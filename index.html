@@ -37,7 +37,7 @@
           <label for="duration">Durée visée</label>
           <select id="duration"><option value="30">30 minutes · rapide</option><option value="45" selected>45 minutes · équilibrée</option><option value="60">60 minutes · développée</option></select>
           <button id="startGame" class="primary full">Commencer l'aventure <span aria-hidden="true">➜</span></button>
-          <p class="fine">Aucune connexion ou clé API nécessaire. Sauvegarde automatique sur cet appareil.</p>
+          <p class="fine">Un code unique sera attribué à ta partie. Sauvegarde automatique sur cet appareil, sans compte ni clé API.</p>
           <button id="resumeGame" class="ghost full" hidden>↩ Reprendre la partie sauvegardée</button>
         </div>
       </div>
@@ -52,6 +52,18 @@
         <div><div class="eyebrow" id="storySetting"></div><h1 id="currentTitle"></h1><p id="phaseDescription" class="subline"></p></div>
         <div class="hud"><span class="chip" id="dayBadge">Nuit 1</span><span class="chip" id="livingBadge">8 habitants</span><span class="chip" id="clueBadge">0 indice</span></div>
       </div>
+      <section class="session-code-panel" aria-label="Identifiant de cette partie">
+        <div class="session-code-copy">
+          <span class="eyebrow">🗝️ IDENTIFIANT DE LA PARTIE</span>
+          <strong class="session-code" id="sessionCode"></strong>
+          <span class="micro">Conserve ce code pour retrouver l’aventure avec ChatGPT. La sauvegarde est actuellement locale sur cet appareil.</span>
+        </div>
+        <div class="session-code-actions">
+          <button type="button" class="secondary" id="copySessionCode">📋 Copier le code</button>
+          <button type="button" class="ghost" id="exportSession">💾 Exporter la sauvegarde</button>
+        </div>
+        <p id="sessionCopyStatus" class="micro" aria-live="polite"></p>
+      </section>
       <div class="main-grid">
         <div class="main-column">
           <section class="panel narrative-panel">

@@ -2,182 +2,169 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#181b24">
-  <meta name="description" content="Assistant hors ligne pour un maître du jeu et un seul joueur dans l'univers des Loups-Garous.">
-  <title>Thiercelieux Solo — Assistant maître du jeu</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#151b27">
+  <meta name="description" content="Prépare une aventure solo de Loup-Garou, transmets sa configuration à ChatGPT et consulte les archives GitHub.">
+  <title>Thiercelieux Solo — Assistant du maître du jeu</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./launcher.css">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="moon">☾</span><div><strong>Thiercelieux Solo</strong><small>Assistant de maître du jeu · 1 joueur</small></div></div>
-    <div class="header-actions">
-      <button id="readButton" class="ghost small" type="button" title="Lire la dernière narration à voix haute">🔊 Écouter</button>
-      <button id="gmToggle" class="ghost small" type="button" aria-expanded="false" aria-controls="gmPanel">🔒 Secrets MJ</button>
-    </div>
+    <div class="brand"><span class="moon">☾</span><div><strong>Thiercelieux Solo</strong><small>ChatGPT raconte · Le MJ décide · GitHub conserve</small></div></div>
+    <nav class="launcher-tabs" aria-label="Navigation">
+      <button type="button" id="tabPrepare" aria-selected="true">⚙️ Préparer</button>
+      <button type="button" id="tabArchives" aria-selected="false">📚 Mes parties</button>
+    </nav>
   </header>
   <main class="shell">
-    <noscript>Cette application a besoin de JavaScript pour fonctionner. Elle ne transmet aucune donnée.</noscript>
-    <section id="setup" class="panel">
-      <div class="eyebrow">UNE HISTOIRE ENTRE VOS MAINS</div>
-      <h1>Un village. Un secret. Une seule personne pour changer le destin.</h1>
-      <p class="lead">Le maître du jeu raconte, interprète les habitants et veille sur les règles. Le joueur enquête, ment, protège, vote… ou chasse avec les Loups.</p>
-      <div class="setup-grid">
-        <div>
-          <h2>1. Choisir une aventure</h2>
-          <div id="storyChoices" class="story-grid" role="group" aria-label="Aventures disponibles"></div>
-        </div>
-        <div class="form-panel">
-          <h2>2. Attribuer le rôle</h2>
-          <label for="roleSelect">Rôle du joueur</label>
-          <select id="roleSelect"><option value="random">🎲 Attribution au hasard</option></select>
-          <div id="rolePreview" class="role-preview">Les rôles viennent du jeu de base et de ses extensions.</div>
-          <label for="playerName">Prénom du personnage</label>
-          <input id="playerName" maxlength="28" value="Alex" placeholder="Prénom du héros">
-          <label for="duration">Durée visée</label>
-          <select id="duration"><option value="30">30 minutes · rapide</option><option value="45" selected>45 minutes · équilibrée</option><option value="60">60 minutes · développée</option></select>
-          <button id="startGame" class="primary full">Commencer l'aventure <span aria-hidden="true">➜</span></button>
-          <p class="fine">Un code unique sera attribué à ta partie. Sauvegarde automatique sur cet appareil, sans compte ni clé API.</p>
-          <button id="resumeGame" class="ghost full" hidden>↩ Reprendre la partie sauvegardée</button>
-        </div>
+    <noscript>Cette page nécessite JavaScript pour créer une configuration ou consulter les archives.</noscript>
+    <section id="prepareSection" aria-label="Créer une configuration de partie">
+      <div class="hero-heading">
+        <div class="eyebrow">UNE AVENTURE CRÉÉE AVEC CHATGPT</div>
+        <h1>Préparez votre partie. L'histoire se jouera dans ChatGPT.</h1>
+        <p class="lead">Un MJ adulte, un seul joueur, des habitants joués par ChatGPT. Cette application génère uniquement un identifiant et un JSON de paramètres. Le MJ reste maître de l'histoire.</p>
       </div>
-      <details class="catalogue">
-        <summary>📚 Consulter tous les rôles et leurs pouvoirs</summary>
-        <div id="roleCatalog" class="catalog-grid"></div>
-        <p class="fine">Les rôles complexes sont documentés pour l'arbitrage du MJ ; le moteur automatise les pouvoirs essentiels du mode solo.</p>
-      </details>
-    </section>
-    <section id="game" hidden>
-      <div class="game-header">
-        <div><div class="eyebrow" id="storySetting"></div><h1 id="currentTitle"></h1><p id="phaseDescription" class="subline"></p></div>
-        <div class="hud"><span class="chip" id="dayBadge">Nuit 1</span><span class="chip" id="livingBadge">8 habitants</span><span class="chip" id="clueBadge">0 indice</span></div>
+      <div class="flow-strip" aria-label="Déroulé en quatre étapes">
+        <span><b>1</b> Configurer</span><span><b>2</b> Copier le JSON</span><span><b>3</b> Jouer dans ChatGPT</span><span><b>4</b> Retrouver sur GitHub</span>
       </div>
-      <section class="session-code-panel" aria-label="Identifiant de cette partie">
-        <div class="session-code-copy">
-          <span class="eyebrow">🗝️ IDENTIFIANT DE LA PARTIE</span>
-          <strong class="session-code" id="sessionCode"></strong>
-          <span class="micro">Conserve ce code pour retrouver l’aventure avec ChatGPT. La sauvegarde est actuellement locale sur cet appareil.</span>
+      <form id="configForm" class="setup-form" onsubmit="return false">
+        <section class="panel">
+          <div class="section-header"><span class="step">01</span><div><h2>Le joueur et son aventure</h2><p>Le joueur choisit son rôle, ou laisse ChatGPT le proposer au hasard.</p></div></div>
+          <div class="config-grid">
+            <label>Prénom du personnage
+              <input id="heroName" value="Alex" maxlength="40" placeholder="Prénom du héros">
+            </label>
+            <label>Âge du joueur
+              <input id="heroAge" type="number" value="10" min="6" max="99">
+            </label>
+            <label>Durée de la séance (minutes)
+              <select id="duration"><option value="30">30 min — rapide</option><option value="45" selected>45 min — équilibrée</option><option value="60">60 min — développée</option><option value="90">90 min — longue</option></select>
+            </label>
+            <label>Personnages non joueurs (PNJ)
+              <input id="npcCount" type="number" value="7" min="3" max="25">
+            </label>
+            <label>Scénario
+              <select id="scenario"></select>
+            </label>
+            <label>Titre imposé (facultatif)
+              <input id="customTitle" maxlength="100" placeholder="ChatGPT peut l'inventer">
+            </label>
+            <label>Univers et décor
+              <select id="environment"><option value="village_thiercelieux">Village de Thiercelieux</option><option value="foret">Forêt et hameaux</option><option value="chateau">Château mystérieux</option><option value="village_montagne">Village de montagne</option><option value="autre">Inventé par ChatGPT</option></select>
+            </label>
+            <label>Type d'aventure
+              <select id="storyStyle"><option value="mystere_enquete" selected>Enquête et mystère</option><option value="classique_loup_garou">Loups-Garous traditionnel</option><option value="exploration">Exploration et aventure</option><option value="roleplay_dialogues">Dialogues et personnages</option><option value="mixte">Mélange de tous les styles</option></select>
+            </label>
+          </div>
+          <label class="wide-label">Une envie particulière pour cette histoire ?
+            <textarea id="themeFree" rows="3" maxlength="600" placeholder="Ex. : un village sous la neige, une vieille énigme familiale, une créature que personne n'a vraiment vue…"></textarea>
+          </label>
+          <div class="scale-grid">
+            <label>Mystère <input type="range" id="intensity" min="1" max="5" value="4"><small>1 = léger · 5 = très intrigant</small></label>
+            <label>Humour <input type="range" id="humor" min="1" max="5" value="3"><small>1 = sérieux · 5 = drôle</small></label>
+            <label>Difficulté <input type="range" id="difficulty" min="1" max="5" value="3"><small>1 = aidé · 5 = difficile</small></label>
+            <label>Frissons <input type="range" id="fear" min="1" max="5" value="2"><small>Pas de violence graphique</small></label>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="section-header"><span class="step">02</span><div><h2>Les cartes et les règles</h2><p>Tous les rôles restent disponibles. Les véritables cartes sont utilisées quand leur visuel est vérifié.</p></div></div>
+          <div class="config-grid">
+            <label>Rôle du joueur
+              <select id="roleChoice"></select>
+            </label>
+            <label>Nombre cible de Loups-Garous
+              <select id="wolfCount"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+            </label>
+          </div>
+          <div id="rolePreview" class="role-preview launcher-role-preview" aria-live="polite"></div>
+          <details class="role-catalogue">
+            <summary>🃏 Choisir les rôles autorisés <span id="rolePoolCount"></span></summary>
+            <p class="fine">Le tirage éventuel est effectué dans ChatGPT, pas dans l'application. Décoche les cartes que tu ne souhaites pas utiliser.</p>
+            <div id="roleChecklist" class="role-checklist"></div>
+          </details>
+          <div class="check-grid">
+            <label><input id="captain" type="checkbox" checked> Fonction de Capitaine</label>
+            <label><input id="couples" type="checkbox" checked> Amoureux de Cupidon</label>
+            <label><input id="events" type="checkbox"> Événements Nouvelle Lune</label>
+            <label><input id="jobs" type="checkbox"> Métiers et bâtiments du Village</label>
+          </div>
+          <p class="fine">Les pouvoirs officiels et leurs interactions sont arbitrés avec le MJ. Aucun personnage ne reçoit un pouvoir inventé par l'application.</p>
+        </section>
+        <section class="panel">
+          <div class="section-header"><span class="step">03</span><div><h2>Déroulement et assistance au MJ</h2><p>Les décisions de l'enfant et les validations du MJ font avancer l'histoire, pas des boutons automatiques.</p></div></div>
+          <div class="config-grid">
+            <label>Durée conseillée d'une nuit
+              <select id="nightDuration"><option value="2">2 min</option><option value="3" selected>3 min</option><option value="5">5 min</option><option value="8">8 min</option></select>
+            </label>
+            <label>Appel des rôles nocturnes
+              <select id="nightOrder"><option value="officiel_adapte" selected>Ordre officiel adapté aux cartes présentes</option><option value="detaille">Annonce détaillée pour le MJ</option><option value="rapide">Version courte</option></select>
+            </label>
+          </div>
+          <div class="check-grid">
+            <label><input id="askValidation" type="checkbox" checked> Attendre l'accord du MJ entre les scènes</label>
+            <label><input id="allowImprovisation" type="checkbox" checked> Autoriser les actions libres et l'improvisation</label>
+            <label><input id="mjGuidance" type="checkbox" checked> Rappeler les règles et pouvoirs au MJ</label>
+            <label><input id="hints" type="checkbox" checked> Proposer des indices si le joueur bloque</label>
+            <label><input id="pacingHelp" type="checkbox" checked> Conseiller le rythme et les transitions</label>
+          </div>
+          <div class="advice">
+            <h3>🎭 Le rôle de ChatGPT</h3>
+            <p>Incarner les habitants, créer les dialogues, annoncer « Le village s'endort », organiser les appels de rôles, proposer les rebondissements et assister le MJ. Jamais révéler un secret au joueur sans justification ou validation.</p>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="section-header"><span class="step">04</span><div><h2>Ambiance et affichage</h2><p>Ces réglages sont transmis à ChatGPT ; l'application n'enregistre ni n'interprète les dialogues.</p></div></div>
+          <div class="check-grid">
+            <label><input id="cardsOn" type="checkbox" checked> Afficher les vraies illustrations des cartes</label>
+            <label><input id="soundsOn" type="checkbox" checked> Prévoir des ambiances et bruitages</label>
+            <label><input id="voiceOn" type="checkbox" checked> Prévoir des lectures et voix de personnages</label>
+          </div>
+          <p class="fine">Les médias éphémères doivent être nettoyés après utilisation. Le dépôt public ne doit recevoir aucune note secrète du MJ.</p>
+        </section>
+      </form>
+      <section class="panel finish-panel">
+        <div class="section-header"><span class="step">05</span><div><h2>Créer le dossier de lancement</h2><p>Un identifiant de partie et son JSON sont générés sur ton appareil. Rien n'est encore envoyé sur GitHub.</p></div></div>
+        <button class="primary" type="button" id="buildButton">🗝️ Générer l'identifiant et le JSON</button>
+        <p id="formStatus" role="status"></p>
+        <div id="generatedPanel" class="generated-panel" hidden>
+          <div class="id-banner"><span>IDENTIFIANT DE PARTIE</span><strong id="generatedId"></strong></div>
+          <p id="generatedWarning" class="warning" hidden></p>
+          <p>Dans une <strong>conversation du projet ChatGPT Loup garou</strong>, colle de préférence le prompt complet. ChatGPT créera alors le prologue dans GitHub et attendra les instructions du MJ.</p>
+          <div class="button-row">
+            <button type="button" id="copyPrompt" class="primary">📋 Copier pour ChatGPT</button>
+            <button type="button" id="copyJson" class="secondary">Copier le JSON seul</button>
+            <button type="button" id="downloadJson" class="ghost">Télécharger le JSON</button>
+            <button type="button" id="newConfig" class="ghost">Modifier la configuration</button>
+          </div>
+          <label class="wide-label" for="jsonOut">Paramètres JSON
+            <textarea id="jsonOut" rows="11" readonly spellcheck="false"></textarea>
+          </label>
+          <p id="exportStatus" role="status" class="fine"></p>
         </div>
-        <div class="session-code-actions">
-          <button type="button" class="secondary" id="copySessionCode">📋 Copier le code</button>
-          <button type="button" class="ghost" id="exportSession">💾 Exporter la sauvegarde</button>
-        </div>
-        <p id="sessionCopyStatus" class="micro" aria-live="polite"></p>
       </section>
-      <div class="main-grid">
-        <div class="main-column">
-          <section class="panel narrative-panel">
-            <div class="narrative-top"><span id="phaseIcon" class="phase-icon">🌙</span><span id="phaseLabel" class="eyebrow">PROLOGUE</span></div>
-            <h2 id="sceneTitle">À raconter à voix haute</h2>
-            <p id="sceneText" class="narrative" aria-live="polite"></p>
-            <div class="action-row">
-              <button id="continueButton" class="primary" type="button">Continuer ➜</button>
-              <button id="sceneRead" class="ghost" type="button">🔊 Lire la scène</button>
-            </div>
-          </section>
-          <section id="discussionSection" class="panel" hidden>
-            <div class="section-title"><h2>💬 Parler aux habitants</h2><span class="micro">Le MJ joue les réponses</span></div>
-            <p class="muted">Choisis un habitant, puis un sujet de conversation. Les réponses tiennent compte de ses secrets et de l'enquête.</p>
-            <div id="residents" class="resident-grid"></div>
-            <div id="conversationPanel" class="conversation-panel" hidden>
-              <div class="section-title"><h3 id="conversationName"></h3><span id="conversationJob" class="micro"></span></div>
-              <div id="dialogueText" class="speech" aria-live="polite"></div>
-              <div class="topic-row" id="topicButtons"></div>
-              <div class="question-row">
-                <input id="freeQuestion" placeholder="Ou pose une question libre…" aria-label="Question libre au personnage" maxlength="140">
-                <button id="askQuestion" class="secondary">Demander</button>
-              </div>
-            </div>
-          </section>
-          <section id="investigationSection" class="panel" hidden>
-            <div class="section-title"><h2>🔎 Explorer le village</h2><span class="micro">Chaque lieu contient un indice</span></div>
-            <div id="places" class="places-grid"></div>
-            <p id="placeResult" class="result" aria-live="polite"></p>
-          </section>
-          <section id="nightSection" class="panel" hidden>
-            <h2>🌙 Action de nuit</h2>
-            <p id="nightHelp" class="muted"></p>
-            <div id="nightControls" class="night-controls">
-              <label for="nightTarget">Cible</label><select id="nightTarget"></select>
-              <label for="nightAbility" id="nightAbilityLabel">Pouvoir</label><select id="nightAbility"></select>
-              <button id="nightAct" class="secondary">Valider mon action</button>
-            </div>
-            <p id="nightResult" class="result" aria-live="polite"></p>
-          </section>
-          <section id="voteSection" class="panel" hidden>
-            <h2>⚖️ Le vote du village</h2>
-            <p class="muted">Le joueur vote, les autres habitants prennent leur décision selon leurs informations et leurs soupçons. Personne n'est accusé automatiquement sur un simple indice.</p>
-            <label for="voteTarget">Qui veux-tu désigner ?</label>
-            <select id="voteTarget"></select>
-            <button id="voteButton" class="danger">Organiser le vote</button>
-            <p id="voteResult" class="result" aria-live="polite"></p>
-          </section>
-          <section class="panel">
-            <div class="section-title"><h2>📜 Journal de partie</h2><span class="micro">Actions publiques</span></div>
-            <div id="journal" class="journal" aria-live="polite"></div>
-          </section>
-        </div>
-        <aside class="side-column">
-          <section class="panel sound-panel">
-  <div class="section-title"><h2>🎧 Régie sonore du MJ</h2><span id="speechState" class="micro" aria-live="polite">Prêt</span></div>
-  <p class="muted">Voix des personnages, ambiances automatiques, bruitages à déclencher librement.</p>
-  <div class="sound-switches">
-    <label><input type="checkbox" id="voiceToggle" checked> Voix</label>
-    <label><input type="checkbox" id="ambientToggle" checked> Ambiances</label>
-    <label><input type="checkbox" id="sfxToggle" checked> Bruitages</label>
-    <label><input type="checkbox" id="filesToggle"> Préférer les MP3 locaux</label>
-  </div>
-  <label for="volumeInput">Volume général</label>
-  <input id="volumeInput" type="range" min="0" max="100" value="65">
-  <label for="voiceSelect">Voix du narrateur</label>
-  <select id="voiceSelect"><option value="">Français automatique</option></select>
-  <div class="sound-buttons">
-    <button type="button" data-sound="night">🌙 Nuit</button>
-    <button type="button" data-sound="wolf">🐺 Loup</button>
-    <button type="button" data-sound="bell">🔔 Cloche</button>
-    <button type="button" data-sound="door">🚪 Porte</button>
-    <button type="button" data-sound="steps">👣 Pas</button>
-    <button type="button" data-sound="dawn">🌅 Aube</button>
-    <button type="button" data-sound="reveal">✨ Révélation</button>
-    <button type="button" data-sound="heartbeat">💓 Suspense</button>
-  </div>
-  <div class="sound-buttons"><button id="testVoiceBtn" type="button" class="secondary">▶ Tester la voix</button><button id="stopAudioBtn" type="button" class="ghost">■ Couper les sons</button></div>
-  <p class="fine" id="audioStatus" aria-live="polite">Les sons sont disponibles après un clic. Les voix dépendent du navigateur.</p>
-</section>
-          <section class="panel identity">
-            <div class="eyebrow">CARTE DU JOUEUR</div>
-            <div class="identity-icon" id="playerIcon">🎭</div>
-            <div id="heroImageCredit" class="role-image-credit"></div>
-            <h2 id="heroName"></h2>
-            <div id="heroRole" class="identity-role"></div>
-            <p id="heroPower"></p>
-            <span id="heroTeam" class="mini-chip"></span>
-            <p id="heroRoleNote" class="fine"></p>
-          </section>
-          <section class="panel">
-            <h2>🧩 Indices découverts</h2>
-            <div id="clueList" class="clue-list"><p class="muted">Explore les lieux pour trouver des pistes.</p></div>
-          </section>
-          <section class="panel">
-            <h2>🎲 Aide au maître du jeu</h2>
-            <p class="muted">Rythme conseillé : 5 min d'introduction, puis échanges, exploration et vote. Une nuit dure 1 à 2 minutes, avec une vraie annonce « Le village s'endort ».</p>
-            <p class="fine">Les habitants non joueurs sont interprétés par le MJ. Pour les pouvoirs rares, consulter le panneau « Secrets MJ ».</p>
-            <button id="newGame" class="ghost full" type="button">↻ Nouvelle partie</button>
-          </section>
-        </aside>
+    </section>
+    <section id="archiveSection" hidden aria-label="Archives de parties GitHub">
+      <div class="hero-heading">
+        <div class="eyebrow">ARCHIVES GITHUB EN LECTURE SEULE</div>
+        <h1>Vos aventures de Thiercelieux</h1>
+        <p class="lead">ChatGPT écrit les scènes et le journal dans GitHub après validation du MJ. Ce tableau de bord affiche uniquement les données publiques déjà archivées.</p>
       </div>
+      <section class="panel">
+        <div class="section-header archive-heading"><div><h2>Parties enregistrées</h2><p id="archiveStatus" role="status">Actualisation depuis GitHub…</p></div><button type="button" id="archiveRefresh" class="secondary">↻ Actualiser</button></div>
+        <div id="archiveList" class="archive-list"></div>
+      </section>
+      <section class="panel" id="sessionDetail" hidden>
+        <button id="backToArchives" type="button" class="ghost small">← Retour aux archives</button>
+        <div id="sessionContent"></div>
+      </section>
+      <div class="advice"><h3>🛡️ Espace du maître du jeu</h3><p>Une page GitHub publique n'est pas un coffre-fort : les identités secrètes, notes MJ et révélations futures doivent rester dans la conversation privée ou un stockage privé. Aucune action de jeu n'est commandée ici.</p></div>
     </section>
   </main>
-  <aside id="gmPanel" class="gm-panel" hidden aria-label="Informations réservées au maître du jeu">
-    <div class="gm-head"><div><div class="eyebrow">ÉCRAN PRIVÉ</div><h2>Secrets du maître du jeu</h2></div><button id="gmClose" class="ghost small">✕ Fermer</button></div>
-    <p class="warning">⚠️ Ne pas montrer cet écran au joueur : il révèle les Loups, les rôles et les fausses pistes.</p>
-    <div id="gmContent"></div>
-  </aside>
-  <footer>Thiercelieux Solo · Adaptation indépendante, non officielle · Narrations originales · Fonctionne hors ligne</footer>
+  <footer>Thiercelieux Solo · Projet indépendant et non officiel · Application d'affichage, GitHub pour les archives, ChatGPT pour jouer</footer>
   <script src="./roles.js"></script>
   <script src="./role-art.js"></script>
   <script src="./stories.js"></script>
-  <script src="./audio.js"></script>
-  <script src="./app.js"></script>
+  <script src="./launcher.js"></script>
 </body>
 </html>

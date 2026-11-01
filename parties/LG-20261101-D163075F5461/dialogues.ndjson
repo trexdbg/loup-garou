@@ -1,1 +1,4 @@
 {"seq":0,"type":"systeme","phase":"prologue","texte":"Partie initialisée. Prologue prêt. Aucun dialogue joué ou confirmé.","public":true}
+{"seq":1,"type":"dialogue_pnj","phase":"dialogues_et_enquete","scene":"scene_1","locuteur":"Agathe","texte":"Ah, Alex ! Tu arrives à pic ! Voilà trente ans que j'entends cette cloche, et c'est la première fois qu'elle miaule. Tu crois qu'on a installé un chat à la place du battant ?","public":true}
+{"seq":2,"type":"dialogue_pnj","phase":"dialogues_et_enquete","scene":"scene_1","locuteur":"Gaston","texte":"Silence ! En ma qualité de garde-champêtre, je déclare officiellement cette affaire… extrêmement bizarre !","public":true}
+{"seq":3,"type":"dialogue_pnj","phase":"dialogues_et_enquete","scene":"scene_1","locuteur":"Agathe","texte":"Dis-moi, toi : par quoi commencerais-tu ?","public":true}

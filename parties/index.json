@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "parties": [
+    {
+      "id": "2026-11-01-001",
+      "cree_le": "2026-11-01",
+      "titre": "Les douze coups du clocher — le treizième coup",
+      "statut": "en_attente_du_choix_du_role",
+      "phase": "mise_en_place"
+    }
+  ]
+}

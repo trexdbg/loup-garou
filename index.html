@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#181b24">
+  <meta name="description" content="Assistant hors ligne pour un maître du jeu et un seul joueur dans l'univers des Loups-Garous.">
+  <title>Thiercelieux Solo — Assistant maître du jeu</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="moon">☾</span><div><strong>Thiercelieux Solo</strong><small>Assistant de maître du jeu · 1 joueur</small></div></div>
+    <div class="header-actions">
+      <button id="readButton" class="ghost small" type="button" title="Lire la dernière narration à voix haute">🔊 Écouter</button>
+      <button id="gmToggle" class="ghost small" type="button" aria-expanded="false" aria-controls="gmPanel">🔒 Secrets MJ</button>
+    </div>
+  </header>
+  <main class="shell">
+    <noscript>Cette application a besoin de JavaScript pour fonctionner. Elle ne transmet aucune donnée.</noscript>
+    <section id="setup" class="panel">
+      <div class="eyebrow">UNE HISTOIRE ENTRE VOS MAINS</div>
+      <h1>Un village. Un secret. Une seule personne pour changer le destin.</h1>
+      <p class="lead">Le maître du jeu raconte, interprète les habitants et veille sur les règles. Le joueur enquête, ment, protège, vote… ou chasse avec les Loups.</p>
+      <div class="setup-grid">
+        <div>
+          <h2>1. Choisir une aventure</h2>
+          <div id="storyChoices" class="story-grid" role="group" aria-label="Aventures disponibles"></div>
+        </div>
+        <div class="form-panel">
+          <h2>2. Attribuer le rôle</h2>
+          <label for="roleSelect">Rôle du joueur</label>
+          <select id="roleSelect"><option value="random">🎲 Attribution au hasard</option></select>
+          <div id="rolePreview" class="role-preview">Les rôles viennent du jeu de base et de ses extensions.</div>
+          <label for="playerName">Prénom du personnage</label>
+          <input id="playerName" maxlength="28" value="Alex" placeholder="Prénom du héros">
+          <label for="duration">Durée visée</label>
+          <select id="duration"><option value="30">30 minutes · rapide</option><option value="45" selected>45 minutes · équilibrée</option><option value="60">60 minutes · développée</option></select>
+          <button id="startGame" class="primary full">Commencer l'aventure <span aria-hidden="true">➜</span></button>
+          <p class="fine">Aucune connexion ou clé API nécessaire. Sauvegarde automatique sur cet appareil.</p>
+          <button id="resumeGame" class="ghost full" hidden>↩ Reprendre la partie sauvegardée</button>
+        </div>
+      </div>
+      <details class="catalogue">
+        <summary>📚 Consulter tous les rôles et leurs pouvoirs</summary>
+        <div id="roleCatalog" class="catalog-grid"></div>
+        <p class="fine">Les rôles complexes sont documentés pour l'arbitrage du MJ ; le moteur automatise les pouvoirs essentiels du mode solo.</p>
+      </details>
+    </section>
+    <section id="game" hidden>
+      <div class="game-header">
+        <div><div class="eyebrow" id="storySetting"></div><h1 id="currentTitle"></h1><p id="phaseDescription" class="subline"></p></div>
+        <div class="hud"><span class="chip" id="dayBadge">Nuit 1</span><span class="chip" id="livingBadge">8 habitants</span><span class="chip" id="clueBadge">0 indice</span></div>
+      </div>
+      <div class="main-grid">
+        <div class="main-column">
+          <section class="panel narrative-panel">
+            <div class="narrative-top"><span id="phaseIcon" class="phase-icon">🌙</span><span id="phaseLabel" class="eyebrow">PROLOGUE</span></div>
+            <h2 id="sceneTitle">À raconter à voix haute</h2>
+            <p id="sceneText" class="narrative" aria-live="polite"></p>
+            <div class="action-row">
+              <button id="continueButton" class="primary" type="button">Continuer ➜</button>
+              <button id="sceneRead" class="ghost" type="button">🔊 Lire la scène</button>
+            </div>
+          </section>
+          <section id="discussionSection" class="panel" hidden>
+            <div class="section-title"><h2>💬 Parler aux habitants</h2><span class="micro">Le MJ joue les réponses</span></div>
+            <p class="muted">Choisis un habitant, puis un sujet de conversation. Les réponses tiennent compte de ses secrets et de l'enquête.</p>
+            <div id="residents" class="resident-grid"></div>
+            <div id="conversationPanel" class="conversation-panel" hidden>
+              <div class="section-title"><h3 id="conversationName"></h3><span id="conversationJob" class="micro"></span></div>
+              <div id="dialogueText" class="speech" aria-live="polite"></div>
+              <div class="topic-row" id="topicButtons"></div>
+              <div class="question-row">
+                <input id="freeQuestion" placeholder="Ou pose une question libre…" aria-label="Question libre au personnage" maxlength="140">
+                <button id="askQuestion" class="secondary">Demander</button>
+              </div>
+            </div>
+          </section>
+          <section id="investigationSection" class="panel" hidden>
+            <div class="section-title"><h2>🔎 Explorer le village</h2><span class="micro">Chaque lieu contient un indice</span></div>
+            <div id="places" class="places-grid"></div>
+            <p id="placeResult" class="result" aria-live="polite"></p>
+          </section>
+          <section id="nightSection" class="panel" hidden>
+            <h2>🌙 Action de nuit</h2>
+            <p id="nightHelp" class="muted"></p>
+            <div id="nightControls" class="night-controls">
+              <label for="nightTarget">Cible</label><select id="nightTarget"></select>
+              <label for="nightAbility" id="nightAbilityLabel">Pouvoir</label><select id="nightAbility"></select>
+              <button id="nightAct" class="secondary">Valider mon action</button>
+            </div>
+            <p id="nightResult" class="result" aria-live="polite"></p>
+          </section>
+          <section id="voteSection" class="panel" hidden>
+            <h2>⚖️ Le vote du village</h2>
+            <p class="muted">Le joueur vote, les autres habitants prennent leur décision selon leurs informations et leurs soupçons. Personne n'est accusé automatiquement sur un simple indice.</p>
+            <label for="voteTarget">Qui veux-tu désigner ?</label>
+            <select id="voteTarget"></select>
+            <button id="voteButton" class="danger">Organiser le vote</button>
+            <p id="voteResult" class="result" aria-live="polite"></p>
+          </section>
+          <section class="panel">
+            <div class="section-title"><h2>📜 Journal de partie</h2><span class="micro">Actions publiques</span></div>
+            <div id="journal" class="journal" aria-live="polite"></div>
+          </section>
+        </div>
+        <aside class="side-column">
+          <section class="panel identity">
+            <div class="eyebrow">CARTE DU JOUEUR</div>
+            <div class="identity-icon" id="playerIcon">🎭</div>
+            <h2 id="heroName"></h2>
+            <div id="heroRole" class="identity-role"></div>
+            <p id="heroPower"></p>
+            <span id="heroTeam" class="mini-chip"></span>
+            <p id="heroRoleNote" class="fine"></p>
+          </section>
+          <section class="panel">
+            <h2>🧩 Indices découverts</h2>
+            <div id="clueList" class="clue-list"><p class="muted">Explore les lieux pour trouver des pistes.</p></div>
+          </section>
+          <section class="panel">
+            <h2>🎲 Aide au maître du jeu</h2>
+            <p class="muted">Rythme conseillé : 5 min d'introduction, puis échanges, exploration et vote. Une nuit dure 1 à 2 minutes, avec une vraie annonce « Le village s'endort ».</p>
+            <p class="fine">Les habitants non joueurs sont interprétés par le MJ. Pour les pouvoirs rares, consulter le panneau « Secrets MJ ».</p>
+            <button id="newGame" class="ghost full" type="button">↻ Nouvelle partie</button>
+          </section>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <aside id="gmPanel" class="gm-panel" hidden aria-label="Informations réservées au maître du jeu">
+    <div class="gm-head"><div><div class="eyebrow">ÉCRAN PRIVÉ</div><h2>Secrets du maître du jeu</h2></div><button id="gmClose" class="ghost small">✕ Fermer</button></div>
+    <p class="warning">⚠️ Ne pas montrer cet écran au joueur : il révèle les Loups, les rôles et les fausses pistes.</p>
+    <div id="gmContent"></div>
+  </aside>
+  <footer>Thiercelieux Solo · Adaptation indépendante, non officielle · Narrations originales · Fonctionne hors ligne</footer>
+  <script src="./roles.js"></script>
+  <script src="./stories.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

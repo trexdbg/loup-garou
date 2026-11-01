@@ -68,6 +68,19 @@
   }
   art["villageois"]={url:villageoisUrl,source:villageoisSource};
 
+  // Blasons originaux Nouvelle Lune visibles sur la planche officielle Asmodee :
+  // Ancien = carte en haut à droite (arbre), Bouc = carte centrale (bouffon).
+  const newMoonPlate = "https://cdn.svc.asmodee.net/production-asmodeeca/uploads/2023/07/LMELG02FREN-WEREWOLVES_OF_MILLER_HOLLOW-NEW_MOON-ML-COMPONENTS-1024x1024.png";
+  const newMoonSource = "https://www.asmodee.ca/product/loups-garous-de-thiercelieux-les-nouvelle-lune/";
+  art["ancien"] = {url:newMoonPlate, source:newMoonSource,
+    crop:{size:240,width:512,x:269,y:5}};
+  art["bouc"] = {url:newMoonPlate,source:newMoonSource,
+    crop:{size:240,width:512,x:120,y:141}};
+  // La véritable carte du Voleur (masque turquoise tenant deux cartes).
+  art["voleur"] = {url:"https://babygloo.com/cdn/shop/files/38420.jpg?v=1758641542&width=800",
+    source:"https://babygloo.com/products/les-loups-garous-de-thiercelieux"};
+
+
   const wikiTitles = Object.freeze({
     "villageois": "Simple Villageois", "loup": "Simple Loup-Garou",
     "voyante": "Voyante", "sorciere": "Sorcière", "chasseur": "Chasseur",

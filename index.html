@@ -31,20 +31,20 @@
           <h2>2. Attribuer le rôle</h2>
           <label for="roleSelect">Rôle du joueur</label>
           <select id="roleSelect"><option value="random">🎲 Attribution au hasard</option></select>
-          <div id="rolePreview" class="role-preview">Les rôles viennent du jeu de base et de ses extensions.</div>
+          <div id="rolePreview" class="role-preview" aria-live="polite">Les rôles viennent du jeu de base et de ses extensions.</div>
           <label for="playerName">Prénom du personnage</label>
           <input id="playerName" maxlength="28" value="Alex" placeholder="Prénom du héros">
           <label for="duration">Durée visée</label>
           <select id="duration"><option value="30">30 minutes · rapide</option><option value="45" selected>45 minutes · équilibrée</option><option value="60">60 minutes · développée</option></select>
           <button id="startGame" class="primary full">Commencer l'aventure <span aria-hidden="true">➜</span></button>
-          <p class="fine">Aucune connexion ou clé API nécessaire. Sauvegarde automatique sur cet appareil.</p>
+          <p class="fine">Aucune clé API nécessaire. Sauvegarde locale ; une connexion est nécessaire pour charger les illustrations originales.</p>
           <button id="resumeGame" class="ghost full" hidden>↩ Reprendre la partie sauvegardée</button>
         </div>
       </div>
       <details class="catalogue">
         <summary>📚 Consulter tous les rôles et leurs pouvoirs</summary>
         <div id="roleCatalog" class="catalog-grid"></div>
-        <p class="fine">Les rôles complexes sont documentés pour l'arbitrage du MJ ; le moteur automatise les pouvoirs essentiels du mode solo.</p>
+        <p class="fine">Les illustrations originales confirmées sont affichées avec leur source. Une carte sans image vérifiée conserve son icône : elle n'est jamais remplacée par un autre rôle.</p>
       </details>
     </section>
     <section id="game" hidden>
@@ -134,8 +134,9 @@
     <p class="warning">⚠️ Ne pas montrer cet écran au joueur : il révèle les Loups, les rôles et les fausses pistes.</p>
     <div id="gmContent"></div>
   </aside>
-  <footer>Thiercelieux Solo · Adaptation indépendante, non officielle · Narrations originales · Fonctionne hors ligne</footer>
+  <footer>Thiercelieux Solo · Projet indépendant, non officiel · Visuels originaux liés à leurs sources · Mécaniques locales</footer>
   <script src="./roles.js"></script>
+  <script src="./role-art.js"></script>
   <script src="./stories.js"></script>
   <script src="./app.js"></script>
 </body>

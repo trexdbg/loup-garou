@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "id": "LG-20261101-D163075F5461",
+  "titre": "La Cloche qui a perdu sa voix",
+  "cree_le": "2026-11-01T20:09:03.123Z",
+  "statut": "en_attente_validation_mj",
+  "phase": "prologue",
+  "mode": "1 joueur humain, 1 MJ humain, PNJ interprétés par ChatGPT",
+  "participants": {
+    "joueur": {
+      "prenom": "Alex",
+      "age": 10
+    },
+    "joueurs_humains": 1,
+    "pnj_nombre": 7,
+    "maitre_du_jeu": "humain"
+  },
+  "personnages_pnj": [
+    {
+      "prenom": "Agathe",
+      "description": "boulangère joviale"
+    },
+    {
+      "prenom": "Basile",
+      "description": "facteur toujours pressé"
+    },
+    {
+      "prenom": "Clémence",
+      "description": "jardinière curieuse"
+    },
+    {
+      "prenom": "Gaston",
+      "description": "garde-champêtre un peu solennel"
+    },
+    {
+      "prenom": "Iris",
+      "description": "herboriste malicieuse"
+    },
+    {
+      "prenom": "Malo",
+      "description": "musicien distrait"
+    },
+    {
+      "prenom": "Rosalie",
+      "description": "horlogère méticuleuse"
+    }
+  ],
+  "progression": {
+    "scene": "prologue",
+    "jour": 0,
+    "nuit": 0,
+    "journal_seq": 0,
+    "indices_decouverts": [],
+    "votes": []
+  },
+  "resume_public": "À Thiercelieux, la cloche du village a émis un drôle de bruit. Alex arrive sur la place, libre d'observer et de discuter.",
+  "aide_mj_publique": "Lire le prologue puis demander l'accord du MJ. Ne pas lancer la nuit, le vote ou les décisions du joueur sans validation.",
+  "dernier_evenement_public": "Prologue préparé ; attente de la validation du MJ.",
+  "archivage": {
+    "repo": "trexdbg/loup-garou",
+    "dossier": "parties/LG-20261101-D163075F5461",
+    "dialogues": "dialogues.ndjson",
+    "journal": "journal.md",
+    "narrations": "narrations.md"
+  },
+  "prochain_geste": "Le MJ valide le prologue et la répartition secrète des cartes avant que le joueur agisse."
+}

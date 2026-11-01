@@ -33,7 +33,7 @@ jobs:
       - name: Assembler uniquement les fichiers publics
         run: |
           mkdir -p site
-          cp index.html styles.css roles.js role-art.js stories.js app.js site/
+          cp index.html styles.css roles.js role-art.js stories.js audio.js app.js site/
           touch site/.nojekyll
       - name: Configurer GitHub Pages
         uses: actions/configure-pages@v5

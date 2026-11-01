@@ -25,3 +25,13 @@
 .session-code-actions button{font-size:.86rem}
 .session-code-panel #sessionCopyStatus{flex-basis:100%;margin:0;min-height:0}
 @media(max-width:600px){.session-code-actions{width:100%}.session-code-actions button{flex:1 1 auto}}
+
+/* Les planches sources restent intactes sur leurs serveurs :
+   on ne recadre que leur affichage dans l'élément image. */
+.role-art { isolation: isolate; }
+.role-art img.role-art-sprite { position: absolute; max-width: none; object-fit: fill; }
+.role-art-sprite[hidden] { display: none !important; }
+.role-image-credit { margin: -5px 0 13px; }
+.role-image-credit .role-source { margin-top: 2px; font-size: .72rem; }
+.role-preview-copy .role-source { display: block; }
+.catalog-item .role-source + .role-source { margin-top: 0; padding-top: 0; }

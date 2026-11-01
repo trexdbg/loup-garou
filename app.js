@@ -323,6 +323,7 @@ function render(){
       !(r.action==="fox"&&!game.fox)&&!(r.action==="monkey"&&!game.monkey);
     visible("nightControls",enabled);
     set("nightHelp",r.power+(r.support==="mj"?" Le MJ complète les effets selon le livret.":"")+
+      (wolf(game.roleId)?" Tes compagnons Loups sont : "+alive().filter(n=>wolf(n.roleId)).map(n=>n.name).join(", ")+".":"")+
       (r.action==="witch"?" La victime des Loups est : "+(game.attack||"personne")+".":"")+
       (!enabled?" Aucune autre action cette nuit.":""));
     if(enabled){

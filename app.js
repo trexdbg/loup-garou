@@ -82,6 +82,8 @@ function setup(){
       node("small",r.support==="mj"?"Arbitrage MJ":"Assistance automatique"),
       window.ROLE_ILLUSTRATIONS.link(r,"Fiche du rôle ↗")
     );
+    const credit=window.ROLE_ILLUSTRATIONS.credit(r);
+    if(credit)e.append(credit);
     $("roleCatalog").append(e);
   }
   try{visible("resumeGame",!!localStorage.getItem(KEY));}catch(_){}
@@ -102,6 +104,8 @@ function preview(){
     node("small",r.support==="mj"?"Arbitrage du MJ.":"Pouvoir assisté."),
     window.ROLE_ILLUSTRATIONS.link(r,"Voir le rôle sur le wiki ↗")
   );
+  const credit=window.ROLE_ILLUSTRATIONS.credit(r);
+  if(credit)information.append(credit);
   line.append(window.ROLE_ILLUSTRATIONS.image(r,"preview"),information);
   container.append(line);
 }
@@ -357,6 +361,8 @@ function render(){
   set("clueBadge",game.clues.length+" indices");
   set("heroName",game.name);set("heroRole",r.name);set("heroPower",r.power);
   $("playerIcon").replaceChildren(window.ROLE_ILLUSTRATIONS.image(r,"hero"));
+  const artworkCredit=window.ROLE_ILLUSTRATIONS.credit(r);
+  $("heroImageCredit").replaceChildren(...(artworkCredit?[artworkCredit]:[]));
   set("heroTeam",window.CAMPS[r.team]);
   set("heroRoleNote",r.support==="mj"?"Pouvoir complexe : arbitrage du MJ nécessaire.":"Pouvoir pris en charge dans le mode solo.");
   visible("continueButton",game.phase!=="end"&&(game.phase!=="vote"||game.voted));

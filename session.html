@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#181b24">
+<title>Thiercelieux — Salon de partie</title>
+<link rel="stylesheet" href="./styles.css">
+<style>
+:root{--surface:#1e2633;--surface2:#151b27;--accent:#e8bc72;--line:#465163;--soft:#bec7d1}
+body{background:radial-gradient(circle at 80% 0,#303448,transparent 46%),#10141d}
+.shell{max-width:1150px}.session-head{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:20px}
+.session-head h1{margin:6px 0}.section-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(275px,1fr);gap:18px}
+.session-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.session-form label,.session-controls label{display:block;color:var(--soft);font-size:.87rem}
+.session-form label>input,.session-form label>select,.session-controls input{display:block;width:100%;margin-top:6px}
+.session-form .wide{grid-column:1/-1}.scene{font:1.18rem/1.75 Georgia,serif;white-space:pre-wrap;color:#fff6e3}
+.pill{border:1px solid #71624f;border-radius:99px;padding:5px 11px;color:#f3ce91;font-size:.84rem;display:inline-block}
+.row-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.session-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:end}
+.session-controls .full{grid-column:1/-1;margin:0}.session-controls .row-buttons{grid-column:1/-1}
+.session-tag{font-family:ui-monospace,monospace;color:#f4d197}
+.statusline{min-height:18px;font-size:.83rem;color:var(--soft);margin-top:10px}
+.cast{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.cast button{background:var(--surface2);text-align:left}
+.cast button.selected{outline:2px solid var(--accent)}
+.cast button[disabled]{opacity:.45}
+.cast small{display:block;color:var(--soft)}
+.chat-thread{max-height:260px;overflow:auto;display:grid;gap:8px;margin:12px 0}
+.chat-msg{border-left:3px solid var(--accent);background:#262b3a;padding:9px 11px;border-radius:5px;white-space:pre-wrap}
+.chat-msg.question{border-color:#8bd8d0}.chat-msg small{display:block;color:var(--soft)}
+.ask-line{display:flex;gap:8px}.ask-line input{flex:1;min-width:0}
+.place-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.place-grid button{text-align:left;background:var(--surface2)}.place-grid button.found{border-color:#8bd8d0}
+.place-grid small{display:block;color:var(--soft)}
+#history{max-height:230px;overflow-y:auto;display:grid;gap:8px}
+.logitem{font-size:.86rem;border-left:3px solid #5b6b77;background:var(--surface2);padding:9px 12px}
+.gm-list{display:grid;gap:6px}.gm-row{display:flex;align-items:center;justify-content:space-between;gap:9px}
+.gm-row select{max-width:220px}.gm-note{width:100%;min-height:100px;background:#151b27;color:#fff;border:1px solid var(--line);border-radius:9px;padding:11px}
+.warning{color:#f5cfbd}.fine{line-height:1.6}
+#view[hidden],#setupView[hidden],#gmBox[hidden],#conversation[hidden],#nightBox[hidden],#voteBox[hidden],#dayBox[hidden]{display:none}
+@media(max-width:760px){.section-grid{grid-template-columns:1fr}.session-controls,.session-form{grid-template-columns:1fr}.session-form .wide,.session-controls .full,.session-controls .row-buttons{grid-column:auto}.ask-line{flex-wrap:wrap}.ask-line button{width:100%}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="brand"><span class="moon">☾</span><div><strong>Thiercelieux</strong><small>Parties interactives · 1 joueur + 1 maître du jeu</small></div></div><a href="./index.html" style="color:#e8bc72">Accueil du jeu</a></header>
+<main class="shell">
+  <div class="session-head"><div><div class="eyebrow">LE SALON DES HISTOIRES</div><h1>Une partie, une histoire, un identifiant.</h1></div><span class="pill" id="connectionStatus">Mode local</span></div>
+  <section class="panel" aria-label="Connexion et reprise">
+    <h2>🔗 Retrouver une aventure</h2>
+    <p class="fine">La partie est sauvegardée sur cet appareil. Pour l'ouvrir aussi depuis ChatGPT, synchronise-la avec ton dépôt privé <strong>trexdbg/loup-garou</strong> (branche <code>parties</code>). ChatGPT utilise la connexion GitHub autorisée dans la conversation ; ce salon utilise un jeton à droits limités, conservé seulement en mémoire dans l’onglet.</p>
+    <div class="session-controls">
+      <label>Code de la partie<input id="sessionId" placeholder="LG-20261101-A1B2C3" autocomplete="off" spellcheck="false"></label>
+      <label>Jeton GitHub du MJ<input id="pat" type="password" placeholder="github_pat_…" autocomplete="off"></label>
+      <div class="row-buttons"><button class="secondary" id="openGithub">📥 Ouvrir sur GitHub</button><button class="ghost" id="saveGithub">📤 Envoyer sur GitHub</button><button class="ghost" id="copyCode">📋 Copier le code</button><button class="ghost" id="openLocal">↩ Reprendre localement</button></div>
+    </div>
+    <p id="syncStatus" class="statusline" aria-live="polite">Connecte GitHub si tu veux retrouver une partie depuis ChatGPT. Ne partage jamais ton jeton avec l'enfant ou dans la conversation.</p>
+  </section>
+  <section class="panel" id="setupView">
+    <h2>🎲 Créer une nouvelle partie</h2>
+    <div class="session-form">
+      <label>Aventure<select id="storySelect"></select></label>
+      <label>Rôle du joueur<select id="roleSelect"><option value="random">🎲 Tirer au hasard</option></select></label>
+      <label>Nom du héros<input id="playerName" value="Alex" maxlength="28"></label>
+      <label>Durée envisagée<select id="duration"><option value="30">30 minutes</option><option value="45" selected>45 minutes</option><option value="60">60 minutes</option></select></label>
+      <div class="wide"><p id="roleHint" class="fine">Le maître du jeu pourra toujours adapter les règles et les personnages.</p><button id="start" class="primary">Créer la partie et obtenir son code</button></div>
+    </div>
+  </section>
+  <div id="view" hidden>
+    <section class="panel narrative-panel">
+      <div class="session-head"><div><span class="eyebrow" id="location"></span><h2 id="sceneTitle"></h2></div><div><span class="pill" id="phaseBadge"></span><div class="session-tag" id="visibleId"></div></div></div>
+      <p class="scene" id="sceneText" aria-live="polite"></p>
+      <div class="row-buttons"><button class="primary" id="advance">Continuer l'histoire ➜</button><button class="ghost" id="readScene">🔊 Écouter</button><button class="ghost" id="toggleGM">🔒 Secrets MJ</button><button class="ghost" id="exportJSON">Exporter JSON</button><button class="ghost" id="newGame">Nouvelle partie</button></div>
+    </section>
+    <section class="section-grid">
+      <div>
+        <section class="panel" id="dayBox">
+          <h2>💬 Parler aux habitants</h2>
+          <div id="cast" class="cast"></div>
+          <div id="conversation" hidden>
+            <h3 id="npcTitle" style="margin-top:16px"></h3>
+            <div id="chatThread" class="chat-thread"></div>
+            <div class="row-buttons"><button class="ghost" id="askAlibi">Où étais-tu ?</button><button class="ghost" id="askRumor">Qu'as-tu vu ?</button><button class="ghost" id="askHint">Un détail suspect ?</button></div>
+            <div class="ask-line" style="margin-top:10px"><input id="question" maxlength="200" placeholder="Pose librement ta question…"><button id="ask" class="secondary">Demander</button></div>
+          </div>
+          <h2 style="margin-top:24px">🔎 Explorer les lieux</h2><div id="places" class="place-grid"></div><p id="clueResult" class="result"></p>
+        </section>
+        <section class="panel" id="nightBox" hidden>
+          <h2>🌙 La nuit tombe</h2><p id="nightHelp" class="muted"></p>
+          <label for="nightTarget">Personne concernée</label><select id="nightTarget"></select>
+          <button id="nightAct" class="secondary" style="margin-top:10px">Valider mon action</button>
+          <p id="nightResult" class="fine"></p>
+        </section>
+        <section class="panel" id="voteBox" hidden><h2>⚖️ Le vote du village</h2><p class="muted">Le maître du jeu peut interrompre le vote et arbitrer les pouvoirs spéciaux.</p><select id="voteTarget"></select><button id="vote" class="danger" style="margin-top:10px">Désigner ce suspect</button></section>
+        <section class="panel"><h2>📜 Journal de partie</h2><div id="history"></div></section>
+      </div>
+      <aside>
+        <section class="panel"><div class="eyebrow">CARTE DU JOUEUR</div><h2 id="playerCard"></h2><p id="roleCard" style="color:#e8bc72;font-weight:bold"></p><p id="powerCard" class="fine"></p><span class="pill" id="dayCard"></span></section>
+        <section class="panel"><h2>🧩 Indices trouvés</h2><div id="clues" class="clue-list"></div></section>
+        <section class="panel"><h2>🔊 Narration</h2><p class="fine">Lecture vocale du navigateur, sans enregistrement.</p><div class="row-buttons"><button id="stopVoice" class="ghost">Arrêter la voix</button><label><input type="checkbox" id="autoVoice" checked> Lire les nouvelles répliques</label></div></section>
+      </aside>
+    </section>
+    <section class="panel" id="gmBox" hidden>
+      <h2>🔒 Espace réservé au maître du jeu</h2><p class="warning">Ne pas présenter cet écran au joueur : il révèle les rôles et les secrets.</p>
+      <p id="gmSecret"></p><div class="gm-list" id="gmRoster"></div>
+      <h3 style="margin-top:20px">Modifier la scène</h3><textarea class="gm-note" id="gmScene" placeholder="Raconte ce qui se passe maintenant…"></textarea>
+      <div class="row-buttons"><button id="gmNarrate" class="secondary">Publier la narration</button><button id="gmEnd" class="ghost">Terminer cette partie</button></div>
+    </section>
+  </div>
+</main>
+<footer>Thiercelieux Solo · Assistant de jeu non officiel · Sauvegarde locale et synchronisation GitHub facultative</footer>
+<script src="./roles.js"></script>
+<script src="./stories.js"></script>
+<script>
+(() => {
+"use strict";
+const $ = id => document.getElementById(id);
+const REPO = "trexdbg/loup-garou", BRANCH = "parties", SAVE_PREFIX = "lg.session.", LAST = "lg.latest";
+let game = null, selected = "", remoteSha = null, token = "", dirty = false, busy = false, lastRefresh = 0;
+const date = () => new Date().toISOString();
+const story = () => window.STORIES.find(s => s.id === game?.storyId) || window.STORIES[0];
+const role = id => window.ROLE_BY_ID[id] || window.ROLE_BY_ID.villageois;
+const code = () => {
+ const bytes = new Uint8Array(3); crypto.getRandomValues(bytes);
+ const d = new Date(), label = "" + d.getFullYear() + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0");
+ return "LG-" + label + "-" + Array.from(bytes,n => n.toString(16).padStart(2,"0")).join("").toUpperCase();
+};
+function el(tag,text,cls) { const x = document.createElement(tag); x.textContent = text; if(cls) x.className = cls; return x; }
+function opt(parent,value,text) { const x = el("option",text); x.value = value; parent.append(x); }
+function message(text,error=false) { $("syncStatus").textContent = (error?"⚠️ ":"") + text; $("syncStatus").style.color = error?"#ffc0ae":""; }
+function saveLocal() {
+ if(!game)return;
+ game.updatedAt = date();
+ localStorage.setItem(SAVE_PREFIX+game.id,JSON.stringify(game));
+ localStorage.setItem(LAST,game.id);
+ $("sessionId").value = game.id; dirty = true;
+ if(token)saveRemote(true);
+}
+function event(kind,speaker,text,other={}) {
+ game.events.push(Object.assign({id:code()+"-"+Date.now(),at:date(),kind,speaker,text},other));
+ saveLocal();
+}
+function create() {
+ const s = window.STORIES.find(x => x.id === $("storySelect").value);
+ const pick = $("roleSelect").value;
+ const chosen = pick === "random" ? window.ROLES[Math.floor(Math.random()*window.ROLES.length)].id : pick;
+ const wolfName = s.culprit || s.residents[0].name;
+ const extras = s.residents.filter(n=>n.name!==wolfName);
+ const otherWolf = chosen === "loup" ? "" : extras[Math.floor(Math.random()*extras.length)].name;
+ const villageRoles = ["voyante","sorciere","salvateur","ancien","chasseur","villageois","villageois"];
+ let i = 0;
+ game = {schemaVersion:1,id:code(),storyId:s.id,title:s.title,createdAt:date(),updatedAt:date(),
+ duration:Number($("duration").value),phase:"prologue",day:0,status:"active",
+ player:{name:$("playerName").value.trim().slice(0,28)||"Alex",roleId:chosen,alive:true},
+ residents:s.residents.map(n=>({name:n.name,job:n.job,roleId:n.name===wolfName||n.name===otherWolf?"loup":villageRoles[(i++)%villageRoles.length],alive:true})),
+ scene:{title:"Le prologue",text:s.opening,speaker:"Narrateur"},
+ events:[],clues:[],explored:[],nightActions:[],votes:[],pending:null};
+ remoteSha = null;dirty=true;selected="";
+ event("scene","Narrateur",s.opening,{phase:"prologue"});
+ render();message("Partie créée : "+game.id+". Sauvegarde locale prête.");
+}
+function valid(g) {
+ return g?.schemaVersion===1 && /^LG-[0-9]{8}-[0-9A-F]{6}$/.test(g.id) &&
+ window.STORIES.some(s=>s.id===g.storyId) && window.ROLE_BY_ID[g.player?.roleId] &&
+ Array.isArray(g.residents) && Array.isArray(g.events) &&
+ Array.isArray(g.clues) && Array.isArray(g.explored) &&
+ typeof g.scene?.text==="string";
+}
+function accept(g,sha) {
+ if(!valid(g))throw new Error("Format de partie incorrect.");
+ const last = game?.events.at(-1)?.id;
+ game=g; remoteSha=sha; dirty=false; selected="";
+ localStorage.setItem(SAVE_PREFIX+g.id,JSON.stringify(g));localStorage.setItem(LAST,g.id);
+ render();
+ if($("autoVoice").checked && last && last!==g.events.at(-1)?.id && g.events.at(-1)?.kind==="npc_reply")speak(g.events.at(-1).text,g.events.at(-1).speaker);
+}
+function loadLocal() {
+ const id=$("sessionId").value.trim().toUpperCase()||localStorage.getItem(LAST);
+ const raw=localStorage.getItem(SAVE_PREFIX+id);
+ if(!raw)return message("Partie introuvable sur cet appareil.",true);
+ try{accept(JSON.parse(raw),null);dirty=true;message("Partie "+id+" chargée localement. Vérifie GitHub avant de la synchroniser.");}
+ catch(e){message(e.message,true);}
+}
+function setScene(phase,title,text) {
+ game.phase=phase;game.scene={title,text,speaker:"Narrateur"};
+ event("scene","Narrateur",text,{phase,day:game.day});render();
+}
+function next() {
+ if(!game||game.status!=="active")return;
+ const s=story();
+ if(game.phase==="prologue"||game.phase==="vote"){game.day++;setScene("night","Le village s'endort",s.night);}
+ else if(game.phase==="night")setScene("dawn","Le village se réveille",s.dawn);
+ else if(game.phase==="dawn")setScene("day","La place du village",s.day);
+ else if(game.phase==="day")setScene("vote","Le conseil du village","Le village se réunit. Chaque habitant peut défendre ses idées et désigner un suspect.");
+ else setScene("day","Enquête",s.day);
+}
+function render() {
+ if(!game)return;
+ $("setupView").hidden=true;$("view").hidden=false;
+ $("location").textContent=story().setting;
+ $("sceneTitle").textContent=game.scene.title;
+ $("sceneText").textContent=game.scene.text;
+ $("visibleId").textContent=game.id;
+ $("phaseBadge").textContent=({prologue:"Prologue",night:"🌙 Nuit",dawn:"🌅 Aube",day:"☀️ Jour",vote:"⚖️ Vote",ending:"Épilogue"})[game.phase]+" "+(game.day||"");
+ $("advance").hidden=game.status==="finished";
+ $("playerCard").textContent=game.player.name;
+ $("roleCard").textContent=role(game.player.roleId).icon+" "+role(game.player.roleId).name;
+ $("powerCard").textContent=role(game.player.roleId).power;
+ $("dayCard").textContent="Jour "+game.day;
+ $("sessionId").value=game.id;
+ $("dayBox").hidden=!["day","dawn"].includes(game.phase);
+ $("nightBox").hidden=game.phase!=="night";
+ $("voteBox").hidden=game.phase!=="vote";
+ renderCast();renderClues();renderHistory();renderNight();renderVote();if(!$("gmBox").hidden)renderGM();
+}
+function renderCast() {
+ const cast=$("cast");cast.replaceChildren();
+ game.residents.forEach(n=>{
+ const b=el("button",n.name+(n.alive?"":" ✝") ,n.name===selected?"selected":"");
+ b.disabled=!n.alive;
+ b.append(el("small",n.job));
+ b.onclick=()=>{selected=n.name;renderCast();renderChat();};
+ cast.append(b);
+ });
+ const places=$("places");places.replaceChildren();
+ story().locations.forEach(p=>{
+ const b=el("button",p.icon+" "+p.name,game.explored.includes(p.id)?"found":"");
+ b.append(el("small",p.text));b.onclick=()=>explore(p);places.append(b);
+ });
+ renderChat();
+}
+function renderChat() {
+ const npc=story().residents.find(n=>n.name===selected);
+ $("conversation").hidden=!npc;if(!npc)return;
+ $("npcTitle").textContent="Dialogue avec "+npc.name+" · "+npc.job;
+ const thread=$("chatThread");thread.replaceChildren();
+ const relevant=game.events.filter(e=>e.target===selected && ["player_question","npc_reply"].includes(e.kind)).slice(-16);
+ if(!relevant.length)thread.append(el("div",npc.name+" te regarde et attend ta question.","chat-msg"));
+ relevant.forEach(e=>{
+ const div=el("div",e.text,"chat-msg"+(e.kind==="player_question"?" question":""));
+ div.prepend(el("small",e.kind==="player_question"?game.player.name:npc.name));thread.append(div);
+ });
+}
+function ask(question,preset) {
+ const npc=story().residents.find(n=>n.name===selected);if(!npc||!question)return;
+ game.pending={type:"npc_reply",resident:npc.name,question,day:game.day};
+ event("player_question",game.player.name,question,{target:npc.name,status:token?"waiting":"offline"});
+ if(!token){
+   const q=question.toLowerCase();
+   const response=preset||(/où|alibi|nuit|heure|étais/.test(q)?npc.alibi:
+     /secret|cache|mensonge/.test(q)?npc.hint:/vu|sais|loup|entendu/.test(q)?npc.rumor:"Je me demande la même chose… "+npc.hint);
+   game.pending=null;event("npc_reply",npc.name,"« "+response+" »",{target:npc.name});speak(response,npc.name);
+ }else{
+   message("Question envoyée. Dis à ChatGPT : « Partie "+game.id+", réponds à "+npc.name+" ». Le salon récupérera sa réponse.");
+ }
+ $("question").value="";renderChat();renderHistory();
+}
+function explore(p) {
+ if(!game.explored.includes(p.id)) {
+  game.explored.push(p.id);game.clues.push({id:p.id,title:p.name,text:p.clue});
+  event("clue","Enquête",p.clue,{location:p.name});
+ }
+ $("clueResult").textContent=p.clue;renderCast();renderClues();renderHistory();
+}
+function renderClues() {
+ const list=$("clues");list.replaceChildren();
+ if(!game.clues.length)list.append(el("p","Aucun indice pour le moment.","fine"));
+ game.clues.forEach(c=>list.append(el("div",c.title+" — "+c.text,"clue-card")));
+}
+function renderHistory() {
+ const list=$("history");list.replaceChildren();
+ game.events.slice(-40).forEach(e=>list.append(el("div",(e.speaker?e.speaker+" : ":"")+e.text,"logitem")));
+}
+function living() {return game.residents.filter(n=>n.alive);}
+function renderNight() {
+ const target=$("nightTarget"),old=target.value;target.replaceChildren();
+ living().forEach(n=>opt(target,n.name,n.name));if(living().some(n=>n.name===old))target.value=old;
+ $("nightHelp").textContent="Le rôle "+role(game.player.roleId).name+" : "+role(game.player.roleId).power+
+ ". Tu peux consigner une action ; le maître du jeu arbitre les pouvoirs complexes.";
+}
+function nightAct() {
+ const target=$("nightTarget").value;if(!target)return;
+ const action=role(game.player.roleId).action;
+ const obj={day:game.day,actor:game.player.name,ability:action,target};
+ game.nightActions.push(obj);
+ let desc=game.player.name+" utilise son pouvoir (« "+action+" ») sur "+target+".";
+ if(action==="inspect"){const n=game.residents.find(x=>x.name===target);desc=target+" possède le rôle "+role(n.roleId).name+".";}
+ event("night_action",game.player.name,desc,{target,private:true});
+ $("nightResult").textContent=desc;renderHistory();
+}
+function renderVote() {
+ const select=$("voteTarget"),old=select.value;select.replaceChildren();
+ living().forEach(n=>opt(select,n.name,n.name));if(living().some(n=>n.name===old))select.value=old;
+}
+function vote() {
+ const target=$("voteTarget").value;if(!target)return;
+ if(game.votes.some(x=>x.day===game.day)){message("Le vote de ce jour a déjà été organisé.",true);return;}
+ const n=game.residents.find(x=>x.name===target);n.alive=false;
+ game.votes.push({day:game.day,target});
+ event("vote","Village",target+" quitte le village. Rôle révélé : "+role(n.roleId).name+".",{target});
+ if(!living().some(x=>x.roleId==="loup")){
+  game.status="finished";setScene("ending","La fin du mystère",story().endVillage);
+ }else{setScene("night","La nuit suivante",story().night);game.day++;}
+}
+function renderGM() {
+ $("gmSecret").textContent="Secret du scénario : "+story().culprit+" est lié au mystère.";
+ const roster=$("gmRoster");roster.replaceChildren();
+ game.residents.forEach(n=>{
+ const row=el("div","", "gm-row");row.append(el("span",n.name+(n.alive?"":" (éliminé)")));
+ const select=document.createElement("select");
+ window.ROLES.forEach(r=>opt(select,r.id,r.name));select.value=n.roleId;
+ select.onchange=()=>{n.roleId=select.value;event("gm","MJ","Modification secrète du rôle de "+n.name,{private:true});};
+ row.append(select);roster.append(row);
+ });
+}
+function endGame() {if(!game)return;game.status="finished";setScene("ending","Épilogue",story().endWolves);}
+function speak(text,speaker) {
+ if(!("speechSynthesis" in window)||!text)return;
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(String(text).slice(0,3000));u.lang="fr-FR";
+ u.pitch=speaker&&speaker!=="Narrateur"?1.12:0.9;u.rate=.92;speechSynthesis.speak(u);
+}
+function exportJSON() {
+ if(!game)return;const blob=new Blob([JSON.stringify(game,null,2)],{type:"application/json"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=game.id+".json";a.click();
+ setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function connect() {
+ const v=$("pat").value.trim();if(v){token=v;$("pat").value="";$("connectionStatus").textContent="GitHub connecté"; }
+ if(!token){message("Jeton GitHub nécessaire pour accéder au dépôt privé.",true);return false;}
+ return true;
+}
+function encode(value) {
+ const bytes=new TextEncoder().encode(value);let s="";for(const b of bytes)s+=String.fromCharCode(b);return btoa(s);
+}
+function decode(value) {return new TextDecoder().decode(Uint8Array.from(atob(value.replace(/\s/g,"")),x=>x.charCodeAt(0)));}
+async function request(method,url,body) {
+ const response=await fetch(url,{method,cache:"no-store",headers:{"Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28","Content-Type":"application/json"},body:body?JSON.stringify(body):undefined});
+ if(response.status===404)return {missing:true};
+ const data=await response.json().catch(()=>({}));
+ if(!response.ok)throw Error("GitHub "+response.status+" : "+(data.message||"Accès refusé"));
+ return data;
+}
+const path=id=>"https://api.github.com/repos/"+REPO+"/contents/sessions/"+encodeURIComponent(id)+".json";
+async function readRemote(silent=false) {
+ if(!connect()||busy)return;
+ const id=(silent&&game?game.id:$("sessionId").value.trim().toUpperCase());
+ if(!/^LG-[0-9]{8}-[0-9A-F]{6}$/.test(id)){message("Code incorrect. Exemple : LG-20261101-A1B2C3",true);return;}
+ if(!silent&&game&&dirty&&!confirm("Charger GitHub ? La version locale non envoyée sera remplacée."))return;
+ busy=true;
+ try {
+  const remote=await request("GET",path(id)+"?ref="+BRANCH);lastRefresh=Date.now();
+  if(remote.missing){if(!silent)message("Cette partie n'existe pas encore sur GitHub.",true);return;}
+  const incoming=JSON.parse(decode(remote.content));
+  if(!valid(incoming)||incoming.id!==id)throw Error("Format de partie incompatible.");
+  if(silent&&dirty)return;
+  if(silent&&remoteSha===remote.sha)return;
+  accept(incoming,remote.sha);
+  message("Partie "+id+" chargée depuis GitHub.");
+ }catch(e){if(!silent)message(e.message,true);}
+ finally{busy=false;}
+}
+async function saveRemote(silent=false) {
+ if(!game||!connect()||busy)return;
+ busy=true;
+ try {
+  const found=await request("GET",path(game.id)+"?ref="+BRANCH);
+  if(!found.missing&&found.sha!==remoteSha)throw Error("Conflit : une autre version existe sur GitHub. Recharge-la d'abord.");
+  const content=JSON.stringify(game);
+  const body={message:"partie "+game.id+" : progression",content:encode(content),branch:BRANCH};
+  if(!found.missing)body.sha=found.sha;
+  const response=await request("PUT",path(game.id),body);
+  remoteSha=response.content.sha;
+  if(content===JSON.stringify(game))dirty=false;
+  message("Partie "+game.id+" enregistrée sur GitHub.");
+ }catch(e){if(!silent||dirty)message(e.message,true);}
+ finally{busy=false;}
+}
+function init() {
+ window.STORIES.forEach(s=>opt($("storySelect"),s.id,s.icon+" "+s.title+" — "+s.minutes+" min"));
+ window.ROLES.forEach(r=>opt($("roleSelect"),r.id,r.icon+" "+r.name));
+ $("roleSelect").onchange=()=>{$("roleHint").textContent=role($("roleSelect").value).power;};
+ $("start").onclick=create;$("openGithub").onclick=()=>readRemote(false);
+ $("saveGithub").onclick=()=>saveRemote(false);$("openLocal").onclick=loadLocal;
+ $("advance").onclick=next;$("newGame").onclick=()=>{game=null;remoteSha=null;dirty=false;selected="";$("view").hidden=true;$("setupView").hidden=false;};
+ $("readScene").onclick=()=>{if(game)speak(game.scene.text,"Narrateur");};
+ $("stopVoice").onclick=()=>speechSynthesis?.cancel();
+ $("toggleGM").onclick=()=>{$("gmBox").hidden=!$("gmBox").hidden;if(!$("gmBox").hidden)renderGM();};
+ $("gmNarrate").onclick=()=>{const text=$("gmScene").value.trim();if(text)setScene(game.phase,"Intervention du maître du jeu",text);};
+ $("gmEnd").onclick=endGame;$("exportJSON").onclick=exportJSON;
+ $("ask").onclick=()=>ask($("question").value.trim());
+ $("question").onkeydown=e=>{if(e.key==="Enter")ask($("question").value.trim());};
+ $("askAlibi").onclick=()=>{const n=story().residents.find(x=>x.name===selected);if(n)ask("Où étais-tu cette nuit ?",n.alibi);};
+ $("askRumor").onclick=()=>{const n=story().residents.find(x=>x.name===selected);if(n)ask("Qu'as-tu vu ?",n.rumor);};
+ $("askHint").onclick=()=>{const n=story().residents.find(x=>x.name===selected);if(n)ask("As-tu remarqué un détail suspect ?",n.hint);};
+ $("nightAct").onclick=nightAct;$("vote").onclick=vote;
+ $("copyCode").onclick=()=>{
+ const id=game?.id||$("sessionId").value.trim();
+ if(!id)return message("Aucun identifiant à copier.",true);
+ navigator.clipboard?.writeText(id).then(()=>message("Code "+id+" copié.")).catch(()=>message("Copie ce code : "+id));
+ };
+ const linked=new URLSearchParams(location.search).get("partie");
+ if(linked&&/^LG-[0-9]{8}-[0-9A-F]{6}$/.test(linked))$("sessionId").value=linked;
+ else $("sessionId").value=localStorage.getItem(LAST)||"";
+ setInterval(()=>{if(token&&game&&!dirty&&!busy&&Date.now()-lastRefresh>20000)readRemote(true);},22000);
+}
+init();
+})();
+</script>
+</body>
+</html>

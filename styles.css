@@ -3,3 +3,16 @@
 @media(max-width:950px){.setup-grid,.main-grid{grid-template-columns:1fr}.game-header{align-items:start;flex-direction:column}.side-column{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.side-column .panel{margin-bottom:10px}.side-column>.panel:last-child{grid-column:1/-1}}
 @media(max-width:600px){.shell{padding:15px 12px 50px}.topbar{padding:12px}.brand strong{font-size:1.06rem}.brand small{font-size:.68rem}.moon{font-size:1.8rem}.header-actions .small{font-size:.7rem;padding:8px}.panel{padding:17px;margin-bottom:12px}.story-grid{grid-template-columns:1fr}.story-option{min-height:0}.side-column{display:block}.places-grid{grid-template-columns:1fr 1fr}.question-row{flex-wrap:wrap}.question-row button{width:100%}.narrative{font-size:1.09rem}.gm-panel{padding:16px}.night-controls{grid-template-columns:1fr}.resident-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* Régie sonore, lisible sur écran de MJ, téléphone ou tablette. */
+.sound-panel .sound-switches{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}
+.sound-panel .sound-switches label{display:inline-flex;align-items:center;gap:7px;font-size:.87rem;color:var(--text)}
+.sound-panel input[type="checkbox"]{width:17px;height:17px;accent-color:var(--gold)}
+.sound-panel>label{display:block;margin-top:14px;margin-bottom:7px;font-size:.88rem}
+.sound-panel input[type="range"]{display:block;width:100%;accent-color:var(--gold)}
+.sound-panel select{width:100%;max-width:100%;background:var(--panel-2)}
+.sound-buttons{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}
+.sound-buttons button{padding:8px 12px;flex:0 1 auto;min-height:38px;background:var(--panel-2)}
+.sound-panel #audioStatus{margin:8px 0 0}
+@media(max-width:420px){.sound-buttons button{flex:1 1 42%}}

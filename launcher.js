@@ -100,9 +100,10 @@
     const story = stories.find(s => s.id === $v("scenario"));
     const name = clean($v("heroName"), 40) || "Alex";
     const now = new Date().toISOString();
+    const id = sessionId();
     return {
       schema_version: 2,
-      id: sessionId(),
+      id,
       cree_le: now,
       statut: "a_creer_sur_github",
       source: "Thiercelieux Solo / configurateur GitHub Pages",
@@ -175,7 +176,7 @@
       },
       publication: {
         git_public: true,
-        chemin: "parties/" + "ID_A_REMPLACER",
+        chemin: "parties/" + id,
         index: "parties/index.json",
         secrets_mj: "NE_JAMAIS_PUBLIER_DANS_CE_DEPOT_PUBLIC",
         fichiers_publics: ["parametres.json", "partie.json", "narrations.md", "journal.md", "dialogues.ndjson"],
@@ -196,9 +197,9 @@
       "Voici la configuration produite par l'application. Lis son ID exact et utilise le dépôt GitHub " + repo + ".",
       "Tu es l'assistant du maître du jeu humain : tu incarnes les PNJ et proposes les scènes, mais le MJ valide les actions et décisions importantes.",
       "1. Vérifie si parties/" + value.id + "/ existe déjà. S'il existe, demande au MJ s'il faut le reprendre, sans écraser ses données.",
-      "2. Crée parties/" + value.id + "/parametres.json (la configuration), partie.json (état PUBLIC de départ), narrations.md (UNIQUEMENT le prologue), journal.md et dialogues.ndjson (entrée initiale facultative).",
+      "2. Crée parties/" + value.id + "/parametres.json (COPIE EXPURGÉE de tous les rôles et secrets), partie.json (état PUBLIC de départ), narrations.md (UNIQUEMENT le prologue), journal.md et dialogues.ndjson (entrée initiale facultative). Garde le JSON complet dans notre conversation privée.",
       "3. Mets à jour parties/index.json pour référencer ce même ID, titre, date, statut, phase et dossier; n'écrase pas les autres parties.",
-      "4. Prépare les identités et secrets uniquement dans notre conversation privée, sans les commiter au dépôt public. Ne publie pas le rôle secret du joueur ni ceux des PNJ.",
+      "4. Prépare les identités et secrets uniquement dans notre conversation privée, sans les commiter au dépôt public. Ne publie pas le rôle secret du joueur ni ceux des PNJ. Si le rôle est fixé dans le JSON, remplace son ID par null dans la copie GitHub.",
       "5. Après écriture sur GitHub, raconte le prologue et attends l'accord du MJ. Ne génère ni nuit complète, ni vote, ni dénouement par anticipation.",
       "6. Ensuite, au fil de nos échanges, écris seulement les nouveaux événements validés dans le dossier de cette partie et mets à jour l'index.",
       "7. Reste adapté à un joueur de 10 ans si c'est l'âge indiqué. Respecte les vraies cartes et demande au MJ en cas de règles ambiguës.",
@@ -211,16 +212,17 @@
 
   function clearGenerated() {
     if ($("generatedPanel").hidden) return;
-    $("generatedWarning").hidden = false;
-    $("generatedWarning").textContent = "Les paramètres ont été modifiés : regénère un JSON pour prendre en compte tes changements.";
+    generated = null;
+    $("generatedPanel").hidden = true;
+    $("formStatus").textContent = "Paramètres modifiés : génère un nouvel identifiant et son JSON.";
   }
   function build() {
     try {
       generated = config();
-      generated.publication.chemin = "parties/" + generated.id;
       $("generatedId").textContent = generated.id;
       $("jsonOut").value = JSON.stringify(generated, null, 2);
       $("generatedPanel").hidden = false;
+      $("formStatus").textContent = "";
       $("generatedWarning").hidden = true;
       $("exportStatus").textContent = "Configuration prête. Aucun dossier GitHub n'a encore été créé : transmets le JSON ou le prompt à ChatGPT.";
       try { localStorage.setItem(draftKey, JSON.stringify(generated)); } catch (_) {}

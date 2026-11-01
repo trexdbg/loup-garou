@@ -80,3 +80,9 @@ footer { padding:28px 15px; }
   .archive-heading { flex-wrap:wrap; }
   .button-row button { flex-basis:100%; }
 }
+.reminder-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 0; }
+.reminder-grid>div { background:#171f2c;border:1px solid #445064;border-radius:10px;padding:16px; }
+.reminder-grid strong { color:#eaca9a; }
+.reminder-grid p { color:var(--muted);margin:9px 0 0;font-size:.88rem;line-height:1.6; }
+.archive-public-summary { color:#d5d9de; }
+@media (max-width:740px) { .reminder-grid { grid-template-columns:1fr; } }

@@ -104,17 +104,20 @@ test("chaque rôle lance une partie sans erreur", () => {
 test("illustrations authentiques: chaque image correspond à un seul rôle, sans confusion", () => {
   const {window,el} = environment();
   const art = window.ROLE_ILLUSTRATIONS;
-  const urls = window.ROLES.map(r => art.imageUrl(r)).filter(Boolean);
-  assert.equal(urls.length, 10);
-  assert.equal(new Set(urls).size, urls.length);
+  const cards = window.ROLES.filter(r => art.hasImage(r));
+  assert.equal(cards.length, 27);
+  // Les 2 planches contiennent plusieurs cartes : la paire ID + source est validée
+  // par les coordonnées de recadrage propres à chaque rôle dans role-art.js.
+  assert.equal(new Set(cards.map(r => r.id)).size, cards.length);
   for (const role of window.ROLES) {
     const card = art.image(role, "catalog");
     assert.equal(card.children.length, art.hasImage(role) ? 2 : 1);
     assert.ok(art.source(role).startsWith("https://"));
   }
   // Le Grand Méchant Loup ne doit surtout pas recevoir l'image du Chien-Loup.
-  assert.equal(art.hasImage(window.ROLE_BY_ID["grand-loup"]), false);
-  assert.equal(art.hasImage(window.ROLE_BY_ID["chien"]), false);
+  assert.equal(art.hasImage(window.ROLE_BY_ID["grand-loup"]), true);
+  assert.equal(art.hasImage(window.ROLE_BY_ID["chien"]), true);
+  assert.notEqual(art.imageUrl(window.ROLE_BY_ID["grand-loup"]), art.imageUrl(window.ROLE_BY_ID["loup"]));
   // La fiche de la Voyante apparaît bien dans le sélecteur.
   el("roleSelect").value="voyante";
   el("roleSelect").onchange();

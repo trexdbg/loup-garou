@@ -4,7 +4,7 @@ Objectif : permettre des aventures de 30 à 60 minutes sans saturer le dépôt G
 
 ## Contenu permanent
 
-On conserve le code, les rôles, les cinq histoires d'origine, les métadonnées et journaux de partie, les secrets du MJ et le petit nombre de sons génériques utiles à plusieurs parties.
+On conserve le code, les rôles, les cinq histoires d'origine, les métadonnées publiques et journaux de partie (sans identités cachées), et le petit nombre de sons génériques utiles à plusieurs parties.
 
 ## Contenu temporaire
 
@@ -17,7 +17,7 @@ On conserve le code, les rôles, les cinq histoires d'origine, les métadonnées
 
 Chaque nuit, GitHub Actions exécute `scripts/prune_transient_assets.py --days 14 --max-mb 50 --apply` sur la branche principale, une fois le workflow fusionné.
 
-**Protection contre la perte de partie :** aucune suppression tant que `partie.json` n'a pas un statut final explicite (`terminee`, `terminée`, `completed`, etc.). Pour une partie terminée, on supprime après **14 jours depuis la dernière mise à jour de la partie ou du fichier** : les audios de `parties/<id>/audio/` non marqués `archive` ou `permanent` dans leur `manifest.json`, et le fichier `dialogues.ndjson`. Si le volume des médias temporaires des parties terminées dépasse **50 Mio**, les plus anciens partent plus tôt. Les autres fichiers de la partie restent.
+**Protection contre la perte de partie :** aucune suppression tant que `partie.json` n'a pas un statut final explicite (`terminee`, `terminée`, `completed`, etc.). Pour une partie terminée, on supprime après **14 jours depuis la dernière mise à jour de la partie ou du fichier** : les audios de `parties/<id>/audio/` non marqués `archive` ou `permanent` dans leur `manifest.json`, et le fichier `dialogues.ndjson`. Si le volume des médias temporaires des parties terminées dépasse **50 Mio**, les plus anciens partent plus tôt. Les autres fichiers publics de la partie restent. Les secrets MJ demeurent dans la conversation privée, et non dans ce dépôt.
 
 **Simulation** depuis la racine du projet : `python3 scripts/prune_transient_assets.py` ; exécution réelle : `python3 scripts/prune_transient_assets.py --apply`.
 

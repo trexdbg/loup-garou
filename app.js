@@ -40,15 +40,36 @@ function setup(){
   $("roleCatalog").replaceChildren();
   for(const r of roles){
     const e=node("div",undefined,"catalog-item");
-    e.append(node("b",r.icon+" "+r.name),node("div",r.edition+" · "+window.CAMPS[r.team],"edition"),
-      node("p",r.power),node("small",r.support==="mj"?"Arbitrage MJ":"Assistance automatique"));
+    e.append(
+      window.ROLE_ILLUSTRATIONS.image(r,"catalog"),
+      node("b",r.name),
+      node("div",r.edition+" · "+window.CAMPS[r.team],"edition"),
+      node("p",r.power),
+      node("small",r.support==="mj"?"Arbitrage MJ":"Assistance automatique"),
+      window.ROLE_ILLUSTRATIONS.link(r,"Fiche du rôle ↗")
+    );
     $("roleCatalog").append(e);
   }
   try{visible("resumeGame",!!localStorage.getItem(KEY));}catch(_){}
 }
 function preview(){
   const r=byId[$("roleSelect").value];
-  set("rolePreview",r?r.power+" · "+(r.support==="mj"?"Arbitrage du MJ.":"Pouvoir assisté."):"Un des "+roles.length+" rôles sera attribué au hasard.");
+  const container=$("rolePreview");
+  container.replaceChildren();
+  if(!r){
+    container.append(node("p","Un des "+roles.length+" rôles sera attribué au hasard."));
+    return;
+  }
+  const line=node("div",undefined,"role-preview-layout");
+  const information=node("div",undefined,"role-preview-copy");
+  information.append(
+    node("strong",r.name),
+    node("p",r.power),
+    node("small",r.support==="mj"?"Arbitrage du MJ.":"Pouvoir assisté."),
+    window.ROLE_ILLUSTRATIONS.link(r,"Voir le rôle sur le wiki ↗")
+  );
+  line.append(window.ROLE_ILLUSTRATIONS.image(r,"preview"),information);
+  container.append(line);
 }
 function start(){
   const r=$("roleSelect").value==="random"?rand(roles).id:$("roleSelect").value;
@@ -300,7 +321,8 @@ function render(){
   set("livingBadge",(alive().length+(game.playerAlive?1:0))+" habitants");
   set("clueBadge",game.clues.length+" indices");
   set("heroName",game.name);set("heroRole",r.name);set("heroPower",r.power);
-  set("playerIcon",r.icon);set("heroTeam",window.CAMPS[r.team]);
+  $("playerIcon").replaceChildren(window.ROLE_ILLUSTRATIONS.image(r,"hero"));
+  set("heroTeam",window.CAMPS[r.team]);
   set("heroRoleNote",r.support==="mj"?"Pouvoir complexe : arbitrage du MJ nécessaire.":"Pouvoir pris en charge dans le mode solo.");
   visible("continueButton",game.phase!=="end"&&(game.phase!=="vote"||game.voted));
   visible("discussionSection",game.phase==="day");
@@ -341,6 +363,7 @@ function render(){
       !(r.action==="fox"&&!game.fox)&&!(r.action==="monkey"&&!game.monkey);
     visible("nightControls",enabled);
     set("nightHelp",r.power+(r.support==="mj"?" Le MJ complète les effets selon le livret.":"")+
+      (wolf(game.roleId)?" Tes compagnons Loups sont : "+alive().filter(n=>wolf(n.roleId)).map(n=>n.name).join(", ")+".":"")+
       (r.action==="witch"?" La victime des Loups est : "+(game.attack||"personne")+".":"")+
       (!enabled?" Aucune autre action cette nuit.":""));
     if(enabled){
@@ -368,7 +391,12 @@ function renderSecrets(){
   const list=node("div",undefined,"gm-list");
   for(const n of game.npcs){
     const source=story().residents.find(x=>x.name===n.name),row=node("div",undefined,"gm-row"),details=node("div");
-    details.append(node("strong",n.name+(n.alive?"":" ✝")),node("div",source.trait+". "+source.secret));
+    details.append(
+      node("strong",n.name+(n.alive?"":" ✝")),
+      node("div",source.trait+". "+source.secret),
+      node("small","Carte : "+byId[n.roleId].name),
+      window.ROLE_ILLUSTRATIONS.image(byId[n.roleId],"tiny")
+    );
     const sel=document.createElement("select");sel.setAttribute("aria-label","Rôle de "+n.name);
     choice(sel,roles.map(r=>({value:r.id,label:r.name})),n.roleId);
     sel.onchange=()=>{n.roleId=sel.value;log("Le MJ modifie une carte.");save();render();};

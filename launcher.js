@@ -323,6 +323,25 @@
         make("span", "Phase : " + (state.phase || state.progression?.scene || "prologue"))
       );
       content.append(make("h3", title), meta);
+      if (state.resume_public) content.append(make("p", state.resume_public, "archive-public-summary"));
+      if (state.dernier_evenement_public) content.append(make("p", "Dernier événement : " + state.dernier_evenement_public, "archive-public-summary"));
+      if (state.aide_mj_publique) {
+        const tip = make("div", undefined, "advice");
+        tip.append(make("h4", "🎭 Conseil au MJ"), make("p", state.aide_mj_publique));
+        content.append(tip);
+      }
+      const resumeButton = make("button", "📋 Copier une consigne de reprise pour ChatGPT", "secondary");
+      resumeButton.type = "button";
+      resumeButton.addEventListener("click", async () => {
+        const message = "Reprenons la partie " + id + " du projet Loup garou. Relis sur GitHub son partie.json, journal.md et les derniers dialogues, préserve tous les secrets de notre conversation, puis attends mon choix de MJ avant de continuer.";
+        try {
+          await navigator.clipboard.writeText(message);
+          $("archiveStatus").textContent = "Consigne de reprise copiée pour " + id + ".";
+        } catch (_) {
+          $("archiveStatus").textContent = "Copie automatique indisponible : ID à reprendre dans ChatGPT = " + id;
+        }
+      });
+      content.append(resumeButton);
       const textFiles = [["narrations.md", "📖 Narrations"],["journal.md", "📜 Journal"],["dialogues.ndjson", "💬 Dialogues archivés"]];
       for (const [file, heading] of textFiles) {
         try {

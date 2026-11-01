@@ -2,7 +2,7 @@
 
 **Assistant de maître du jeu pour un adulte + un seul joueur (dès 10 ans).** Aventures originales inspirées de l'univers et des mécaniques des *Loups-Garous de Thiercelieux*.
 
-> Projet indépendant, non officiel. Aucune illustration ni texte de règle officiel n'est reproduit. Pour arbitrer les pouvoirs spéciaux, utilisez les cartes et livrets dont vous disposez.
+> Projet indépendant, non officiel. Les résumés sont originaux. Certaines illustrations officielles sont affichées depuis le site de l'éditeur, sans être copiées dans ce dépôt. Elles restent la propriété de leurs ayants droit. Pour arbitrer les pouvoirs, les cartes et livrets officiels font foi.
 
 ## ▶ Jouer immédiatement
 
@@ -11,7 +11,7 @@
 3. Choisissez un scénario, un prénom et un rôle **au choix ou tiré au sort**.
 4. Lisez l'introduction à voix haute. Le MJ peut ouvrir le panneau **🔒 Secrets MJ**, à l'abri des regards du joueur.
 
-**Aucun compte, serveur, paquet npm, clé API ni accès Internet n'est nécessaire.** Les données sont sauvegardées dans le stockage local du navigateur. Le bouton **Reprendre la partie sauvegardée** recharge la session en cours. L'option 🔊 utilise la synthèse vocale disponible dans certains navigateurs.
+**Aucun compte, serveur, paquet npm ni clé API n'est nécessaire pour jouer.** Les données sont sauvegardées dans le stockage local du navigateur. Le moteur de jeu fonctionne hors ligne ; **l'affichage des illustrations originales nécessite Internet**, et bascule sur les icônes de rôle si une image n'est pas disponible. Le bouton **Reprendre la partie sauvegardée** recharge la session en cours. L'option 🔊 utilise la synthèse vocale disponible dans certains navigateurs.
 
 ## 🎲 Déroulement d'une partie
 
@@ -65,6 +65,18 @@ Le Capitaine est une **fonction supplémentaire**, pas une carte de rôle unique
 - Utilisez **Secrets MJ** seulement quand le joueur ne voit pas l'écran ; ce panneau affiche les vrais rôles et les secrets des dialogues.
 - Si une carte de votre boîte diffère du résumé ici, **la carte/le livret officiel fait foi**.
 
+## 🖼 Visuels des cartes
+
+Le **catalogue**, l'**aperçu du rôle**, la **carte du joueur** et le panneau **Secrets MJ** affichent, lorsque leur correspondance a été vérifiée, l'illustration authentique du rôle. Les illustrations proviennent des publications [Asmodee](https://www.asmodee.fr/les-roles-des-loups-garous-de-thiercelieux-que-vous-allez-adorer/) ; les fiches de rôle pointent vers le [wiki Loup-Garou](https://loupgarou.fandom.com/fr/wiki/Liste_des_r%C3%B4les). Les images ne sont **pas** incluses dans les fichiers du dépôt.
+
+Les 10 correspondances actuellement référencées : **Sorcière, Voyante, Chasseur, Cupidon, Renard, Deux Sœurs, Trois Frères, Enfant Sauvage, Loup-Garou Blanc et Joueur de Flûte**. Pour les autres rôles, une icône neutre apparaît en attendant de vérifier **leur propre illustration**. Il est interdit d'utiliser l'image du Grand Méchant Loup pour le Chien-Loup, ou inversement.
+
+La provenance et l'identité des images sont centralisées dans `role-art.js` (une URL par ID de rôle). La mention sur un wiki, même sous licence générale CC BY-SA pour les textes communautaires, **ne constitue pas une autorisation de republier les dessins commerciaux**. Les visuels restent la propriété de leurs auteurs/éditeurs ; pour les embarquer localement ou les redistribuer, obtenir une autorisation explicite. L'intégration dépend de la disponibilité et des conditions d'accès du site source.
+
+### GitHub Pages
+
+Le projet est un site statique prêt à être publié sur GitHub Pages. Pour l'activer : dans le dépôt, ouvrir **Settings → Pages → Build and deployment → Deploy from a branch → `main` → `/(root)` → Save**. Une fois publié, l'adresse habituelle est `https://trexdbg.github.io/loup-garou/`. L'activation effective de Pages doit être vérifiée dans les paramètres du dépôt.
+
 ## 🧪 Tests
 
 Une installation de **Node.js 18+** suffit :
@@ -80,6 +92,7 @@ Les tests vérifient la structure du catalogue, la cohérence des scénarios, le
 - `index.html` : écran de préparation, narration, conversations, actions et secrets MJ.
 - `styles.css` : interface responsive, lisible sur téléphone et ordinateur.
 - `roles.js` : catalogue des rôles et leurs pouvoirs résumés.
+- `role-art.js` : association stricte entre rôles, illustrations officielles vérifiées et fiches wiki, avec repli visuel.
 - `stories.js` : les cinq aventures originales, leurs habitants et leurs indices.
 - `app.js` : état de partie, rôles secrets, dialogues, votes, sauvegarde et phases.
 - `tests/smoke.test.cjs` : tests de fumée sans dépendances.

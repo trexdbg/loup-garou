@@ -300,7 +300,7 @@ function vote() {
  event("vote","Village",target+" quitte le village. Rôle révélé : "+role(n.roleId).name+".",{target});
  if(!living().some(x=>x.roleId==="loup")){
   game.status="finished";setScene("ending","La fin du mystère",story().endVillage);
- }else{setScene("night","La nuit suivante",story().night);game.day++;}
+ }else{game.day++;setScene("night","La nuit suivante",story().night);}
 }
 function renderGM() {
  $("gmSecret").textContent="Secret du scénario : "+story().culprit+" est lié au mystère.";
@@ -316,7 +316,7 @@ function renderGM() {
 function endGame() {if(!game)return;game.status="finished";setScene("ending","Épilogue",story().endWolves);}
 function speak(text,speaker) {
  if(!("speechSynthesis" in window)||!text)return;
- speechSynthesis.cancel();
+ window.speechSynthesis.cancel();
  const u=new SpeechSynthesisUtterance(String(text).slice(0,3000));u.lang="fr-FR";
  u.pitch=speaker&&speaker!=="Narrateur"?1.12:0.9;u.rate=.92;speechSynthesis.speak(u);
 }
@@ -384,7 +384,7 @@ function init() {
  $("saveGithub").onclick=()=>saveRemote(false);$("openLocal").onclick=loadLocal;
  $("advance").onclick=next;$("newGame").onclick=()=>{game=null;remoteSha=null;dirty=false;selected="";$("view").hidden=true;$("setupView").hidden=false;};
  $("readScene").onclick=()=>{if(game)speak(game.scene.text,"Narrateur");};
- $("stopVoice").onclick=()=>speechSynthesis?.cancel();
+ $("stopVoice").onclick=()=>{if("speechSynthesis" in window)window.speechSynthesis.cancel();};
  $("toggleGM").onclick=()=>{$("gmBox").hidden=!$("gmBox").hidden;if(!$("gmBox").hidden)renderGM();};
  $("gmNarrate").onclick=()=>{const text=$("gmScene").value.trim();if(text)setScene(game.phase,"Intervention du maître du jeu",text);};
  $("gmEnd").onclick=endGame;$("exportJSON").onclick=exportJSON;

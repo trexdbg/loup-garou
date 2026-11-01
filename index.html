@@ -106,6 +106,32 @@
           </section>
         </div>
         <aside class="side-column">
+          <section class="panel sound-panel">
+  <div class="section-title"><h2>🎧 Régie sonore du MJ</h2><span id="speechState" class="micro" aria-live="polite">Prêt</span></div>
+  <p class="muted">Voix des personnages, ambiances automatiques, bruitages à déclencher librement.</p>
+  <div class="sound-switches">
+    <label><input type="checkbox" id="voiceToggle" checked> Voix</label>
+    <label><input type="checkbox" id="ambientToggle" checked> Ambiances</label>
+    <label><input type="checkbox" id="sfxToggle" checked> Bruitages</label>
+    <label><input type="checkbox" id="filesToggle"> Préférer les MP3 locaux</label>
+  </div>
+  <label for="volumeInput">Volume général</label>
+  <input id="volumeInput" type="range" min="0" max="100" value="65">
+  <label for="voiceSelect">Voix du narrateur</label>
+  <select id="voiceSelect"><option value="">Français automatique</option></select>
+  <div class="sound-buttons">
+    <button type="button" data-sound="night">🌙 Nuit</button>
+    <button type="button" data-sound="wolf">🐺 Loup</button>
+    <button type="button" data-sound="bell">🔔 Cloche</button>
+    <button type="button" data-sound="door">🚪 Porte</button>
+    <button type="button" data-sound="steps">👣 Pas</button>
+    <button type="button" data-sound="dawn">🌅 Aube</button>
+    <button type="button" data-sound="reveal">✨ Révélation</button>
+    <button type="button" data-sound="heartbeat">💓 Suspense</button>
+  </div>
+  <div class="sound-buttons"><button id="testVoiceBtn" type="button" class="secondary">▶ Tester la voix</button><button id="stopAudioBtn" type="button" class="ghost">■ Couper les sons</button></div>
+  <p class="fine" id="audioStatus" aria-live="polite">Les sons sont disponibles après un clic. Les voix dépendent du navigateur.</p>
+</section>
           <section class="panel identity">
             <div class="eyebrow">CARTE DU JOUEUR</div>
             <div class="identity-icon" id="playerIcon">🎭</div>
@@ -137,6 +163,7 @@
   <footer>Thiercelieux Solo · Adaptation indépendante, non officielle · Narrations originales · Fonctionne hors ligne</footer>
   <script src="./roles.js"></script>
   <script src="./stories.js"></script>
+  <script src="./audio.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

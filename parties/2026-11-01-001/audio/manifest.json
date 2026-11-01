@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "partie": "2026-11-01-001",
+  "pistes": [
+    {
+      "id": "fx-cloche-001",
+      "chemin": "cloche_avertissement.wav",
+      "type": "effet_sonore",
+      "description": "Trois tintements de cloche synthétisés, création originale",
+      "format": "audio/wav",
+      "frequence_hz": 8000,
+      "canaux": 1,
+      "duree_secondes": 7,
+      "scene": "prologue",
+      "statut": "archive"
+    }
+  ],
+  "voix_narration": [],
+  "note": "Aucune voix d'enfant archivée. Ne pas indiquer de piste parlée tant qu'aucun fichier vocal n'a effectivement été créé et ajouté."
+}

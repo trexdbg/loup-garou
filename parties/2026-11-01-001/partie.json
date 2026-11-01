@@ -1,0 +1,56 @@
+{
+  "id": "2026-11-01-001",
+  "titre": "Les douze coups du clocher — le treizième coup",
+  "scenario_source": "stories.js#clocher (librement adapté pour une partie dans ChatGPT)",
+  "cree_le": "2026-11-01",
+  "statut": "en_attente_du_choix_du_role",
+  "phase": "mise_en_place",
+  "mode": "conversation ChatGPT, avec maître du jeu humain et un seul joueur",
+  "participants": {
+    "joueurs": 1,
+    "age_cible": 10,
+    "maitre_du_jeu": "humain",
+    "pnj": 7
+  },
+  "parametres": {
+    "duree_cible_min": 45,
+    "ton": "mystère, tension douce, humour possible; pas de violence graphique",
+    "univers": "Thiercelieux, jour/nuit, rôles et pouvoirs des cartes physiques",
+    "role_joueur": {
+      "choix": "a_definir",
+      "options": "choix libre parmi tous les rôles du catalogue ou tirage au sort"
+    },
+    "arbitrage": "Le MJ humain décide de commencer, suspendre, retcon, valider les pouvoirs, déplacer le rythme et déclencher les votes; l'assistant propose et joue les PNJ.",
+    "hasard": "Tirages consignés; rôle et répartition arrêtés avant la première nuit par le MJ",
+    "style_dialogue": "PNJ cohérents, réponses libres aux questions du joueur, secrets non révélés sans motif",
+    "conditions_fin": "victoire village/loups/solitaire selon rôle, ou résolution narrative arbitrée par MJ",
+    "confidentialite": "Secrets conservés séparément des narrations; ne pas les montrer au joueur."
+  },
+  "progression": {
+    "scene": "prologue",
+    "nuit": 0,
+    "jour": 0,
+    "indices_decouverts": [],
+    "votes": [],
+    "journal_seq": 0
+  },
+  "personnages_pnj": [
+    "Émile",
+    "Jeanne",
+    "Louis",
+    "Mina",
+    "Romain",
+    "Claire",
+    "Nestor"
+  ],
+  "archivage": {
+    "repo": "trexdbg/loup-garou",
+    "chemin": "parties/2026-11-01-001/",
+    "dialogues": "dialogues.ndjson",
+    "journal": "journal.md",
+    "narrations": "narrations.md",
+    "notes_privees": "secrets-mj.md",
+    "audios": "audio/manifest.json"
+  },
+  "prochain_geste": "Le joueur choisit un rôle ou demande un tirage au sort; le MJ valide le début de la première scène."
+}

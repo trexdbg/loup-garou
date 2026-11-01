@@ -105,7 +105,7 @@ test("illustrations authentiques: chaque image correspond à un seul rôle, sans
   const {window,el} = environment();
   const art = window.ROLE_ILLUSTRATIONS;
   const cards = window.ROLES.filter(r => art.hasImage(r));
-  assert.equal(cards.length, 27);
+  assert.equal(cards.length, 30);
   // Les 2 planches contiennent plusieurs cartes : la paire ID + source est validée
   // par les coordonnées de recadrage propres à chaque rôle dans role-art.js.
   assert.equal(new Set(cards.map(r => r.id)).size, cards.length);

@@ -16,3 +16,12 @@
 .sound-buttons button{padding:8px 12px;flex:0 1 auto;min-height:38px;background:var(--panel-2)}
 .sound-panel #audioStatus{margin:8px 0 0}
 @media(max-width:420px){.sound-buttons button{flex:1 1 42%}}
+
+/* Identifiant de partie visible pendant le jeu, y compris sur mobile. */
+.session-code-panel{display:flex;align-items:center;flex-wrap:wrap;gap:12px 18px;background:#202635;border:1px solid #7a6a51;border-radius:14px;padding:14px 18px;margin-bottom:20px}
+.session-code-copy{flex:1 1 260px;display:flex;flex-direction:column;gap:4px}
+.session-code{font:700 clamp(1.05rem,2.8vw,1.38rem)/1.35 ui-monospace,Consolas,monospace;color:#ffe1a2;letter-spacing:.04em;overflow-wrap:anywhere}
+.session-code-actions{display:flex;flex-wrap:wrap;gap:8px}
+.session-code-actions button{font-size:.86rem}
+.session-code-panel #sessionCopyStatus{flex-basis:100%;margin:0;min-height:0}
+@media(max-width:600px){.session-code-actions{width:100%}.session-code-actions button{flex:1 1 auto}}

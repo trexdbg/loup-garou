@@ -44,6 +44,7 @@ function environment() {
     SpeechSynthesisUtterance: function(text){this.text=text;}
   });
   vm.runInContext(code("roles.js"),context);
+  vm.runInContext(code("role-art.js"),context);
   vm.runInContext(code("stories.js"),context);
   vm.runInContext(code("app.js"),context);
   return {el:id=>document.getElementById(id),window:context.window,localStorage};
@@ -98,4 +99,24 @@ test("chaque rôle lance une partie sans erreur", () => {
     assert.equal(state.roleId,role.id);
     assert.ok(["dawn","end"].includes(state.phase));
   }
+});
+
+test("illustrations authentiques: chaque image correspond à un seul rôle, sans confusion", () => {
+  const {window,el} = environment();
+  const art = window.ROLE_ILLUSTRATIONS;
+  const urls = window.ROLES.map(r => art.imageUrl(r)).filter(Boolean);
+  assert.equal(urls.length, 10);
+  assert.equal(new Set(urls).size, urls.length);
+  for (const role of window.ROLES) {
+    const card = art.image(role, "catalog");
+    assert.equal(card.children.length, art.hasImage(role) ? 2 : 1);
+    assert.ok(art.source(role).startsWith("https://"));
+  }
+  // Le Grand Méchant Loup ne doit surtout pas recevoir l'image du Chien-Loup.
+  assert.equal(art.hasImage(window.ROLE_BY_ID["grand-loup"]), false);
+  assert.equal(art.hasImage(window.ROLE_BY_ID["chien"]), false);
+  // La fiche de la Voyante apparaît bien dans le sélecteur.
+  el("roleSelect").value="voyante";
+  el("roleSelect").onchange();
+  assert.equal(el("rolePreview").children.length, 1);
 });

@@ -1,0 +1,9 @@
+# Ne jamais versionner les dialogues et sons régénérables.
+/assets/audio/generated/
+/parties/*/audio/generated/
+/parties/*/dialogues/generated/
+
+# Échantillons ou exports locaux qui n'ont pas vocation à entrer dans l'historique.
+*.tmp
+*.bak
+__pycache__/

@@ -5,64 +5,14 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 
 
-/* Illustrations officielles externes ; pas de fausse carte si la source est absente. */
-.role-art {
-  display: inline-flex;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  flex: none;
-  overflow: hidden;
-  aspect-ratio: 1/1;
-  border-radius: 13px;
-  background: radial-gradient(circle at 50% 40%,#4b4254,#171923);
-  border: 1px solid #8f7759;
-  box-shadow: inset 0 0 0 3px #211f25, 0 6px 18px #0005;
-  vertical-align: middle;
-}
-.role-art img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-.role-art-fallback {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: 100%;
-  font-size: 2.3rem;
-}
-.role-art--catalog { width: 100%; max-height: 170px; margin-bottom: 12px; }
-.role-art--preview { width: clamp(90px, 28vw, 140px); }
-.role-art--hero { width: min(100%,215px); margin: 0 auto 12px; }
-.role-art--hero .role-art-fallback { font-size: 5rem; }
-.role-art--tiny { width: 44px; height: 44px; margin-top: 7px; border-radius: 7px; }
-.role-art--tiny .role-art-fallback { font-size: 1.4rem; }
-.role-preview-layout { display: flex; align-items: center; gap: 16px; text-align: left; }
-.role-preview-copy { min-width: 0; }
-.role-preview-copy strong { font: 700 1.16rem Georgia,serif; }
-.role-preview-copy p { margin: 5px 0 7px; }
-.role-preview-copy small { display: block; }
-.role-preview p { margin: 0; }
-.role-source {
-  display: inline-block;
-  margin-top: 9px;
-  color: #f3d7a6;
-  font-size: .83rem;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.role-source:hover { color: #fff; }
-.role-source:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
-.catalog-item { display: flex; flex-direction: column; min-width: 0; }
-.catalog-item .role-source { margin-top: auto; padding-top: 10px; }
-.catalog-item .role-art--catalog { align-self: center; }
-.identity-icon { font-size: initial; }
-.gm-row > div:first-child { min-width: 0; }
-.gm-row .role-art--tiny { display: flex; }
-@media(max-width:600px) {
-  .role-preview-layout { gap: 11px; }
-  .role-art--preview { width: 90px; }
-  .role-art--catalog { max-height: 140px; }
-}
+/* Régie sonore, lisible sur écran de MJ, téléphone ou tablette. */
+.sound-panel .sound-switches{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}
+.sound-panel .sound-switches label{display:inline-flex;align-items:center;gap:7px;font-size:.87rem;color:var(--text)}
+.sound-panel input[type="checkbox"]{width:17px;height:17px;accent-color:var(--gold)}
+.sound-panel>label{display:block;margin-top:14px;margin-bottom:7px;font-size:.88rem}
+.sound-panel input[type="range"]{display:block;width:100%;accent-color:var(--gold)}
+.sound-panel select{width:100%;max-width:100%;background:var(--panel-2)}
+.sound-buttons{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}
+.sound-buttons button{padding:8px 12px;flex:0 1 auto;min-height:38px;background:var(--panel-2)}
+.sound-panel #audioStatus{margin:8px 0 0}
+@media(max-width:420px){.sound-buttons button{flex:1 1 42%}}

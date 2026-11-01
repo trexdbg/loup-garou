@@ -4,6 +4,7 @@ const $ = id => document.getElementById(id);
 const roles = window.ROLES, stories = window.STORIES, byId = window.ROLE_BY_ID;
 const KEY = "loup-garou-solo-v1", SELF = "__joueur__";
 let game = null, storyId = stories[0].id, selected = null, secrets = false, spoken = "";
+let audioPhaseKey = "", lastSpeaker = "Narrateur";
 const rand = arr => arr[Math.floor(Math.random()*arr.length)];
 const alive = () => game.npcs.filter(n => n.alive);
 const npc = name => game.npcs.find(n => n.name === name);
@@ -19,9 +20,11 @@ const choice = (el, values, desired) => {
 };
 const save = () => { if(game) try{localStorage.setItem(KEY,JSON.stringify(game));}catch(_){} };
 const log = txt => {game.journal.unshift("Tour "+game.day+" : "+txt);game.journal.length=Math.min(game.journal.length,70);};
-function listen(text){
+function listen(text,speaker=lastSpeaker){
+  const content=(speaker==="Narrateur"?(text||spoken).split("\n\nMJ :")[0]:(text||spoken));
+  if(window.SOUND){window.SOUND.speak(content,speaker);return;}
   if(!("speechSynthesis" in window)){alert("Lecture vocale non disponible.");return;}
-  speechSynthesis.cancel();const s=new SpeechSynthesisUtterance(text||spoken);s.lang="fr-FR";s.rate=.9;speechSynthesis.speak(s);
+  speechSynthesis.cancel();const s=new SpeechSynthesisUtterance(content);s.lang="fr-FR";s.rate=.9;speechSynthesis.speak(s);
 }
 function setup(){
   $("storyChoices").replaceChildren();
@@ -82,19 +85,19 @@ function start(){
     duration:Number($("duration").value),day:1,phase:"intro",npcs,playerAlive:true,
     journal:[],clues:[],visited:[],nightChoice:null,attack:null,nightSummary:"",voted:false,voteSummary:"",
     life:true,death:true,fox:true,monkey:true,protected:null,mark:null,charmed:[],outcome:null};
-  selected=null;log("La partie commence. Les habitants se réunissent.");
+  selected=null;audioPhaseKey="";log("La partie commence. Les habitants se réunissent.");
   visible("setup",false);visible("game",true);scene();save();
 }
 function resume(){
   try{
     const v=JSON.parse(localStorage.getItem(KEY));
     if(!v||v.version!==1||!byId[v.roleId]||!stories.some(s=>s.id===v.storyId))throw Error("Format inconnu");
-    game=v;selected=null;visible("setup",false);visible("game",true);scene();
+    game=v;selected=null;audioPhaseKey="";visible("setup",false);visible("game",true);scene();
   }catch(e){alert("Impossible de reprendre cette partie : "+e.message);}
 }
 function reset(){
   if(!confirm("Recommencer avec une nouvelle aventure ?"))return;
-  game=null;selected=null;try{localStorage.removeItem(KEY);}catch(_){}
+  window.SOUND?.stop();audioPhaseKey="";game=null;selected=null;try{localStorage.removeItem(KEY);}catch(_){}
   visible("setup",true);visible("game",false);toggleSecrets(false);setup();
 }
 function enterNight(){
@@ -185,7 +188,20 @@ function scene(){
   }
   set("currentTitle",s.title);set("storySetting",s.setting);set("phaseDescription",s.tone);
   set("sceneTitle",title);set("phaseIcon",icon);set("phaseLabel",label);
-  set("sceneText",desc);set("continueButton",next);spoken=desc;render();
+  set("sceneText",desc);set("continueButton",next);spoken=desc;lastSpeaker="Narrateur";render();
+  const key=game.storyId+"/"+game.day+"/"+game.phase;
+  if(key!==audioPhaseKey&&window.SOUND){
+    audioPhaseKey=key;
+    const phase=game.phase;
+    const forest=/forêt|chêne|bois/i.test(s.setting);
+    window.SOUND.scene(phase==="night"||phase==="vote"?"night":forest?"forest":"day");
+    if(phase==="night")window.SOUND.effect("night");
+    if(phase==="dawn")window.SOUND.effect("dawn");
+    if(phase==="vote")window.SOUND.effect("bell");
+    if(phase==="end")window.SOUND.effect("reveal");
+    const forPlayer=desc.split("\n\nMJ :")[0];
+    window.SOUND.speak(forPlayer,"Narrateur");
+  }
 }
 function nightOptions(){
   const r=byId[game.roleId],action=r.action;
@@ -246,7 +262,7 @@ function chat(n,topic,q=""){
   if(/sac|bague|clé|masque|lanterne|forêt|cloche|trace|secret|indice/.test(text))return chat(n,"hint");
   return "Je n'en suis pas sûr. "+source.rumor+" Tu devrais aussi demander à mes voisins.";
 }
-function speech(text){set("dialogueText","« "+text+" »");spoken=text;}
+function speech(text){set("dialogueText","« "+text+" »");spoken=text;lastSpeaker=selected||"Narrateur";window.SOUND?.speak(text,lastSpeaker);}
 function talk(name){
   selected=name;const n=npc(name);
   speech(n.muted?"Ce personnage ne peut répondre que par gestes.":chat(n,"hello"));
@@ -266,11 +282,13 @@ function explore(id){
     log("Indice découvert à "+p.name+": "+p.clue);
   }
   set("placeResult",p.text+"\n"+(first?"🔍 Nouvel indice : ":"Indice déjà connu : ")+p.clue);
+  window.SOUND?.effect(first?"clue":"steps");window.SOUND?.speak(p.clue,"Narrateur");
   save();render();
 }
 function vote(){
   if(game.phase!=="vote"||game.voted)return;
   const target=$("voteTarget").value; if(!npc(target)?.alive)return;
+  window.SOUND?.effect("vote");
   const tally=Object.fromEntries(alive().map(x=>[x.name,0]));
   tally[target]++;
   for(const voter of alive()){
@@ -403,8 +421,8 @@ $("newGame").onclick=reset;$("continueButton").onclick=advance;
 $("nightAct").onclick=actionNight;$("voteButton").onclick=vote;
 $("gmToggle").onclick=()=>toggleSecrets(!secrets);
 $("gmClose").onclick=()=>toggleSecrets(false);
-$("readButton").onclick=()=>listen(spoken);
-$("sceneRead").onclick=()=>listen($("sceneText").textContent);
+$("readButton").onclick=()=>listen(spoken,lastSpeaker);
+$("sceneRead").onclick=()=>listen($("sceneText").textContent.split("\n\nMJ :")[0],"Narrateur");
 $("askQuestion").onclick=()=>{
   const q=$("freeQuestion").value.trim();if(q){question("free",q);$("freeQuestion").value="";}
 };

@@ -31,20 +31,20 @@
           <h2>2. Attribuer le rôle</h2>
           <label for="roleSelect">Rôle du joueur</label>
           <select id="roleSelect"><option value="random">🎲 Attribution au hasard</option></select>
-          <div id="rolePreview" class="role-preview" aria-live="polite">Les rôles viennent du jeu de base et de ses extensions.</div>
+          <div id="rolePreview" class="role-preview">Les rôles viennent du jeu de base et de ses extensions.</div>
           <label for="playerName">Prénom du personnage</label>
           <input id="playerName" maxlength="28" value="Alex" placeholder="Prénom du héros">
           <label for="duration">Durée visée</label>
           <select id="duration"><option value="30">30 minutes · rapide</option><option value="45" selected>45 minutes · équilibrée</option><option value="60">60 minutes · développée</option></select>
           <button id="startGame" class="primary full">Commencer l'aventure <span aria-hidden="true">➜</span></button>
-          <p class="fine">Aucune clé API nécessaire. Sauvegarde locale ; une connexion est nécessaire pour charger les illustrations originales.</p>
+          <p class="fine">Aucune connexion ou clé API nécessaire. Sauvegarde automatique sur cet appareil.</p>
           <button id="resumeGame" class="ghost full" hidden>↩ Reprendre la partie sauvegardée</button>
         </div>
       </div>
       <details class="catalogue">
         <summary>📚 Consulter tous les rôles et leurs pouvoirs</summary>
         <div id="roleCatalog" class="catalog-grid"></div>
-        <p class="fine">Les illustrations originales confirmées sont affichées avec leur source. Une carte sans image vérifiée conserve son icône : elle n'est jamais remplacée par un autre rôle.</p>
+        <p class="fine">Les rôles complexes sont documentés pour l'arbitrage du MJ ; le moteur automatise les pouvoirs essentiels du mode solo.</p>
       </details>
     </section>
     <section id="game" hidden>
@@ -106,6 +106,32 @@
           </section>
         </div>
         <aside class="side-column">
+          <section class="panel sound-panel">
+  <div class="section-title"><h2>🎧 Régie sonore du MJ</h2><span id="speechState" class="micro" aria-live="polite">Prêt</span></div>
+  <p class="muted">Voix des personnages, ambiances automatiques, bruitages à déclencher librement.</p>
+  <div class="sound-switches">
+    <label><input type="checkbox" id="voiceToggle" checked> Voix</label>
+    <label><input type="checkbox" id="ambientToggle" checked> Ambiances</label>
+    <label><input type="checkbox" id="sfxToggle" checked> Bruitages</label>
+    <label><input type="checkbox" id="filesToggle"> Préférer les MP3 locaux</label>
+  </div>
+  <label for="volumeInput">Volume général</label>
+  <input id="volumeInput" type="range" min="0" max="100" value="65">
+  <label for="voiceSelect">Voix du narrateur</label>
+  <select id="voiceSelect"><option value="">Français automatique</option></select>
+  <div class="sound-buttons">
+    <button type="button" data-sound="night">🌙 Nuit</button>
+    <button type="button" data-sound="wolf">🐺 Loup</button>
+    <button type="button" data-sound="bell">🔔 Cloche</button>
+    <button type="button" data-sound="door">🚪 Porte</button>
+    <button type="button" data-sound="steps">👣 Pas</button>
+    <button type="button" data-sound="dawn">🌅 Aube</button>
+    <button type="button" data-sound="reveal">✨ Révélation</button>
+    <button type="button" data-sound="heartbeat">💓 Suspense</button>
+  </div>
+  <div class="sound-buttons"><button id="testVoiceBtn" type="button" class="secondary">▶ Tester la voix</button><button id="stopAudioBtn" type="button" class="ghost">■ Couper les sons</button></div>
+  <p class="fine" id="audioStatus" aria-live="polite">Les sons sont disponibles après un clic. Les voix dépendent du navigateur.</p>
+</section>
           <section class="panel identity">
             <div class="eyebrow">CARTE DU JOUEUR</div>
             <div class="identity-icon" id="playerIcon">🎭</div>
@@ -134,10 +160,11 @@
     <p class="warning">⚠️ Ne pas montrer cet écran au joueur : il révèle les Loups, les rôles et les fausses pistes.</p>
     <div id="gmContent"></div>
   </aside>
-  <footer>Thiercelieux Solo · Projet indépendant, non officiel · Visuels originaux liés à leurs sources · Mécaniques locales</footer>
+  <footer>Thiercelieux Solo · Adaptation indépendante, non officielle · Narrations originales · Fonctionne hors ligne</footer>
   <script src="./roles.js"></script>
   <script src="./role-art.js"></script>
   <script src="./stories.js"></script>
+  <script src="./audio.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

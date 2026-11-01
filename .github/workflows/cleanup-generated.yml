@@ -1,0 +1,37 @@
+name: Nettoyer les audios et dialogues temporaires
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cleanup-generated-assets
+  cancel-in-progress: false
+
+jobs:
+  nettoyage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer l'historique Git (pour calculer l'âge des fichiers)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Purger les médias non archivés des parties terminées
+        run: python3 scripts/prune_transient_assets.py --days 14 --max-mb 50 --apply
+
+      - name: Enregistrer uniquement les suppressions de contenu temporaire
+        run: |
+          git add -u -- parties
+          if ! git diff --cached --quiet; then
+            git config user.name "Thiercelieux cleanup bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "chore: expire temporary adventure dialogue and audio"
+            git push
+          else
+            echo "Aucun fichier temporaire à supprimer."
+          fi

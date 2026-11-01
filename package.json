@@ -1,0 +1,12 @@
+{
+  "name": "thiercelieux-solo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Assistant narratif hors ligne pour 1 MJ et 1 joueur",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

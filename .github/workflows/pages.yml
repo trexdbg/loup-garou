@@ -28,12 +28,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Vérifier le jeu et les illustrations
+      - name: Vérifier les archives et le catalogue
         run: npm test
       - name: Assembler uniquement les fichiers publics
         run: |
-          mkdir -p site
-          cp index.html styles.css roles.js role-art.js stories.js audio.js app.js site/
+          mkdir -p site/parties
+          cp index.html styles.css launcher.css roles.js role-art.js stories.js launcher.js site/
+          # Les seules données copiées dans Pages sont les archives publiques.
+          if [ -f parties/index.json ]; then cp parties/index.json site/parties/index.json; fi
+          for folder in parties/*/; do
+            [ -d "$folder" ] || continue
+            dest="site/$folder"
+            mkdir -p "$dest"
+            for filename in partie.json narrations.md journal.md dialogues.ndjson; do
+              if [ -f "${folder}${filename}" ]; then cp "${folder}${filename}" "$dest"; fi
+            done
+          done
           touch site/.nojekyll
       - name: Configurer GitHub Pages
         uses: actions/configure-pages@v5

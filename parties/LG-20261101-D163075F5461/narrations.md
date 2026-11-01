@@ -20,6 +20,25 @@ Le soleil descend doucement derrière les toits, mais **le village est encore bi
 
 ---
 
-**Pause MJ :** fin du prologue. Attendre son accord avant toute action, transition, première nuit ou révélation.
+**Pause MJ (historique) :** le prologue a été validé ; la partie a commencé sur signal du MJ.
 
 **Indication audio :** ambiance de village légère, tintement comique très court. Aucun fichier audio généré.
+
+
+## Scène 1 — Le grand mystère du petit « Miaou »
+
+*Ambiance : fontaine, pas sur les pavés et murmures amusés. Le village est toujours éveillé.*
+
+Agathe, la boulangère, s'approche d'Alex en serrant une baguette comme une épée.
+
+**Agathe :** « Ah, Alex ! Tu arrives à pic ! Voilà trente ans que j'entends cette cloche, et c'est la première fois qu'elle miaule. Tu crois qu'on a installé un chat à la place du battant ? »
+
+Gaston redresse son chapeau… à l'envers.
+
+**Gaston :** « Silence ! En ma qualité de garde-champêtre, je déclare officiellement cette affaire… extrêmement bizarre ! »
+
+Un éclat de rire traverse la place. Agathe se penche vers Alex.
+
+**Agathe :** « Dis-moi, toi : par quoi commencerais-tu ? »
+
+*Pause joueur : Alex peut répondre librement, interroger quelqu'un ou regarder autour de lui. Aucune action ne lui est imposée.*

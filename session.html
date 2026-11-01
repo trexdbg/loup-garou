@@ -116,7 +116,7 @@ body{background:radial-gradient(circle at 80% 0,#303448,transparent 46%),#10141d
 "use strict";
 const $ = id => document.getElementById(id);
 const REPO = "trexdbg/loup-garou", BRANCH = "parties", SAVE_PREFIX = "lg.session.", LAST = "lg.latest";
-let game = null, selected = "", remoteSha = null, token = "", dirty = false, busy = false, lastRefresh = 0;
+let game = null, selected = "", remoteSha = null, token = "", dirty = false, busy = false, lastRefresh = 0, saveTimer = 0;
 const date = () => new Date().toISOString();
 const story = () => window.STORIES.find(s => s.id === game?.storyId) || window.STORIES[0];
 const role = id => window.ROLE_BY_ID[id] || window.ROLE_BY_ID.villageois;
@@ -134,7 +134,7 @@ function saveLocal() {
  localStorage.setItem(SAVE_PREFIX+game.id,JSON.stringify(game));
  localStorage.setItem(LAST,game.id);
  $("sessionId").value = game.id; dirty = true;
- if(token)saveRemote(true);
+ if(token){ clearTimeout(saveTimer); saveTimer=setTimeout(()=>saveRemote(true),1000); }
 }
 function event(kind,speaker,text,other={}) {
  game.events.push(Object.assign({id:code()+"-"+Date.now(),at:date(),kind,speaker,text},other));
@@ -269,7 +269,7 @@ function renderClues() {
 }
 function renderHistory() {
  const list=$("history");list.replaceChildren();
- game.events.slice(-40).forEach(e=>list.append(el("div",(e.speaker?e.speaker+" : ":"")+e.text,"logitem")));
+ game.events.filter(e=>!e.private).slice(-40).forEach(e=>list.append(el("div",(e.speaker?e.speaker+" : ":"")+e.text,"logitem")));
 }
 function living() {return game.residents.filter(n=>n.alive);}
 function renderNight() {

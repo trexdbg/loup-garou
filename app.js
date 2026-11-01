@@ -18,7 +18,41 @@ const choice = (el, values, desired) => {
   for(const item of values){const o=new Option(item.label,item.value);el.add(o);}
   if(values.some(x=>x.value===value))el.value=value;
 };
-const save = () => { if(game) try{localStorage.setItem(KEY,JSON.stringify(game));}catch(_){} };
+// Identifiant stable : également attribué aux anciennes sauvegardes locales.
+const generateSessionId = () => {
+  const d = new Date();
+  const date = [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("");
+  const bytes = new Uint8Array(4);
+  if(window.crypto && typeof window.crypto.getRandomValues === "function")window.crypto.getRandomValues(bytes);
+  else for(let i=0;i<bytes.length;i++)bytes[i]=Math.floor(Math.random()*256);
+  return "LG-" + date + "-" + Array.from(bytes,b=>b.toString(16).padStart(2,"0")).join("").toUpperCase();
+};
+const ensureSessionId = () => {
+  if(!game)return false;
+  if(typeof game.id==="string" && /^LG-[0-9]{8}-[0-9A-F]{8}$/.test(game.id))return false;
+  game.id=generateSessionId();return true;
+};
+const save = () => { if(game) try{ensureSessionId();localStorage.setItem(KEY,JSON.stringify(game));}catch(_){} };
+function copySessionId(){
+  if(!game)return;
+  const id=game.id;
+  if(navigator.clipboard && typeof navigator.clipboard.writeText === "function"){
+    navigator.clipboard.writeText(id).then(()=>set("sessionCopyStatus","Code copié : "+id))
+      .catch(()=>{set("sessionCopyStatus","Copiez ce code : "+id);});
+  }else set("sessionCopyStatus","Copiez ce code : "+id);
+}
+function exportSession(){
+  if(!game)return;
+  save();
+  const data=JSON.stringify(game,null,2);
+  const blob=new Blob([data],{type:"application/json;charset=utf-8"});
+  const link=document.createElement("a");
+  const url=URL.createObjectURL(blob);
+  link.href=url;link.download=game.id+".json";
+  document.body.append(link);link.click();link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  set("sessionCopyStatus","Sauvegarde exportée (avec les secrets du MJ). À partager uniquement dans une conversation privée.");
+}
 const log = txt => {game.journal.unshift("Tour "+game.day+" : "+txt);game.journal.length=Math.min(game.journal.length,70);};
 function listen(text,speaker=lastSpeaker){
   const content=(speaker==="Narrateur"?(text||spoken).split("\n\nMJ :")[0]:(text||spoken));
@@ -81,7 +115,7 @@ function start(){
     name:person.name,roleId:person.name===s.culprit||person.name===accomplice?"loup":support[next++%support.length],
     alive:true,trust:0,shield:1,muted:false,revealed:false
   }));
-  game={version:1,storyId,roleId:r,name:$("playerName").value.trim().slice(0,28)||"Alex",
+  game={version:1,id:generateSessionId(),storyId,roleId:r,name:$("playerName").value.trim().slice(0,28)||"Alex",
     duration:Number($("duration").value),day:1,phase:"intro",npcs,playerAlive:true,
     journal:[],clues:[],visited:[],nightChoice:null,attack:null,nightSummary:"",voted:false,voteSummary:"",
     life:true,death:true,fox:true,monkey:true,protected:null,mark:null,charmed:[],outcome:null};
@@ -92,7 +126,7 @@ function resume(){
   try{
     const v=JSON.parse(localStorage.getItem(KEY));
     if(!v||v.version!==1||!byId[v.roleId]||!stories.some(s=>s.id===v.storyId))throw Error("Format inconnu");
-    game=v;selected=null;audioPhaseKey="";visible("setup",false);visible("game",true);scene();
+    game=v;const upgraded=ensureSessionId();if(upgraded)save();selected=null;audioPhaseKey="";visible("setup",false);visible("game",true);scene();
   }catch(e){alert("Impossible de reprendre cette partie : "+e.message);}
 }
 function reset(){
@@ -317,6 +351,7 @@ function vote(){
 function render(){
   if(!game)return;
   const r=byId[game.roleId];
+  ensureSessionId();set("sessionCode",game.id);
   set("dayBadge",game.phase==="intro"?"Prologue":"Tour "+game.day);
   set("livingBadge",(alive().length+(game.playerAlive?1:0))+" habitants");
   set("clueBadge",game.clues.length+" indices");
@@ -415,6 +450,8 @@ function renderSecrets(){
   box.append(node("h3","Conseil de mise en scène"));
   box.append(node("p","Change ta voix selon les personnages. Les alibis servent de base ; accepte les idées et actions libres du joueur. Pour les pouvoirs non automatisés, utilise les cartes que vous possédez."));
 }
+$("copySessionCode").onclick=copySessionId;
+$("exportSession").onclick=exportSession;
 $("roleSelect").onchange=preview;
 $("startGame").onclick=start;$("resumeGame").onclick=resume;
 $("newGame").onclick=reset;$("continueButton").onclick=advance;

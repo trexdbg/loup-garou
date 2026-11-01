@@ -21,7 +21,7 @@ const choice = (el, values, desired) => {
 const save = () => { if(game) try{localStorage.setItem(KEY,JSON.stringify(game));}catch(_){} };
 const log = txt => {game.journal.unshift("Tour "+game.day+" : "+txt);game.journal.length=Math.min(game.journal.length,70);};
 function listen(text,speaker=lastSpeaker){
-  const content=text||spoken;
+  const content=(speaker==="Narrateur"?(text||spoken).split("\n\nMJ :")[0]:(text||spoken));
   if(window.SOUND){window.SOUND.speak(content,speaker);return;}
   if(!("speechSynthesis" in window)){alert("Lecture vocale non disponible.");return;}
   speechSynthesis.cancel();const s=new SpeechSynthesisUtterance(content);s.lang="fr-FR";s.rate=.9;speechSynthesis.speak(s);

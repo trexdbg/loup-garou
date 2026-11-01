@@ -7,6 +7,14 @@
       "titre": "Les douze coups du clocher — le treizième coup",
       "statut": "en_attente_du_choix_du_role",
       "phase": "mise_en_place"
+    },
+    {
+      "id": "LG-20261101-D163075F5461",
+      "cree_le": "2026-11-01",
+      "titre": "La Cloche qui a perdu sa voix",
+      "statut": "en_attente_validation_mj",
+      "phase": "prologue",
+      "dossier": "parties/LG-20261101-D163075F5461"
     }
   ]
 }

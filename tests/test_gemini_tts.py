@@ -83,6 +83,48 @@ class GeminiTTSTests(unittest.TestCase):
             self.assertNotIn("NE PAS LIRE", json.dumps(manifest))
 
 
+    def test_phonon_files_remain_playable_after_gemini_step(self):
+        """Regression: the Phonon manifest path is relative to the party, not /audio."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            party = root / "parties" / "LG-20261102-123456789ABC"
+            party.mkdir(parents=True)
+            (root / "parties" / "index.json").write_text(
+                json.dumps({"parties": [{"id": party.name, "statut": "en_cours"}]}),
+                encoding="utf-8",
+            )
+            (party / "partie.json").write_text(
+                json.dumps({"personnages_pnj": [{"prenom": "Rose"}]}), encoding="utf-8"
+            )
+            text = "Bonjour André, que penses-tu des Loups-Garous ?"
+            (party / "dialogues.ndjson").write_text(
+                json.dumps({"seq": 1, "scene_id": "tour_de_table_01",
+                            "public": True, "audio": True,
+                            "type": "dialogue_pnj", "locuteur": "Rose", "texte": text}),
+                encoding="utf-8",
+            )
+            audio_dir = root / "site" / "parties" / party.name / "audio"
+            audio_dir.mkdir(parents=True)
+            mp3 = "f" * 20 + ".mp3"
+            (audio_dir / mp3).write_bytes(b"phonon test audio")
+            phonon = {"file": "audio/" + mp3, "locuteur": "Rose", "texte": text,
+                      "provider": "phonon", "model": "gradium/phonon-40m-fr",
+                      "voice": "Noémie"}
+            manifest_file = audio_dir / "manifest.json"
+            manifest_file.write_text(
+                json.dumps({"version": 1, "provider": "mixed",
+                            "lines": {"1": phonon}, "stats": {}}),
+                encoding="utf-8",
+            )
+            # Exactly how Pages invokes Gemini: it must leave Phonon untouched.
+            count = generate(root, root / "site", root / "cache", 0, 1, "")
+            self.assertEqual(count, 0)
+            manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
+            self.assertEqual(manifest["lines"]["1"], phonon)
+            self.assertEqual(manifest["stats"]["available"], 1)
+            self.assertEqual(manifest["stats"]["missing"], 0)
+            self.assertTrue((audio_dir / mp3).is_file())
+
     def test_flash_lite_uses_interactions_and_preserves_exact_transcript(self):
         import base64
         import io

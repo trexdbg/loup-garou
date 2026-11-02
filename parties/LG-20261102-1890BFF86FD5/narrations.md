@@ -43,3 +43,15 @@ Les huit habitants sont présents. Personne n'a disparu cette nuit.
 **Rose :** « Écoutons-nous sans accuser trop vite. »
 
 André peut librement prendre la parole.
+
+## Jour 1 — Réveil et discussions
+
+Le village se réveille. Les huit habitants sont toujours présents, personne n'a disparu durant la nuit.
+
+André explique qu'il trouve Hugo bizarre et que Rose défend beaucoup de monde. Il estime que certains parlent énormément et ne sait pas encore pour qui voter. Les villageois réagissent, sans conclure.
+
+## Jour 1 — Préparation du vote
+
+Le village prépare les éventuels votes. Martin soupçonne Hugo ; Hugo et Célia questionnent Éloi. Rose demande de laisser chacun s'expliquer.
+
+Le scrutin n'est pas ouvert. Aucune voix n'est recueillie, et André reste libre de son choix.

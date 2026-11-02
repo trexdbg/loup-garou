@@ -33,7 +33,7 @@ jobs:
       - name: Assembler uniquement les fichiers publics
         run: |
           mkdir -p site/parties
-          cp index.html styles.css launcher.css roles.js role-art.js stories.js launcher.js site/
+          cp index.html styles.css launcher.css roles.js modes.js role-art.js stories.js launcher.js piper-free.js voice-live.js seating-model.js table-seating.js mj-private.js tts-config.json site/
           # Les seules données copiées dans Pages sont les archives publiques.
           if [ -f parties/index.json ]; then cp parties/index.json site/parties/index.json; fi
           for folder in parties/*/; do

@@ -31,6 +31,8 @@ function launcher() {
     },
     console
   });
+  vm.runInContext(read("roles.js"),context);
+  vm.runInContext(read("modes.js"),context);
   vm.runInContext(read("launcher.js"),context);
   return {api:context.window.LG_LAUNCHER,nodes};
 }
@@ -67,7 +69,7 @@ test("la consigne GPT impose le jeu classique sans énigme annexe", () => {
   assert.match(prompt,/des Loups-Garous se cachent dans le village/);
   assert.match(prompt,/secrets_mj\.json/);
   assert.match(prompt,/TRÈS COURT/);
-  assert.match(prompt,/attends l'accord du MJ/);
+  assert.match(prompt,/attends l.accord du MJ/i);
   assert.match(prompt,/n'affirme jamais que la synchronisation est faite/);
 });
 

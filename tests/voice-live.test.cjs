@@ -14,7 +14,7 @@ function setup() {
     speechSynthesis: { getVoices: () => french },
     SpeechSynthesisUtterance: function SpeechSynthesisUtterance(text) { this.text = text; }
   };
-  vm.runInNewContext(source, { window, document: {} });
+  vm.runInNewContext(source, { window, document: {}, fetch: async () => ({ok: false}) });
   return window.LG_VOICES;
 }
 

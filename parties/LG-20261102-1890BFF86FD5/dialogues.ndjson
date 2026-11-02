@@ -84,3 +84,5 @@
 {"seq":84,"scene_id":"revelation_hugo_jour_1","scene_label":"Jour 1 — Carte de Hugo révélée","type":"dialogue_pnj","locuteur":"Rose","texte":"La prochaine fois, écoutons mieux les arguments.","public":true}
 {"seq":85,"scene_id":"revelation_hugo_jour_1","scene_label":"Jour 1 — Carte de Hugo révélée","type":"dialogue_pnj","locuteur":"Célia","texte":"La parole ne suffit pas à prouver une culpabilité.","public":true}
 {"seq":86,"scene_id":"revelation_hugo_jour_1","scene_label":"Jour 1 — Carte de Hugo révélée","type":"dialogue_pnj","locuteur":"Éloi","texte":"Il reste sept habitants. Soyons vigilants.","public":true}
+{"seq":87,"scene_id":"village_s_endort_02","scene_label":"Nuit 2 — Endormissement","type":"narration","locuteur":"Narrateur","texte":"Les sept habitants quittent la place du village.","public":true}
+{"seq":88,"scene_id":"village_s_endort_02","scene_label":"Nuit 2 — Endormissement","type":"narration","locuteur":"Narrateur","texte":"Le village s'endort. Tout le monde ferme les yeux. La deuxième nuit commence.","public":true}

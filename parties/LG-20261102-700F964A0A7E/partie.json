@@ -8,7 +8,7 @@
   "progression": {
     "jour": 0,
     "nuit": 1,
-    "scene": "nuit_1_loups_sorciere"
+    "scene": "nuit_1_sorciere_rendormie"
   },
   "joueur": {
     "prenom": "Alex",
@@ -61,10 +61,10 @@
     "retire": [],
     "valide_par_mj": true
   },
-  "resume_public": "La Voyante s'est rendormie et les Loups-Garous ont fait leur choix pendant la nuit 1. La Sorcière est appelée ; aucune conséquence nocturne n'est encore résolue.",
-  "aide_mj_publique": "La Sorcière est réveillée. Le MJ lui indique secrètement la victime désignée et demande si elle utilise sa potion de vie, sa potion de mort, les deux ou aucune. Attendre validation explicite de son choix avant le réveil du village ; ne révéler aucune cible publiquement.",
-  "dernier_evenement_public": "Les Loups-Garous se rendorment ; la Sorcière est appelée et doit choisir ses actions.",
-  "scene_courante_id": "nuit_1_loups_sorciere",
+  "resume_public": "La Sorcière a décidé en silence puis s'est rendormie. Le village dort toujours ; le réveil doit être autorisé par le MJ.",
+  "aide_mj_publique": "La Sorcière a terminé son tour. Attendre le signal explicite du MJ avant le réveil du village, les annonces du matin et les révélations.",
+  "dernier_evenement_public": "La Sorcière se rendort. La première nuit se poursuit en attendant le signal du MJ.",
+  "scene_courante_id": "nuit_1_sorciere_rendormie",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_conclusion",
@@ -75,13 +75,16 @@
   },
   "nuit_en_cours": {
     "numero": 1,
-    "etape": "appel_sorciere",
-    "statut": "attente_decision_sorciere",
+    "etape": "sorciere_rendormie",
+    "statut": "attente_reveil_mj",
     "actions_resolues": [
       "voyante_observation",
-      "loups_choix_victime"
+      "loups_choix_victime",
+      "sorciere_decision"
     ],
     "attendre_validation_mj": true,
-    "potions_utilisees": []
+    "potions_utilisees": [
+      "vie"
+    ]
   }
 }

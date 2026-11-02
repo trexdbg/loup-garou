@@ -75,3 +75,17 @@ La place du village se vide. Après les accusations et les derniers soupçons, c
 Les portes se ferment, les volets se rabattent. Peu à peu, le silence gagne Thiercelieux.
 
 Le village s'endort. Tout le monde ferme les yeux. La première nuit commence.
+
+## Nuit 1 — les Loups-Garous et la Sorcière
+
+**Narrateur :** « Voyante, rendors-toi et referme les yeux. »
+
+**Narrateur :** « Loups-Garous, réveillez-vous. Regardez-vous et choisissez ensemble une victime. »
+
+*Les Loups-Garous désignent secrètement une victime, puis se rendorment.*
+
+**Narrateur :** « Les Loups-Garous ont fait leur choix. Loups-Garous, rendormez-vous. »
+
+**Narrateur :** « Sorcière, réveille-toi. Le maître du jeu va te montrer discrètement la personne visée cette nuit. Tu peux décider d'utiliser une potion ou de n'en utiliser aucune. »
+
+*La décision de la Sorcière n'a pas encore été prise ; la nuit se poursuit.*

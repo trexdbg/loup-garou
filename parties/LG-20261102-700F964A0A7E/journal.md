@@ -12,4 +12,7 @@
 - **Tour de table — conclusion validée par le MJ** : Rose rappelle qu'aucune preuve n'a été apportée. Octave se défend ; Iris garde en mémoire les accusations trop rapides ; Basile appelle à la méfiance ; Clémence souligne qu'il reste impossible de savoir à qui faire confiance. Le tour de table est déclaré terminé, sans désignation ni vote.
 - **État validé** : phase technique maintenue à `tour_de_table`, statut du tour `termine`, scène courante `tour_de_table_conclusion`. Jour 0, nuit 0, aucun vote, aucun pouvoir nocturne, aucune élimination.
 - **Nuit 1 — accord du MJ** : le village s'endort après le tour de table, sans vote préalable. Les habitants ferment les yeux. Aucun pouvoir nocturne n'a encore été utilisé.
-- **En attente** : signal du MJ pour les étapes nocturnes et choix des personnages. Aucun réveil du village joué.
+- **Nuit 1 — la Voyante** : elle a observé une carte, puis s'est rendormie. Résultat conservé dans le carnet secret du MJ.
+- **Nuit 1 — Loups-Garous** : leur cible a été choisie par Alex et consignée uniquement dans le carnet secret du MJ. L'attaque n'est pas résolue.
+- **Nuit 1 — la Sorcière est appelée** : le MJ lui présente en privé la personne visée. Les potions restent disponibles et aucune décision de la Sorcière n'a été prise.
+- **En attente** : décision de la Sorcière puis validation du MJ, sans victime définitive et sans réveil automatique du village.

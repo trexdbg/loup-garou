@@ -27,3 +27,21 @@ Tous les regards se tournent vers Alex, qui peut maintenant prendre la parole.
 **Inès** — « D'accord. Chacun doit pouvoir répondre. Rose, et toi, qui te semble suspect ? »
 
 **Rose** — « Pour l'instant, je n'ai aucune certitude. Alex, tu peux nous demander ce que tu veux. À qui veux-tu parler d'abord ? »
+
+## Rose répond à Alex — tour de table
+
+*Alex observe attentivement Rose. Elle semble calme, presque trop calme. Il se tourne vers elle et lui pose directement la question.*
+
+**Alex :** « Rose, est-ce que c'est toi le Loup-Garou ? »
+
+**Rose :** « Moi ? Non, Alex, je ne suis pas un Loup-Garou ! Mais je comprends que tu te méfies. Après tout, un vrai Loup pourrait te répondre exactement la même chose. »
+
+**Hugo :** « Ah ! Vous avez vu ? Elle s'est défendue tout de suite ! C'est suspect ! »
+
+**Jade :** « Hugo, franchement ! Tu ferais quoi à sa place ? Tu dirais oui ? »
+
+**Baptiste :** « Moi, je commence surtout à me demander si Hugo n'est pas le Loup ! Il trouve tout le monde suspect ! »
+
+*Rose regarde de nouveau Alex, avec un air curieux.*
+
+**Rose :** « Dis-moi, Alex… pourquoi tu as choisi de m'accuser, moi ? Tu as remarqué quelque chose de particulier ? »

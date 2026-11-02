@@ -114,11 +114,11 @@
           </div>
         </section>
         <section class="panel">
-          <div class="section-header"><span class="step">04</span><div><h2>Ambiance et affichage</h2><p>Ces réglages sont transmis à ChatGPT ; l'application n'enregistre ni n'interprète les dialogues.</p></div></div>
+          <div class="section-header"><span class="step">04</span><div><h2>Ambiance et affichage</h2><p>Ces réglages sont transmis à ChatGPT. En consultation, l'application peut lire à haute voix les nouveaux dialogues publics, sans choisir d'actions ni révéler de secrets.</p></div></div>
           <div class="check-grid">
             <label><input id="cardsOn" type="checkbox" checked> Afficher les vraies illustrations des cartes</label>
             <label><input id="soundsOn" type="checkbox" checked> Prévoir des ambiances et bruitages</label>
-            <label><input id="voiceOn" type="checkbox" checked> Prévoir des lectures et voix de personnages</label>
+            <label><input id="voiceOn" type="checkbox" checked> Voix automatiques des personnages pendant la partie</label>
           </div>
           <p class="fine">Les médias éphémères doivent être nettoyés après utilisation. Le dépôt public ne doit recevoir aucune note secrète du MJ.</p>
         </section>
@@ -148,7 +148,7 @@
       <div class="hero-heading">
         <div class="eyebrow">ARCHIVES GITHUB EN LECTURE SEULE</div>
         <h1>Vos aventures de Thiercelieux</h1>
-        <p class="lead">ChatGPT écrit les scènes et le journal dans GitHub après validation du MJ. Ce tableau de bord affiche uniquement les données publiques déjà archivées.</p>
+        <p class="lead">ChatGPT écrit les scènes et le journal dans GitHub après validation du MJ. Ce tableau de bord affiche les données publiques. Les nouveaux dialogues peuvent être prononcés automatiquement après activation du son.</p>
       </div>
       <section class="panel">
         <div class="section-header archive-heading"><div><h2>Parties enregistrées</h2><p id="archiveStatus" role="status">Actualisation depuis GitHub…</p></div><button type="button" id="archiveRefresh" class="secondary">↻ Actualiser</button></div>
@@ -174,6 +174,7 @@
   <script src="./roles.js"></script>
   <script src="./role-art.js"></script>
   <script src="./stories.js"></script>
+  <script src="./voice-live.js"></script>
   <script src="./launcher.js"></script>
 </body>
 </html>

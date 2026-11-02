@@ -45,3 +45,13 @@ Nouvelle partie initialisée. En attente de la validation du MJ après le prolog
 - Hugo et Éloi sont évoqués comme suspects ; les huit habitants restent susceptibles de recevoir des voix.
 - Scène `preparation_vote_jour_1` archivée. Aucun bulletin attribué à André, aucun suffrage exprimé, aucune élimination.
 - En attente de l'autorisation explicite du MJ pour ouvrir le scrutin.
+
+## Jour 1 — Verdict du village
+
+- Le MJ a validé le dépouillement du premier vote : Hugo reçoit 5 voix contre 3 pour Éloi.
+- André a voté contre Hugo, conformément à son choix explicite.
+- Hugo est éliminé et sa figurine LEGO est retirée de la table.
+- Il reste sept habitants vivants : André, Célia, Éloi, Rose, Martin, Odette et Alice.
+- Scène publique `elimination_jour_1` archivée, séquences 75 à 80.
+- Le rôle et l'historique de l'élimination sont consignés dans `secrets_mj.json`.
+- Aucun pouvoir nocturne ni transition vers la nuit 2 : attente de la validation du MJ.

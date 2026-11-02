@@ -35,6 +35,7 @@
   function setTab(tab) {
     const archives = tab === "archives";
     if (!archives && window.LG_VOICES) window.LG_VOICES.stop();
+    if (!archives && window.LG_MJ_PRIVATE) window.LG_MJ_PRIVATE.hide();
     $("prepareSection").hidden = archives;
     $("archiveSection").hidden = !archives;
     $("tabPrepare").setAttribute("aria-selected", String(!archives));
@@ -162,6 +163,7 @@
       },
       roles: {
         mode: $v("gameMode"),
+        liste_personnalisee: JSON.stringify(pool) !== JSON.stringify(modeCatalog.allowed($v("gameMode"), roles)),
         niveau: modeCatalog.modes[$v("gameMode")].niveau,
         autorises: pool,
         loup_garou_nombre_cible: num("wolfCount", 1, 5),
@@ -222,7 +224,7 @@
       "2. Crée parties/" + value.id + "/parametres.json (COPIE EXPURGÉE de tous les rôles et secrets), partie.json (état PUBLIC de départ), narrations.md (UNIQUEMENT le prologue), journal.md et dialogues.ndjson (entrée initiale facultative). Garde le JSON complet dans notre conversation privée.",
       "3. Mets à jour parties/index.json pour référencer ce même ID, titre, date, statut, phase et dossier; n'écrase pas les autres parties.",
       "4. Prépare les identités et secrets uniquement dans notre conversation privée, sans les commiter au dépôt public. Ne publie pas le rôle secret du joueur ni ceux des PNJ. Si le rôle est fixé dans le JSON, remplace son ID par null dans la copie GitHub.",
-      "4 bis. Applique le niveau roles.mode (classique, avance ou expert) et les rôles autorisés. Compose une distribution cohérente pour le nombre de personnages, le total de Loups, les pouvoirs et les camps ; le MJ valide la répartition avant le prologue.",
+      "4 bis. Applique le niveau roles.mode (classique, avance ou expert) et les rôles autorisés ; si roles.liste_personnalisee est vraie, la sélection manuelle du MJ prime sur le préréglage. Compose une distribution cohérente pour le nombre de personnages, le total de Loups, les pouvoirs et les camps ; le MJ valide la répartition avant le prologue.",
       "4 ter. Après validation des rôles, fournis au MJ dans la conversation PRIVÉE un JSON valide comme {\"id\":\"ID_PARTIE\",\"roles\":[{\"personnage\":\"Alex\",\"role\":\"renard\"}]} avec chaque personnage et son ID exact de rôle issu de roles.js. Ce JSON est à coller uniquement dans le carnet secret MJ de l'application, jamais dans les fichiers GitHub publics.",
       "5. Après écriture sur GitHub, raconte le prologue et attends l'accord du MJ. Ne génère ni nuit complète, ni vote, ni dénouement par anticipation.",
       "6. Ensuite, au fil de nos échanges, écris seulement les nouveaux événements validés dans le dossier de cette partie et mets à jour l'index.",
@@ -334,6 +336,7 @@
   async function openArchive(id) {
     if (!validId(id)) return;
     if (window.LG_VOICES) window.LG_VOICES.stop();
+    if (window.LG_MJ_PRIVATE) window.LG_MJ_PRIVATE.hide();
     $("sessionDetail").hidden = false;
     $("sessionContent").replaceChildren(make("p", "Chargement de " + id + "…"));
     try {
@@ -402,7 +405,7 @@
     $("copyPrompt").addEventListener("click", () => generated && copy(promptFor(generated), "Consigne et JSON copiés. Colle-les dans la conversation ChatGPT du projet."));
     $("downloadJson").addEventListener("click", downloadJson);
     $("archiveRefresh").addEventListener("click", refreshArchives);
-    $("backToArchives").addEventListener("click", () => { if (window.LG_VOICES) window.LG_VOICES.stop(); $("sessionDetail").hidden = true; if (history.replaceState) history.replaceState(null, "", location.pathname); });
+    $("backToArchives").addEventListener("click", () => { if (window.LG_MJ_PRIVATE) window.LG_MJ_PRIVATE.hide(); if (window.LG_VOICES) window.LG_VOICES.stop(); $("sessionDetail").hidden = true; if (history.replaceState) history.replaceState(null, "", location.pathname); });
     $("configForm").addEventListener("change", clearGenerated);
     $("configForm").addEventListener("input", clearGenerated);
     $("newConfig").addEventListener("click", () => { generated = null; $("generatedPanel").hidden = true; $("formStatus").textContent = ""; });

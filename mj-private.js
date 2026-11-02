@@ -84,8 +84,32 @@
     clearButton.type = "button";
     const buttons = make("div", undefined, "mj-private-controls");
     buttons.append(importButton, exportButton, clearButton);
-    region.append(note, stats, list, entryRow, importLabel, buttons, savedLabel, status);
+    const foxPanel = make("section", undefined, "mj-fox-check");
+    const foxHeading = make("h4", "🦊 Contrôle privé du flair du Renard");
+    const foxHint = make("p", "Choisir d'abord une figurine au centre du trio sur le plan de table. Ici, seul le MJ voit si le trio contient au moins un Loup-Garou. Ce contrôle n'utilise pas le pouvoir et ne décide pas de sa perte.", "fine");
+    const foxButton = make("button", "Vérifier le trio sélectionné", "secondary");
+    foxButton.type = "button";
+    const foxAnswer = make("p", "", "mj-fox-answer");
+    foxPanel.append(foxHeading, foxHint, foxButton, foxAnswer);
+    region.append(note, stats, list, foxPanel, entryRow, importLabel, buttons, savedLabel, status);
     mount.append(toggle, region);
+
+    foxButton.addEventListener("click", () => {
+      const group = window.LG_TABLE?.getTrio(id) || [];
+      if (group.length !== 3) {
+        foxAnswer.textContent = "Impossible : il faut trois figurines encore présentes et une cible sélectionnée sur la table.";
+        return;
+      }
+      const identities = group.map(personnage => entries.find(x => x.personnage.toLocaleLowerCase("fr") === personnage.toLocaleLowerCase("fr"))?.role || "");
+      const certainWolf = identities.some(roleId => byId[roleId]?.team === "loups" || roleId === "blanc");
+      const uncertain = identities.some(roleId => !roleId || byId[roleId]?.team === "variable");
+      const label = "Groupe : " + group.join(" · ") + ". ";
+      foxAnswer.textContent = certainWolf
+        ? label + "OUI — le flair détecte au moins un Loup-Garou. Ne révèle pas lequel au joueur."
+        : uncertain
+          ? label + "RÉSULTAT INCERTAIN — un rôle manque ou peut changer de camp. Le MJ doit vérifier les affiliations secrètes."
+          : label + "NON — aucun Loup-Garou détecté. Selon la règle du Renard, son flair est perdu après ce résultat, si le MJ valide l'action.";
+    });
 
     function persist() {
       const data = JSON.stringify({id, roles:entries});
@@ -138,6 +162,7 @@
       if (open) render();
       else {
         importInput.value = "";
+        foxAnswer.textContent = "";
         list.replaceChildren(); // Retire les secrets du DOM quand le panneau est masqué.
       }
     });

@@ -102,3 +102,11 @@ Après validation d'une action du joueur par le MJ, ChatGPT ne publie que les r�
 L'application conserve une correspondance déterministe entre personnages et profils vocaux, consulte uniquement ce fichier public toutes les six secondes après activation audio initiale du MJ, et prononce les nouvelles répliques dans leur ordre. La progression est conservée pendant la session dans le navigateur ; elle ne constitue pas une action de jeu. Le bouton de relecture concerne uniquement les derniers dialogues déjà publiés.
 
 La lecture utilise la synthèse vocale du navigateur (Web Speech), sans produire de MP3 ni stocker de cache dans Git. La diversité des voix dépend de l'appareil ; Chrome et d'autres navigateurs peuvent exiger un clic initial autorisant le son. Aucun message ChatGPT n'est transmis directement à GitHub Pages : il doit d'abord être explicitement ajouté à GitHub avec le connecteur.
+
+## 8. Politique de voix gratuites — décision du MJ
+
+Le MJ a choisi **zéro budget**. Le fournisseur vocal par défaut est **Piper local** (`provider: piper_local`), sans abonnement, sans clé ni utilisation d'API payante. L'ancienne préparation ElevenLabs reste désactivée : ne jamais la mettre en production ni encourager un abonnement sans demande explicite.
+
+Le lecteur GitHub Pages télécharge à la demande des modèles français publics et tente la génération neuronale sur l'appareil. Il utilise deux timbres de base avec des profils vocaux stables par nom de PNJ. Si la génération est indisponible, lente ou bloquée, il bascule automatiquement vers Web Speech. Les voix ne sont pas produites directement par ChatGPT et les résultats peuvent être différents selon le navigateur.
+
+**Règles inchangées** : ne prononcer que les dialogues réellement archivés et validés ; ne pas publier les rôles secrets, choix non confirmés ou pensées des PNJ. Le MJ décide des scènes ; l'application affiche et lit uniquement, elle ne joue jamais à la place du joueur.

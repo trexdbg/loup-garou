@@ -40,7 +40,7 @@ def public_lines(path: Path, max_scenes: int) -> list[dict]:
             continue
         if not isinstance(row, dict):
             continue
-        if (row.get("public") is not True or row.get("type") not in TYPES
+        if (row.get("public") is not True or row.get("audio") is False or row.get("type") not in TYPES
                 or type(row.get("seq")) is not int or row["seq"] < 1
                 or not isinstance(row.get("texte"), str) or not row["texte"].strip()):
             continue

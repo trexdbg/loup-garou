@@ -20,7 +20,7 @@
    try{
     const x=JSON.parse(text);
     if(x.public!==true||!TYPES.has(x.type)||!Number.isSafeInteger(x.seq)||x.seq<1||typeof x.texte!=="string"||!x.texte.trim())continue;
-    lines.set(x.seq,{seq:x.seq,type:x.type,texte:x.texte.trim().slice(0,2500),
+    lines.set(x.seq,{seq:x.seq,type:x.type,audio:x.audio!==false,texte:x.texte.trim().slice(0,2500),
      locuteur:String(x.locuteur||"Narrateur").slice(0,60),
      scene_id:typeof x.scene_id==="string"&&/^[\w-]{1,80}$/.test(x.scene_id)?x.scene_id:"archive",
      scene_label:typeof x.scene_label==="string"?x.scene_label.slice(0,90):""});
@@ -188,7 +188,7 @@
    const line=rows[state.index];
    for(const li of transcript.children)li.classList.toggle("scene-speaking",li.dataset.seq===String(line.seq));
    // Le joueur joue sa propre voix autour de la table.
-   if(line.type==="dialogue_joueur"){advance(token,rows);return;}
+   if(line.type==="dialogue_joueur"||line.audio===false){advance(token,rows);return;}
    const browserSpeech=(geminiUnavailable=false)=>{
     if(!hasSpeech){shutdown();announce("Synthèse vocale indisponible sur cet appareil.");return;}
     const u=new Speech(line.texte), profile=PROFILES[line.locuteur]||[1,1];

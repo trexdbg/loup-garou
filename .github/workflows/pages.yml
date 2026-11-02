@@ -13,11 +13,8 @@ on:
       - 'tts-config.json'
       - 'voices/**'
       - 'assets/**'
-      - 'parties/index.json'
-      - 'parties/*/partie.json'
+      # Uniquement les nouveaux dialogues déclenchent le workflow, jamais les nuits.
       - 'parties/*/dialogues.ndjson'
-      - 'parties/*/journal.md'
-      - 'parties/*/narrations.md'
       - 'scripts/**'
   workflow_dispatch:
 
@@ -40,6 +37,8 @@ jobs:
     steps:
       - name: Récupérer le dépôt
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - name: Configurer Node
         uses: actions/setup-node@v4
         with:
@@ -88,6 +87,58 @@ jobs:
           key: phonon-fr-v1-${{ github.sha }}
           restore-keys: |
             phonon-fr-v1-
+      - name: Identifier les nouveaux dialogues audio
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          file=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -E '^parties/LG-[0-9]{8}-[A-F0-9]{12}/dialogues\.ndjson
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HOME: ${{ github.workspace }}/.cache/huggingface
+        run: |
+          if [ -n "$HF_TOKEN" ]; then
+            echo "HF_TOKEN disponible : Phonon FR utilise les 15 voix, si la licence a été acceptée."
+            if ! python3 -m pip install --quiet ptts; then
+              echo "::warning::Installation Phonon impossible; Gemini ou voix locales seront utilisées."
+            fi
+          else
+            echo "::warning::HF_TOKEN absent : accepter les conditions gradium/phonon-40m-fr et ajouter le secret pour activer Phonon."
+          fi
+          python3 scripts/generate_phonon_tts.py --site site --max-scenes 1 --max-lines 4
+      - name: Préparer les voix Gemini des scènes récentes
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_TTS_MODEL: gemini-3.8-flash-lite-tts
+        run: |
+          # Vérification sans jamais afficher la valeur du token dans les logs.
+          if [ -n "$GEMINI_API_KEY" ]; then
+            echo "Configuration Gemini : secret GEMINI_API_KEY présent."
+          else
+            echo "::warning::Secret GEMINI_API_KEY absent : lecture vocale locale uniquement."
+          fi
+          python3 scripts/generate_gemini_tts.py --site site --max-scenes 1 --max-lines 0
+      - name: Préparer les MP3 de secours gratuits
+        run: |
+          if ! command -v espeak-ng >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq espeak-ng
+          fi
+          python3 scripts/generate_offline_tts.py site
+      - name: Configurer GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Envoyer le site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./site
+      - name: Déployer le site
+        id: deployment
+        uses: actions/deploy-pages@v4
+ | head -n 1 || true)
+          if [ -n "$file" ]; then
+            echo "LG_TTS_PARTY=$(echo "$file" | cut -d/ -f2)" >> "$GITHUB_ENV"
+          else
+            echo "LG_TTS_PARTY=__none__" >> "$GITHUB_ENV"
+          fi
       - name: Générer les MP3 avec Phonon français (prioritaire)
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}

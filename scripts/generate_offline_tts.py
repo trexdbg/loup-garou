@@ -35,7 +35,7 @@ def approved_lines(dialogues: Path, max_scenes: int = 3) -> list[dict]:
         except ValueError:
             continue
         if (not isinstance(item, dict) or item.get("public") is not True
-                or item.get("type") not in TYPES
+                or item.get("audio") is False or item.get("type") not in TYPES
                 or type(item.get("seq")) is not int or item["seq"] < 1
                 or not isinstance(item.get("texte"), str)
                 or not item["texte"].strip()):

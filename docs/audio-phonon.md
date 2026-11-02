@@ -34,9 +34,10 @@ Les anciennes parties bénéficient de la correspondance par prénom si ce prén
 
 - `voices/phonon-fr.json` est le catalogue de référence, et `voice-pool.js` son miroir côté navigateur.
 - Le workflow utilise `pip install ptts` (runtime Phonon officiel) uniquement lorsque `HF_TOKEN` est renseigné. Le code du projet lance `python -m ptts --model hf://gradium/phonon-40m-fr --lang fr --quant q8 --voice NOM ... -o fichier.wav`. FFmpeg convertit ensuite en MP3 mono 48 kbit/s.
-- Le générateur ne lit que les répliques de PNJ et narrations avec `public: true` dans les **trois dernières scènes**. `dialogue_joueur`, `secrets_mj.json` et toute ligne non publique sont exclus.
-- La génération est limitée à 20 clips nouveaux par déploiement (pour préserver le temps CPU), avec mise en cache par modèle, voix et texte. Les voix existantes sont réutilisées.
-- **Priorité de lecture : Phonon → Gemini existant → eSpeak-ng → navigateur.** Gemini continue d'exister en secours si `GEMINI_API_KEY` est configuré ; il ne remplace pas un clip Phonon déjà présent.
+- Le générateur ne lit que les répliques de PNJ et narrations avec `public: true` dans **la dernière scène** lors des publications automatiques. `dialogue_joueur`, `secrets_mj.json` et toute ligne non publique sont exclus.
+- La génération automatique est limitée à 4 nouveaux clips Phonon par déploiement, ciblés sur la partie dont les dialogues viennent de changer (pour préserver le temps CPU), avec mise en cache par modèle, voix et texte. Les voix existantes sont réutilisées.
+- **Priorité de lecture : Phonon → Gemini en cache → eSpeak-ng → navigateur.** De nouveaux clips Gemini ne sont plus générés automatiquement (`--max-lines 0`).
+- Toute réplique portant `"audio": false` est exclue de la synthèse Phonon, Gemini et eSpeak et de la lecture vocale. Les nuits automatiques n'écrivent aucun nouveau dialogue ; les seuls changements d'état ou de secrets ne déclenchent pas de GitHub Action.
 - Aucun poids du modèle français ni fichier MP3 n'est commité au dépôt. Le téléchargement du modèle et des voix sur le runner peut prendre un certain temps au premier lancement, et les quotas de durée de GitHub Actions restent applicables. Les sons générés restent éphémères : on ne garantit pas qu'une ancienne scène soit toujours publiée.
 - Si le projet devient commercial ou monétisé, ne pas utiliser le modèle CC BY-NC sans licence commerciale adaptée.
 

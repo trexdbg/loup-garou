@@ -34,6 +34,8 @@ class PhononTTSUnitTests(unittest.TestCase):
                  "scene_id": "A", "texte": "SECRET LOUP"},
                 {"seq": 4, "public": True, "type": "narration", "locuteur": "Narrateur",
                  "scene_id": "B", "texte": "Le village s'endort."},
+                {"seq": 5, "public": True, "audio": False, "type": "dialogue_pnj",
+                 "locuteur": "Rose", "scene_id": "B", "texte": "Invisible."},
             ]
             filename.write_text("\n".join(json.dumps(x) for x in entries), encoding="utf-8")
             self.assertEqual([r["seq"] for r in read_lines(filename, 2)], [1, 4])
@@ -77,6 +79,28 @@ class PhononTTSUnitTests(unittest.TestCase):
             self.assertEqual(manifest["lines"]["1"]["voice"], "Noémie")
             self.assertNotIn("SECRETS_MJ", json.dumps(manifest))
             self.assertNotIn("Je vote.", json.dumps(manifest))
+
+    def test_only_changed_party_is_synthesized(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "voices").mkdir()
+            (root / "voices" / "phonon-fr.json").write_text(
+                (self.root / "voices" / "phonon-fr.json").read_text(encoding="utf-8"),
+                encoding="utf-8")
+            party = root / "parties" / "LG-20261102-123456789ABC"
+            party.mkdir(parents=True)
+            (root / "parties" / "index.json").write_text(
+                json.dumps({"parties": [{"id": party.name, "statut": "en_cours"}]}),
+                encoding="utf-8")
+            (party / "dialogues.ndjson").write_text(
+                json.dumps({"seq": 1, "public": True, "type": "dialogue_pnj",
+                            "locuteur": "Rose", "scene_id": "jour_2",
+                            "texte": "Un soupçon."}), encoding="utf-8")
+            with patch.dict("os.environ", {"LG_TTS_PARTY": "__none__"}), patch(
+                    "scripts.generate_phonon_tts.synthesize") as synth:
+                outcome = generate(root, root / "site", root / "cache", 4, 1, True)
+            self.assertEqual(outcome["generated"], 0)
+            synth.assert_not_called()
 
     def test_no_hf_token_does_not_call_synthesis(self):
         with patch("scripts.generate_phonon_tts.synthesize") as s:

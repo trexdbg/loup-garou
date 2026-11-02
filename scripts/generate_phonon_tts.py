@@ -41,7 +41,7 @@ def read_lines(file: Path, max_scenes: int) -> list[dict]:
             continue
         if not isinstance(row, dict):
             continue
-        if (row.get("public") is not True or row.get("type") not in TYPES
+        if (row.get("public") is not True or row.get("audio") is False or row.get("type") not in TYPES
                 or type(row.get("seq")) is not int or row["seq"] < 1
                 or not isinstance(row.get("texte"), str) or not row["texte"].strip()):
             continue
@@ -104,6 +104,7 @@ def generate(root: Path, site: Path, cache: Path, max_lines: int,
     cache.mkdir(parents=True, exist_ok=True)
     result = {"generated": 0, "available": 0}
     failure = False
+    changed_party = os.environ.get("LG_TTS_PARTY", "")
     # Prioritize ongoing parties and do not spend runner CPU on completed games.
     for entry in entries:
         if str(entry.get("statut", "")).lower() in {"terminee", "terminée", "completed", "finished"}:
@@ -138,6 +139,7 @@ def generate(root: Path, site: Path, cache: Path, max_lines: int,
             name = filename_for(voice, words)
             output = cache / name
             if (not output.is_file() and enabled and not failure
+                    and (not changed_party or party_id == changed_party)
                     and result["generated"] < max_lines):
                 try:
                     synthesize(words, voice, output)

@@ -46,13 +46,14 @@
     for (const name of names) if (!entries.some(x => x.personnage === name)) entries.push({personnage:name,role:""});
     let keepLocal = Boolean(storedLocal);
     let open = false;
+    let lectureNumero = 0;
 
     const toggle = make("button", "🗝️ Afficher le carnet secret du MJ", "secondary mj-private-toggle");
     toggle.type = "button";
     toggle.setAttribute("aria-expanded", "false");
     const region = make("div", undefined, "mj-private-region");
     region.hidden = true;
-    const note = make("p", "Affichage local du MJ : l’application ne charge pas automatiquement les rôles de GitHub. Les nouvelles parties peuvent néanmoins archiver ces rôles dans secrets_mj.json sur le dépôt public. Masquer ce panneau avant de montrer l’écran au joueur.", "fine");
+    const note = make("p", "Carnet réservé au MJ : les rôles sont chargés depuis l’archive GitHub publique quand ce panneau est ouvert. Masquer ce panneau avant de montrer l’écran au joueur.", "fine");
     const stats = make("p", "", "mj-private-stats");
     const list = make("div", undefined, "mj-character-grid");
     const status = make("p", "", "mj-private-status");
@@ -159,14 +160,54 @@
       stats.textContent = entries.filter(x => x.role).length + " rôle(s) attribué(s) sur " + entries.length + " personnage(s).";
     }
 
+    async function chargerRolesArchives() {
+      const numero = ++lectureNumero;
+      status.textContent = "Chargement des cartes du MJ depuis GitHub…";
+      try {
+        const url = "https://raw.githubusercontent.com/trexdbg/loup-garou/main/parties/" +
+          encodeURIComponent(id) + "/secrets_mj.json";
+        const reponse = await fetch(url, {cache:"no-store"});
+        if (!reponse.ok) throw new Error("HTTP " + reponse.status);
+        const data = await reponse.json();
+        if (data.id !== id || !Array.isArray(data.roles) || data.roles.length > 50) {
+          throw new Error("Archive invalide");
+        }
+        const attribues = [];
+        for (const item of data.roles) {
+          const personnage = cleanName(item.personnage);
+          const role = item.role;
+          if (!personnage || !byId[role] || attribues.some(e => e.personnage === personnage)) {
+            throw new Error("Rôles invalides");
+          }
+          attribues.push({personnage, role});
+        }
+        if (!open || numero !== lectureNumero) return;
+        for (const name of names) {
+          if (!attribues.some(e => e.personnage === name)) attribues.push({personnage:name,role:""});
+        }
+        entries = attribues;
+        persist();
+        render();
+        status.textContent = "Cartes attribuées : " + data.roles.length +
+          ". Chargées depuis l'archive GitHub (publique).";
+      } catch (e) {
+        if (open && numero === lectureNumero) {
+          status.textContent = "Chargement GitHub indisponible : tu peux importer le JSON manuellement.";
+        }
+      }
+    }
+
     activeHide = () => { if (open) toggle.click(); };
     toggle.addEventListener("click", () => {
       open = !open;
       region.hidden = !open;
       toggle.setAttribute("aria-expanded", String(open));
       toggle.textContent = open ? "🔒 Masquer les rôles secrets" : "🗝️ Afficher le carnet secret du MJ";
-      if (open) render();
-      else {
+      if (open) {
+        render();
+        void chargerRolesArchives();
+      } else {
+        ++lectureNumero;
         importInput.value = "";
         foxAnswer.textContent = "";
         list.replaceChildren(); // Retire les secrets du DOM quand le panneau est masqué.

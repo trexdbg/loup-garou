@@ -17,7 +17,7 @@ Si la page est absente, ouvrir Settings → Pages → Source → GitHub Actions 
 3. Cliquer sur **Copier pour ChatGPT** (recommandé) puis coller le texte dans **une conversation du projet ChatGPT Loup garou**. Le prompt inclut le JSON et le protocole de création.
 4. ChatGPT retrouve l'ID, vérifie qu'il n'existe pas, crée le répertoire `parties/<ID>/` via la connexion GitHub **si celle-ci est disponible**, met à jour `parties/index.json`, prépare uniquement **le prologue**, puis attend le MJ.
 5. La conversation ChatGPT devient le **jeu**. L'enfant parle librement ; ChatGPT joue les PNJ, propose les scènes et rappelle les règles au MJ. Chaque action ou transition significative doit être validée par le MJ avant archivage.
-6. Dans l'onglet **Mes parties**, retrouver l'ID et lire narrations, journal et dialogues publiés dans GitHub. Le bouton **🗝️ Afficher le carnet secret du MJ** permet d'associer, consulter et importer localement les rôles des personnages. Un bouton **Actualiser** recharge les données publiques.
+6. Dans l'onglet **Mes parties**, retrouver l'ID et lire narrations, journal et dialogues publiés dans GitHub. Le bouton **🗝️ Afficher le carnet secret du MJ** charge automatiquement les rôles de la partie depuis `secrets_mj.json` et permet aussi de les modifier ou importer localement. Un bouton **Actualiser** recharge les données publiques.
 7. Pour les **voix automatiques**, ouvrir la partie puis cliquer une seule fois sur « Activer les voix » (déblocage audio mobile). Chaque nouvelle réplique publique ajoutée par ChatGPT est ensuite détectée et prononcée avec la voix du personnage.
 
 **Le lecteur vocal vérifie les dialogues publics sur GitHub environ toutes les 6 secondes après activation : un message dans ChatGPT n'est pas audible avant son archivage effectif. Il n'existe pas de synchronisation directe automatique depuis une conversation ChatGPT vers un navigateur.** Les écritures ont lieu lors des interventions explicites de ChatGPT disposant du connecteur GitHub. GitHub Pages se republie après chaque commit sur `main` ; un léger délai de publication est normal. Pour consulter un fichier qui vient d'être créé mais n'est pas encore disponible dans Pages, le lecteur tente aussi la version GitHub publique.
@@ -70,7 +70,7 @@ Chaque partie comporte un plan circulaire validé par le MJ. Une figurine LEGO r
 ## Carnet secret du MJ dans l'application
 
 1. Ouvrir une partie depuis **Mes parties**, puis cliquer sur **Afficher le carnet secret du MJ**. Les noms du joueur et des habitants proviennent des données *publiques* de `partie.json` lorsqu'ils y figurent.
-2. Assigner chaque rôle avec les menus déroulants, ou demander à ChatGPT le **JSON privé des rôles** après leur validation, puis le coller dans le champ d'import. Format attendu :
+2. Le carnet charge automatiquement les rôles validés depuis `secrets_mj.json` quand le MJ ouvre son panneau. Si le chargement échoue, assigner les rôles avec les menus déroulants ou coller dans le champ d'import le **JSON des rôles** envoyé par ChatGPT. Format attendu :
 
 ```json
 {
@@ -86,7 +86,7 @@ Chaque partie comporte un plan circulaire validé par le MJ. Une figurine LEGO r
 3. Les cartes sont présentées avec les images officielles **uniquement si elles sont vérifiées** par `role-art.js`. La liste peut être modifiée manuellement par le MJ. Un personnage dont le rôle n'est pas connu reste « Rôle inconnu ».
 4. Le carnet est **masqué par défaut** et se conserve en mémoire de session du navigateur. La case facultative « Conserver sur cet appareil » utilise le stockage local non chiffré : **ne pas l'activer sur un appareil partagé**. On peut exporter un fichier privé et effacer les rôles locaux. Masquer systématiquement le panneau avant de passer l'écran à l'enfant.
 
-**Important :** l'import des rôles dans le carnet de l'application demeure **manuel** ; celui-ci ne charge pas encore automatiquement `secrets_mj.json`. En revanche, ChatGPT archive désormais les attributions validées dans ce fichier du dépôt GitHub public. Le carnet local reste une aide d'affichage, pas un coffre-fort.
+**Important :** les rôles archivés dans `secrets_mj.json` sont chargés automatiquement **à l'ouverture du panneau secret du MJ uniquement**. Le dépôt GitHub étant public, ce panneau est une aide d'affichage et ne constitue pas une protection de confidentialité. L'import et l'édition manuels restent possibles ; les modifications locales ne réécrivent pas GitHub.
 
 ### ⚠️ Spoilers MJ et visibilité sur GitHub
 

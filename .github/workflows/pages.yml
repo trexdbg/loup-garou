@@ -57,7 +57,7 @@ jobs:
       - name: Préparer les voix Gemini des scènes récentes
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_TTS_MODEL: ${{ vars.GEMINI_TTS_MODEL || 'gemini-2.5-flash-preview-tts' }}
+          GEMINI_TTS_MODEL: ${{ vars.GEMINI_TTS_MODEL || 'gemini-3.1-flash-tts-preview' }}
         run: |
           # Sans secret, aucune requête à Google et le lecteur utilise les voix locales.
           python3 scripts/generate_gemini_tts.py --site site --max-scenes 3 --max-lines 24

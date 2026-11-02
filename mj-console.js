@@ -39,7 +39,7 @@
       return {title:"Faire parler le village",subtitle:"Jour " + (state.progression?.jour || 1) + " · discussions",key:"jour",instructions:"Poursuis les échanges du matin. Respecte les survivants, les événements archivés et les rôles secrets. Le MJ décidera quand demander un vote ; ne le lance pas maintenant."};
     }
     if (phase === "vote" || phase === "vote_ou_resolution")
-      return {title:"Arbitrer le vote",subtitle:"Vote en cours",key:"vote",instructions:"Aide le MJ à recueillir les votes en respectant les règles et l'état des habitants. N'élimine personne et ne passe pas à la nuit sans validation du résultat par le MJ."};
+      return {title:"Recueillir les votes",subtitle:"Vote en cours",key:"vote",instructions:"Fais voter en un seul lot tous les PNJ vivants selon leurs soupçons et caractères. Demande uniquement le choix d’Alex s’il doit voter ; présente le dépouillement au MJ. Ne résous aucune élimination avant la validation du verdict."};
     return {title:"Lancer le prologue",subtitle:"Partie en préparation",key:"preparation",instructions:"Vérifie les personnages, la répartition secrète et le placement des LEGO ; propose uniquement le prologue. Attends l'accord du MJ avant le tour de table."};
   }
   function promptFor(id, state, action="next", note="") {
@@ -57,7 +57,7 @@
       ", nuit=" + (state.progression?.nuit ?? 0) + ", jour=" + (state.progression?.jour ?? 0) + ".\n" +
       "\nACTION DEMANDÉE : " + task +
       "\n\nMODE RAPIDE : applique directement l’action explicitement validée par le MJ, résous ses conséquences déterministes, fais agir les PNJ autonomes, puis archive le lot en UN SEUL commit GitHub. Ne demande pas une nouvelle validation pour la même action. " +
-      "Stoppe avant tout vote, élimination, pouvoir d’Alex ou changement de phase non autorisé. Journal bref ; index modifié seulement si phase/statut change. Audio : 2 à 5 répliques PNJ utiles par scène, jamais les secrets. Signale clairement un échec de synchronisation.";
+      "Stoppe avant tout vote, élimination, pouvoir d’Alex ou changement de phase non autorisé. Après une élimination validée, vérifie immédiatement la victoire. Journal bref ; index modifié seulement si phase/statut change. Audio : 2 à 5 répliques PNJ utiles par scène, jamais les secrets. Signale clairement un échec de synchronisation.";
   }
   function attach(id,state,mount) {
     mount.replaceChildren();

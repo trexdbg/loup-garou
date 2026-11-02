@@ -65,7 +65,9 @@ test("le JSON prepare l'histoire mais ne la joue pas localement", () => {
 test("la consigne GPT impose le jeu classique sans énigme annexe", () => {
   const {api} = launcher();
   const prompt = api.promptFor(api.config());
-  assert.match(prompt,/UNIQUEMENT le prologue/);
+  assert.match(prompt,/prologue uniquement|UNIQUEMENT le prologue/i);
+  assert.match(prompt,/MODE RAPIDE PAR DÉFAUT/);
+  assert.match(prompt,/UN SEUL commit GitHub/);
   assert.match(prompt,/des Loups-Garous se cachent dans le village/);
   assert.match(prompt,/secrets_mj\.json/);
   assert.match(prompt,/TRÈS COURT/);

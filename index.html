@@ -68,8 +68,12 @@
           </div>
         </section>
         <section class="panel">
-          <div class="section-header"><span class="step">02</span><div><h2>Les cartes et les règles</h2><p>Tous les rôles restent disponibles. Les véritables cartes sont utilisées quand leur visuel est vérifié.</p></div></div>
+          <div class="section-header"><span class="step">02</span><div><h2>Les cartes et les règles</h2><p>Choisis un niveau, puis ajuste librement les rôles si nécessaire. Les véritables cartes sont utilisées quand leur visuel est vérifié.</p></div></div>
           <div class="config-grid">
+            <label>Mode de jeu
+              <select id="gameMode"><option value="classique" selected>🌙 Classique</option><option value="avance">🦊 Avancé</option><option value="expert">🐺 Expert</option></select>
+            </label>
+            <div id="modeSummary" class="mode-summary" aria-live="polite"></div>
             <label>Rôle du joueur
               <select id="roleChoice"></select>
             </label>
@@ -167,15 +171,17 @@
           <div><strong>À la fin d'une scène</strong><p>Faire résumer l'événement par ChatGPT et confirmer l'écriture dans GitHub. Actualiser ensuite cette page.</p></div>
         </div>
       </section>
-      <div class="advice"><h3>🛡️ Espace du maître du jeu</h3><p>Une page GitHub publique n'est pas un coffre-fort : les identités secrètes, notes MJ et révélations futures doivent rester dans la conversation privée ou un stockage privé. Aucune action de jeu n'est commandée ici.</p></div>
+      <div class="advice"><h3>🛡️ Espace du maître du jeu</h3><p>Une page GitHub publique n'est pas un coffre-fort. Le carnet de rôles du MJ fonctionne uniquement sur cet appareil, hors de GitHub : masque-le avant de donner l'écran au joueur. Aucune action de jeu n'est commandée ici.</p></div>
     </section>
   </main>
   <footer>Thiercelieux Solo · Projet indépendant et non officiel · Application d'affichage, GitHub pour les archives, ChatGPT pour jouer</footer>
   <script src="./roles.js"></script>
+  <script src="./modes.js"></script>
   <script src="./role-art.js"></script>
   <script src="./stories.js"></script>
   <script src="./piper-free.js"></script>
   <script src="./voice-live.js"></script>
+  <script src="./mj-private.js"></script>
   <script src="./launcher.js"></script>
 </body>
 </html>

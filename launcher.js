@@ -34,7 +34,7 @@
 
   function setTab(tab) {
     const archives = tab === "archives";
-    if (!archives && window.LG_VOICES) window.LG_VOICES.stop();
+    if (!archives && window.LG_SCENES) window.LG_SCENES.stop();
     if (!archives && window.LG_MJ_PRIVATE) window.LG_MJ_PRIVATE.hide();
     $("prepareSection").hidden = archives;
     $("archiveSection").hidden = !archives;
@@ -350,7 +350,7 @@
 
   async function openArchive(id) {
     if (!validId(id)) return;
-    if (window.LG_VOICES) window.LG_VOICES.stop();
+    if (window.LG_SCENES) window.LG_SCENES.stop();
     if (window.LG_MJ_PRIVATE) window.LG_MJ_PRIVATE.hide();
     $("sessionDetail").hidden = false;
     $("sessionContent").replaceChildren(make("p", "Chargement de " + id + "…"));
@@ -365,23 +365,44 @@
         make("span", "Statut : " + (state.statut || "à confirmer")),
         make("span", "Phase : " + (state.phase || state.progression?.scene || "prologue"))
       );
-      content.append(make("h3", title), meta);
+      const phaseNames = {
+        prologue: "Prologue", tour_de_table: "Débat · tour de table",
+        village_s_endort: "Le village s'endort", appels_nocturnes: "Pouvoirs nocturnes",
+        village_se_reveille: "Réveil du village", dialogues_et_enquete: "Débats",
+        vote_ou_resolution: "Vote", suite_validee_par_mj: "Suite validée"
+      };
+      const header = make("div", undefined, "game-header");
+      header.append(make("p", "PARTIE EN COURS · " + (phaseNames[state.phase] || state.phase || "À préparer"), "game-phase"));
+      header.append(make("h3", title));
+      header.append(meta);
+      content.append(header);
+      if (state.resume_public) content.append(make("p", state.resume_public, "game-synopsis"));
+      const stage = make("div", undefined, "game-stage");
+      content.append(stage);
+      if (window.LG_SCENES) {
+        const voiceMount = make("div", undefined, "game-audio");
+        stage.append(voiceMount);
+        window.LG_SCENES.attach(id, voiceMount, state);
+      }
+      const tableDetails = make("details", undefined, "game-details");
+      tableDetails.open = true;
+      const tableSummary = make("summary", "02 / 🧱 Voir les huit LEGO et leur placement");
+      tableDetails.append(tableSummary);
       if (window.LG_TABLE) {
-        const tableMount = make("section", undefined, "seating-panel");
-        content.append(tableMount);
+        const tableMount = make("div", undefined, "game-table");
+        tableDetails.append(tableMount);
         window.LG_TABLE.attach(id, state, tableMount);
       }
+      stage.append(tableDetails);
+      const privateDetails = make("details", undefined, "game-details game-private");
+      privateDetails.append(make("summary", "03 / 🗝️ Carnet du maître du jeu (rôles secrets)"));
       if (window.LG_MJ_PRIVATE) {
         const privateMount = make("section", undefined, "mj-private-slot");
-        content.append(privateMount);
+        privateDetails.append(privateMount);
         window.LG_MJ_PRIVATE.attach(id, state, privateMount);
       }
-      if (window.LG_VOICES) {
-        const voiceMount = make("div");
-        content.append(voiceMount);
-        window.LG_VOICES.attach(id, voiceMount);
-      }
-      if (state.resume_public) content.append(make("p", state.resume_public, "archive-public-summary"));
+      stage.append(privateDetails);
+      
       if (state.dernier_evenement_public) content.append(make("p", "Dernier événement : " + state.dernier_evenement_public, "archive-public-summary"));
       if (state.aide_mj_publique) {
         const tip = make("div", undefined, "advice");
@@ -400,14 +421,17 @@
         }
       });
       content.append(resumeButton);
-      const textFiles = [["narrations.md", "📖 Narrations"],["journal.md", "📜 Journal"],["dialogues.ndjson", "💬 Dialogues archivés"]];
+      const historyPanel = make("details", undefined, "game-details game-history");
+      historyPanel.append(make("summary", "04 / 📜 Journal et archives écrites"));
+      content.append(historyPanel);
+      const textFiles = [["narrations.md", "Narration"],["journal.md", "Journal"]];
       for (const [file, heading] of textFiles) {
         try {
           const text = await readPublic("parties/" + id + "/" + file);
           const section = make("section", undefined, "archive-document");
           section.append(make("h4", heading), make("pre", text));
-          content.append(section);
-        } catch (_) { /* Les parties initiales ne contiennent pas nécessairement tous les fichiers. */ }
+          historyPanel.append(section);
+        } catch (_) { /* Archives optionnelles. Les scènes audio prennent en charge dialogues.ndjson. */ }
       }
       if (history.replaceState) history.replaceState(null, "", "?partie=" + encodeURIComponent(id));
       $("sessionDetail").scrollIntoView({behavior:"smooth", block:"start"});
@@ -425,7 +449,7 @@
     $("copyPrompt").addEventListener("click", () => generated && copy(promptFor(generated), "Consigne et JSON copiés. Colle-les dans la conversation ChatGPT du projet."));
     $("downloadJson").addEventListener("click", downloadJson);
     $("archiveRefresh").addEventListener("click", refreshArchives);
-    $("backToArchives").addEventListener("click", () => { if (window.LG_MJ_PRIVATE) window.LG_MJ_PRIVATE.hide(); if (window.LG_VOICES) window.LG_VOICES.stop(); $("sessionDetail").hidden = true; if (history.replaceState) history.replaceState(null, "", location.pathname); });
+    $("backToArchives").addEventListener("click", () => { if (window.LG_MJ_PRIVATE) window.LG_MJ_PRIVATE.hide(); if (window.LG_SCENES) window.LG_SCENES.stop(); $("sessionDetail").hidden = true; if (history.replaceState) history.replaceState(null, "", location.pathname); });
     $("configForm").addEventListener("change", clearGenerated);
     $("configForm").addEventListener("input", clearGenerated);
     $("newConfig").addEventListener("click", () => { generated = null; $("generatedPanel").hidden = true; $("formStatus").textContent = ""; });

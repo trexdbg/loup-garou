@@ -97,3 +97,28 @@ footer { padding:28px 15px; }
 .live-voice-status { font-weight:700;font-size:.9rem;color:#e9c997; }
 .live-voice-current { font-style:italic;color:#e6e4e1; }
 @media(max-width:740px){.live-voice-buttons button{flex-basis:100%;}}
+
+/* Trois niveaux, sélection explicite des rôles et carnet confidentiel MJ. */
+.mode-summary {align-self:end;background:#202a38;border:1px solid #69717c;border-radius:10px;padding:12px 14px;font-size:.86rem;color:#e4d7bf;line-height:1.55}
+.mj-private-slot {margin:18px 0 22px}
+.mj-private-toggle {width:100%;text-align:left;border-color:#cfab76;background:#302c32;font-weight:700;padding:14px}
+.mj-private-region {margin-top:12px;padding:18px;background:#1e2633;border:1px solid #a78759;border-radius:12px}
+.mj-private-region>.fine {color:#e3cfa9}
+.mj-private-stats {color:#f3d9ad;font-weight:700;margin:12px 0}
+.mj-character-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:12px;margin:15px 0}
+.mj-character-card {background:#151c27;border:1px solid #4b596b;border-radius:11px;padding:14px;min-width:0}
+.mj-character-name {display:block;margin-bottom:9px}
+.mj-character-card select {width:100%;max-width:100%;margin-bottom:12px}
+.mj-role-details {display:flex;align-items:flex-start;gap:12px;font-size:.87rem}
+.mj-role-details .role-art {flex:none;max-width:100px}
+.mj-role-details .role-art img {max-width:100%;height:auto}
+.mj-role-details p {color:#d4d9e1;font-size:.85rem;line-height:1.45;margin:7px 0}
+.mj-role-details small {color:#c6c1b9}
+.mj-private-controls {display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.mj-private-controls button {flex:1 1 160px}
+.mj-private-controls input {flex:1 1 200px;min-width:150px}
+.mj-private-region textarea {width:100%;min-height:100px}
+.mj-private-save {display:flex;align-items:flex-start;gap:8px;color:#e0cfb4;font-size:.87rem;margin:17px 0}
+.mj-private-save input {width:auto;flex:none;margin-top:4px}
+.mj-private-status {min-height:1.5em;color:#f1cf95;font-weight:600}
+@media(max-width:740px){.mj-character-grid{grid-template-columns:1fr}.mj-private-region{padding:13px}}

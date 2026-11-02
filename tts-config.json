@@ -4,7 +4,7 @@
   "provider": "gemini_api_via_github_actions",
   "enabled": true,
   "worker_url": null,
-  "model_policy": "Generation lors des deploiements sur 3 scenes recentes maximum; mp3 uniquement dans l'artefact Pages",
+  "model_policy": "Au plus 6 nouveaux MP3 par déploiement, seulement pour les répliques manquantes des 3 scènes récentes; réutilisation des caches Gemini 3.1 et 3.8; médias uniquement dans Pages.",
   "default_models": [
     "fr_FR-siwis-medium",
     "fr_FR-tom-medium"
@@ -19,7 +19,7 @@
     "piper_local"
   ],
   "voice_policy": "7 voix Gemini distinctes par ordre des PNJ + 1 narrateur; repli voix navigateur",
-  "model": "gemini-3.1-flash-tts-preview",
+  "model": "gemini-3.8-flash-lite-tts",
   "secret_name": "GEMINI_API_KEY",
-  "model_note": "Modèle Preview Gemini 3.1 Flash TTS avec niveau gratuit, soumis aux quotas Google."
+  "model_note": "Gemini 3.8 Flash-Lite TTS : génération gratuite sous quotas, nouvelles requêtes Interactions REST; anciennes voix conservées grâce au cache."
 }

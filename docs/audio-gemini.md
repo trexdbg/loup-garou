@@ -14,13 +14,13 @@ Le secret GitHub n'est consommé que par le runner GitHub Actions sur le workflo
 
 ## Fonctionnement et coûts
 
-- Modèle par défaut : **`gemini-3.1-flash-tts-preview`**, avec offre gratuite limitée par les quotas propres au compte Google. C'est une version Preview, susceptible de changer ; le modèle 2.5 précédent est annoncé pour retrait le 17 novembre 2026. Ne pas utiliser de modèle payant sans contrôler la tarification.
+- Modèle par défaut : **gemini-3.8-flash-lite-tts** (API Interactions REST) et quota gratuit Google AI Studio. Aucun modèle payant ne se déclenche automatiquement.
 - **7 profils Gemini** pour les sept PNJ (association stable dans l'ordre du casting de `partie.json`) et **1 voix de narrateur**. Chaque réplique est générée séparément pour préserver la cohérence du personnage et respecter l'ordre de la scène.
-- Maximum **24 nouvelles répliques par déploiement**, sur les **3 dernières scènes** de chaque partie. Le cache GitHub Actions réutilise les clips identiques entre déploiements ; les fichiers sont convertis en MP3 à faible débit.
+- Maximum **6 nouvelles répliques par déploiement**, sur les **3 dernières scènes** de chaque partie. Les anciens MP3 Gemini 3.1 restent utilisés depuis le cache : pas de génération inutile. Une erreur 429 interrompt les nouveaux appels pendant ce déploiement.
 - Les MP3 et les manifests ne sont placés que dans l'artefact **GitHub Pages**. **Aucun MP3 n'est commité au dépôt**, y compris après nettoyage. Les anciennes scènes sans MP3 conservent la lecture locale.
 - Si la clé est absente, invalide, le modèle retiré, le quota atteint, le MP3 en erreur, ou la publication en cours, le lecteur bascule vers une voix française locale pour la réplique manquante. Aucune scène n'est démarrée automatiquement.
 - Pour éviter toute dépense, **ne pas activer la facturation** sur le projet Google AI Studio utilisé. Le secret seul ne garantit pas l'absence de coûts si vous configurez un projet Google payant : surveillez les quotas. Le workflow n'impose pas de facturation.
-- La variable d'environnement `GEMINI_TTS_MODEL` peut permettre une future migration, mais **ne pas la remplacer par un modèle payant sans vérifier sa tarification**.
+- Le workflow utilise explicitement Gemini 3.8 Flash-Lite pour empêcher une variable GitHub obsolète de réactiver le modèle précédent. Modifier ce choix requiert de changer le workflow.
 
 ## Confidentialité
 
@@ -31,3 +31,15 @@ Seules les lignes avec `public: true` et un type de narration ou de PNJ sont env
 Si les répliques ont encore les voix du téléphone, vérifier les logs de **Actions → Publier Thiercelieux Solo → Préparer les voix Gemini**, et consulter le nombre de clips indiqués dans l'application. Un échec de quota (HTTP 429) ou d'autorisation (HTTP 403) empêche uniquement la synthèse Gemini ; la publication du site et le jeu restent disponibles.
 
 La génération est **déclenchée par l'archivage/commits des dialogues**, et non en direct à chaque question dans le navigateur ; actualiser après publication. Le bouton **Écouter** reste manuel pour le MJ.
+
+## Suivi des répliques et des quotas
+
+Le lecteur affiche pour chaque scène le nombre de répliques Gemini disponibles et celles qui manquent. Les paroles du joueur ne sont jamais synthétisées.
+
+Chaque publication écrit un résumé « Gemini status » dans le journal GitHub Actions et des statistiques total, available, reused, generated, missing, quota_exhausted dans le manifeste audio de la partie. Lorsque Google répond HTTP 429, les autres requêtes de la publication sont interrompues. Les clips existants sont conservés et la publication Pages continue.
+
+Il n’y a **aucune relance automatique en boucle** : une prochaine mise à jour validée ou un déclenchement manuel du workflow Actions réessaiera seulement les fichiers manquants. Les quotas réels par modèle sont consultables sur https://aistudio.google.com/rate-limit .
+
+L’objectif 0 € suppose une clé d’un projet Google **sans facturation activée**. Le code ne peut ni connaître le quota restant exact ni désactiver la facturation sur le compte Google.
+
+Référence API : https://ai.google.dev/gemini-api/docs/speech-generation .

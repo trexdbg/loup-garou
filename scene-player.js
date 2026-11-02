@@ -68,7 +68,7 @@
   const cast=(party.personnages_pnj||[]).map(x=>typeof x==="string"?x:x.prenom).filter(Boolean);
   const savedKey="lg-scene-played:"+id, heard=new Set();
   try{for(const key of JSON.parse(sessionStorage.getItem(savedKey)||"[]"))heard.add(key);}catch(_){}
-  const state={closed:false,playing:false,generation:0,scenes:[],selected:"",context:null,handle:null,loading:false,index:-1,audio:{},audioCount:0};
+  const state={closed:false,playing:false,generation:0,scenes:[],selected:"",context:null,handle:null,loading:false,index:-1,audio:{},audioCount:0,audioStats:null};
   const box=add(mount,"section",null,"scene-player");
   add(box,"p","01 / LES DIALOGUES","scene-kicker");
   add(box,"h3","🎧 Écouter la scène");
@@ -102,9 +102,20 @@
   function announce(text){if(!state.closed)status.textContent=text;}
   function details(){
    if(mode.value==="gemini"){
-    voiceNote.textContent=state.audioCount
-      ? state.audioCount+" répliques Gemini disponibles. Les autres utilisent les voix françaises locales."
-      : "Aucun fichier Gemini disponible pour cette partie. Lecture avec les voix de l’appareil. Vérifier les Actions GitHub et le manifest audio.";
+    const selected=state.scenes.find(s=>s.id===state.selected);
+    const eligible=(selected?.rows||[]).filter(s=>s.type!=="dialogue_joueur");
+    const ready=eligible.filter(line=>{
+      const clip=state.audio[String(line.seq)];
+      return clip&&clip.locuteur===line.locuteur&&clip.texte===line.texte&&
+        /^audio\/[a-f0-9]{20}\.mp3$/.test(clip.file);
+    }).length;
+    const missing=eligible.length-ready;
+    voiceNote.textContent=eligible.length
+      ? ready+"/"+eligible.length+" répliques Gemini disponibles pour cette scène"+
+        (missing?" · "+missing+" manquante"+(missing>1?"s":"")+" (voix locales en secours).":" · scène entièrement générée.")
+      : "Aucune réplique vocale pour cette scène.";
+    if(missing && state.audioStats?.quota_exhausted)
+      voiceNote.textContent+=" Quota Gemini atteint lors de la dernière génération.";
     return;
    }
    const n=frenchVoices().length;
@@ -210,14 +221,17 @@
      if(res.ok){raw=await res.text();break;}
     }catch(_){}
    }
-   let audio={};
+   let audio={},audioStats=null;
    try{
     const url="./parties/"+encodeURIComponent(id)+"/audio/manifest.json?v="+Date.now();
     const response=await fetch(url,{cache:"no-store"});
     if(response.ok){
      const manifest=await response.json();
      if(manifest.version===1&&manifest.provider==="gemini"&&manifest.lines &&
-        typeof manifest.lines==="object"&&!Array.isArray(manifest.lines))audio=manifest.lines;
+        typeof manifest.lines==="object"&&!Array.isArray(manifest.lines)){
+         audio=manifest.lines;
+         if(manifest.stats&&typeof manifest.stats==="object")audioStats=manifest.stats;
+       }
     }
    }catch(_){}
    state.loading=false;refreshButton.disabled=false;
@@ -227,12 +241,14 @@
    shutdown();
    state.scenes=groupScenes(parseLines(raw));
    state.audio=audio;
+   state.audioStats=audioStats;
    state.audioCount=Object.keys(audio).length;
    details();
    const incoming=state.scenes.at(-1)?.id||"";
    populate(latest!==incoming?incoming:state.selected);
+   details();
   }
-  sceneSelect.addEventListener("change",()=>{shutdown();state.selected=sceneSelect.value;paint();});
+  sceneSelect.addEventListener("change",()=>{shutdown();state.selected=sceneSelect.value;paint();details();});
   refreshButton.addEventListener("click",()=>{void load();});
   mode.addEventListener("change",()=>{shutdown();details();});
   playButton.addEventListener("click",play);replayButton.addEventListener("click",play);

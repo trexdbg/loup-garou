@@ -6,7 +6,7 @@ Version : 2. Objectif : offrir au MJ humain un copilote narratif et des archives
 
 L'utilisateur copie le bouton **Copier pour ChatGPT** depuis GitHub Pages dans une conversation du projet *Loup garou*. La consigne contient un document JSON dont `schema_version` vaut `2` et dont l'`id` suit le format `LG-AAAAMMJJ-XXXXXXXXXXXX`.
 
-Les champs déterminent l'âge du joueur, son prénom, le rôle (fixé ou tiré au sort sous contrôle du MJ), le **niveau** \`roles.mode\` (\`classique\`, \`avance\` ou \`expert\`), la réserve de rôles autorisés, le décor, le scénario, la durée, les difficultés, les options de pouvoirs, les sonorités et le degré d'intervention du MJ.
+Les champs déterminent l'âge du joueur, son prénom, le rôle (fixé ou tiré au sort sous contrôle du MJ), le **niveau** `roles.mode` (`classique`, `avance` ou `expert`), la réserve de rôles autorisés, le décor, le scénario, la durée, les difficultés, les options de pouvoirs, les sonorités et le degré d'intervention du MJ.
 
 **La génération de cet identifiant ne crée aucun fichier GitHub.** L'application ne dispose ni de jeton GitHub ni de pouvoir de modification de partie. Le JSON est à transmettre manuellement à ChatGPT.
 
@@ -14,8 +14,8 @@ Les champs déterminent l'âge du joueur, son prénom, le rôle (fixé ou tiré 
 
 1. Vérifier que `parties/<ID>/` n'existe pas. S'il existe, le considérer comme une reprise potentielle. Ne rien écraser sans validation du MJ.
 2. Lire les options du JSON, valider leurs contradictions éventuelles avec les règles officielles et demander arbitrage du MJ quand nécessaire.
-3. Dans la **conversation privée uniquement**, préparer les rôles des PNJ, leurs motivations, la solution possible et les événements futurs non dévoilés. Respecter le niveau \`roles.mode\`, le tableau \`roles.autorises\`, le nombre de personnages, les camps et le nombre cible de Loups. **Soumettre la répartition au MJ pour validation avant de continuer**. Conserver les identités stables au fil de la partie.
-3 bis. **Après validation**, envoyer dans la conversation privée un JSON MJ contenant \`id\` (ID exact de partie) et \`roles\` (tableau de \`{\"personnage\":\"Prénom\",\"role\":\"id_role\"}\`). Chaque ID de rôle doit exister dans \`roles.js\`. Le MJ colle ce JSON directement dans son carnet de rôles local de l'application, jamais sur GitHub.
+3. Dans la **conversation privée uniquement**, préparer les rôles des PNJ, leurs motivations, la solution possible et les événements futurs non dévoilés. Respecter le niveau `roles.mode`, le tableau `roles.autorises`, le nombre de personnages, les camps et le nombre cible de Loups. **Soumettre la répartition au MJ pour validation avant de continuer**. Conserver les identités stables au fil de la partie.
+3 bis. **Après validation**, envoyer dans la conversation privée un JSON MJ contenant `id` (ID exact de partie) et `roles` (tableau de `{\"personnage\":\"Prénom\",\"role\":\"id_role\"}`). Chaque ID de rôle doit exister dans `roles.js`. Le MJ colle ce JSON directement dans son carnet de rôles local de l'application, jamais sur GitHub.
 4. Écrire dans GitHub :
    - `parties/<ID>/parametres.json` : **version expurgée du JSON** : mettre à `null` tout champ contenant une identité secrète ou un spoiler, y compris un rôle joueur imposé.
    - `parties/<ID>/partie.json` : uniquement l'état qui peut être montré sans divulguer de secrets.
@@ -82,7 +82,7 @@ Les écritures GitHub sont explicites, via les actions de GitHub connectées à 
 
 Chaque reprise part de l'ID et relit `partie.json`, `journal.md` et les derniers dialogues. Les identités secrètes restent dans la conversation privée de jeu ; si elle a disparu, **ne pas inventer un état caché certain**. Demander au MJ sa fiche de secrets ou préparer une reprise validée.
 
-La page publique se contente de lire les archives, via GitHub Pages, avec secours en lecture sur les fichiers publics de GitHub si le déploiement n'est pas encore fait. Le carnet MJ est une fonctionnalité distincte de l'interface, alimentée par le MJ lui-même : ses secrets sont conservés en \`sessionStorage\` par défaut, ou en \`localStorage\` **non chiffré** après consentement explicite. Ne jamais écrire ces valeurs dans GitHub, l'URL, les fichiers publics, les dialogues ou la synthèse vocale. Un clic sur **Actualiser** met à jour la liste et les archives.
+La page publique se contente de lire les archives, via GitHub Pages, avec secours en lecture sur les fichiers publics de GitHub si le déploiement n'est pas encore fait. Le carnet MJ est une fonctionnalité distincte de l'interface, alimentée par le MJ lui-même : ses secrets sont conservés en `sessionStorage` par défaut, ou en `localStorage` **non chiffré** après consentement explicite. Ne jamais écrire ces valeurs dans GitHub, l'URL, les fichiers publics, les dialogues ou la synthèse vocale. Un clic sur **Actualiser** met à jour la liste et les archives.
 
 ## 5. Rôles et visuels
 

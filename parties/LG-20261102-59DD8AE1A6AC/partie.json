@@ -1,0 +1,67 @@
+{
+  "id": "LG-20261102-59DD8AE1A6AC",
+  "schema_version": 2,
+  "titre": "Le premier soupçon",
+  "cree_le": "2026-11-02T08:52:25.597Z",
+  "statut": "en_cours",
+  "phase": "prologue",
+  "progression": {
+    "jour": 0,
+    "nuit": 0,
+    "scene": "prologue"
+  },
+  "joueur": {
+    "prenom": "Alex",
+    "age": 10
+  },
+  "personnages_pnj": [
+    {
+      "prenom": "Rose",
+      "caractere": "Calme et observatrice"
+    },
+    {
+      "prenom": "Hugo",
+      "caractere": "Impulsif et accusateur"
+    },
+    {
+      "prenom": "Salomé",
+      "caractere": "Courageuse et directe"
+    },
+    {
+      "prenom": "Marin",
+      "caractere": "Souriant et persuasif"
+    },
+    {
+      "prenom": "Inès",
+      "caractere": "Prudente et diplomate"
+    },
+    {
+      "prenom": "Baptiste",
+      "caractere": "Bavard et maladroit"
+    },
+    {
+      "prenom": "Jade",
+      "caractere": "Malicieuse et réfléchie"
+    }
+  ],
+  "placement_table": {
+    "type": "circulaire",
+    "sens": "horaire",
+    "depart": "12h",
+    "ordre": [
+      "Alex",
+      "Hugo",
+      "Marin",
+      "Jade",
+      "Inès",
+      "Rose",
+      "Baptiste",
+      "Salomé"
+    ],
+    "retire": [],
+    "valide_par_mj": true
+  },
+  "resume_public": "Les habitants savent que des Loups-Garous se cachent dans le village. Ils commencent à se soupçonner.",
+  "aide_mj_publique": "Lire le prologue, puis laisser Alex choisir librement ce qu'il veut dire ou faire. Ne pas lancer la nuit sans accord du MJ.",
+  "dernier_evenement_public": "Prologue préparé ; attente de l'action du joueur et de l'accord du MJ."
+}

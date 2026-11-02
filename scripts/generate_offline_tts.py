@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Audio MP3 de secours pour les dialogues publics, sans API ni quota.
 
-S'exécute après Gemini sur l'artefact GitHub Pages seulement. Ne lit jamais
+S'exécute après Phonon puis Gemini sur l'artefact GitHub Pages seulement. Ne lit jamais
 secrets_mj.json et ne publie ni les répliques du joueur ni les rôles cachés.
 """
 from __future__ import annotations
@@ -106,7 +106,7 @@ def generate(site: Path, max_scenes: int = 3) -> tuple[int, int]:
             manifest = {"version": 1, "provider": "gemini", "lines": {}, "stats": {}}
         manifest.setdefault("lines", {})
         manifest["version"] = 1
-        manifest["provider"] = "gemini"  # Lecture mixte : Gemini puis MP3 hors ligne.
+        manifest["provider"] = "mixed"  # Lecture mixte : Phonon, Gemini, puis MP3 hors ligne.
         for row in rows:
             seq = str(row["seq"])
             clip = manifest["lines"].get(seq)

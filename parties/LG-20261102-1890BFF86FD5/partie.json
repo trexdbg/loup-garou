@@ -8,7 +8,7 @@
   "progression": {
     "jour": 1,
     "nuit": 1,
-    "scene": "reveil_jour_1"
+    "scene": "preparation_vote_jour_1"
   },
   "joueur": {
     "prenom": "André",
@@ -64,9 +64,9 @@
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
   "resume_public": "Le village s'est réveillé au matin du jour 1, sans disparition.",
-  "aide_mj_publique": "Faire débattre les PNJ du jour 1. Le joueur André peut parler librement. Aucun vote ni nuit automatiquement.",
-  "dernier_evenement_public": "Jour 1 : tous les habitants sont vivants et réunis sur la place du village.",
-  "scene_courante_id": "reveil_jour_1",
+  "aide_mj_publique": "Le scrutin n'est pas ouvert. Faire valider son ouverture par le MJ, recueillir ensuite le choix libre d'André. Aucun résultat ou élimination automatique.",
+  "dernier_evenement_public": "Le village prépare le vote du jour 1. Hugo et Éloi sont cités ; aucun vote n'a encore été exprimé.",
+  "scene_courante_id": "preparation_vote_jour_1",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_02",
@@ -77,10 +77,15 @@
   },
   "jour_en_cours": {
     "numero": 1,
-    "etape": "debats",
-    "statut": "attente_andre",
+    "etape": "preparation_vote",
+    "statut": "attente_ouverture_mj",
     "vote_ouvert": false,
-    "attendre_validation_mj": true
+    "attendre_validation_mj": true,
+    "candidats_evoques": [
+      "Hugo",
+      "Éloi"
+    ],
+    "votes_enregistres": []
   },
   "nuit_en_cours": {
     "numero": 1,

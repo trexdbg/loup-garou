@@ -10,7 +10,7 @@ function launcher() {
   const nodes = Object.create(null);
   const values = {
     roleChoice:"random",heroName:"Alex",heroAge:"10",duration:"45",npcCount:"7",
-    scenario:"originale",customTitle:"",environment:"village_thiercelieux",
+    scenario:"originale",customTitle:"",environment:"village_thiercelieux",gameMode:"classique",
     storyStyle:"mystere_enquete",themeFree:"",intensity:"4",humor:"3",difficulty:"3",fear:"2",
     wolfCount:"2",nightDuration:"3",nightOrder:"officiel_adapte"
   };

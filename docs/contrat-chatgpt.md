@@ -94,3 +94,11 @@ Les 37 rôles du catalogue `roles.js` peuvent être sélectionnés. Les règles 
 - Ne pas commiter les voix et ambiances régénérables à répétition. Préférer la lecture vocale à la volée et conserver seulement les métadonnées nécessaires à rejouer une scène.
 - Nettoyage après fin de partie selon [STOCKAGE.md](../STOCKAGE.md).
 - Une publication GitHub Pages n'est pas instantanée et ne représente pas une « synchronisation en direct » de ChatGPT.
+
+## 7. Voix automatiques à chaque nouvelle action
+
+Après validation d'une action du joueur par le MJ, ChatGPT ne publie que les répliques effectivement jouées dans `parties/<ID>/dialogues.ndjson`. Chaque ligne publique parlée doit comporter `seq` (entier strictement croissant), `type: "dialogue_pnj"` (ou `"narration"`), `locuteur`, `texte` et `public: true`. Le fichier ne doit contenir ni cartes secrètes, ni pensées privées des PNJ, ni instructions réservées au MJ. Ne pas générer les scènes futures par anticipation.
+
+L'application conserve une correspondance déterministe entre personnages et profils vocaux, consulte uniquement ce fichier public toutes les six secondes après activation audio initiale du MJ, et prononce les nouvelles répliques dans leur ordre. La progression est conservée pendant la session dans le navigateur ; elle ne constitue pas une action de jeu. Le bouton de relecture concerne uniquement les derniers dialogues déjà publiés.
+
+La lecture utilise la synthèse vocale du navigateur (Web Speech), sans produire de MP3 ni stocker de cache dans Git. La diversité des voix dépend de l'appareil ; Chrome et d'autres navigateurs peuvent exiger un clic initial autorisant le son. Aucun message ChatGPT n'est transmis directement à GitHub Pages : il doit d'abord être explicitement ajouté à GitHub avec le connecteur.

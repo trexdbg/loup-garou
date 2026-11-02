@@ -244,6 +244,8 @@
       "5. Après validation des LEGO et écriture sur GitHub, raconte un prologue TRÈS COURT (3 à 6 phrases) : les villageois savent déjà que des Loups se cachent parmi eux, ils se réunissent et se soupçonnent. Pas d’énigme annexe. Attends l’accord du MJ avant la première action puis la nuit ; ne simule ni nuit complète, ni vote, ni dénouement.",
       "6. Ensuite, au fil de nos échanges, écris seulement les nouveaux événements validés dans le dossier de cette partie et mets à jour l'index.",
       "7. Reste adapté à un joueur de 10 ans si c'est l'âge indiqué. Respecte les vraies cartes et demande au MJ en cas de règles ambiguës.",
+      "8. Pour tout dialogue effectivement joué après le prologue, crée un lot de lignes dans dialogues.ndjson avec des seq croissants, scene_id commun à ce lot et scene_label lisible (ex. tour_de_table_01 puis tour_de_table_02). L'application relit une scène à la demande du MJ ; ne déclenche aucune lecture automatique et ne révèle aucun secret.",
+      "9. En phase tour_de_table, laisse Alex intervenir à nouveau après chaque scène audio. Les PNJ peuvent débattre entre eux ; n'impose aucune parole ni action au joueur. Le MJ valide explicitement la fin du tour, le vote ou la nuit. Mets à jour phase et scene_courante_id dans partie.json et l'index sans toucher aux autres parties.",
       "Si tu ne peux pas écrire sur GitHub dans cette conversation, dis-le explicitement et fournis les fichiers à déposer : n'affirme jamais que la synchronisation est faite sans confirmation.",
       "",
       "JSON DE PARAMÈTRES :",

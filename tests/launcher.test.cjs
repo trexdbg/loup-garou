@@ -50,7 +50,7 @@ test("le JSON prepare l'histoire mais ne la joue pas localement", () => {
   assert.equal(config.fonctionnement.jeu,"ChatGPT dans le projet Loup garou");
   assert.equal(config.joueur.age,10);
   assert.equal(config.premiere_execution.ne_pas_generer_les_scenes_suivantes,true);
-  assert.equal(config.premiere_execution.attendre_validation_mj_apres_prologue,true);
+  assert.equal(config.premiere_execution.attendre_validation_mj_apres_prologue,false);
   assert.equal(config.publication.chemin,"parties/" + config.id);
   assert.equal(config.assistant_mj.jamais_reveler_secrets_sans_validation,true);
   assert.match(config.publication.secrets_mj,/secrets_mj\.json/);
@@ -66,12 +66,12 @@ test("la consigne GPT impose le jeu classique sans énigme annexe", () => {
   const {api} = launcher();
   const prompt = api.promptFor(api.config());
   assert.match(prompt,/prologue uniquement|UNIQUEMENT le prologue/i);
-  assert.match(prompt,/MODE RAPIDE PAR DÉFAUT/);
-  assert.match(prompt,/UN SEUL commit GitHub/);
+  assert.match(prompt,/MODE AUTONOME PAR DÉFAUT/);
+  assert.match(prompt,/UN SEUL commit groupé/);
   assert.match(prompt,/des Loups-Garous se cachent dans le village/);
   assert.match(prompt,/secrets_mj\.json/);
   assert.match(prompt,/TRÈS COURT/);
-  assert.match(prompt,/attends l.accord du MJ/i);
+  assert.match(prompt,/Attends UNE intervention d’Alex/i);
   assert.match(prompt,/n'affirme jamais que la synchronisation est faite/);
 });
 

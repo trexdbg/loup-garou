@@ -15,34 +15,34 @@ function moduleApi() {
 test("la régie guide la Voyante sans décider pour le joueur",()=>{
   const api=moduleApi();
   const g=api.guideFor({phase:"nuit",progression:{nuit:1},nuit_en_cours:{etape:"appel_voyante"}});
-  assert.match(g.title,/Voyante/);
-  assert.match(g.instructions,/secrets_mj\.json/);
+  assert.match(g.title,/Résoudre la nuit/);
+  assert.match(g.instructions,/Voyante/);
   assert.match(g.instructions,/Alex/);
 });
 test("la régie guide la Sorcière PNJ et attend le réveil validé",()=>{
   const api=moduleApi();
   const g=api.guideFor({phase:"nuit",nuit_en_cours:{etape:"appel_sorciere"}});
-  assert.match(g.instructions,/Sorcière selon le rôle réellement attribué/);
+  assert.match(g.instructions,/Sorcière/);
   assert.doesNotMatch(g.instructions,/Incarne Rose/);
   const morning=api.guideFor({phase:"nuit",nuit_en_cours:{etape:"sorciere_rendormie"}});
-  assert.match(morning.title,/Réveiller/);
-  assert.match(morning.instructions,/MJ autorise/);
+  assert.match(morning.title,/Résoudre la nuit/);
+  assert.match(morning.instructions,/sans validation MJ/);
 });
 test("le jour 1 n'ouvre pas de vote automatiquement",()=>{
   const api=moduleApi();
   const state={phase:"jour",progression:{jour:1,nuit:1},scene_courante_id:"reveil_jour_1"};
   const g=api.guideFor(state);
-  assert.match(g.instructions,/ne le lance pas/);
+  assert.match(g.instructions,/sans scrutin/);
   const prompt=api.promptFor("LG-20261102-700F964A0A7E",state);
   assert.match(prompt,/Lis l’état utile/);
-  assert.match(prompt,/Stoppe avant tout vote, élimination, pouvoir d’Alex ou changement de phase non autorisé/);
+  assert.match(prompt,/MODE AUTONOME/);
   assert.match(prompt,/LG-20261102-700F964A0A7E/);
 });
 test("une synchronisation exige de vérifier main, les scènes et le déploiement",()=>{
   const prompt=moduleApi().promptFor("LG-20261102-700F964A0A7E",{phase:"jour"},"sync");
   assert.match(prompt,/Synchronise uniquement les événements validés/);
   assert.match(prompt,/déploiement/);
-  assert.match(prompt,/UN SEUL commit GitHub/);
+  assert.match(prompt,/EN UN SEUL COMMIT/);
   assert.match(prompt,/sans prétendre avoir poussé/);
 });
 test("la régie MJ est livrée sur GitHub Pages et ouverte par défaut",()=>{

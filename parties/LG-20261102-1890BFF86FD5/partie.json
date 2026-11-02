@@ -8,7 +8,7 @@
   "progression": {
     "jour": 1,
     "nuit": 2,
-    "scene": "village_s_endort_02"
+    "scene": "appel_sorciere_02"
   },
   "joueur": {
     "prenom": "André",
@@ -68,7 +68,7 @@
   "resume_public": "Sept habitants sont encore en vie. Après la révélation du rôle de Hugo, le village s'endort pour la deuxième nuit.",
   "aide_mj_publique": "Le village dort. Attendre l'accord du MJ pour appeler la Voyante. Ne lancer aucun autre pouvoir ni annoncer de victime.",
   "dernier_evenement_public": "Nuit 2 : les sept habitants s'endorment. Aucun rôle nocturne n'a encore agi.",
-  "scene_courante_id": "village_s_endort_02",
+  "scene_courante_id": "appel_sorciere_02",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_02",
@@ -133,13 +133,17 @@
   },
   "nuit_en_cours": {
     "numero": 2,
-    "etape": "endormissement",
-    "actions_resolues": [],
+    "etape": "sorciere_rendormie",
+    "actions_resolues": [
+      "voyante_observation",
+      "loups_choix_victime",
+      "sorciere_decision"
+    ],
     "attendre_validation_mj": true,
     "prochain_appel": "voyante",
-    "loups_appeles": false,
+    "loups_appeles": true,
     "attendre_choix_joueur": false,
-    "attendre_reveil_mj": false,
+    "attendre_reveil_mj": true,
     "attaque_resolue": false
   },
   "roles_reveles_publics": [

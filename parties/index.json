@@ -18,6 +18,15 @@
       "phase": "jour",
       "dossier": "parties/LG-20261102-700F964A0A7E",
       "dernier_evenement": "Jour 1 : le village se réveille, tous les habitants sont en vie. Alex peut participer aux débats."
+    },
+    {
+      "id": "LG-20261102-1890BFF86FD5",
+      "cree_le": "2026-11-02",
+      "titre": "Le village des huit suspects",
+      "statut": "en_cours",
+      "phase": "prologue",
+      "dossier": "parties/LG-20261102-1890BFF86FD5",
+      "dernier_evenement": "Prologue préparé. En attente du maître du jeu."
     }
   ]
 }

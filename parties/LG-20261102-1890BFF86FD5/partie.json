@@ -3,12 +3,12 @@
   "schema_version": 2,
   "titre": "Le village des huit suspects",
   "cree_le": "2026-11-02T18:58:30.815Z",
-  "statut": "en_cours",
-  "phase": "jour",
+  "statut": "terminee",
+  "phase": "terminee",
   "progression": {
     "jour": 2,
     "nuit": 2,
-    "scene": "tir_chasseur_martin_jour_2"
+    "scene": "verdict_final_jour_2"
   },
   "joueur": {
     "prenom": "André",
@@ -61,16 +61,17 @@
     "retire": [
       "Hugo",
       "Martin",
-      "Éloi"
+      "Éloi",
+      "André"
     ],
     "valide_par_mj": true,
     "statut": "valide",
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Au jour 2, Martin est mort et son tir de Chasseur a éliminé Éloi, révélé Loup-Garou. Cinq habitants restent en jeu, dont un Loup-Garou caché. Les débats attendent le MJ.",
-  "aide_mj_publique": "Le tir du Chasseur est résolu et la carte Loup-Garou d'Éloi a été révélée publiquement. Les figurines de Hugo, Martin et Éloi sont retirées. Attendre l'accord explicite du MJ pour les débats, un vote ou une nouvelle nuit.",
-  "dernier_evenement_public": "Jour 2 : le Chasseur Martin a éliminé Éloi, révélé Loup-Garou. Cinq survivants ; débats en attente du MJ.",
-  "scene_courante_id": "tir_chasseur_martin_jour_2",
+  "resume_public": "Partie terminée : les deux Loups-Garous, Éloi et André, ont été éliminés. Célia, Rose, Alice et Odette sont les quatre survivantes.",
+  "aide_mj_publique": "Partie terminée et victoire du village. Montrer la carte d'André et lire la scène finale. Aucun autre vote ni nouvelle nuit.",
+  "dernier_evenement_public": "Jour 2 : André révélé Loup-Garou, 3 voix contre 2. Victoire du village.",
+  "scene_courante_id": "verdict_final_jour_2",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_02",
@@ -81,10 +82,10 @@
   },
   "jour_en_cours": {
     "numero": 2,
-    "etape": "attente_debats_mj",
-    "statut": "suspendu_attente_mj",
+    "etape": "termine",
+    "statut": "termine",
     "vote_ouvert": false,
-    "attendre_validation_mj": true,
+    "attendre_validation_mj": false,
     "chasseur": {
       "personnage": "Martin",
       "statut": "tir_effectue",
@@ -92,7 +93,36 @@
       "cible_tir": "Éloi",
       "valide_par_mj": true
     },
-    "debats_ouverts": false
+    "debats_ouverts": false,
+    "votes_enregistres": [
+      {
+        "votant": "Célia",
+        "cible": "André"
+      },
+      {
+        "votant": "Rose",
+        "cible": "André"
+      },
+      {
+        "votant": "Alice",
+        "cible": "André"
+      },
+      {
+        "votant": "Odette",
+        "cible": "Célia"
+      },
+      {
+        "votant": "André",
+        "cible": "Célia"
+      }
+    ],
+    "resultat": {
+      "André": 3,
+      "Célia": 2
+    },
+    "elimine": "André",
+    "resultat_valide": true,
+    "elimination_validee": true
   },
   "nuit_en_cours": {
     "numero": 2,
@@ -129,6 +159,27 @@
       "role": "loup",
       "jour": 2,
       "cause": "tir_chasseur_martin"
+    },
+    {
+      "personnage": "André",
+      "role": "loup",
+      "jour": 2,
+      "cause": "vote"
     }
-  ]
+  ],
+  "resultat_final": {
+    "vainqueur": "village",
+    "statut": "terminee",
+    "jour": 2,
+    "survivants": [
+      "Célia",
+      "Rose",
+      "Alice",
+      "Odette"
+    ],
+    "loups_elimines": [
+      "Éloi",
+      "André"
+    ]
+  }
 }

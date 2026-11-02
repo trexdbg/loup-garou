@@ -1,8 +1,15 @@
 {
-  "schema_version": 1,
-  "mode": "auto",
-  "provider": "elevenlabs",
-  "enabled": false,
+  "schema_version": 2,
+  "mode": "local_neural",
+  "provider": "piper_local",
+  "enabled": true,
   "worker_url": null,
-  "notice": "Synthèse premium inactive tant que Cloudflare Worker et une clé ElevenLabs ne sont pas configurés. Secours : voix du navigateur."
+  "model_policy": "telechargement_apres_clic_mj",
+  "default_models": [
+    "fr_FR-siwis-medium",
+    "fr_FR-tom-medium"
+  ],
+  "prix_eur": 0,
+  "protection": "aucune_cle_api_ni_fichier_audio_dans_le_depot",
+  "note": "Voix françaises neuronales générées localement après activation du MJ. Premier téléchargement potentiellement supérieur à 130 Mo, utilisation CPU et délai. Fallback Web Speech automatique."
 }

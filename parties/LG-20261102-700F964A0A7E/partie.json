@@ -1,0 +1,75 @@
+{
+  "id": "LG-20261102-700F964A0A7E",
+  "schema_version": 2,
+  "titre": "Le village des soupçons",
+  "cree_le": "2026-11-02T12:39:56.344Z",
+  "statut": "en_cours",
+  "phase": "prologue",
+  "progression": {
+    "jour": 0,
+    "nuit": 0,
+    "scene": "prologue"
+  },
+  "joueur": {
+    "prenom": "Alex",
+    "age": 10
+  },
+  "personnages_pnj": [
+    {
+      "prenom": "Mila",
+      "caractere": "Curieuse, réfléchie"
+    },
+    {
+      "prenom": "Octave",
+      "caractere": "Bavard, inquiet"
+    },
+    {
+      "prenom": "Rose",
+      "caractere": "Calme, méfiante"
+    },
+    {
+      "prenom": "Nils",
+      "caractere": "Franc, susceptible"
+    },
+    {
+      "prenom": "Clémence",
+      "caractere": "Maligne, persuasive"
+    },
+    {
+      "prenom": "Basile",
+      "caractere": "Amusant, provocateur"
+    },
+    {
+      "prenom": "Iris",
+      "caractere": "Discrète, observatrice"
+    }
+  ],
+  "placement_table": {
+    "type": "circulaire",
+    "sens": "horaire",
+    "depart": "12h",
+    "ordre": [
+      "Mila",
+      "Octave",
+      "Alex",
+      "Rose",
+      "Nils",
+      "Clémence",
+      "Basile",
+      "Iris"
+    ],
+    "retire": [],
+    "valide_par_mj": true
+  },
+  "resume_public": "Les huit habitants de Thiercelieux savent que deux Loups-Garous se cachent parmi eux et commencent à s'observer. Personne n'a encore pris de décision.",
+  "aide_mj_publique": "Lire le prologue. Attendre l'accord explicite du MJ avant d'ouvrir la première scène de discussion ou de lancer la nuit.",
+  "dernier_evenement_public": "Les huit habitants se réunissent et commencent à se soupçonner.",
+  "scene_courante_id": "prologue",
+  "tour_de_table": {
+    "statut": "non_commence",
+    "dernier_echange": null,
+    "dialogues_enregistres": 0,
+    "attendre_reponse_alex": false,
+    "passage_vote_apres_validation_mj": true
+  }
+}

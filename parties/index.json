@@ -9,6 +9,15 @@
       "phase": "tour_de_table",
       "dossier": "parties/LG-20261102-59DD8AE1A6AC",
       "dernier_evenement": "Alex interroge Rose sur son identité."
+    },
+    {
+      "id": "LG-20261102-700F964A0A7E",
+      "cree_le": "2026-11-02",
+      "titre": "Le village des soupçons",
+      "statut": "en_cours",
+      "phase": "prologue",
+      "dossier": "parties/LG-20261102-700F964A0A7E",
+      "dernier_evenement": "Prologue créé, en attente de l'accord du MJ."
     }
   ]
 }

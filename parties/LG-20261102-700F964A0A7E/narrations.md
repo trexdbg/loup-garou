@@ -51,3 +51,19 @@ Mila finit par demander : « Qui veut commencer à parler ? »
 **Nils :** « Basile, à ton tour : qui soupçonnes-tu ? »
 
 **Basile :** « Moi ? Peut-être Octave. Il s'agite beaucoup depuis le début ! »
+
+## Clôture du tour de table — validée par le MJ
+
+*Le brouhaha s'apaise peu à peu sur la place du village.*
+
+**Rose :** « Bon, nous avons entendu tout le monde. Beaucoup de soupçons, mais aucune preuve ! »
+
+**Octave :** « Et je le répète : ce n'est pas parce que je parle beaucoup que je suis un Loup-Garou ! »
+
+**Iris :** « Moi, je vais surtout me souvenir de ceux qui ont essayé d'accuser les autres trop rapidement. »
+
+**Basile :** « Faites comme vous voulez ! Mais méfiez-vous de ceux qui ont l'air trop innocents ! »
+
+**Clémence :** « Nous avons tous quelque chose à réfléchir. Pour l'instant, personne ne sait vraiment à qui faire confiance. »
+
+*Les habitants échangent de derniers regards méfiants. Le tour de parole touche à sa fin, mais personne n'est encore désigné.*

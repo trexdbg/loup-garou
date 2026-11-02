@@ -8,7 +8,7 @@
   "progression": {
     "jour": 0,
     "nuit": 0,
-    "scene": "tour_de_table_02"
+    "scene": "tour_de_table_conclusion"
   },
   "joueur": {
     "prenom": "Alex",
@@ -61,15 +61,16 @@
     "retire": [],
     "valide_par_mj": true
   },
-  "resume_public": "Alex explique qu'il accusait Mila pour lancer le débat et provoquer des réactions. Les habitants discutent, Iris questionne Basile, qui soupçonne Octave.",
-  "aide_mj_publique": "Faire écouter la scène Alex lance le débat, puis attendre la prochaine prise de parole d'Alex. Pas de vote ni de nuit sans accord du MJ.",
-  "dernier_evenement_public": "Après la réponse d'Alex, les soupçons se déplacent vers Basile et Octave.",
-  "scene_courante_id": "tour_de_table_02",
+  "resume_public": "Tour de table terminé avec l'accord du MJ : Alex a lancé le débat, Mila a défendu sa position, Basile et Octave ont été questionnés. Aucun habitant n'a été désigné ; pas de vote ni de nuit.",
+  "aide_mj_publique": "Tour de table terminé, scène finale enregistrée. Lire la clôture et attendre un accord explicite du MJ pour choisir puis ouvrir une nouvelle phase ; ni vote ni nuit automatiques.",
+  "dernier_evenement_public": "Le MJ valide la conclusion du tour de table. Les habitants se dispersent sans vote ni décision.",
+  "scene_courante_id": "tour_de_table_conclusion",
   "tour_de_table": {
-    "statut": "en_cours",
-    "dernier_echange": "tour_de_table_02",
-    "dialogues_enregistres": 25,
-    "attendre_reponse_alex": true,
-    "passage_vote_apres_validation_mj": true
+    "statut": "termine",
+    "dernier_echange": "tour_de_table_conclusion",
+    "dialogues_enregistres": 32,
+    "attendre_reponse_alex": false,
+    "passage_vote_apres_validation_mj": true,
+    "conclusion_validee_par_mj": true
   }
 }

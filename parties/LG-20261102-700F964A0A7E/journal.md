@@ -15,4 +15,5 @@
 - **Nuit 1 — la Voyante** : elle a observé une carte, puis s'est rendormie. Résultat conservé dans le carnet secret du MJ.
 - **Nuit 1 — Loups-Garous** : leur cible a été choisie par Alex et consignée uniquement dans le carnet secret du MJ. L'attaque n'est pas résolue.
 - **Nuit 1 — la Sorcière est appelée** : le MJ lui présente en privé la personne visée. Les potions restent disponibles et aucune décision de la Sorcière n'a été prise.
-- **En attente** : décision de la Sorcière puis validation du MJ, sans victime définitive et sans réveil automatique du village.
+- **Nuit 1 — décision de la Sorcière** : Rose a choisi seule et s'est rendormie. Les détails sont consignés uniquement dans le carnet du MJ.
+- **En attente** : feu vert du MJ pour réveiller le village. Aucun jour nouveau ni vote n'a commencé.

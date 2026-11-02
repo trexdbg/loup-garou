@@ -79,13 +79,15 @@ L'univers, les règles et les cartes appartiennent à leurs ayants droit. Pour v
 - ChatGPT continue de gérer les réactions et les décisions dans la conversation, sous validation du MJ, et doit écrire chaque nouveau dialogue dans GitHub. L'application reste en **lecture seule**.
 - Les textes privés et les secrets du MJ ne sont jamais transmis au lecteur public.
 
-### Voix neuronales haute qualité (option payante)
+### Voix neuronales gratuites : Piper (mode principal)
 
-Le mode local Web Speech est gratuit, mais peut sonner robotique. Pour des voix françaises plus expressives avec un timbre distinct par PNJ, le projet contient désormais un **pont ElevenLabs sécurisé côté Cloudflare Worker**, qui génère l'audio uniquement après la publication d'une nouvelle réplique jouée. Le son est lu dans l'application et n'est pas commité dans GitHub.
+**Aucun abonnement, aucune API, aucune clé, aucun paiement.** L'application utilise désormais Piper TTS (voix de synthèse neuronales françaises exécutées directement par le téléphone ou le navigateur) lorsque le MJ clique sur « Démarrer les voix gratuites ».
 
-**Ce mode n'est pas actif par défaut :** aucun compte ElevenLabs, aucune clé ni aucun Worker n'a été configuré par ChatGPT. Le fichier `tts-config.json` reste désactivé. La mise en service nécessite un compte/API ElevenLabs, un Worker Cloudflare et un choix de voix françaises ; les secrets ne doivent jamais être ajoutés à ce dépôt public.
+- Deux voix françaises de base, `fr_FR-siwis-medium` et `fr_FR-tom-medium`, sont associées de manière fixe aux PNJ, avec de petites variations de débit pour distinguer leurs personnalités. Cela ne crée pas huit comédiens différents ; la qualité est à écouter et à ajuster sur l'appareil.
+- Téléchargement **à la demande au premier usage** : environ 127 Mo de modèles pour les deux voix, plus le moteur de synthèse et ses ressources. Les modèles sont normalement mis en cache par le navigateur ; ils ne sont jamais commités sur GitHub.
+- Chaque nouvelle réplique validée est lue dans l'ordre. La génération s'effectue sur l'appareil, sans coût par caractère. Certains téléphones peuvent prendre du temps ou échouer à charger les modèles : dans ce cas, retour automatique au moteur vocal classique.
+- Le texte des dialogues reste public dans les archives comme auparavant ; les secrets du MJ ne quittent jamais la conversation privée.
+- Librairie de synthèse : `@diffusionstudio/vits-web@1.0.3` (MIT) chargée dynamiquement depuis esm.sh ; modèles Piper disponibles sur Hugging Face. Connexion nécessaire au premier téléchargement, performances variables selon la mémoire et le navigateur.
+- Configuration : `tts-config.json` définit `provider: piper_local` et `enabled: true`. L'ancienne intégration ElevenLabs sous `tts-worker/` est un prototype **désactivé, non nécessaire et non déployé** ; l'utilisation normale reste gratuite.
 
-- Instructions d'installation : [tts-worker/README.md](tts-worker/README.md).
-- Le coût dépend du fournisseur et de l'utilisation : définir un plafond de dépense et garder le limiteur de requêtes activé.
-- Une panne du fournisseur fait automatiquement revenir l'application à la voix locale ; la partie et les dialogues publics restent utilisables.
-- Une courte annonce dans l'application signale que les voix générées par l'IA ne sont pas des acteurs humains.
+Ce changement concerne uniquement la lecture vocale des archives publiques et ne remplace ni ChatGPT (dialogues et progression) ni le MJ (décisions). Aucun événement supplémentaire de la partie en cours n'est généré.

@@ -4,11 +4,11 @@
   "titre": "La première nuit approche",
   "cree_le": "2026-11-02T20:50:27.211Z",
   "statut": "en_cours",
-  "phase": "tour_de_table",
+  "phase": "jour",
   "progression": {
-    "jour": 1,
-    "nuit": 0,
-    "scene": "tour_de_table_01"
+    "jour": 2,
+    "nuit": 1,
+    "scene": "reveil_jour_2"
   },
   "joueur": {
     "prenom": "André",
@@ -76,31 +76,48 @@
     "valide_par_mj": true,
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Jour 1 : les huit habitants sont présents. Premières présentations ; aucune élimination ni vote.",
-  "aide_mj_publique": "Lire le prologue et les quatre présentations, puis attendre UNE intervention d’André. Ensuite, passer à la nuit 1 sans vote.",
-  "dernier_evenement_public": "Jour 1 : présentations ouvertes, André est invité à parler.",
-  "scene_courante_id": "tour_de_table_01",
+  "resume_public": "Jour 2 : Jade est retrouvée morte ; sa carte de Voyante est révélée. Sept personnes restent en vie.",
+  "aide_mj_publique": "Lire les réactions du matin ; attendre une intervention d’André avant le vote du jour 2.",
+  "dernier_evenement_public": "Réveil du jour 2 : Jade est morte, sa carte de Voyante est révélée.",
+  "scene_courante_id": "reveil_jour_2",
   "tour_de_table": {
-    "statut": "attend_intervention_joueur",
+    "statut": "termine",
+    "jour": 1,
+    "termine_sans_vote": true,
     "dernier_echange": "tour_de_table_01",
-    "dialogues_enregistres": 4,
-    "attendre_reponse_andre": true,
-    "attendre_validation_mj": false,
-    "passage_vote_apres_validation_mj": false
+    "attendre_reponse_andre": false
   },
   "jour_en_cours": {
-    "numero": 1,
-    "etape": "presentations",
+    "numero": 2,
+    "etape": "dialogues_et_enquete",
     "statut": "en_cours",
     "vote_ouvert": false,
     "debats_ouverts": true,
-    "attendre_validation_mj": false,
+    "attendre_intervention_joueur": true,
     "votes_enregistres": []
   },
-  "nuit_en_cours": null,
-  "roles_reveles_publics": [],
+  "nuit_en_cours": {
+    "numero": 1,
+    "statut": "resolue",
+    "actions_resolues": [
+      "voyante_observation",
+      "loups_choix_victime",
+      "sorciere_decision",
+      "reveil_village"
+    ],
+    "victimes_confirmees": [
+      "Jade"
+    ]
+  },
+  "roles_reveles_publics": [
+    {
+      "personnage": "Jade",
+      "role": "voyante",
+      "cause": "attaque_nocturne",
+      "jour": 2
+    }
+  ],
   "vivants": [
-    "Jade",
     "Baptiste",
     "André",
     "Rose",
@@ -109,8 +126,11 @@
     "Marin",
     "Inès"
   ],
-  "retire": [],
+  "retire": [
+    "Jade"
+  ],
   "audio": {
-    "lecture_automatique": false
+    "lecture_automatique": false,
+    "dernier_lot": "reveil_jour_2"
   }
 }

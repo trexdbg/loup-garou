@@ -8,7 +8,7 @@
   "progression": {
     "jour": 2,
     "nuit": 2,
-    "scene": "reveil_jour_2_chasseur"
+    "scene": "tir_chasseur_martin_jour_2"
   },
   "joueur": {
     "prenom": "André",
@@ -60,16 +60,17 @@
     ],
     "retire": [
       "Hugo",
-      "Martin"
+      "Martin",
+      "Éloi"
     ],
     "valide_par_mj": true,
     "statut": "valide",
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Au matin du jour 2, Martin est retrouvé mort. Sa carte de Chasseur est révélée. Six habitants sont encore en jeu ; le tir du Chasseur n'a pas eu lieu.",
-  "aide_mj_publique": "Faire écouter le réveil, puis demander au MJ d'autoriser le tir du Chasseur. Martin propose de viser Éloi mais aucun tir ni élimination supplémentaire ne sont validés. Les débats du jour 2 attendent la résolution du Chasseur.",
-  "dernier_evenement_public": "Jour 2 : Martin mort, rôle de Chasseur révélé. Dernier tir non effectué, en attente du MJ.",
-  "scene_courante_id": "reveil_jour_2_chasseur",
+  "resume_public": "Au jour 2, Martin est mort et son tir de Chasseur a éliminé Éloi, révélé Loup-Garou. Cinq habitants restent en jeu, dont un Loup-Garou caché. Les débats attendent le MJ.",
+  "aide_mj_publique": "Le tir du Chasseur est résolu et la carte Loup-Garou d'Éloi a été révélée publiquement. Les figurines de Hugo, Martin et Éloi sont retirées. Attendre l'accord explicite du MJ pour les débats, un vote ou une nouvelle nuit.",
+  "dernier_evenement_public": "Jour 2 : le Chasseur Martin a éliminé Éloi, révélé Loup-Garou. Cinq survivants ; débats en attente du MJ.",
+  "scene_courante_id": "tir_chasseur_martin_jour_2",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_02",
@@ -80,21 +81,22 @@
   },
   "jour_en_cours": {
     "numero": 2,
-    "etape": "attente_tir_chasseur",
+    "etape": "attente_debats_mj",
     "statut": "suspendu_attente_mj",
     "vote_ouvert": false,
     "attendre_validation_mj": true,
     "chasseur": {
       "personnage": "Martin",
-      "statut": "attente_accord_mj",
-      "tir_effectue": false,
-      "cible_tir": null
+      "statut": "tir_effectue",
+      "tir_effectue": true,
+      "cible_tir": "Éloi",
+      "valide_par_mj": true
     },
     "debats_ouverts": false
   },
   "nuit_en_cours": {
     "numero": 2,
-    "etape": "terminee_attente_chasseur",
+    "etape": "terminee",
     "actions_resolues": [
       "voyante_observation",
       "loups_choix_victime",
@@ -107,7 +109,7 @@
     "attendre_reveil_mj": false,
     "attaque_resolue": true,
     "reveil_valide_par_mj": true,
-    "chasseur_en_attente": true
+    "chasseur_en_attente": false
   },
   "roles_reveles_publics": [
     {
@@ -121,6 +123,12 @@
       "role": "chasseur",
       "jour": 2,
       "cause": "attaque_loups"
+    },
+    {
+      "personnage": "Éloi",
+      "role": "loup",
+      "jour": 2,
+      "cause": "tir_chasseur_martin"
     }
   ]
 }

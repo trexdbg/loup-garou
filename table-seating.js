@@ -8,7 +8,8 @@ const orderOf=id=>sessions.get(id)?.ordre.slice()||[];
 const trioOf=id=>{const s=sessions.get(id);return s?M.trio(s.ordre,s.centre,s.retire):[];};
 function attach(id,state,mount){
  const names=M.names(state),r=M.remote(state),local=saved(id),base=local?.id===id?local:r;
- const s={ordre:M.reconcile(base.ordre||[],names),retire:(base.retire||[]).filter(x=>names.includes(x)),valide:base.valide===true && (base.ordre||[]).length===names.length,centre:null};
+ const exact=(base.ordre||[]).length===names.length && names.every(person=>(base.ordre||[]).includes(person));
+ const s={ordre:M.reconcile(base.ordre||[],names),retire:(base.retire||[]).filter(x=>names.includes(x)),valide:base.valide===true && exact,centre:null};
  sessions.set(id,s);
  mount.replaceChildren();
  const title=elt("h4","🧱 Plan de table des LEGO"),info=elt("p","Place n° 1 en haut (12 h), puis dans le sens horaire. Une figurine par personnage, avec sa carte de rôle cachée dessous.","fine");

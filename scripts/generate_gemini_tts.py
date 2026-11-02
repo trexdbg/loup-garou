@@ -133,6 +133,17 @@ def generate(root: Path, site: Path, cache: Path,
     entries = json.loads(index_file.read_text(encoding="utf-8")).get("parties", [])
     # The newest validated party gets the remaining free-tier quota first.
     entries = sorted(reversed(entries), key=lambda x: str(x.get("cree_le", "")), reverse=True)
+    # Spend the free quota only on the newest ongoing party with playable lines.
+    # Older parties still publish every cached clip, but create no new ones.
+    priority_party = None
+    for item in entries:
+        candidate = item.get("id")
+        if (str(item.get("statut", "")).lower() not in {"terminee", "terminée", "completed", "finished"}
+                and isinstance(candidate, str) and candidate.startswith("LG-")
+                and candidate.replace("-", "").isalnum()
+                and public_lines(root / "parties" / candidate / "dialogues.ndjson", max_scenes)):
+            priority_party = candidate
+            break
     generated = 0
     stopped = False
     quota_exhausted = False
@@ -174,7 +185,8 @@ def generate(root: Path, site: Path, cache: Path,
                 if candidate.is_file() and candidate.stat().st_size > 0:
                     selected_model, cached = candidate_model, candidate
                     break
-            if cached is None and api_key and generated < max_lines and not stopped:
+            if (cached is None and party_id == priority_party and api_key
+                    and generated < max_lines and not stopped):
                 candidate = cache / fingerprint(MODEL, voice, style, text)
                 try:
                     wav, mime = synthesize(text, voice, style, api_key)
@@ -227,12 +239,12 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--site", default="site")
     parser.add_argument("--cache", default=".cache/gemini-tts")
-    parser.add_argument("--max-lines", type=int, default=6)
+    parser.add_argument("--max-lines", type=int, default=8)
     parser.add_argument("--max-scenes", type=int, default=3)
     args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
     count = generate(root, Path(args.site), Path(args.cache),
-                     max(0, min(args.max_lines, 6)), max(1, min(args.max_scenes, 5)),
+                     max(0, min(args.max_lines, 8)), max(1, min(args.max_scenes, 5)),
                      os.environ.get("GEMINI_API_KEY", ""))
     print(str(count) + " new TTS clips; previous Gemini MP3s retained. Missing clips use local voices.")
 

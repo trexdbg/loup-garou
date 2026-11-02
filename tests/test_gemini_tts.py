@@ -58,7 +58,7 @@ class GeminiTTSTests(unittest.TestCase):
             with patch("scripts.generate_gemini_tts.synthesize", fake_synthesize), \
                  patch("scripts.generate_gemini_tts.make_mp3", fake_mp3), \
                  patch("scripts.generate_gemini_tts.time.sleep", lambda seconds: None):
-                self.assertEqual(generate(root, root / "site", root / "cache", 1, 3, "test-key"), 1)
+                self.assertEqual(generate(root, root / "site", root / "cache", 2, 3, "test-key"), 1)
             self.assertEqual(seen, [newer.name])
 
     def test_no_secret_creates_only_public_manifest(self):

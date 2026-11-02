@@ -72,7 +72,7 @@ jobs:
           else
             echo "::warning::Secret GEMINI_API_KEY absent : lecture vocale locale uniquement."
           fi
-          python3 scripts/generate_gemini_tts.py --site site --max-scenes 3 --max-lines 6
+          python3 scripts/generate_gemini_tts.py --site site --max-scenes 3 --max-lines 8
       - name: Configurer GitHub Pages
         uses: actions/configure-pages@v5
       - name: Envoyer le site

@@ -4,7 +4,7 @@
   "provider": "gemini_api_via_github_actions",
   "enabled": true,
   "worker_url": null,
-  "model_policy": "Au plus 6 nouveaux MP3 par déploiement, seulement pour les répliques manquantes des 3 scènes récentes; réutilisation des caches Gemini 3.1 et 3.8; médias uniquement dans Pages.",
+  "model_policy": "Au plus 8 nouveaux MP3 par déploiement pour la partie active la plus récente et les 3 dernières scènes ; les anciennes parties et les anciens modèles conservent leurs MP3 en cache.",
   "default_models": [
     "fr_FR-siwis-medium",
     "fr_FR-tom-medium"

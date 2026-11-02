@@ -16,7 +16,7 @@ Le secret GitHub n'est consommé que par le runner GitHub Actions sur le workflo
 
 - Modèle par défaut : **gemini-3.8-flash-lite-tts** (API Interactions REST) et quota gratuit Google AI Studio. Aucun modèle payant ne se déclenche automatiquement.
 - **7 profils Gemini** pour les sept PNJ (association stable dans l'ordre du casting de `partie.json`) et **1 voix de narrateur**. Chaque réplique est générée séparément pour préserver la cohérence du personnage et respecter l'ordre de la scène.
-- Maximum **6 nouvelles répliques par déploiement**, sur les **3 dernières scènes** de chaque partie. Les anciens MP3 Gemini 3.1 restent utilisés depuis le cache : pas de génération inutile. Une erreur 429 interrompt les nouveaux appels pendant ce déploiement.
+- Maximum **8 nouvelles répliques par déploiement**, sur les **3 dernières scènes** de chaque partie. Seule la partie active la plus récente peut demander de nouvelles voix ; les anciens MP3 de toutes les parties restent servis depuis le cache. Une erreur 429 interrompt les nouveaux appels pendant ce déploiement.
 - Les MP3 et les manifests ne sont placés que dans l'artefact **GitHub Pages**. **Aucun MP3 n'est commité au dépôt**, y compris après nettoyage. Les anciennes scènes sans MP3 conservent la lecture locale.
 - Si la clé est absente, invalide, le modèle retiré, le quota atteint, le MP3 en erreur, ou la publication en cours, le lecteur bascule vers une voix française locale pour la réplique manquante. Aucune scène n'est démarrée automatiquement.
 - Pour éviter toute dépense, **ne pas activer la facturation** sur le projet Google AI Studio utilisé. Le secret seul ne garantit pas l'absence de coûts si vous configurez un projet Google payant : surveillez les quotas. Le workflow n'impose pas de facturation.

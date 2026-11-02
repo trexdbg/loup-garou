@@ -62,6 +62,14 @@
     "valide_par_mj": true
   },
   "resume_public": "Le tour de table continue. Alex soupçonne Rose, Hugo s'emporte et Jade et Baptiste contestent ses accusations. Rose attend la réponse d'Alex.",
-  "aide_mj_publique": "Alex peut expliquer ses soupçons ou parler à un autre habitant. Les PNJ peuvent se répondre. Ne pas déclencher de vote ou de nuit.",
-  "dernier_evenement_public": "Alex a demandé directement à Rose si elle est Loup-Garou. Rose lui demande ce qui a éveillé ses soupçons."
+  "aide_mj_publique": "Écouter la dernière scène audio dans l'application. Alex répond ou interroge un autre personnage, puis ChatGPT publie uniquement le nouvel échange. Le MJ décidera de la fin du tour.",
+  "dernier_evenement_public": "Alex a demandé directement à Rose si elle est Loup-Garou. Rose lui demande ce qui a éveillé ses soupçons.",
+  "scene_courante_id": "tour_de_table_02",
+  "tour_de_table": {
+    "statut": "en_cours",
+    "dernier_echange": "tour_de_table_02",
+    "dialogues_enregistres": 22,
+    "attendre_reponse_alex": true,
+    "passage_vote_apres_validation_mj": true
+  }
 }

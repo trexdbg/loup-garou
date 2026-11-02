@@ -172,10 +172,27 @@ def generate(root: Path, site: Path, cache: Path,
         target.mkdir(parents=True, exist_ok=True)
         stats = {"total": len(rows), "available": 0, "reused": 0,
                  "generated": 0, "missing": 0, "quota_exhausted": False}
-        manifest = {"version": 1, "provider": "gemini", "model": MODEL,
-                    "lines": {}, "stats": stats}
+        manifest_file = target / "manifest.json"
+        try:
+            previous = json.loads(manifest_file.read_text(encoding="utf-8"))
+            prior_clips = previous.get("lines", {})
+        except (OSError, ValueError):
+            prior_clips = {}
+        manifest = {"version": 1, "provider": "mixed", "preferred_provider": "phonon",
+                    "model": MODEL, "lines": {}, "stats": stats}
         for row in rows:
             speaker, text = row["locuteur"], row["texte"]
+            previous_clip = prior_clips.get(str(row["seq"]), {})
+            if (isinstance(previous_clip, dict)
+                    and previous_clip.get("provider") == "phonon"
+                    and previous_clip.get("locuteur") == speaker
+                    and previous_clip.get("texte") == text
+                    and isinstance(previous_clip.get("file"), str)
+                    and __import__("re").fullmatch(r"audio/[a-f0-9]{20}\.mp3", previous_clip["file"])
+                    and (target / previous_clip["file"]).is_file()):
+                manifest["lines"][str(row["seq"])] = previous_clip
+                stats["available"] += 1
+                continue
             voice, style = voice_for(speaker, cast)
             # Preserve the old model's sound and named files when cached.
             selected_model = None
@@ -225,7 +242,7 @@ def generate(root: Path, site: Path, cache: Path,
                     stats["reused"] += 1
             else:
                 stats["missing"] += 1
-        # Count the clips reused rather than newly produced in this deployment.
+        # Count reused clips, including Phonon voices already available.
         stats["reused"] = stats["available"] - stats["generated"]
         stats["quota_exhausted"] = quota_exhausted
         (target / "manifest.json").write_text(

@@ -93,7 +93,7 @@ Les écritures GitHub sont explicites, via les actions de GitHub connectées à 
 
 Chaque reprise part de l'ID et relit `partie.json`, `secrets_mj.json` s'il existe, `journal.md` et les derniers dialogues. Si l'ancien dossier n'a pas de fichier de secrets, **ne pas inventer un état caché certain** : demander au MJ sa fiche ou préparer une reprise validée.
 
-La page publique lit l'état, le journal et les dialogues de GitHub Pages. Le carnet MJ reste une fonctionnalité locale, alimentée manuellement, conservée en `sessionStorage` par défaut ou en `localStorage` **non chiffré** sur demande. Les attributions validées peuvent en parallèle être conservées dans `secrets_mj.json` sur GitHub ; ne jamais les afficher dans les dialogues non révélés, la synthèse vocale ou la vue destinée au joueur. Un clic sur **Actualiser** met à jour la liste et les archives.
+La page publique lit l'état, le journal et les dialogues de GitHub Pages. Le carnet MJ est masqué par défaut ; lorsqu'il est ouvert, il charge les rôles de `secrets_mj.json` (dépôt public), puis peut les conserver en `sessionStorage` ou en `localStorage` **non chiffré** sur demande. La saisie et l'import manuels restent possibles. Les attributions validées peuvent en parallèle être conservées dans `secrets_mj.json` sur GitHub ; ne jamais les afficher dans les dialogues non révélés, la synthèse vocale ou la vue destinée au joueur. Un clic sur **Actualiser** met à jour la liste et les archives.
 
 ## 5. Rôles et visuels
 

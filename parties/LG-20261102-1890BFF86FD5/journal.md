@@ -55,3 +55,11 @@ Nouvelle partie initialisée. En attente de la validation du MJ après le prolog
 - Scène publique `elimination_jour_1` archivée, séquences 75 à 80.
 - Le rôle et l'historique de l'élimination sont consignés dans `secrets_mj.json`.
 - Aucun pouvoir nocturne ni transition vers la nuit 2 : attente de la validation du MJ.
+
+## Jour 1 — Rôle révélé de Hugo
+
+- Le maître du jeu montre officiellement la carte après l'élimination : **Hugo était un Simple Villageois**.
+- Cette information est désormais connue de tout le village. Elle n'est plus un secret.
+- Répliques et annonce archivées dans `dialogues.ndjson`, scène `revelation_hugo_jour_1` (séquences 81 à 86).
+- Sept survivants ; vote clos ; jour 1 conservé ; aucune nuit 2 déclenchée.
+- Les rôles des sept autres habitants restent cachés dans les scènes publiques.

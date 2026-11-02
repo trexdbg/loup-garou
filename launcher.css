@@ -122,3 +122,30 @@ footer { padding:28px 15px; }
 .mj-private-save input {width:auto;flex:none;margin-top:4px}
 .mj-private-status {min-height:1.5em;color:#f1cf95;font-weight:600}
 @media(max-width:740px){.mj-character-grid{grid-template-columns:1fr}.mj-private-region{padding:13px}}
+
+/* LEGO : diagramme circulaire et outils du MJ. */
+.seating-panel{border:1px solid #746449;background:#1b2430;border-radius:13px;padding:16px;margin:18px 0}
+.seating-panel h4{color:#f2d6a6;margin:0 0 8px}
+.seating-status{padding:10px;border-radius:9px;background:#2c3444;color:#f0d6a7;font-weight:700;font-size:.88rem}
+.seating-scroll{max-width:100%;overflow-x:auto;background:#111b27;border-radius:12px;margin:14px 0;padding:8px}
+.seating-ring{position:relative;margin:auto;border-radius:50%;background:radial-gradient(circle,#2f4346,#19212e);border:1px dashed #577d7c}
+.seating-table-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:14px 22px;border:2px solid #a28255;border-radius:35px;background:#4b3828;color:#f5d6a5;font-weight:900}
+.seating-seat{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;justify-content:center;width:105px;min-height:69px;padding:4px;background:#293647;border:2px solid #5b7088;border-radius:11px;font-size:.77rem;text-align:center;line-height:1.25}
+.seating-seat .lego-icon{font-size:1.35rem}
+.seating-seat .lego-name{overflow-wrap:anywhere;font-weight:700}
+.seating-seat.is-trio{border-color:#9acf92;background:#3b4a3b}
+.seating-seat.is-center{border-color:#ffd389;box-shadow:0 0 0 3px #e2bd7866}
+.seating-seat.is-out{opacity:.45;text-decoration:line-through}
+.seating-rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:9px}
+.seating-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px;border:1px solid #4b5869;border-radius:9px;background:#171f2b}
+.seating-row strong{font-size:.85rem;overflow-wrap:anywhere}
+.seating-row-buttons{display:flex;gap:4px;flex:none}
+.seating-row-buttons button{padding:5px 7px;font-size:.78rem}
+.seating-fox{padding:12px;background:#263c32;color:#c5ebbb;border-radius:9px;font-weight:700}
+.seating-actions{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.seating-actions button{flex:1 1 180px}
+.seating-panel textarea{width:100%;padding:10px;min-height:115px;background:#111923;color:#e4dac8}
+.mj-fox-check{padding:13px;background:#292d33;border:1px solid #ac925f;border-radius:11px;margin:12px 0}
+.mj-fox-check h4,.mj-fox-answer{color:#f2d6a5}
+.mj-fox-answer{font-weight:700}
+@media(max-width:740px){.seating-panel{padding:11px}.seating-rows{grid-template-columns:1fr}}

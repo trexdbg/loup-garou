@@ -131,3 +131,21 @@ La nuit se poursuit. Aucun réveil ni résultat n'est annoncé sans l'accord du 
 **Martin :** « Hier, je me suis trompé sur Hugo. Mais les explications d'Éloi m'inquiétaient déjà. »
 
 *Martin envisage de viser Éloi. Le tir reste suspendu à l'accord du maître du jeu. Aucun autre habitant n'est éliminé pour l'instant.*
+
+## Jour 2 — Dernier tir de Martin
+
+*Martin indique clairement sa dernière cible devant le village.*
+
+**Martin :** « Je me suis trompé sur Hugo. Cette fois, je choisis Éloi ! »
+
+*Le Chasseur tire. Éloi est éliminé et sa figurine LEGO est retirée de la table.*
+
+**Narrateur :** « Le maître du jeu retourne la carte d'Éloi. Il était **Loup-Garou** ! »
+
+**Alice :** « Un Loup-Garou ! Martin avait vu juste ! »
+
+**Rose :** « Nous en avons démasqué un. Mais il en reste encore un parmi nous. »
+
+**Célia :** « Nous ne devons pas oublier les soupçons de Martin. »
+
+*Il reste cinq habitants en jeu. Les débats du jour 2 ne sont pas ouverts : le maître du jeu décidera de la suite.*

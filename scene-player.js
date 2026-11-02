@@ -70,9 +70,9 @@
   try{for(const key of JSON.parse(sessionStorage.getItem(savedKey)||"[]"))heard.add(key);}catch(_){}
   const state={closed:false,playing:false,generation:0,scenes:[],selected:"",context:null,handle:null,loading:false,index:-1,audio:{},audioCount:0,audioStats:null};
   const box=add(mount,"section",null,"scene-player");
-  add(box,"p","01 / LES DIALOGUES","scene-kicker");
+  add(box,"p","RÉGIE AUDIO · SCÈNES PUBLIÉES","scene-kicker");
   add(box,"h3","🎧 Écouter la scène");
-  add(box,"p","Après actualisation, lance les répliques une par une dans l'ordre. Quand la scène se termine, Alex peut répondre librement.","scene-help");
+  add(box,"p","Écoutez les répliques dans l’ordre, sans lecture automatique. Vous contrôlez la suite de la partie depuis la régie du MJ.","scene-help");
   const head=add(box,"div",null,"scene-controls");
   const selectLabel=add(head,"label","Scène à écouter");
   const sceneSelect=add(selectLabel,"select");
@@ -94,10 +94,11 @@
   status.setAttribute("role","status");status.setAttribute("aria-live","polite");
   const transcript=add(box,"ol",null,"scene-transcript");
   const following=add(box,"div",null,"scene-followup");
-  add(following,"strong","Après l'écoute : Alex reprend la parole.");
-  add(following,"p","Les nouveaux échanges seront générés par ChatGPT et archivés dans une nouvelle scène. Le MJ décidera quand terminer ce tour de table.");
-  const copyButton=add(following,"button","📋 Copier pour continuer dans ChatGPT","secondary");copyButton.type="button";
-  const endRoundButton=add(following,"button","✓ Proposer la fin du tour","ghost");endRoundButton.type="button";
+  add(following,"strong",party.phase==="nuit"?"Après l’écoute : le MJ garde la main.":party.phase==="jour"?"Après l’écoute : animer les débats du jour.":"Après l’écoute : donner la parole à Alex.");
+  add(following,"p","ChatGPT archive les scènes après validation du maître du jeu. Les décisions du joueur ne sont jamais prises automatiquement.");
+  const copyButton=add(following,"button",party.phase==="nuit"?"📋 Copier l’étape nocturne":"📋 Continuer dans ChatGPT","secondary");copyButton.type="button";
+  const endRoundButton=add(following,"button",party.phase==="jour"?"✓ Préparer la fin des débats":"✓ Proposer la fin du tour","ghost");endRoundButton.type="button";
+  endRoundButton.hidden = !["tour_de_table","jour"].includes(party.phase);
   const copied=add(following,"p","", "fine");
   function announce(text){if(!state.closed)status.textContent=text;}
   function details(){
@@ -157,7 +158,7 @@
    const scene=state.scenes.find(s=>s.id===state.selected);
    shutdown();
    if(scene){heard.add(scene.id);try{sessionStorage.setItem(savedKey,JSON.stringify([...heard]));}catch(_){}populate(scene.id);}
-   announce("✓ Scène terminée. Alex peut poser une question ou répondre.");
+   announce("✓ Scène terminée. Le MJ peut préparer la prochaine action.");
   }
   function advance(token,rows){
    if(state.closed||!state.playing||token!==state.generation)return;
@@ -253,15 +254,19 @@
   mode.addEventListener("change",()=>{shutdown();details();});
   playButton.addEventListener("click",play);replayButton.addEventListener("click",play);
   stopButton.addEventListener("click",()=>{shutdown();announce("Lecture arrêtée ; relance la scène au début si nécessaire.");});
+  const copyText = async text => {
+    try { await navigator.clipboard.writeText(text); copied.textContent = "✓ Consigne copiée pour ChatGPT."; }
+    catch (_) { copied.textContent = "Copie indisponible. Utilise le panneau de régie en haut de la page."; }
+  };
   copyButton.addEventListener("click",async()=>{
-   const text="Partie LG "+id+". La scène "+state.selected+" est prête ou a été écoutée. Alex intervient à nouveau pendant le tour de table. Je vais indiquer ses paroles. Réponds avec les PNJ sans faire parler Alex à sa place. Après mon accord, archive uniquement le nouvel échange sous un nouvel identifiant scene_id dans dialogues.ndjson. Ne termine pas le tour de table, ne lance pas de vote ou de nuit sans accord explicite du MJ.\n\nAlex : ";
-   try{await navigator.clipboard.writeText(text);copied.textContent="Consigne copiée ; colle-la dans notre conversation ChatGPT et ajoute les paroles d'Alex.";}
-   catch(_){copied.textContent="Copie indisponible ; retourne dans ChatGPT et indique l'ID "+id+".";}
+    const helper=window.LG_MJ_CONSOLE;
+    const action=["tour_de_table","jour"].includes(party.phase)?"dialogue":"next";
+    const text=helper?.promptFor(id,party,action) || ("Partie "+id+". Relis le dernier état sur GitHub et propose la suite sans validation automatique.");
+    await copyText(text);
   });
   endRoundButton.addEventListener("click",async()=>{
-   const text="Partie Loup-Garou "+id+". Je souhaite terminer le tour de table après les échanges déjà joués. Relis le journal et les derniers dialogues publics sur GitHub ; propose une courte conclusion des débats sans déclencher automatiquement de vote ou de nuit. Attends mon accord explicite avant de changer de phase, puis archive uniquement les événements validés.";
-   try{await navigator.clipboard.writeText(text);copied.textContent="Consigne de fin de tour copiée. Colle-la dans ChatGPT pour validation.";}
-   catch(_){copied.textContent="Retourne dans ChatGPT et demande la fin du tour pour "+id+".";}
+    const text="Partie "+id+". Le MJ souhaite conclure le débat de cette phase. Relis les échanges sur GitHub et propose une courte conclusion. Ne lance aucun vote ni nuit sans mon accord et archive uniquement la scène validée.";
+    await copyText(text);
   });
   const onVoices=()=>{if(!state.closed)details();};
   synth?.addEventListener?.("voiceschanged",onVoices);

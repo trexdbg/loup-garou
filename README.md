@@ -58,6 +58,10 @@ Les narrations futures ne sont jamais écrites d'avance. Lors du lancement, seul
 
 Un mode initialise la **liste autorisée** des rôles, mais n'impose pas que toutes les cartes soient distribuées. On peut cocher/décocher individuellement les cartes avant de générer le JSON. ChatGPT compose une répartition adaptée au nombre de personnages et au nombre de Loups demandé, puis attend l'accord du MJ.
 
+## Figurines LEGO et ordre de voisinage
+
+Chaque partie comporte un plan circulaire validé par le MJ. Une figurine LEGO représente chaque personnage, avec une carte cachée sous la figurine. Dans **Mes parties**, les places se réorganisent avec ← / →, et les figurines retirées sont exclues des trios voisins. Le **carnet secret du MJ** vérifie le flair du Renard sans révéler l'identité du Loup au joueur. Le plan public n'est archivé qu'après copie de la consigne vers ChatGPT. [Règles détaillées du placement](docs/placement-lego.md).
+
 ## Carnet secret du MJ dans l'application
 
 1. Ouvrir une partie depuis **Mes parties**, puis cliquer sur **Afficher le carnet secret du MJ**. Les noms du joueur et des habitants proviennent des données *publiques* de `partie.json` lorsqu'ils y figurent.

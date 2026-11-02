@@ -203,7 +203,7 @@
   playButton.addEventListener("click",play);replayButton.addEventListener("click",play);
   stopButton.addEventListener("click",()=>{shutdown();announce("Lecture arrêtée ; relance la scène au début si nécessaire.");});
   copyButton.addEventListener("click",async()=>{
-   const text="Partie LG "+id+". La scène "+state.selected+" est prête ou a été écoutée. Alex intervient à nouveau pendant le tour de table. Je vais indiquer ses paroles. Réponds avec les PNJ sans faire parler Alex à sa place. Après mon accord, archive uniquement le nouvel échange sous un nouvel identifiant scene_id dans dialogues.ndjson. Ne termine pas le tour de table, ne lance pas de vote ou de nuit sans accord explicite du MJ.\\n\\nAlex : ";
+   const text="Partie LG "+id+". La scène "+state.selected+" est prête ou a été écoutée. Alex intervient à nouveau pendant le tour de table. Je vais indiquer ses paroles. Réponds avec les PNJ sans faire parler Alex à sa place. Après mon accord, archive uniquement le nouvel échange sous un nouvel identifiant scene_id dans dialogues.ndjson. Ne termine pas le tour de table, ne lance pas de vote ou de nuit sans accord explicite du MJ.\n\nAlex : ";
    try{await navigator.clipboard.writeText(text);copied.textContent="Consigne copiée ; colle-la dans notre conversation ChatGPT et ajoute les paroles d'Alex.";}
    catch(_){copied.textContent="Copie indisponible ; retourne dans ChatGPT et indique l'ID "+id+".";}
   });

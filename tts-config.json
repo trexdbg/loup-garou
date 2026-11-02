@@ -1,10 +1,10 @@
 {
   "schema_version": 3,
-  "mode": "local_neural",
+  "mode": "lecture_scenes_manuelle",
   "provider": "piper_local",
   "enabled": true,
   "worker_url": null,
-  "model_policy": "telechargement_apres_clic_mj",
+  "model_policy": "telechargement_piper_uniquement_sur_clic_ecouter_et_choix_piper",
   "default_models": [
     "fr_FR-siwis-medium",
     "fr_FR-tom-medium"

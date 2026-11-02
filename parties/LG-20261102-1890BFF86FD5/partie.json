@@ -8,7 +8,7 @@
   "progression": {
     "jour": 1,
     "nuit": 1,
-    "scene": "elimination_jour_1"
+    "scene": "revelation_hugo_jour_1"
   },
   "joueur": {
     "prenom": "André",
@@ -66,9 +66,9 @@
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
   "resume_public": "Le village a éliminé Hugo à la fin du jour 1. La prochaine nuit n'a pas encore commencé.",
-  "aide_mj_publique": "Hugo ne participe plus à la partie. Retirer son LEGO, conserver l'ordre des survivants. Le MJ décide quand commencer la nuit 2.",
-  "dernier_evenement_public": "Hugo éliminé au jour 1 après un vote de 5 contre 3. Sept habitants restent.",
-  "scene_courante_id": "elimination_jour_1",
+  "aide_mj_publique": "La carte de Hugo (Simple Villageois) a été montrée à tous. Les autres rôles restent cachés. Attendre l'accord du MJ avant la nuit 2.",
+  "dernier_evenement_public": "Après son élimination, la carte de Hugo est révélée : Simple Villageois. Sept habitants restent.",
+  "scene_courante_id": "revelation_hugo_jour_1",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_02",
@@ -127,7 +127,9 @@
     },
     "elimine": "Hugo",
     "resultat_valide": true,
-    "elimination_validee": true
+    "elimination_validee": true,
+    "role_hugo_revele": true,
+    "role_hugo_public": "villageois"
   },
   "nuit_en_cours": {
     "numero": 1,
@@ -144,5 +146,13 @@
     "attendre_reveil_mj": false,
     "attaque_resolue": true,
     "reveil_valide_par_mj": true
-  }
+  },
+  "roles_reveles_publics": [
+    {
+      "personnage": "Hugo",
+      "role": "villageois",
+      "jour": 1,
+      "cause": "vote"
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "mode": "local_neural",
   "provider": "piper_local",
   "enabled": true,
@@ -11,5 +11,11 @@
   ],
   "prix_eur": 0,
   "protection": "aucune_cle_api_ni_fichier_audio_dans_le_depot",
-  "note": "Voix françaises neuronales générées localement après activation du MJ. Premier téléchargement potentiellement supérieur à 130 Mo, utilisation CPU et délai. Fallback Web Speech automatique."
+  "note": "Le lecteur de scènes est manuel : clic Écouter, pas de polling vocal. Voix françaises distinctes selon disponibilité du navigateur. Piper propose deux timbres gratuits téléchargeables à la demande, sans garantie de 7 timbres.",
+  "default_playback_mode": "navigateur",
+  "available_modes": [
+    "navigateur",
+    "piper_local"
+  ],
+  "voice_policy": "jusqua_7_voix_francaises_natives_si_disponibles_sinon_profils_alternatifs"
 }

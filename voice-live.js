@@ -301,7 +301,7 @@
       enqueue(); // Synchrone avec le clic : nécessaire pour les règles audio mobiles.
       if (!state.busy) {
         // Le message confirme le son immédiatement, dans le geste utilisateur initial.
-        if (speechAvailable) {
+        if (speechAvailable && !piperEnabled) {
           const unlock = new SpeechSynthesisUtterance("Les voix du village sont prêtes.");
           unlock.lang = "fr-FR";
           unlock.voice = voiceFor("Narrateur");

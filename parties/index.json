@@ -1,4 +1,13 @@
 {
   "schema_version": 1,
-  "parties": []
+  "parties": [
+    {
+      "id": "LG-20261102-59DD8AE1A6AC",
+      "cree_le": "2026-11-02",
+      "titre": "Le premier soupçon",
+      "statut": "en_cours",
+      "phase": "prologue",
+      "dossier": "parties/LG-20261102-59DD8AE1A6AC"
+    }
+  ]
 }

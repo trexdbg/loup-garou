@@ -118,6 +118,7 @@ La page de consultation et le lecteur audio ne chargent pas automatiquement `sec
 
 - [roles.js](roles.js) + [modes.js](modes.js) : catalogue des **37 rôles**, presets Classique / Avancé / Expert et leurs résumés.
 - [mj-private.js](mj-private.js) : carnet de rôles privé, assignation locale par personnage, import/export du JSON MJ.
+- [voice-pool.js](voice-pool.js) + [voices/phonon-fr.json](voices/phonon-fr.json) : 15 personnages récurrents, 15 voix fixes et catalogue Phonon français.
 - [role-art.js](role-art.js) : association vérifiée aux illustrations authentiques et fiches wiki ; pas d'image empruntée à un autre rôle.
 - [stories.js](stories.js) : cinq trames facultatives (ChatGPT peut en créer de nouvelles).
 - [launcher.js](launcher.js) + [launcher.css](launcher.css) + [index.html](index.html) : nouvelle application de configuration / consultation.
@@ -135,14 +136,15 @@ Le lecteur actif est `scene-player.js` (l'ancien `voice-live.js` reste conservé
 
 **Parcours :** ouvrir la partie → **↻ Actualiser** → sélectionner la dernière scène → **▶ Écouter** → Alex interagit en vrai → le MJ transmet son intervention à ChatGPT → ChatGPT archive le prochain échange avec un nouvel identifiant → rafraîchir et réécouter. Les scènes déjà écoutées sont indiquées dans la session du navigateur. Le MJ peut copier une consigne pour continuer ou proposer la fin du tour de table, sans déclencher automatiquement de vote ni de nuit.
 
-### Sept personnages, voix Gemini et secours local
+### Casting de 15 PNJ, chacun avec une vraie voix française Phonon
 
-- **Gemini 3.8 Flash-Lite TTS** : sept voix distinctes pour les sept PNJ, plus une voix de narrateur. Les personnages gardent leur voix au fil des scènes ; les paroles du joueur sont visibles mais jamais synthétisées.
-- **Clé protégée** : créer un secret GitHub Actions nommé **`GEMINI_API_KEY`**, sans inscrire la clé dans les fichiers de ce dépôt ni dans le JavaScript public. Le générateur Python ne s'exécute que sur le runner GitHub, après archivage des dialogues.
-- **Lecture dans l'application** : ouvrir « Mes parties » → « Actualiser » → choisir la scène → sélectionner « ✨ Gemini » → « ▶ Écouter ». Aucun dialogue ne se déclenche sans le clic du MJ. Les fichiers MP3 générés sont publiés dans l'artefact GitHub Pages, **jamais ajoutés à l'historique Git**.
-- **Coûts** : l'offre gratuite Gemini 3.8 Flash-Lite TTS est soumise à des quotas et sa disponibilité Preview peut évoluer. Utiliser un projet Google AI Studio sans facturation pour éviter tout coût. Aucune migration payante automatique. En cas de quota, d'absence de clé ou de modèle supprimé, **voix françaises du navigateur** (ou **Piper**) restent disponibles.
-- **Stockage maîtrisé** : au maximum trois scènes récentes par partie dans le site, un cache réutilisable sur les exécutions GitHub Actions et des MP3 légers. Les scènes anciennes peuvent toujours être lues avec les voix locales.
+- **15 personnages permanents**, sélectionnables dans l'onglet Préparer (3 à 15 PNJ, 7 par défaut) : Rose, Salomé, Inès, Jade, Mila, Clémence, Iris, Zoé, Agathe, Hugo, Marin, Baptiste, Nils, Léon, Octave.
+- **15 timbres Phonon différents**, issus du catalogue officiel Gradium (9 féminins, 6 masculins), attribués de manière fixe aux habitants, indépendamment de leurs rôles ou de leur camp secret. Le narrateur réutilise une des 15 voix ; Alex parle réellement.
+- **Phonon 40M FR est prioritaire** : les répliques publiques sont transformées en MP3 lors de GitHub Actions. Les MP3 ne sont publiés que dans GitHub Pages et sont mis en cache dans Actions, **jamais commités**.
+- Pour activer : accepter les conditions du modèle `gradium/phonon-40m-fr` sur Hugging Face, puis créer un secret GitHub **`HF_TOKEN`** en lecture. **Phonon français est sous licence CC BY-NC 4.0 (non commercial)**.
+- **Secours** : Gemini (`GEMINI_API_KEY` déjà pris en charge), puis eSpeak-ng local, puis voix du navigateur. Aucune lecture automatique ; le MJ clique sur **▶ Écouter**.
+- **Limites** : uniquement les scènes déjà validées, cache de 3 scènes récentes et plafond de 20 nouveaux clips Phonon par déploiement. Les requêtes Gemini restent soumises à leurs quotas si la génération Phonon échoue.
 
-**Mise en route et dépannage : [docs/audio-gemini.md](docs/audio-gemini.md).**
+**Guide complet : [Configuration Phonon et attribution des 15 voix](docs/audio-phonon.md).**
 
 La publication GitHub Pages peut prendre un court délai après les commits. L'application est en lecture seule ; toutes les décisions et écritures du jeu restent dans ChatGPT avec l’accord du MJ.

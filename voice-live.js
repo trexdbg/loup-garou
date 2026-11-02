@@ -20,10 +20,14 @@
   let active = null;
   const AudioCtx = window.AudioContext || window.webkitAudioContext;
   let endpoint = "";
+  let piperEnabled = true;
   fetch("./tts-config.json?v=" + Date.now(), { cache: "no-store" })
     .then(res => res.ok ? res.json() : null)
     .then(config => {
-      if (config && config.enabled === true && /^https:\/\/[a-z0-9.-]+$/i.test(config.worker_url || "")) {
+      if (config && config.provider === "piper_local") {
+        piperEnabled = config.enabled === true;
+        if (active && active.qualityLabel) active.qualityLabel.textContent = "✨ Voix neuronales françaises gratuites (Piper) : premier chargement volumineux, génération sur cet appareil.";
+      } else if (config && config.enabled === true && /^https:\/\/[a-z0-9.-]+$/i.test(config.worker_url || "")) {
         endpoint = config.worker_url.replace(/\/$/, "");
         if (active && active.qualityLabel) active.qualityLabel.textContent = "✨ Mode voix neuronales activé (ElevenLabs) : une vraie voix française par personnage, si le serveur est configuré.";
       }
@@ -92,15 +96,15 @@
       id, closed: false, enabled: false, busy: false, loading: false,
       loaded: false, rows: [], queue: [], lastSeq: savedSeq,
       maxQueued: savedSeq, interval: null,
-      audioCtx: null, source: null, abort: null, generation: 0
+      audioCtx: null, source: null, localHandle: null, abort: null, generation: 0, piperUnavailable: false
     };
     const box = add(mount, "section", null, "live-voice");
-    state.qualityLabel = add(box, "p", endpoint ? "✨ Voix neuronales disponibles." : "Voix du navigateur actuellement : amélioration sonore limitée. Un serveur de synthèse neuronale peut être activé pour des voix beaucoup plus humaines.", "fine");
+    state.qualityLabel = add(box, "p", "✨ Voix neuronales gratuites Piper : deux timbres français de base, adaptés aux personnages. Le premier lancement peut télécharger environ 130 Mo de modèles. Sans abonnement ni paiement. Une voix locale classique prend le relais en cas d’échec.", "fine");
     add(box, "h4", "🎭 Voix automatiques des habitants");
     add(box, "p", "Les voix sont générées par synthèse vocale, et non enregistrées par des comédiens.", "fine");
     add(box, "p", "Un seul démarrage audio, puis les nouvelles répliques publiques sont lues automatiquement au fur et à mesure de leur publication sur GitHub.", "fine");
     const actions = add(box, "div", null, "live-voice-buttons");
-    const start = add(actions, "button", "▶ Activer les voix", "primary");
+    const start = add(actions, "button", "▶ Démarrer les voix gratuites", "primary");
     start.type = "button";
     const pause = add(actions, "button", "⏸ Mettre en pause", "secondary");
     pause.type = "button";
@@ -132,6 +136,7 @@
         state.busy = false;
         state.source = null;
         state.abort = null;
+        state.localHandle = null;
         state.lastSeq = Math.max(state.lastSeq, item.seq);
         saveSeq();
         next();
@@ -165,6 +170,41 @@
         };
         try { synth.speak(utterance); }
         catch (_) { utterance.onerror(); }
+      }
+      if (piperEnabled && !state.piperUnavailable && state.audioCtx && window.LG_PIPER && window.LG_PIPER.supported()) {
+        setStatus("✨ " + speaker + " · préparation de la voix gratuite (premier chargement parfois long)");
+        let finished = false;
+        let timer = null;
+        function failure() {
+          if (finished) return;
+          finished = true;
+          if (timer !== null) clearTimeout(timer);
+          if (state.closed || !state.enabled || generation !== state.generation) return;
+          state.piperUnavailable = true;
+          setStatus("Piper indisponible sur cet appareil · retour automatique aux voix classiques");
+          speakLocal();
+        }
+        // Un délai maximum évite de bloquer une partie sur mobile.
+        timer = setTimeout(failure, 120000);
+        window.LG_PIPER.synthesize(item.texte, speaker, progress => {
+          if (state.enabled && generation === state.generation) {
+            setStatus("✨ " + speaker + " · téléchargement voix : " + progress.percentage + " %");
+          }
+        }).then(blob => {
+          if (finished || state.closed || !state.enabled || generation !== state.generation) return;
+          return window.LG_PIPER.play(blob, speaker, state.audioCtx, () => {
+            finished = true;
+            if (timer !== null) clearTimeout(timer);
+            finish();
+          }, failure).then(handle => {
+            if (finished || state.closed || !state.enabled || generation !== state.generation) handle?.stop();
+            else {
+              state.localHandle = handle;
+              setStatus("✨ " + speaker + " · voix neuronale gratuite");
+            }
+          });
+        }).catch(failure);
+        return;
       }
       if (!endpoint || !state.audioCtx) {
         speakLocal();
@@ -239,6 +279,8 @@
       state.generation++;
       if (state.abort) state.abort.abort();
       state.abort = null;
+      if (state.localHandle) { try { state.localHandle.stop(); } catch (_) {} }
+      state.localHandle = null;
       if (state.source) { try { state.source.onended = null; state.source.stop(); } catch (_) {} }
       state.source = null;
       if (speechAvailable) synth.cancel();
@@ -277,11 +319,9 @@
       if ((!speechAvailable && !AudioCtx) || !state.rows.length) return;
       const tail = state.rows.slice(-3);
       if (!tail.length) return;
-      if (speechAvailable) synth.cancel();
-      state.busy = false;
+      stop();
       state.lastSeq = Math.max(0, tail[0].seq - 1);
       state.maxQueued = state.lastSeq;
-      state.queue = [];
       saveSeq();
       startVoices();
     });

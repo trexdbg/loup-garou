@@ -1,19 +1,19 @@
 /* Lecture progressive des dialogues publics — aucun rôle/secret côté navigateur.
-   Synthèse vocale à la volée, sans créer ni stocker de MP3.
+   Synthèse vocale locale ou MP3 éphémères via serveur sécurisé, jamais dans Git.
    Un geste du MJ active la voix pour respecter les restrictions audio mobiles. */
 (() => {
   "use strict";
   const base = "https://raw.githubusercontent.com/trexdbg/loup-garou/main/";
   const speakers = ["Narrateur", "Agathe", "Basile", "Clémence", "Gaston", "Iris", "Malo", "Rosalie"];
   const profiles = {
-    Narrateur: { pitch: 0.90, rate: 0.89 },
-    Agathe: { pitch: 1.17, rate: 1.00 },
-    Basile: { pitch: 1.02, rate: 1.12 },
-    "Clémence": { pitch: 1.14, rate: 0.94 },
-    Gaston: { pitch: 0.76, rate: 0.88 },
-    Iris: { pitch: 1.08, rate: 0.93 },
-    Malo: { pitch: 0.86, rate: 0.96 },
-    Rosalie: { pitch: 0.99, rate: 0.90 }
+    Narrateur: { pitch: 0.97, rate: 0.94 },
+    Agathe: { pitch: 1.07, rate: 1.01 },
+    Basile: { pitch: 1.00, rate: 1.07 },
+    "Clémence": { pitch: 1.04, rate: 0.98 },
+    Gaston: { pitch: 0.93, rate: 0.94 },
+    Iris: { pitch: 1.03, rate: 0.99 },
+    Malo: { pitch: 0.97, rate: 0.98 },
+    Rosalie: { pitch: 1.00, rate: 0.95 }
   };
   const validType = new Set(["dialogue_pnj", "dialogue", "replique", "narration", "narration_publique"]);
   const speechAvailable = !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
@@ -25,6 +25,7 @@
     .then(config => {
       if (config && config.enabled === true && /^https:\/\/[a-z0-9.-]+$/i.test(config.worker_url || "")) {
         endpoint = config.worker_url.replace(/\/$/, "");
+        if (active && active.qualityLabel) active.qualityLabel.textContent = "✨ Mode voix neuronales activé (ElevenLabs) : une vraie voix française par personnage, si le serveur est configuré.";
       }
     }).catch(() => {});
 
@@ -51,7 +52,17 @@
     if (!speechAvailable) return [];
     return window.speechSynthesis.getVoices()
       .filter(voice => /^fr([-_]|$)/i.test(voice.lang || ""))
-      .sort((a, b) => (a.name + a.voiceURI).localeCompare(b.name + b.voiceURI));
+      .sort((a, b) => {
+        function rank(v) {
+          const name = (v.name || "").toLowerCase();
+          let score = 0;
+          if (/natural|premium|enhanced|neural|online|google|cloud/.test(name)) score += 12;
+          if (/french|français|france/.test(name)) score += 2;
+          if (v.localService === false) score += 4;
+          return score;
+        }
+        return rank(b) - rank(a) || (a.name + a.voiceURI).localeCompare(b.name + b.voiceURI);
+      });
   }
 
   function voiceFor(speaker) {
@@ -84,6 +95,7 @@
       audioCtx: null, source: null, abort: null, generation: 0
     };
     const box = add(mount, "section", null, "live-voice");
+    state.qualityLabel = add(box, "p", endpoint ? "✨ Voix neuronales disponibles." : "Voix du navigateur actuellement : amélioration sonore limitée. Un serveur de synthèse neuronale peut être activé pour des voix beaucoup plus humaines.", "fine");
     add(box, "h4", "🎭 Voix automatiques des habitants");
     add(box, "p", "Un seul démarrage audio, puis les nouvelles répliques publiques sont lues automatiquement au fur et à mesure de leur publication sur GitHub.", "fine");
     const actions = add(box, "div", null, "live-voice-buttons");

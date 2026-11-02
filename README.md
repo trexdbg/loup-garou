@@ -12,12 +12,12 @@ Si la page est absente, ouvrir Settings → Pages → Source → GitHub Actions 
 
 ## Comment jouer
 
-1. Dans l'onglet **Préparer**, remplir les paramètres : scénario libre ou existant, joueur, rôle choisi ou aléatoire, durée, nombre de PNJ, sélection des cartes, difficulté, ambiance, options de règles et aides au MJ.
+1. Dans l'onglet **Préparer**, choisir un mode **Classique**, **Avancé** ou **Expert**, puis remplir les paramètres : scénario, joueur, rôle choisi ou aléatoire, durée, nombre de PNJ, cartes autorisées, ambiance et aides au MJ.
 2. Cliquer sur **Générer l'identifiant et le JSON**. Exemple d'ID : `LG-20261101-010203040506`. Cet ID n'est encore qu'une proposition locale : il ne crée pas directement de dossier GitHub.
 3. Cliquer sur **Copier pour ChatGPT** (recommandé) puis coller le texte dans **une conversation du projet ChatGPT Loup garou**. Le prompt inclut le JSON et le protocole de création.
 4. ChatGPT retrouve l'ID, vérifie qu'il n'existe pas, crée le répertoire `parties/<ID>/` via la connexion GitHub **si celle-ci est disponible**, met à jour `parties/index.json`, prépare uniquement **le prologue**, puis attend le MJ.
 5. La conversation ChatGPT devient le **jeu**. L'enfant parle librement ; ChatGPT joue les PNJ, propose les scènes et rappelle les règles au MJ. Chaque action ou transition significative doit être validée par le MJ avant archivage.
-6. Dans l'onglet **Mes parties**, retrouver l'ID et lire narrations, journal et dialogues publiés dans GitHub. Un bouton **Actualiser** recharge les dernières données.
+6. Dans l'onglet **Mes parties**, retrouver l'ID et lire narrations, journal et dialogues publiés dans GitHub. Le bouton **🗝️ Afficher le carnet secret du MJ** permet d'associer, consulter et importer localement les rôles des personnages. Un bouton **Actualiser** recharge les données publiques.
 7. Pour les **voix automatiques**, ouvrir la partie puis cliquer une seule fois sur « Activer les voix » (déblocage audio mobile). Chaque nouvelle réplique publique ajoutée par ChatGPT est ensuite détectée et prononcée avec la voix du personnage.
 
 **Le lecteur vocal vérifie les dialogues publics sur GitHub environ toutes les 6 secondes après activation : un message dans ChatGPT n'est pas audible avant son archivage effectif. Il n'existe pas de synchronisation directe automatique depuis une conversation ChatGPT vers un navigateur.** Les écritures ont lieu lors des interventions explicites de ChatGPT disposant du connecteur GitHub. GitHub Pages se republie après chaque commit sur `main` ; un léger délai de publication est normal. Pour consulter un fichier qui vient d'être créé mais n'est pas encore disponible dans Pages, le lecteur tente aussi la version GitHub publique.
@@ -26,7 +26,7 @@ Si la page est absente, ouvrir Settings → Pages → Source → GitHub Actions 
 
 | Élément | Responsabilité | N'effectue jamais |
 |---|---|---|
-| Application GitHub Pages | Génération du JSON et de l'ID, catalogue de 37 rôles, lecture des archives | Jeux de rôles, votes, choix des PNJ, écriture GitHub |
+| Application GitHub Pages | Génération du JSON et de l'ID, modes, catalogue de 37 rôles, carnet local MJ et lecture des archives | Jeux de rôles, votes, choix des PNJ, écriture GitHub |
 | ChatGPT | Prologue, interprétation des PNJ, dialogues, arbitrage proposé, écriture des fichiers autorisés | Remplacer les décisions du joueur ou les validations du MJ |
 | MJ humain | Décisions définitives, rythme, interprétation, règles spéciales et révélations | Obligation de suivre une action suggérée |
 | GitHub | Historique, fichiers publics de partie et index de consultation | Exécuter la partie lui-même |
@@ -48,6 +48,37 @@ parties/
 
 Les narrations futures ne sont jamais écrites d'avance. Lors du lancement, seul le prologue est créé. À chaque étape suivante, le MJ choisit et ChatGPT ajoute seulement ce qui s'est passé.
 
+## Modes de jeu (personnalisables)
+
+| Mode | Rôles proposés | Fonctionnement |
+|---|---|---|
+| **Classique** | Simple Villageois, Loup-Garou, Voyante, Sorcière, Chasseur, Cupidon, Petite Fille | Parties accessibles, peu d'interactions difficiles à arbitrer. |
+| **Avancé** | Classique + Voleur, Ancien, Bouc Émissaire, Idiot du Village, Salvateur, Corbeau, Chevalier à l'Épée Rouillée, Renard, Montreur d'Ours, Grand Méchant Loup | Plus de pouvoirs, stratégies et contraintes de voisinage. |
+| **Expert** | Les 37 rôles disponibles, incluant loups spéciaux, indépendants, changements de camp et cartes de l'édition anniversaire | Les interactions complexes sont validées par le MJ, jamais inventées par l'application. |
+
+Un mode initialise la **liste autorisée** des rôles, mais n'impose pas que toutes les cartes soient distribuées. On peut cocher/décocher individuellement les cartes avant de générer le JSON. ChatGPT compose une répartition adaptée au nombre de personnages et au nombre de Loups demandé, puis attend l'accord du MJ.
+
+## Carnet secret du MJ dans l'application
+
+1. Ouvrir une partie depuis **Mes parties**, puis cliquer sur **Afficher le carnet secret du MJ**. Les noms du joueur et des habitants proviennent des données *publiques* de `partie.json` lorsqu'ils y figurent.
+2. Assigner chaque rôle avec les menus déroulants, ou demander à ChatGPT le **JSON privé des rôles** après leur validation, puis le coller dans le champ d'import. Format attendu :
+
+```json
+{
+  "id": "LG-20261101-0123456789AB",
+  "roles": [
+    {"personnage": "Alex", "role": "renard"},
+    {"personnage": "Agathe", "role": "loup"},
+    {"personnage": "Basile", "role": "voyante"}
+  ]
+}
+```
+
+3. Les cartes sont présentées avec les images officielles **uniquement si elles sont vérifiées** par `role-art.js`. La liste peut être modifiée manuellement par le MJ. Un personnage dont le rôle n'est pas connu reste « Rôle inconnu ».
+4. Le carnet est **masqué par défaut** et se conserve en mémoire de session du navigateur. La case facultative « Conserver sur cet appareil » utilise le stockage local non chiffré : **ne pas l'activer sur un appareil partagé**. On peut exporter un fichier privé et effacer les rôles locaux. Masquer systématiquement le panneau avant de passer l'écran à l'enfant.
+
+**Important :** l'import entre ChatGPT et l'application est **manuel**, pas une synchronisation automatique. Les rôles secrets ne sont ni téléchargés depuis GitHub ni ajoutés aux fichiers publics. Le simple fait de cacher un élément sur un site public ne constitue pas une authentification : ce carnet est une aide d'affichage locale sur l'appareil du MJ, pas un coffre-fort.
+
 ### ⚠️ Confidentialité des rôles et secrets du MJ
 
 **Le dépôt `trexdbg/loup-garou` est public.** Cacher un fichier sur GitHub Pages n'empêche pas sa lecture dans le dépôt ou son historique. Les rôles secrets du joueur et des PNJ, indices futurs, solutions et notes MJ doivent rester dans la conversation ChatGPT privée ou dans un autre dépôt privé.
@@ -58,7 +89,8 @@ L'interface Pages publie uniquement `partie.json`, `journal.md`, `narrations.md`
 
 ## Ressources conservées
 
-- [roles.js](roles.js) : catalogue des **37 rôles** et leurs résumés.
+- [roles.js](roles.js) + [modes.js](modes.js) : catalogue des **37 rôles**, presets Classique / Avancé / Expert et leurs résumés.
+- [mj-private.js](mj-private.js) : carnet de rôles privé, assignation locale par personnage, import/export du JSON MJ.
 - [role-art.js](role-art.js) : association vérifiée aux illustrations authentiques et fiches wiki ; pas d'image empruntée à un autre rôle.
 - [stories.js](stories.js) : cinq trames facultatives (ChatGPT peut en créer de nouvelles).
 - [launcher.js](launcher.js) + [launcher.css](launcher.css) + [index.html](index.html) : nouvelle application de configuration / consultation.

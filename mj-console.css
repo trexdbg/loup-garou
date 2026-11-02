@@ -56,3 +56,12 @@
  .mj-control-top h2{font-size:1.45rem}
 }
 @media(prefers-reduced-motion:reduce){.mj-control-room *{scroll-behavior:auto!important}}
+
+.mj-secret-timeline{background:#1b2a34;border:1px solid #a68e63;border-radius:12px;padding:15px;margin:14px 0}
+.mj-secret-timeline h4{margin:0 0 12px;color:#f4d9aa}
+.mj-night-ledger{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.mj-night-ledger-item{background:#111e2d;border:1px solid #506174;border-radius:9px;padding:12px;min-width:0}
+.mj-night-ledger-item small{display:block;color:#c2d0df;font-size:.72rem;font-weight:700;letter-spacing:.04em;margin-bottom:6px}
+.mj-night-ledger-item strong{display:block;font-weight:700;line-height:1.45;font-size:.88rem;overflow-wrap:anywhere}
+.mj-secret-timeline .fine{margin:12px 0 0;color:#eed2ab}
+@media(max-width:610px){.mj-night-ledger{grid-template-columns:1fr}}

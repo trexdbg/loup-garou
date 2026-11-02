@@ -88,3 +88,13 @@ Nouvelle partie initialisée. En attente de la validation du MJ après le prolog
 - **Aucun tir effectué** et aucune victime supplémentaire. Le MJ doit valider explicitement la décision avant toute nouvelle élimination.
 - Scène publique `reveil_jour_2_chasseur` archivée (séquences 99 à 108). Jour 2 ouvert mais débats et vote suspendus jusqu'à résolution du Chasseur.
 - Les observations de la Voyante et les pouvoirs des autres personnages restent secrets.
+
+## Jour 2 — Tir confirmé du Chasseur
+
+- Le MJ valide explicitement le tir du Chasseur Martin sur Éloi, avant tout nouveau débat.
+- **Éloi est éliminé** ; sa figurine LEGO est retirée de la table avec celles de Hugo et Martin.
+- Sa carte est publiquement révélée : **Loup-Garou**. Ce rôle n'est plus secret pour les habitants.
+- La scène publique `tir_chasseur_martin_jour_2` est archivée dans `dialogues.ndjson`, séquences 109 à 116.
+- Il reste cinq habitants vivants : André, Célia, Rose, Alice et Odette, parmi lesquels un seul Loup-Garou est encore caché.
+- Le tir est définitivement résolu, sans second tir, sans vote ni nouveau pouvoir.
+- Le jour 2 reste en attente du MJ ; les débats ne sont **pas** ouverts.

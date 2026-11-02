@@ -177,6 +177,18 @@ def main() -> None:
     outcome = generate(root, Path(args.site), Path(args.cache),
                        max(0, min(args.max_lines, 30)),
                        max(1, min(args.max_scenes, 5)), has_token)
+    # A public, non-sensitive status lets the MJ confirm that genuine Phonon
+    # clips were produced, without ever exposing the access token or logs.
+    status = {"engine": "phonon", "model": MODEL,
+              "generated": outcome["generated"],
+              "available": outcome["available"],
+              "ready": outcome["available"] > 0}
+    target = Path(args.site)
+    target.mkdir(parents=True, exist_ok=True)
+    (target / "phonon-status.json").write_text(
+        json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if has_token and not status["ready"]:
+        print("::warning::HF_TOKEN est présent, mais aucun MP3 Phonon n'est disponible. Vérifier l'accès au modèle et les logs de l'étape Phonon.")
     print("Phonon ready: " + json.dumps(outcome) + ". HF access: " +
           ("configured" if has_token else "not configured (fallback enabled)"))
 

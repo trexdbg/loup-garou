@@ -85,3 +85,15 @@ Le maître du jeu retourne la carte de Hugo devant les sept survivants : **Simpl
 **Éloi :** « Il reste sept habitants. Soyons vigilants. »
 
 La nuit 2 ne commencera qu'après l'accord du maître du jeu.
+
+## Nuit 2 — Le village s'endort
+
+Le soir tombe sur Thiercelieux. Les sept habitants se séparent après la révélation de la carte de Hugo.
+
+**Alice :** « Nous nous sommes trompés sur Hugo. J'espère que demain nous serons plus prudents. »
+
+**Rose :** « Il est temps de rentrer. Bonne nuit à tous. »
+
+**Narrateur :** « Le village s'endort... Tout le monde ferme les yeux. La deuxième nuit commence. »
+
+Aucun rôle nocturne n'est appelé avant une nouvelle instruction du MJ.

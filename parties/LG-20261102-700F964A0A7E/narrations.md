@@ -31,3 +31,23 @@ Mila finit par demander : « Qui veut commencer à parler ? »
 **Iris :** « Je n'ai rien vu de suspect chez Mila, mais je peux me tromper. »
 
 **Mila :** « Alors, Alex, explique-moi. Qu'est-ce qui te fait penser que je suis un Loup-Garou ? »
+
+## Tour de table — Alex lance le débat
+
+**Alex :** « C'est juste pour lancer le débat et voir qui se dévoile. On ne peut torturer personne, donc voilà... »
+
+**Mila :** « Ah ! Tu voulais simplement voir ma réaction ? J'ai cru que tu étais sûr de toi ! »
+
+**Clémence :** « C'est une idée. Mais on peut aussi accuser au hasard pour détourner les soupçons. »
+
+**Octave :** « Attendez ! Vous essayez de nous piéger ? Moi, je n'ai rien à cacher ! »
+
+**Basile :** « Alors pourquoi te défends-tu déjà, Octave ? Personne ne t'a accusé ! »
+
+**Iris :** « Justement, Basile, tu as encouragé l'accusation contre Mila tout de suite. Pourquoi ? »
+
+**Rose :** « On peut se contenter de poser des questions. Écoutons chacun. »
+
+**Nils :** « Basile, à ton tour : qui soupçonnes-tu ? »
+
+**Basile :** « Moi ? Peut-être Octave. Il s'agite beaucoup depuis le début ! »

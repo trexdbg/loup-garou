@@ -8,7 +8,7 @@
   "progression": {
     "jour": 0,
     "nuit": 0,
-    "scene": "tour_de_table_01"
+    "scene": "tour_de_table_02"
   },
   "joueur": {
     "prenom": "Alex",
@@ -61,14 +61,14 @@
     "retire": [],
     "valide_par_mj": true
   },
-  "resume_public": "Alex soupçonne Mila d'être un Loup-Garou. Elle nie. Les autres habitants débattent, puis la parole revient à Alex.",
-  "aide_mj_publique": "Attendre la réponse d'Alex. Aucun vote ni passage à la nuit sans validation expresse du MJ.",
-  "dernier_evenement_public": "Alex accuse Mila. Mila se défend et demande pourquoi Alex la soupçonne.",
-  "scene_courante_id": "tour_de_table_01",
+  "resume_public": "Alex explique qu'il accusait Mila pour lancer le débat et provoquer des réactions. Les habitants discutent, Iris questionne Basile, qui soupçonne Octave.",
+  "aide_mj_publique": "Faire écouter la scène Alex lance le débat, puis attendre la prochaine prise de parole d'Alex. Pas de vote ni de nuit sans accord du MJ.",
+  "dernier_evenement_public": "Après la réponse d'Alex, les soupçons se déplacent vers Basile et Octave.",
+  "scene_courante_id": "tour_de_table_02",
   "tour_de_table": {
     "statut": "en_cours",
-    "dernier_echange": "tour_de_table_01",
-    "dialogues_enregistres": 16,
+    "dernier_echange": "tour_de_table_02",
+    "dialogues_enregistres": 25,
     "attendre_reponse_alex": true,
     "passage_vote_apres_validation_mj": true
   }

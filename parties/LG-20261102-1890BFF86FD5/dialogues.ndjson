@@ -78,3 +78,9 @@
 {"seq":78,"scene_id":"elimination_jour_1","scene_label":"Jour 1 — Verdict du village","type":"dialogue_pnj","locuteur":"Alice","texte":"J'espère que nous avons pris la bonne décision.","public":true}
 {"seq":79,"scene_id":"elimination_jour_1","scene_label":"Jour 1 — Verdict du village","type":"dialogue_pnj","locuteur":"Rose","texte":"Sept habitants restent. Ne prenons pas cette décision à la légère.","public":true}
 {"seq":80,"scene_id":"elimination_jour_1","scene_label":"Jour 1 — Verdict du village","type":"narration","locuteur":"Narrateur","texte":"Le jour s'achève. Le maître du jeu décide quand commencer la nuit suivante.","public":true}
+{"seq":81,"scene_id":"revelation_hugo_jour_1","scene_label":"Jour 1 — Carte de Hugo révélée","type":"narration","locuteur":"Narrateur","texte":"Le maître du jeu retourne la carte de Hugo : Simple Villageois. Tout le monde découvre son rôle.","public":true}
+{"seq":82,"scene_id":"revelation_hugo_jour_1","scene_label":"Jour 1 — Carte de Hugo révélée","type":"dialogue_pnj","locuteur":"Alice","texte":"Nous avons éliminé un innocent !","public":true}
+{"seq":83,"scene_id":"revelation_hugo_jour_1","scene_label":"Jour 1 — Carte de Hugo révélée","type":"dialogue_pnj","locuteur":"Martin","texte":"J'ai eu tort de voter contre lui.","public":true}
+{"seq":84,"scene_id":"revelation_hugo_jour_1","scene_label":"Jour 1 — Carte de Hugo révélée","type":"dialogue_pnj","locuteur":"Rose","texte":"La prochaine fois, écoutons mieux les arguments.","public":true}
+{"seq":85,"scene_id":"revelation_hugo_jour_1","scene_label":"Jour 1 — Carte de Hugo révélée","type":"dialogue_pnj","locuteur":"Célia","texte":"La parole ne suffit pas à prouver une culpabilité.","public":true}
+{"seq":86,"scene_id":"revelation_hugo_jour_1","scene_label":"Jour 1 — Carte de Hugo révélée","type":"dialogue_pnj","locuteur":"Éloi","texte":"Il reste sept habitants. Soyons vigilants.","public":true}

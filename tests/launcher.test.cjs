@@ -51,23 +51,27 @@ test("le JSON prepare l'histoire mais ne la joue pas localement", () => {
   assert.equal(config.premiere_execution.attendre_validation_mj_apres_prologue,true);
   assert.equal(config.publication.chemin,"parties/" + config.id);
   assert.equal(config.assistant_mj.jamais_reveler_secrets_sans_validation,true);
-  assert.equal(config.publication.secrets_mj,"NE_JAMAIS_PUBLIER_DANS_CE_DEPOT_PUBLIC");
+  assert.match(config.publication.secrets_mj,/secrets_mj\.json/);
+  assert.equal(config.aventure.connaissance_loups_initiale,true);
+  assert.equal(config.aventure.enigme_annexe_par_defaut,false);
   nodes.roleChoice.value="voyante";
   assert.equal(api.config().joueur.role.id,"voyante");
   nodes.roleChoice.value="chasseur";
   assert.throws(() => api.config(), /rôle choisi/);
 });
 
-test("la consigne GPT impose une creation limitee au prologue et une copie publique expurgee", () => {
+test("la consigne GPT impose le jeu classique sans énigme annexe", () => {
   const {api} = launcher();
   const prompt = api.promptFor(api.config());
   assert.match(prompt,/UNIQUEMENT le prologue/);
-  assert.match(prompt,/COPIE EXPURGÉE/);
+  assert.match(prompt,/des Loups-Garous se cachent dans le village/);
+  assert.match(prompt,/secrets_mj\.json/);
+  assert.match(prompt,/TRÈS COURT/);
   assert.match(prompt,/attends l'accord du MJ/);
   assert.match(prompt,/n'affirme jamais que la synchronisation est faite/);
 });
 
-test("l'interface est statique, la publication est publique sans fichiers de secrets", () => {
+test("l'interface est statique et l'index des anciennes parties est vide", () => {
   const html = read("index.html");
   const workflow = read(".github/workflows/pages.yml");
   const index = JSON.parse(read("parties/index.json"));
@@ -78,5 +82,6 @@ test("l'interface est statique, la publication est publique sans fichiers de sec
   assert.doesNotMatch(html,/src="\.\/app\.js"/);
   assert.match(workflow,/launcher\.css/);
   assert.match(workflow,/for filename in partie\.json narrations\.md journal\.md dialogues\.ndjson/);
-  assert.ok(index.parties.some(x => x.id==="2026-11-01-001"));
+  assert.deepEqual(index.parties,[]);
+  assert.match(html,/value="classique_loup_garou" selected/);
 });

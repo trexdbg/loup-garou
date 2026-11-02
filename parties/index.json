@@ -1,28 +1,4 @@
 {
   "schema_version": 1,
-  "parties": [
-    {
-      "id": "2026-11-01-001",
-      "cree_le": "2026-11-01",
-      "titre": "Les douze coups du clocher — le treizième coup",
-      "statut": "en_attente_du_choix_du_role",
-      "phase": "mise_en_place"
-    },
-    {
-      "id": "LG-20261101-D163075F5461",
-      "cree_le": "2026-11-01",
-      "titre": "La Cloche qui a perdu sa voix",
-      "statut": "en_cours",
-      "phase": "dialogues_et_enquete",
-      "dossier": "parties/LG-20261101-D163075F5461"
-    },
-    {
-      "id": "LG-20261102-ECC258EF6F92",
-      "cree_le": "2026-11-02",
-      "titre": "La Huitième Lanterne",
-      "statut": "en_cours",
-      "phase": "dialogues_et_enquete",
-      "dossier": "parties/LG-20261102-ECC258EF6F92"
-    }
-  ]
+  "parties": []
 }

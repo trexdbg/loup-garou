@@ -54,16 +54,16 @@
               <select id="environment"><option value="village_thiercelieux">Village de Thiercelieux</option><option value="foret">Forêt et hameaux</option><option value="chateau">Château mystérieux</option><option value="village_montagne">Village de montagne</option><option value="autre">Inventé par ChatGPT</option></select>
             </label>
             <label>Type d'aventure
-              <select id="storyStyle"><option value="mystere_enquete" selected>Enquête et mystère</option><option value="classique_loup_garou">Loups-Garous traditionnel</option><option value="exploration">Exploration et aventure</option><option value="roleplay_dialogues">Dialogues et personnages</option><option value="mixte">Mélange de tous les styles</option></select>
+              <select id="storyStyle"><option value="classique_loup_garou" selected>Classique : nuit, soupçons et votes</option><option value="mystere_enquete">Enquête sur l’identité des Loups</option><option value="roleplay_dialogues">Davantage de bluff et dialogues</option><option value="mixte">Humour et tensions villageoises</option></select>
             </label>
           </div>
           <label class="wide-label">Une envie particulière pour cette histoire ?
-            <textarea id="themeFree" rows="3" maxlength="600" placeholder="Ex. : un village sous la neige, une vieille énigme familiale, une créature que personne n'a vraiment vue…"></textarea>
+            <textarea id="themeFree" rows="3" maxlength="600" placeholder="Ex. : village enneigé, habitants méfiants, débat tendu. Tous savent que les Loups-Garous sont parmi eux."></textarea>
           </label>
           <div class="scale-grid">
-            <label>Mystère <input type="range" id="intensity" min="1" max="5" value="4"><small>1 = léger · 5 = très intrigant</small></label>
+            <label>Suspense sur les identités <input type="range" id="intensity" min="1" max="5" value="3"><small>1 = léger · 5 = tendu</small></label>
             <label>Humour <input type="range" id="humor" min="1" max="5" value="3"><small>1 = sérieux · 5 = drôle</small></label>
-            <label>Difficulté <input type="range" id="difficulty" min="1" max="5" value="3"><small>1 = aidé · 5 = difficile</small></label>
+            <label>Difficulté des débats <input type="range" id="difficulty" min="1" max="5" value="2"><small>1 = simple · 5 = bluff difficile</small></label>
             <label>Frissons <input type="range" id="fear" min="1" max="5" value="2"><small>Pas de violence graphique</small></label>
           </div>
         </section>

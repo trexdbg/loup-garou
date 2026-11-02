@@ -49,6 +49,10 @@ parties/
 
 Les narrations futures ne sont jamais écrites d'avance. Lors du lancement, seul le prologue est créé. À chaque étape suivante, le MJ choisit et ChatGPT ajoute seulement ce qui s'est passé.
 
+### Narration des nouvelles parties — Loup-Garou traditionnel
+
+**Dès le début, tous les habitants savent que des Loups-Garous se cachent au village.** Le seul grand mystère est leur identité. La partie consiste à échanger, mentir ou bluffer, utiliser les pouvoirs nocturnes, débattre puis voter, étape par étape avec validation du MJ. Prologue de 3 à 6 phrases ; aucun puzzle, lanterne magique, prophétie, énigme de cloche, objet à récupérer ni intrigue parallèle. L'ambiance peut varier, mais jamais le cœur du jeu. Le configurateur ne propose plus d'anciens scénarios d'enquête annexes.
+
 ## Modes de jeu (personnalisables)
 
 | Mode | Rôles proposés | Fonctionnement |

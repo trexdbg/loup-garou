@@ -1,9 +1,7 @@
 # Archives de parties
 
-| ID | Date | Aventure | Statut | Répertoire |
-|---|---|---|---|---|
-| 2026-11-01-001 | 01/11/2026 | Les douze coups du clocher — le treizième coup | En attente du rôle du joueur | [Ouvrir](2026-11-01-001/) |
+Aucune partie actuellement archivée.
 
-Une partie se **joue dans la conversation ChatGPT**, sous le contrôle du maître du jeu humain. Ce dossier GitHub sert **uniquement d'archive** : paramètres, journaux, dialogues, notes confidentielles du MJ, narrations et fichiers audio. Il n'est pas le moteur du jeu.
+Les nouvelles parties sont créées et suivies dans ChatGPT, sous contrôle du MJ humain. La liste est conservée dans [`index.json`](index.json).
 
-Les fichiers de dialogue se complètent au fil des échanges lorsque l'archivage GitHub est effectué; aucune synchronisation en arrière-plan n'est supposée.
+Le jeu démarre avec la présence des Loups-Garous connue de tous. Les identités sont cachées et se découvrent par le dialogue, les pouvoirs et les votes.

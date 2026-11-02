@@ -45,8 +45,8 @@
 
   function populate() {
     const story = $("scenario");
-    story.append(new Option("✨ Inventée par ChatGPT (recommandé)", "originale"));
-    for (const s of stories) story.append(new Option(s.icon + " " + s.title, s.id));
+    // Partie classique uniquement : les habitants connaissent déjà la présence des Loups-Garous.
+    story.replaceChildren(new Option("🐺 Loups-Garous traditionnel — trouver les Loups", "originale"));
     const role = $("roleChoice");
     role.append(new Option("🎲 Tiré au sort par ChatGPT", "random"));
     for (const r of roles) role.append(new Option(r.icon + " " + r.name, r.id));
@@ -147,6 +147,9 @@
       },
       aventure: {
         scenario: story ? story.id : "originale",
+        connaissance_loups_initiale: true,
+        objectif_principal: "identifier_les_loups_par_dialogues_pouvoirs_et_votes",
+        enigme_annexe_par_defaut: false,
         scenario_reference: story ? story.title : null,
         titre_libre: clean($v("customTitle"), 100) || null,
         duree_minutes: num("duration", 20, 120),
@@ -229,6 +232,8 @@
       "PROJET LOUP GAROU — INITIALISATION D'UNE NOUVELLE PARTIE",
       "Voici la configuration produite par l'application. Lis son ID exact et utilise le dépôt GitHub " + repo + ".",
       "Tu es l'assistant du maître du jeu humain : tu incarnes les PNJ et proposes les scènes, mais le MJ valide les actions et décisions importantes.",
+      "RÈGLE FONDAMENTALE : dès le début tous les habitants savent que des Loups-Garous se cachent dans le village. Le seul grand mystère est LEUR IDENTITÉ. Le jeu est le Loup-Garou traditionnel, pas une quête ou une enquête fantastique.",
+      "NARRATION : commence par des discussions, soupçons, bluff, pouvoirs nocturnes, réveil, débats et vote. N’invente aucune lanterne magique, prophétie, cloche étrange, lettre codée, objet à récupérer ou énigme annexe. Les choix de décor et d’ambiance ne changent pas cette règle.",
       "1. Vérifie si parties/" + value.id + "/ existe déjà. S'il existe, demande au MJ s'il faut le reprendre, sans écraser ses données.",
       "2. Commence par proposer les personnages, leur distribution de rôles et le placement des LEGO ; attends l’accord explicite du MJ sur le rôle du joueur, les PNJ et l’ordre circulaire avant de rédiger le prologue. Une fois validé, crée parties/" + value.id + "/parametres.json (paramètres complets, y compris rôle fixé), partie.json (état visible par le joueur, incluant placement_table validé), secrets_mj.json (rôles validés et notes du MJ), narrations.md (UNIQUEMENT le prologue), journal.md et dialogues.ndjson (entrée initiale facultative). Ne dévoile aucun rôle secret dans les scènes destinées au joueur.",
       "3. Mets à jour parties/index.json pour référencer ce même ID, titre, date, statut, phase et dossier; n'écrase pas les autres parties.",
@@ -236,7 +241,7 @@
       "4 bis. Applique le niveau roles.mode (classique, avance ou expert) et les rôles autorisés ; si roles.liste_personnalisee est vraie, la sélection manuelle du MJ prime sur le préréglage. Compose une distribution cohérente pour le nombre de personnages, le total de Loups, les pouvoirs et les camps ; le MJ valide la répartition avant le prologue.",
       "4 bis bis. Propose au MJ un placement CIRCULAIRE des personnages avec exactement une figurine LEGO par personne (joueur inclus). Place 1 à 12 h, parcours horaire, noms et numéros de place. Attends la validation du MJ AVANT d'affirmer que les places sont fixées ; archive seulement l'ordre public validé dans partie.json au champ placement_table. Les cartes physiques restent cachées sous les figurines ; leurs attributions sont archivées uniquement dans secrets_mj.json, et jamais dans placement_table. Toutes les interactions de voisinage, dont le flair du Renard, doivent utiliser cet ordre réel.",
       "4 ter. Après validation des rôles, fournis au MJ dans la conversation PRIVÉE un JSON valide comme {\"id\":\"ID_PARTIE\",\"roles\":[{\"personnage\":\"Alex\",\"role\":\"renard\"}]} avec chaque personnage et son ID exact de rôle issu de roles.js. Archive aussi ce JSON dans secrets_mj.json sur GitHub, sans le faire apparaître dans l’interface joueur ; le MJ peut également le coller dans le carnet secret de l’application.",
-      "5. Après validation de la disposition réelle des LEGO et écriture sur GitHub, raconte le prologue et attends l'accord du MJ. Ne génère ni nuit complète, ni vote, ni dénouement par anticipation.",
+      "5. Après validation des LEGO et écriture sur GitHub, raconte un prologue TRÈS COURT (3 à 6 phrases) : les villageois savent déjà que des Loups se cachent parmi eux, ils se réunissent et se soupçonnent. Pas d’énigme annexe. Attends l’accord du MJ avant la première action puis la nuit ; ne simule ni nuit complète, ni vote, ni dénouement.",
       "6. Ensuite, au fil de nos échanges, écris seulement les nouveaux événements validés dans le dossier de cette partie et mets à jour l'index.",
       "7. Reste adapté à un joueur de 10 ans si c'est l'âge indiqué. Respecte les vraies cartes et demande au MJ en cas de règles ambiguës.",
       "Si tu ne peux pas écrire sur GitHub dans cette conversation, dis-le explicitement et fournis les fichiers à déposer : n'affirme jamais que la synchronisation est faite sans confirmation.",

@@ -12,6 +12,8 @@ Les champs déterminent l'âge du joueur, son prénom, le rôle (fixé ou tiré 
 
 ## 2. Initialisation par ChatGPT (une seule étape)
 
+**Règle de narration (2 novembre 2026) :** jouer aux Loups-Garous de Thiercelieux, pas à une enquête fantastique. Dès le départ, tous les habitants savent qu'il y a des Loups-Garous dans le village ; seule leur identité est secrète. Prologue de 3 à 6 phrases au maximum, sans lanterne magique, cloche inquiétante, lettre codée, quête, disparition indépendante ou autre énigme. La progression tourne autour des dialogues, soupçons, bluff, pouvoirs nocturnes, réveils et votes, sous arbitrage du MJ. Les préférences de décor, mystère et ambiance ne doivent pas détourner de ces mécaniques.
+
 1. Vérifier que `parties/<ID>/` n'existe pas. S'il existe, le considérer comme une reprise potentielle. Ne rien écraser sans validation du MJ.
 2. Lire les options du JSON, valider leurs contradictions éventuelles avec les règles officielles et demander arbitrage du MJ quand nécessaire.
 3. Dans la **conversation avec le MJ**, préparer les rôles des PNJ, leurs motivations, la solution possible et les événements futurs non dévoilés. Respecter le niveau `roles.mode`, le tableau `roles.autorises`, le nombre de personnages, les camps et le nombre cible de Loups. **Soumettre la répartition au MJ pour validation avant de continuer**. Conserver les identités stables au fil de la partie.
@@ -32,12 +34,12 @@ Exemple d'état public minimal dans `partie.json` :
 {
   "id": "LG-20261101-0123456789AB",
   "schema_version": 2,
-  "titre": "Le secret du vieux puits",
+  "titre": "Les Loups de Thiercelieux",
   "cree_le": "2026-11-01T20:00:00.000Z",
   "statut": "en_cours",
   "phase": "prologue",
   "progression": {"jour": 0, "nuit": 0, "scene": "prologue"},
-  "resume_public": "Un village cache une énigme.",
+  "resume_public": "Les habitants savent que des Loups-Garous se cachent parmi eux.",
   "aide_mj_publique": "Demander au joueur ce qu'il veut examiner.",
   "dernier_evenement_public": "Prologue préparé"
 }
@@ -54,7 +56,7 @@ Index conseillé `parties/index.json` :
     {
       "id": "LG-20261101-0123456789AB",
       "cree_le": "2026-11-01",
-      "titre": "Le secret du vieux puits",
+      "titre": "Les Loups de Thiercelieux",
       "statut": "en_cours",
       "phase": "prologue"
     }

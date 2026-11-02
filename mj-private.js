@@ -122,9 +122,15 @@
 
     function render() {
       list.replaceChildren();
-      for (const item of entries) {
+      const placement = window.LG_TABLE?.getOrder(id) || [];
+      const ordered = entries.slice().sort((a, b) => {
+        const ai = placement.indexOf(a.personnage), bi = placement.indexOf(b.personnage);
+        return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
+      });
+      for (const item of ordered) {
         const card = make("div", undefined, "mj-character-card");
-        const heading = make("strong", item.personnage, "mj-character-name");
+        const index = placement.indexOf(item.personnage);
+        const heading = make("strong", (index < 0 ? "" : "LEGO " + (index + 1) + " · ") + item.personnage, "mj-character-name");
         const select = make("select");
         select.setAttribute("aria-label", "Rôle de " + item.personnage);
         select.append(new Option("— Rôle inconnu —", ""));

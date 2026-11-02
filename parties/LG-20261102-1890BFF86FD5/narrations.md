@@ -55,3 +55,17 @@ André explique qu'il trouve Hugo bizarre et que Rose défend beaucoup de monde.
 Le village prépare les éventuels votes. Martin soupçonne Hugo ; Hugo et Célia questionnent Éloi. Rose demande de laisser chacun s'expliquer.
 
 Le scrutin n'est pas ouvert. Aucune voix n'est recueillie, et André reste libre de son choix.
+
+## Jour 1 — Le verdict
+
+Le maître du jeu annonce le dépouillement : Hugo reçoit cinq voix contre trois pour Éloi. Le village a tranché.
+
+**Hugo :** « Vous faites une erreur ! »
+
+Hugo est éliminé. Sa figurine quitte la table.
+
+**Alice :** « J'espère que nous avons pris la bonne décision. »
+
+**Rose :** « Sept habitants restent. Ne prenons pas cette décision à la légère. »
+
+Le village demeure au jour 1. Le MJ décidera du début de la nuit suivante.

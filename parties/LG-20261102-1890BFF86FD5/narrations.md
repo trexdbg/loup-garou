@@ -113,3 +113,21 @@ Aucun rôle nocturne n'est appelé avant une nouvelle instruction du MJ.
 **Narrateur :** « Sorcière, rendors-toi et ferme les yeux. »
 
 La nuit se poursuit. Aucun réveil ni résultat n'est annoncé sans l'accord du MJ.
+
+## Jour 2 — Le Chasseur
+
+*Au matin, le village découvre que Martin n'est plus parmi eux.*
+
+**Narrateur :** « Village, réveille-toi ! Martin est mort cette nuit ! »
+
+**Alice :** « Non, pas Martin ! Après Hugo, nous avons encore perdu quelqu'un ! »
+
+**Rose :** « Nous ne sommes plus que six. Il faut rester attentifs. »
+
+*Le maître du jeu retourne la carte de Martin devant tous : **Chasseur**.*
+
+**Narrateur :** « Le Chasseur peut tirer une dernière fois lorsqu'il meurt. »
+
+**Martin :** « Hier, je me suis trompé sur Hugo. Mais les explications d'Éloi m'inquiétaient déjà. »
+
+*Martin envisage de viser Éloi. Le tir reste suspendu à l'accord du maître du jeu. Aucun autre habitant n'est éliminé pour l'instant.*

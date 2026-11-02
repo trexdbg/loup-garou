@@ -72,3 +72,9 @@
 {"seq":72,"scene_id":"vote_jour_1_01","scene_label":"Jour 1 — Votes des habitants","type":"narration","locuteur":"Narrateur","texte":"André a fait connaître son choix au maître du jeu.","public":true}
 {"seq":73,"scene_id":"vote_jour_1_01","scene_label":"Jour 1 — Votes des habitants","type":"dialogue_joueur","locuteur":"André","texte":"Je vote contre Hugo.","public":true}
 {"seq":74,"scene_id":"vote_jour_1_01","scene_label":"Jour 1 — Votes des habitants","type":"narration","locuteur":"Narrateur","texte":"Les huit choix sont enregistrés. Le dépouillement et toute élimination restent suspendus à l'accord du maître du jeu.","public":true}
+{"seq":75,"scene_id":"elimination_jour_1","scene_label":"Jour 1 — Verdict du village","type":"narration","locuteur":"Narrateur","texte":"Le dépouillement est terminé. Hugo reçoit cinq voix, Éloi en reçoit trois.","public":true}
+{"seq":76,"scene_id":"elimination_jour_1","scene_label":"Jour 1 — Verdict du village","type":"narration","locuteur":"Narrateur","texte":"Le village a décidé : Hugo est éliminé et quitte la table.","public":true}
+{"seq":77,"scene_id":"elimination_jour_1","scene_label":"Jour 1 — Verdict du village","type":"dialogue_pnj","locuteur":"Hugo","texte":"Vous faites une erreur !","public":true}
+{"seq":78,"scene_id":"elimination_jour_1","scene_label":"Jour 1 — Verdict du village","type":"dialogue_pnj","locuteur":"Alice","texte":"J'espère que nous avons pris la bonne décision.","public":true}
+{"seq":79,"scene_id":"elimination_jour_1","scene_label":"Jour 1 — Verdict du village","type":"dialogue_pnj","locuteur":"Rose","texte":"Sept habitants restent. Ne prenons pas cette décision à la légère.","public":true}
+{"seq":80,"scene_id":"elimination_jour_1","scene_label":"Jour 1 — Verdict du village","type":"narration","locuteur":"Narrateur","texte":"Le jour s'achève. Le maître du jeu décide quand commencer la nuit suivante.","public":true}

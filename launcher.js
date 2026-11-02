@@ -394,14 +394,14 @@
         window.LG_TABLE.attach(id, state, tableMount);
       }
       stage.append(tableDetails);
-      const privateDetails = make("details", undefined, "game-details game-private");
-      privateDetails.append(make("summary", "03 / 🗝️ Carnet du maître du jeu (rôles secrets)"));
+      const privateSection = make("section", undefined, "game-private-section");
+      privateSection.append(make("h4", "03 / 🗝️ Espace du maître du jeu"));
       if (window.LG_MJ_PRIVATE) {
-        const privateMount = make("section", undefined, "mj-private-slot");
-        privateDetails.append(privateMount);
+        const privateMount = make("div", undefined, "mj-private-slot");
+        privateSection.append(privateMount);
         window.LG_MJ_PRIVATE.attach(id, state, privateMount);
       }
-      stage.append(privateDetails);
+      stage.append(privateSection);
       
       if (state.dernier_evenement_public) content.append(make("p", "Dernier événement : " + state.dernier_evenement_public, "archive-public-summary"));
       if (state.aide_mj_publique) {

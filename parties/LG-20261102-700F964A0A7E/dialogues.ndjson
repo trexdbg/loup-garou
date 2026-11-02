@@ -1,0 +1,6 @@
+{"seq":1,"scene_id":"prologue","scene_label":"Le prologue","type":"narration","locuteur":"Narrateur","texte":"À Thiercelieux, les huit habitants se retrouvent sur la place du village : ils savent déjà que deux Loups-Garous vivent parmi eux. Octave observe ses voisins et murmure :","public":true}
+{"seq":2,"scene_id":"prologue","scene_label":"Le prologue","type":"dialogue_pnj","locuteur":"Octave","texte":"Cette fois, je ne me laisserai pas tromper.","public":true}
+{"seq":3,"scene_id":"prologue","scene_label":"Le prologue","type":"narration","locuteur":"Narrateur","texte":"Clémence réplique :","public":true}
+{"seq":4,"scene_id":"prologue","scene_label":"Le prologue","type":"dialogue_pnj","locuteur":"Clémence","texte":"Accuser sans preuve, c'est justement ce qu'un Loup voudrait.","public":true}
+{"seq":5,"scene_id":"prologue","scene_label":"Le prologue","type":"narration","locuteur":"Narrateur","texte":"Rose croise les bras, tandis que Basile sourit en silence. Mila finit par demander :","public":true}
+{"seq":6,"scene_id":"prologue","scene_label":"Le prologue","type":"dialogue_pnj","locuteur":"Mila","texte":"Qui veut commencer à parler ?","public":true}

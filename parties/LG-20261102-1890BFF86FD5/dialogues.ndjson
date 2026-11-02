@@ -55,3 +55,9 @@
 {"seq":55,"scene_id":"debats_jour_1_01","scene_label":"Jour 1 — Les soupçons d'André","type":"dialogue_pnj","locuteur":"Éloi","texte":"Hugo change vite d'avis, ça me semble suspect.","public":true}
 {"seq":56,"scene_id":"debats_jour_1_01","scene_label":"Jour 1 — Les soupçons d'André","type":"dialogue_pnj","locuteur":"Célia","texte":"Éloi, tu as aussi changé de discours sur ceux qui se taisent. Pourquoi ?","public":true}
 {"seq":57,"scene_id":"debats_jour_1_01","scene_label":"Jour 1 — Les soupçons d'André","type":"dialogue_pnj","locuteur":"Hugo","texte":"Je pose des questions, ce n'est pas un crime !","public":true}
+{"seq":58,"scene_id":"preparation_vote_jour_1","scene_label":"Jour 1 — Préparation du vote","type":"narration","locuteur":"Narrateur","texte":"Les habitants préparent le vote. Aucun bulletin n'est encore recueilli.","public":true}
+{"seq":59,"scene_id":"preparation_vote_jour_1","scene_label":"Jour 1 — Préparation du vote","type":"dialogue_pnj","locuteur":"Hugo","texte":"Je trouve le comportement d'Éloi suspect.","public":true}
+{"seq":60,"scene_id":"preparation_vote_jour_1","scene_label":"Jour 1 — Préparation du vote","type":"dialogue_pnj","locuteur":"Célia","texte":"Je souhaite aussi entendre Éloi avant le vote.","public":true}
+{"seq":61,"scene_id":"preparation_vote_jour_1","scene_label":"Jour 1 — Préparation du vote","type":"dialogue_pnj","locuteur":"Martin","texte":"Et moi, je surveille Hugo.","public":true}
+{"seq":62,"scene_id":"preparation_vote_jour_1","scene_label":"Jour 1 — Préparation du vote","type":"dialogue_pnj","locuteur":"Rose","texte":"Il faut pouvoir entendre tout le monde avant de décider.","public":true}
+{"seq":63,"scene_id":"preparation_vote_jour_1","scene_label":"Jour 1 — Préparation du vote","type":"narration","locuteur":"Narrateur","texte":"Le choix d'André reste libre et le vote n'est pas ouvert.","public":true}

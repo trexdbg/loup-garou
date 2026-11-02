@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "mode": "auto",
+  "provider": "elevenlabs",
+  "enabled": false,
+  "worker_url": null,
+  "notice": "Synthèse premium inactive tant que Cloudflare Worker et une clé ElevenLabs ne sont pas configurés. Secours : voix du navigateur."
+}

@@ -55,6 +55,7 @@
     region.hidden = true;
     const note = make("p", "Régie réservée au maître du jeu : les cartes sont chargées depuis les archives GitHub. Les joueurs n’utilisent pas cet écran. Cliquez sur Masquer si vous devez dissimuler les informations.", "fine");
     const stats = make("p", "", "mj-private-stats");
+    const secretTimeline = make("section", undefined, "mj-secret-timeline");
     const list = make("div", undefined, "mj-character-grid");
     const status = make("p", "", "mj-private-status");
     status.setAttribute("role", "status");
@@ -92,7 +93,7 @@
     foxButton.type = "button";
     const foxAnswer = make("p", "", "mj-fox-answer");
     foxPanel.append(foxHeading, foxHint, foxButton, foxAnswer);
-    region.append(note, stats, list, foxPanel, entryRow, importLabel, buttons, savedLabel, status);
+    region.append(note, stats, secretTimeline, list, foxPanel, entryRow, importLabel, buttons, savedLabel, status);
     mount.append(toggle, region);
 
     foxButton.addEventListener("click", () => {
@@ -160,6 +161,41 @@
       stats.textContent = entries.filter(x => x.role).length + " rôle(s) attribué(s) sur " + entries.length + " personnage(s).";
     }
 
+    function renderNightNotes(notes) {
+      secretTimeline.replaceChildren();
+      if (!notes || typeof notes !== "object") return;
+      const night = notes.nuit_1;
+      const potions = notes.etat_initial?.potions_sorciere;
+      const title = make("h4", "🌙 Carnet secret — suivi des pouvoirs");
+      secretTimeline.append(title);
+      const rows = [];
+      if (night?.voyante) {
+        const target = night.voyante.cible || "à choisir";
+        const observed = night.voyante.role_revele || "en attente";
+        rows.push(["Voyante", (night.voyante.observatrice || "Voyante") + " a observé " + target + " : " + observed]);
+      }
+      if (night?.loups) rows.push(["Loups-Garous", "Victime désignée : " + (night.loups.victime_designee || "en attente") + (night.loups.attaque_resolue ? " · attaque arbitrée" : " · attente de résolution")]);
+      if (night?.sorciere) {
+        const decision = night.sorciere.decision;
+        rows.push(["Sorcière", decision
+          ? (decision.sauve ? "Sauvetage : " + decision.sauve : "Potion de vie : " + (decision.potion_vie || "non utilisée")) + " · Potion de mort : " + (decision.potion_mort || "non utilisée")
+          : "En attente de sa décision"]);
+      }
+      if (potions) rows.push(["Potions restantes", "Vie : " + (potions.vie ?? "?") + " · Mort : " + (potions.mort ?? "?")]);
+      if (notes.etat_initial?.voyante_observations?.length)
+        rows.push(["Observations", notes.etat_initial.voyante_observations.length + " observation(s) archivées"]);
+      if (night?.victimes_confirmees) rows.push(["Victimes de la nuit", night.victimes_confirmees.length ? night.victimes_confirmees.join(", ") : "Aucune"]);
+      if (!rows.length) { secretTimeline.append(make("p","Aucune action nocturne enregistrée.","fine"));return; }
+      const grid = make("div",undefined,"mj-night-ledger");
+      for (const [label,value] of rows) {
+        const card = make("div",undefined,"mj-night-ledger-item");
+        card.append(make("small",label),make("strong",value));
+        grid.append(card);
+      }
+      secretTimeline.append(grid);
+      secretTimeline.append(make("p","Réservé au MJ · informations lues depuis les archives GitHub. Ne jamais les lire aux joueurs.","fine"));
+    }
+
     async function chargerRolesArchives() {
       const numero = ++lectureNumero;
       status.textContent = "Chargement des cartes du MJ depuis GitHub…";
@@ -188,6 +224,7 @@
         entries = attribues;
         persist();
         render();
+        renderNightNotes(data.notes_mj);
         status.textContent = "Cartes attribuées : " + data.roles.length +
           ". Chargées depuis l'archive GitHub (publique).";
       } catch (e) {
@@ -210,6 +247,7 @@
         ++lectureNumero;
         importInput.value = "";
         foxAnswer.textContent = "";
+        secretTimeline.replaceChildren();
         list.replaceChildren(); // Retire les secrets du DOM quand le panneau est masqué.
       }
     });

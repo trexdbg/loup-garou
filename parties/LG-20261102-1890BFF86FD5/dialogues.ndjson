@@ -89,3 +89,10 @@
 {"seq":89,"scene_id":"appel_voyante_02","scene_label":"Nuit 2 — La Voyante","type":"narration","locuteur":"Narrateur","texte":"Voyante, réveille-toi et regarde la carte d'un habitant.","public":true}
 {"seq":90,"scene_id":"appel_voyante_02","scene_label":"Nuit 2 — La Voyante","type":"narration","locuteur":"Narrateur","texte":"La Voyante a consulté une carte. Sa découverte reste secrète.","public":true}
 {"seq":91,"scene_id":"appel_voyante_02","scene_label":"Nuit 2 — La Voyante","type":"narration","locuteur":"Narrateur","texte":"Voyante, rendors-toi et referme les yeux.","public":true}
+{"seq":92,"scene_id":"appel_loups_02","scene_label":"Nuit 2 — Appel des Loups-Garous","type":"narration","locuteur":"Narrateur","texte":"Loups-Garous, réveillez-vous et reconnaissez-vous.","public":true}
+{"seq":93,"scene_id":"appel_loups_02","scene_label":"Nuit 2 — Appel des Loups-Garous","type":"narration","locuteur":"Narrateur","texte":"Les Loups-Garous désignent une victime dans le secret de la nuit.","public":true}
+{"seq":94,"scene_id":"appel_loups_02","scene_label":"Nuit 2 — Appel des Loups-Garous","type":"narration","locuteur":"Narrateur","texte":"Loups-Garous, rendormez-vous et fermez les yeux.","public":true}
+{"seq":95,"scene_id":"appel_sorciere_02","scene_label":"Nuit 2 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"Sorcière, réveille-toi.","public":true}
+{"seq":96,"scene_id":"appel_sorciere_02","scene_label":"Nuit 2 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"Le maître du jeu te montre discrètement la personne désignée cette nuit.","public":true}
+{"seq":97,"scene_id":"appel_sorciere_02","scene_label":"Nuit 2 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"La Sorcière décide en silence, sans révéler sa décision au village.","public":true}
+{"seq":98,"scene_id":"appel_sorciere_02","scene_label":"Nuit 2 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"Sorcière, rendors-toi et ferme les yeux. Le village reste endormi.","public":true}

@@ -19,7 +19,7 @@
     "piper_local"
   ],
   "voice_policy": "7 voix Gemini distinctes par ordre des PNJ + 1 narrateur; repli voix navigateur",
-  "model": "gemini-2.5-flash-preview-tts",
-  "model_shutdown_announced": "2026-11-17",
-  "secret_name": "GEMINI_API_KEY"
+  "model": "gemini-3.1-flash-tts-preview",
+  "secret_name": "GEMINI_API_KEY",
+  "model_note": "Modèle Preview Gemini 3.1 Flash TTS avec niveau gratuit, soumis aux quotas Google."
 }

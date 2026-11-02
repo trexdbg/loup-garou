@@ -14,7 +14,7 @@ import sys
 import urllib.error
 import urllib.request
 
-MODEL = os.environ.get("GEMINI_TTS_MODEL", "gemini-2.5-flash-preview-tts")
+MODEL = os.environ.get("GEMINI_TTS_MODEL", "gemini-3.1-flash-tts-preview")
 API_URL = "https://generativelanguage.googleapis.com/v1beta/models/"
 TYPES = {"dialogue_pnj", "dialogue", "replique", "narration", "narration_publique"}
 VOICES = [

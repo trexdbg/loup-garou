@@ -1,6 +1,6 @@
-# Thiercelieux Solo — ChatGPT + GitHub + application d'affichage 🌙
+# Thiercelieux — Régie privée du maître du jeu 🌙
 
-Une aventure de **Loups-Garous de Thiercelieux** pour **1 joueur (dès 10 ans) et 1 maître du jeu adulte**. Le MJ humain conserve le dernier mot. ChatGPT raconte, incarne tous les PNJ et assure la continuité narrative. GitHub archive les étapes. L'application GitHub Pages sert exclusivement à **configurer** et **consulter** les parties.
+Une aventure de **Loups-Garous de Thiercelieux** pour **1 joueur (dès 10 ans) et 1 maître du jeu adulte**. Le MJ humain conserve le dernier mot. ChatGPT raconte, incarne tous les PNJ et assure la continuité narrative. GitHub archive les étapes. L'application GitHub Pages est une **régie exclusivement destinée au MJ** : les joueurs ne consultent jamais l'écran. Elle permet de préparer et d'animer les parties, sans prendre de décisions ni écrire elle-même sur GitHub.
 
 Projet indépendant, non officiel. Les illustrations officielles restent liées depuis leurs sources tierces, sans être copiées dans ce dépôt.
 
@@ -10,15 +10,33 @@ Projet indépendant, non officiel. Les illustrations officielles restent liées 
 
 Si la page est absente, ouvrir Settings → Pages → Source → GitHub Actions et vérifier le workflow de déploiement.
 
+## Régie du maître du jeu
+
+L'application s'ouvre sur **Régie des parties**, et retrouve la dernière partie ouverte. La création d'une nouvelle partie se trouve dans l'onglet **+ Nouvelle partie**.
+
+Dans une partie, le MJ voit, dans cet ordre :
+- **Tableau de bord** : phase, jour/nuit, vivants, dernière scène, prochaines actions et étapes de nuit déjà jouées.
+- **Consignes ChatGPT** : recopier la prochaine action, reprendre l'état ou demander une synchronisation GitHub. Aucune consigne n'exécute d'action tant que le MJ ne l'a pas transmise à ChatGPT.
+- **Régie audio** : jouer, arrêter ou réécouter les dialogues publics ; voix Gemini si disponibles, sinon voix locales. Les messages de suite respectent la phase (pas de débat artificiel au milieu de la nuit).
+- **Carnet secret** : rôles officiels, observation de la Voyante, victime désignée, décisions de la Sorcière et potions restantes ; ouvert directement sur l'écran du MJ, masquable d'un clic et automatiquement masqué si l'onglet perd sa visibilité.
+- **Table LEGO** : placement circulaire, personnages retirés et contrôle confidentiel du Renard.
+- **Notes du MJ** : notes conservées seulement dans la session du navigateur, non archivées automatiquement. Les archives complètes restent disponibles dans le panneau historique.
+
+Le navigateur reste **en lecture seule sur GitHub** ; les boutons préparent seulement des consignes pour la conversation ChatGPT du MJ. Toute phase, vote, pouvoir du joueur ou élimination exige une décision ou validation explicite du MJ.
+
+### Publication et confidentialité
+
+GitHub Pages peut être légèrement en retard par rapport à la branche `main`. Pour l'état des parties, l'application privilégie les fichiers bruts du dépôt et dispose d'un bouton **Actualiser cette partie**. Les MP3 proviennent de l'artefact de publication Pages ; une réplique manquante utilise la voix locale. **Le dépôt est public : les rôles et les notes du MJ archivés en JSON ne sont pas secrets pour quiconque consulte GitHub.**
+
 ## Comment jouer
 
-1. Dans l'onglet **Préparer**, choisir un mode **Classique**, **Avancé** ou **Expert**, puis remplir les paramètres : scénario, joueur, rôle choisi ou aléatoire, durée, nombre de PNJ, cartes autorisées, ambiance et aides au MJ.
+1. Dans l'onglet **+ Nouvelle partie**, choisir un mode **Classique**, **Avancé** ou **Expert**, puis remplir les paramètres : scénario, joueur, rôle choisi ou aléatoire, durée, nombre de PNJ, cartes autorisées, ambiance et aides au MJ.
 2. Cliquer sur **Générer l'identifiant et le JSON**. Exemple d'ID : `LG-20261101-010203040506`. Cet ID n'est encore qu'une proposition locale : il ne crée pas directement de dossier GitHub.
 3. Cliquer sur **Copier pour ChatGPT** (recommandé) puis coller le texte dans **une conversation du projet ChatGPT Loup garou**. Le prompt inclut le JSON et le protocole de création.
 4. ChatGPT retrouve l'ID, vérifie qu'il n'existe pas, crée le répertoire `parties/<ID>/` via la connexion GitHub **si celle-ci est disponible**, met à jour `parties/index.json`, prépare uniquement **le prologue**, puis attend le MJ.
 5. La conversation ChatGPT devient le **jeu**. L'enfant parle librement ; ChatGPT joue les PNJ, propose les scènes et rappelle les règles au MJ. Chaque action ou transition significative doit être validée par le MJ avant archivage.
-6. Dans l'onglet **Mes parties**, retrouver l'ID et lire narrations, journal et dialogues publiés dans GitHub. Le bouton **🗝️ Afficher le carnet secret du MJ** charge automatiquement les rôles de la partie depuis `secrets_mj.json` et permet aussi de les modifier ou importer localement. Un bouton **Actualiser** recharge les données publiques.
-7. Dans **Mes parties**, ouvrir la partie, actualiser les dialogues puis cliquer sur **▶ Écouter**. L’application lit uniquement la scène sélectionnée, dans l’ordre, sans lecture automatique. Alex parle ensuite librement : ChatGPT archive un nouveau lot de dialogues après validation du MJ.
+6. Dans **Régie des parties**, retrouver l'ID et les archives. Le carnet du MJ affiche les rôles et notes secrètes après chargement GitHub, avec un bouton pour les masquer. La régie propose des consignes de continuation et de synchronisation à copier.
+7. Dans la **régie audio**, ouvrir la partie, actualiser les dialogues puis cliquer sur **▶ Écouter**. L’application lit uniquement la scène sélectionnée, dans l’ordre, sans lecture automatique. Alex parle ensuite librement : ChatGPT archive un nouveau lot de dialogues après validation du MJ.
 
 **Le lecteur audio est manuel** : il lit `dialogues.ndjson` quand le MJ ouvre ou actualise la partie. Aucun polling toutes les six secondes et aucune synchronisation directe de ChatGPT vers le navigateur. Il faut que les dialogues soient d’abord archivés dans GitHub ; l’application ne modifie pas la partie.
 

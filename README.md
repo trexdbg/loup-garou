@@ -119,10 +119,10 @@ Le lecteur actif est `scene-player.js` (l'ancien `voice-live.js` reste conservé
 
 ### Sept personnages, voix Gemini et secours local
 
-- **Gemini 2.5 Flash Preview TTS** : sept voix distinctes pour les sept PNJ, plus une voix de narrateur. Les personnages gardent leur voix au fil des scènes ; les paroles du joueur sont visibles mais jamais synthétisées.
+- **Gemini 3.1 Flash TTS Preview** : sept voix distinctes pour les sept PNJ, plus une voix de narrateur. Les personnages gardent leur voix au fil des scènes ; les paroles du joueur sont visibles mais jamais synthétisées.
 - **Clé protégée** : créer un secret GitHub Actions nommé **`GEMINI_API_KEY`**, sans inscrire la clé dans les fichiers de ce dépôt ni dans le JavaScript public. Le générateur Python ne s'exécute que sur le runner GitHub, après archivage des dialogues.
 - **Lecture dans l'application** : ouvrir « Mes parties » → « Actualiser » → choisir la scène → sélectionner « ✨ Gemini » → « ▶ Écouter ». Aucun dialogue ne se déclenche sans le clic du MJ. Les fichiers MP3 générés sont publiés dans l'artefact GitHub Pages, **jamais ajoutés à l'historique Git**.
-- **Coûts** : l'offre gratuite Gemini reste soumise à des quotas et le modèle 2.5 est annoncé pour un retrait au **17 novembre 2026**. Utiliser un projet Google AI Studio sans facturation pour éviter tout coût. Aucune migration payante automatique. En cas de quota, d'absence de clé ou de modèle supprimé, **voix françaises du navigateur** (ou **Piper**) restent disponibles.
+- **Coûts** : l'offre gratuite Gemini 3.1 Flash TTS est soumise à des quotas et sa disponibilité Preview peut évoluer. Utiliser un projet Google AI Studio sans facturation pour éviter tout coût. Aucune migration payante automatique. En cas de quota, d'absence de clé ou de modèle supprimé, **voix françaises du navigateur** (ou **Piper**) restent disponibles.
 - **Stockage maîtrisé** : au maximum trois scènes récentes par partie dans le site, un cache réutilisable sur les exécutions GitHub Actions et des MP3 légers. Les scènes anciennes peuvent toujours être lues avec les voix locales.
 
 **Mise en route et dépannage : [docs/audio-gemini.md](docs/audio-gemini.md).**

@@ -39,8 +39,9 @@ Documentation complète : [docs/contrat-chatgpt.md](docs/contrat-chatgpt.md).
 parties/
   index.json                  # liste des parties publiques (mise à jour par ChatGPT)
   LG-YYYYMMDD-XXXXXXXXXXXX/
-    parametres.json           # paramètres EXPURGÉS des secrets
-    partie.json               # statut, titre, phase, état PUBLIC
+    parametres.json           # paramètres complets, rôle fixé inclus
+    partie.json               # statut, titre, phase, état visible par le joueur
+    secrets_mj.json           # rôles et notes du MJ (accessible dans le dépôt public)
     narrations.md             # uniquement les scènes effectivement préparées ou jouées
     dialogues.ndjson          # dialogues publics confirmés, un JSON par ligne
     journal.md                # événements et décisions validées
@@ -81,15 +82,15 @@ Chaque partie comporte un plan circulaire validé par le MJ. Une figurine LEGO r
 3. Les cartes sont présentées avec les images officielles **uniquement si elles sont vérifiées** par `role-art.js`. La liste peut être modifiée manuellement par le MJ. Un personnage dont le rôle n'est pas connu reste « Rôle inconnu ».
 4. Le carnet est **masqué par défaut** et se conserve en mémoire de session du navigateur. La case facultative « Conserver sur cet appareil » utilise le stockage local non chiffré : **ne pas l'activer sur un appareil partagé**. On peut exporter un fichier privé et effacer les rôles locaux. Masquer systématiquement le panneau avant de passer l'écran à l'enfant.
 
-**Important :** l'import entre ChatGPT et l'application est **manuel**, pas une synchronisation automatique. Les rôles secrets ne sont ni téléchargés depuis GitHub ni ajoutés aux fichiers publics. Le simple fait de cacher un élément sur un site public ne constitue pas une authentification : ce carnet est une aide d'affichage locale sur l'appareil du MJ, pas un coffre-fort.
+**Important :** l'import des rôles dans le carnet de l'application demeure **manuel** ; celui-ci ne charge pas encore automatiquement `secrets_mj.json`. En revanche, ChatGPT archive désormais les attributions validées dans ce fichier du dépôt GitHub public. Le carnet local reste une aide d'affichage, pas un coffre-fort.
 
-### ⚠️ Confidentialité des rôles et secrets du MJ
+### ⚠️ Spoilers MJ et visibilité sur GitHub
 
-**Le dépôt `trexdbg/loup-garou` est public.** Cacher un fichier sur GitHub Pages n'empêche pas sa lecture dans le dépôt ou son historique. Les rôles secrets du joueur et des PNJ, indices futurs, solutions et notes MJ doivent rester dans la conversation ChatGPT privée ou dans un autre dépôt privé.
+**Décision du MJ (2 novembre 2026) :** pour les nouvelles parties, GitHub peut archiver les rôles, secrets, indices et notes du MJ dans `parties/<ID>/secrets_mj.json`. Le rôle choisi par le joueur peut rester dans `parametres.json`. `partie.json`, `narrations.md`, `journal.md` et `dialogues.ndjson` restent exempts de spoilers avant leur révélation dans le jeu.
 
-Le JSON complet copié vers ChatGPT peut contenir un rôle imposé. **Ne le commitez pas tel quel dans le dépôt public :** ChatGPT doit retirer cet ID et tout secret de la copie `parametres.json` publiée. Les fichiers `partie.json` et `dialogues.ndjson` doivent rester sans spoilers non dévoilés. Le fichier historique `parties/2026-11-01-001/secrets-mj.md` est déjà dans le dépôt public : il ne constitue pas un lieu confidentiel et ne doit pas être reproduit pour les nouvelles parties.
+**Attention : le dépôt `trexdbg/loup-garou` est public.** Toute personne qui visite le dépôt ou son historique peut lire `secrets_mj.json` et connaître les rôles. Masquer l'onglet MJ dans GitHub Pages ne procure aucune confidentialité technique. Ne stocker aucune donnée personnelle ou mot de passe dans ces fichiers. Si une protection réelle devient nécessaire, utiliser un dépôt privé.
 
-L'interface Pages publie uniquement `partie.json`, `journal.md`, `narrations.md`, `dialogues.ndjson` et l'index public, pas les fichiers de notes du MJ.
+La page de consultation et le lecteur audio ne chargent pas automatiquement `secrets_mj.json` ; seuls les fichiers de narration et d'état destinés au joueur sont affichés dans le parcours ordinaire.
 
 ## Ressources conservées
 
@@ -113,7 +114,7 @@ L'univers, les règles et les cartes appartiennent à leurs ayants droit. Pour v
 - La progression de lecture est mémorisée dans la session du navigateur. Le bouton pause interrompt la lecture ; « Réécouter les 3 dernières » permet de répéter une scène courte.
 - Les voix sont **synthétisées à la volée (Web Speech)** : aucun MP3 n'est produit ni conservé dans GitHub. La qualité et la diversité des voix dépendent de l'appareil.
 - ChatGPT continue de gérer les réactions et les décisions dans la conversation, sous validation du MJ, et doit écrire chaque nouveau dialogue dans GitHub. L'application reste en **lecture seule**.
-- Les textes privés et les secrets du MJ ne sont jamais transmis au lecteur public.
+- Les secrets archivés dans `secrets_mj.json` ne sont pas envoyés au lecteur vocal ; seul le dialogue joué est prononcé.
 
 ### Voix neuronales gratuites : Piper (mode principal)
 
@@ -122,7 +123,7 @@ L'univers, les règles et les cartes appartiennent à leurs ayants droit. Pour v
 - Deux voix françaises de base, `fr_FR-siwis-medium` et `fr_FR-tom-medium`, sont associées de manière fixe aux PNJ, avec de petites variations de débit pour distinguer leurs personnalités. Cela ne crée pas huit comédiens différents ; la qualité est à écouter et à ajuster sur l'appareil.
 - Téléchargement **à la demande au premier usage** : environ 127 Mo de modèles pour les deux voix, plus le moteur de synthèse et ses ressources. Les modèles sont normalement mis en cache par le navigateur ; ils ne sont jamais commités sur GitHub.
 - Chaque nouvelle réplique validée est lue dans l'ordre. La génération s'effectue sur l'appareil, sans coût par caractère. Certains téléphones peuvent prendre du temps ou échouer à charger les modèles : dans ce cas, retour automatique au moteur vocal classique.
-- Le texte des dialogues reste public dans les archives comme auparavant ; les secrets du MJ ne quittent jamais la conversation privée.
+- Le texte des dialogues reste public dans les archives comme auparavant ; les secrets MJ peuvent désormais être archivés séparément dans `secrets_mj.json` sur GitHub.
 - Librairie de synthèse : `@diffusionstudio/vits-web@1.0.3` (MIT) chargée dynamiquement depuis esm.sh ; modèles Piper disponibles sur Hugging Face. Connexion nécessaire au premier téléchargement, performances variables selon la mémoire et le navigateur.
 - Configuration : `tts-config.json` définit `provider: piper_local` et `enabled: true`. L'ancienne intégration ElevenLabs sous `tts-worker/` est un prototype **désactivé, non nécessaire et non déployé** ; l'utilisation normale reste gratuite.
 

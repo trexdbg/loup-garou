@@ -197,7 +197,7 @@
         suggestions_relance: checked("pacingHelp"),
         conseils_separes_des_dialogues: true,
         jamais_reveler_secrets_sans_validation: true,
-        instructions_privees: "Conserver dans la conversation ChatGPT, pas dans les fichiers publics GitHub"
+        instructions_privees: "Les secrets validés du MJ peuvent être archivés dans secrets_mj.json sur GitHub public. Ne jamais les révéler dans les scènes destinées au joueur sans validation du MJ."
       },
       media: {
         illustrations_cartes_authentiques_si_disponibles: checked("cardsOn"),
@@ -210,13 +210,13 @@
         git_public: true,
         chemin: "parties/" + id,
         index: "parties/index.json",
-        secrets_mj: "NE_JAMAIS_PUBLIER_DANS_CE_DEPOT_PUBLIC",
-        fichiers_publics: ["parametres.json", "partie.json", "narrations.md", "journal.md", "dialogues.ndjson"],
+        secrets_mj: "secrets_mj.json (fichier public sur GitHub, réservé à l’usage du MJ dans l’interface)",
+        fichiers_publics: ["parametres.json", "partie.json", "secrets_mj.json", "narrations.md", "journal.md", "dialogues.ndjson"],
         acces_application: "lecture_seule"
       },
       premiere_execution: {
         attendre_validation_roles_et_placement_lego_avant_creation_du_prologue: true,
-        cree_uniquement: ["dossier_de_partie", "parametres.json", "partie.json_public", "prologue_seulement", "journal_initial", "index_json"],
+        cree_uniquement: ["dossier_de_partie", "parametres.json", "partie.json_public", "secrets_mj.json_apres_validation", "prologue_seulement", "journal_initial", "index_json"],
         ne_pas_generer_les_scenes_suivantes: true,
         attendre_validation_mj_apres_prologue: true,
         ne_pas_simuler_les_decisions_du_joueur: true
@@ -230,12 +230,12 @@
       "Voici la configuration produite par l'application. Lis son ID exact et utilise le dépôt GitHub " + repo + ".",
       "Tu es l'assistant du maître du jeu humain : tu incarnes les PNJ et proposes les scènes, mais le MJ valide les actions et décisions importantes.",
       "1. Vérifie si parties/" + value.id + "/ existe déjà. S'il existe, demande au MJ s'il faut le reprendre, sans écraser ses données.",
-      "2. Commence par proposer les personnages, leur distribution de rôles et le placement des LEGO ; attends l’accord explicite du MJ sur le rôle du joueur, les PNJ et l’ordre circulaire avant de rédiger le prologue. Une fois validé, crée parties/" + value.id + "/parametres.json (COPIE EXPURGÉE des secrets), partie.json (état PUBLIC incluant placement_table validé), narrations.md (UNIQUEMENT le prologue), journal.md et dialogues.ndjson (entrée initiale facultative). Garde les rôles secrets dans notre conversation privée.",
+      "2. Commence par proposer les personnages, leur distribution de rôles et le placement des LEGO ; attends l’accord explicite du MJ sur le rôle du joueur, les PNJ et l’ordre circulaire avant de rédiger le prologue. Une fois validé, crée parties/" + value.id + "/parametres.json (paramètres complets, y compris rôle fixé), partie.json (état visible par le joueur, incluant placement_table validé), secrets_mj.json (rôles validés et notes du MJ), narrations.md (UNIQUEMENT le prologue), journal.md et dialogues.ndjson (entrée initiale facultative). Ne dévoile aucun rôle secret dans les scènes destinées au joueur.",
       "3. Mets à jour parties/index.json pour référencer ce même ID, titre, date, statut, phase et dossier; n'écrase pas les autres parties.",
-      "4. Prépare les identités et secrets uniquement dans notre conversation privée, sans les commiter au dépôt public. Ne publie pas le rôle secret du joueur ni ceux des PNJ. Si le rôle est fixé dans le JSON, remplace son ID par null dans la copie GitHub.",
+      "4. Après validation du MJ, conserve les identités, les rôles et les secrets dans parties/" + value.id + "/secrets_mj.json sur GitHub (y compris le rôle du joueur). Ne masque pas le rôle fixé dans parametres.json. Le dépôt GitHub est PUBLIC : les fichiers et leur historique sont lisibles par tous, même si l’application ne les affiche pas au joueur. N’inscris aucun spoiler non révélé dans partie.json, narrations.md ou dialogues.ndjson.",
       "4 bis. Applique le niveau roles.mode (classique, avance ou expert) et les rôles autorisés ; si roles.liste_personnalisee est vraie, la sélection manuelle du MJ prime sur le préréglage. Compose une distribution cohérente pour le nombre de personnages, le total de Loups, les pouvoirs et les camps ; le MJ valide la répartition avant le prologue.",
-      "4 bis bis. Propose au MJ un placement CIRCULAIRE des personnages avec exactement une figurine LEGO par personne (joueur inclus). Place 1 à 12 h, parcours horaire, noms et numéros de place. Attends la validation du MJ AVANT d'affirmer que les places sont fixées ; archive seulement l'ordre public validé dans partie.json au champ placement_table. Les cartes de rôle sont cachées sous les figurines et ne doivent jamais être archivées dans le dépôt public. Toutes les interactions de voisinage, dont le flair du Renard, doivent utiliser cet ordre réel.",
-      "4 ter. Après validation des rôles, fournis au MJ dans la conversation PRIVÉE un JSON valide comme {\"id\":\"ID_PARTIE\",\"roles\":[{\"personnage\":\"Alex\",\"role\":\"renard\"}]} avec chaque personnage et son ID exact de rôle issu de roles.js. Ce JSON est à coller uniquement dans le carnet secret MJ de l'application, jamais dans les fichiers GitHub publics.",
+      "4 bis bis. Propose au MJ un placement CIRCULAIRE des personnages avec exactement une figurine LEGO par personne (joueur inclus). Place 1 à 12 h, parcours horaire, noms et numéros de place. Attends la validation du MJ AVANT d'affirmer que les places sont fixées ; archive seulement l'ordre public validé dans partie.json au champ placement_table. Les cartes physiques restent cachées sous les figurines ; leurs attributions sont archivées uniquement dans secrets_mj.json, et jamais dans placement_table. Toutes les interactions de voisinage, dont le flair du Renard, doivent utiliser cet ordre réel.",
+      "4 ter. Après validation des rôles, fournis au MJ dans la conversation PRIVÉE un JSON valide comme {\"id\":\"ID_PARTIE\",\"roles\":[{\"personnage\":\"Alex\",\"role\":\"renard\"}]} avec chaque personnage et son ID exact de rôle issu de roles.js. Archive aussi ce JSON dans secrets_mj.json sur GitHub, sans le faire apparaître dans l’interface joueur ; le MJ peut également le coller dans le carnet secret de l’application.",
       "5. Après validation de la disposition réelle des LEGO et écriture sur GitHub, raconte le prologue et attends l'accord du MJ. Ne génère ni nuit complète, ni vote, ni dénouement par anticipation.",
       "6. Ensuite, au fil de nos échanges, écris seulement les nouveaux événements validés dans le dossier de cette partie et mets à jour l'index.",
       "7. Reste adapté à un joueur de 10 ans si c'est l'âge indiqué. Respecte les vraies cartes et demande au MJ en cas de règles ambiguës.",
@@ -386,7 +386,7 @@
       const resumeButton = make("button", "📋 Copier une consigne de reprise pour ChatGPT", "secondary");
       resumeButton.type = "button";
       resumeButton.addEventListener("click", async () => {
-        const message = "Reprenons la partie " + id + " du projet Loup garou. Relis sur GitHub son partie.json, journal.md et les derniers dialogues, préserve tous les secrets de notre conversation, puis attends mon choix de MJ avant de continuer.";
+        const message = "Reprenons la partie " + id + " du projet Loup garou. Relis sur GitHub son partie.json, secrets_mj.json si présent, journal.md et les derniers dialogues. Ne révèle pas les spoilers au joueur et attends mon choix de MJ avant de continuer.";
         try {
           await navigator.clipboard.writeText(message);
           $("archiveStatus").textContent = "Consigne de reprise copiée pour " + id + ".";

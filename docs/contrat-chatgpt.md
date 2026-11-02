@@ -1,6 +1,6 @@
 # Contrat d'échange — Configurateur ↔ ChatGPT ↔ GitHub
 
-Version : 2. Objectif : offrir au MJ humain un copilote narratif et des archives publiques en lecture seule pour **1 joueur**.
+Version : 3 (politique de stockage MJ du 2 novembre 2026). Objectif : offrir au MJ humain un copilote narratif et des archives GitHub publiques, avec contenu visible par le joueur séparé des fichiers de secrets, pour **1 joueur**.
 
 ## 1. Entrée provenant de l'application
 
@@ -14,11 +14,12 @@ Les champs déterminent l'âge du joueur, son prénom, le rôle (fixé ou tiré 
 
 1. Vérifier que `parties/<ID>/` n'existe pas. S'il existe, le considérer comme une reprise potentielle. Ne rien écraser sans validation du MJ.
 2. Lire les options du JSON, valider leurs contradictions éventuelles avec les règles officielles et demander arbitrage du MJ quand nécessaire.
-3. Dans la **conversation privée uniquement**, préparer les rôles des PNJ, leurs motivations, la solution possible et les événements futurs non dévoilés. Respecter le niveau `roles.mode`, le tableau `roles.autorises`, le nombre de personnages, les camps et le nombre cible de Loups. **Soumettre la répartition au MJ pour validation avant de continuer**. Conserver les identités stables au fil de la partie.
-3 bis. **Après validation**, envoyer dans la conversation privée un JSON MJ contenant `id` (ID exact de partie) et `roles` (tableau de `{\"personnage\":\"Prénom\",\"role\":\"id_role\"}`). Chaque ID de rôle doit exister dans `roles.js`. Le MJ colle ce JSON directement dans son carnet de rôles local de l'application, jamais sur GitHub.
+3. Dans la **conversation avec le MJ**, préparer les rôles des PNJ, leurs motivations, la solution possible et les événements futurs non dévoilés. Respecter le niveau `roles.mode`, le tableau `roles.autorises`, le nombre de personnages, les camps et le nombre cible de Loups. **Soumettre la répartition au MJ pour validation avant de continuer**. Conserver les identités stables au fil de la partie.
+3 bis. **Après validation**, envoyer dans la conversation privée un JSON MJ contenant `id` (ID exact de partie) et `roles` (tableau de `{\"personnage\":\"Prénom\",\"role\":\"id_role\"}`). Chaque ID de rôle doit exister dans `roles.js`. Le MJ peut coller ce JSON dans son carnet de rôles local de l'application ; ChatGPT doit aussi l'archiver sur GitHub dans `secrets_mj.json` après validation.
 4. Écrire dans GitHub :
-   - `parties/<ID>/parametres.json` : **version expurgée du JSON** : mettre à `null` tout champ contenant une identité secrète ou un spoiler, y compris un rôle joueur imposé.
-   - `parties/<ID>/partie.json` : uniquement l'état qui peut être montré sans divulguer de secrets.
+   - `parties/<ID>/parametres.json` : paramètres complets, y compris le rôle joueur imposé si présent (dépôt public).
+   - `parties/<ID>/partie.json` : uniquement l'état qui peut être montré au joueur, sans spoiler.
+   - `parties/<ID>/secrets_mj.json` : **fichier GitHub public de secrets MJ**, avec `id`, `roles` (attributions de tous les personnages selon les IDs de `roles.js`), et éventuellement notes, indices et décisions MJ validés. La page destinée au joueur ne doit pas le charger.
    - `parties/<ID>/narrations.md` : un **prologue** et ses consignes non secrètes. Ne pas écrire la première nuit, l'aube ou la fin par anticipation.
    - `parties/<ID>/journal.md` : « partie initialisée », date, scénario et statut.
    - `parties/<ID>/dialogues.ndjson` : éventuellement la première narration ; pas de dialogues fictivement joués.
@@ -67,7 +68,7 @@ Les exemples sont des modèles, **pas des parties réelles à insérer**.
 
 Avant de commencer les séquences de jeu dépendant du voisinage, **proposer au MJ l'ordre complet des figurines LEGO, joueur compris**, sous forme de table circulaire. Départ à 12 h, numérotation dans le sens horaire. Attendre l'accord du MJ : **une liste de personnages ne constitue pas en elle-même un placement validé**. Après confirmation, écrire le champ public `placement_table` de `parties/<ID>/partie.json` avec `type: "circulaire"`, `sens: "horaire"`, `depart: "12h"`, `ordre` (tableau des prénoms dans l'ordre), `retire` (liste des figurines retirées) et `valide_par_mj: true`.
 
-Une carte secrète est placée physiquement **sous chaque LEGO** ; ne publier ni identité secrète, ni emplacement d'une carte de rôle dans les archives GitHub. Les déplacements des LEGO invalident l'ancien plan jusqu'à nouvel accord du MJ. L'application propose les changements localement, puis le MJ copie le plan vers la conversation pour archivage explicite.
+Une carte secrète est placée physiquement **sous chaque LEGO** ; ne pas inclure les identités secrètes dans `placement_table`. Les attributions peuvent être archivées séparément dans `secrets_mj.json` sur GitHub public. Les déplacements des LEGO invalident l'ancien plan jusqu'à nouvel accord du MJ. L'application propose les changements localement, puis le MJ copie le plan vers la conversation pour archivage explicite.
 
 Pour le Renard, le flair s'applique au **personnage ciblé et à ses deux voisins directs encore présents** dans l'ordre circulaire. Le carnet secret vérifie oui/non/incertain à partir des cartes attribuées localement, mais n'applique pas le pouvoir ni ses conséquences. Les pouvoirs de voisinage comme le Montreur d'Ours doivent employer le même plan. Détails : [placement LEGO](placement-lego.md).
 
@@ -82,15 +83,15 @@ Pour le Renard, le flair s'applique au **personnage ciblé et à ses deux voisin
 
 Le MJ peut interrompre, revenir sur une scène, changer un personnage, demander un indice, ralentir ou accélérer, et accorder une exception de règle. Ces décisions priment sur les propositions de l'assistant.
 
-Les conseils au MJ sont **séparés** du dialogue à lire au joueur. Une information non révélée reste dans la conversation privée.
+Les conseils au MJ sont **séparés** du dialogue à lire au joueur. Une information non révélée reste dans la conversation MJ et, si validée, dans `secrets_mj.json`, sans apparaître dans les textes destinés au joueur.
 
 ## 4. Mise à jour et récupération
 
 Les écritures GitHub sont explicites, via les actions de GitHub connectées à la conversation. La réponse de ChatGPT doit distinguer : données réellement écrites, fichiers simplement proposés et absence d'accès.
 
-Chaque reprise part de l'ID et relit `partie.json`, `journal.md` et les derniers dialogues. Les identités secrètes restent dans la conversation privée de jeu ; si elle a disparu, **ne pas inventer un état caché certain**. Demander au MJ sa fiche de secrets ou préparer une reprise validée.
+Chaque reprise part de l'ID et relit `partie.json`, `secrets_mj.json` s'il existe, `journal.md` et les derniers dialogues. Si l'ancien dossier n'a pas de fichier de secrets, **ne pas inventer un état caché certain** : demander au MJ sa fiche ou préparer une reprise validée.
 
-La page publique se contente de lire les archives, via GitHub Pages, avec secours en lecture sur les fichiers publics de GitHub si le déploiement n'est pas encore fait. Le carnet MJ est une fonctionnalité distincte de l'interface, alimentée par le MJ lui-même : ses secrets sont conservés en `sessionStorage` par défaut, ou en `localStorage` **non chiffré** après consentement explicite. Ne jamais écrire ces valeurs dans GitHub, l'URL, les fichiers publics, les dialogues ou la synthèse vocale. Un clic sur **Actualiser** met à jour la liste et les archives.
+La page publique lit l'état, le journal et les dialogues de GitHub Pages. Le carnet MJ reste une fonctionnalité locale, alimentée manuellement, conservée en `sessionStorage` par défaut ou en `localStorage` **non chiffré** sur demande. Les attributions validées peuvent en parallèle être conservées dans `secrets_mj.json` sur GitHub ; ne jamais les afficher dans les dialogues non révélés, la synthèse vocale ou la vue destinée au joueur. Un clic sur **Actualiser** met à jour la liste et les archives.
 
 ## 5. Rôles et visuels
 
@@ -98,8 +99,8 @@ Les 37 rôles du catalogue `roles.js` peuvent être sélectionnés. Les règles 
 
 ## 6. Sécurité et stockage
 
-- **Dépôt public = données publiques**, y compris son historique Git. Ne pas commiter les secrets et les fiches du MJ. Un fichier appelé `secrets-mj.md` dans un dépôt public n'est pas protégé.
-- Le JSON initial complet, contenant éventuellement un rôle secret choisi, ne doit jamais être copié intégralement dans le dépôt. La copie publique est expurgée.
+- **Dépôt public = données publiques**, y compris les secrets et l'historique Git. Le MJ autorise explicitement l'archivage des rôles et secrets dans `secrets_mj.json` pour les nouvelles parties, en acceptant la possibilité de spoilers pour quiconque consulte le dépôt.
+- Conserver les paramètres complets, mais séparer les secrets MJ du déroulement visible par le joueur. Ne jamais commiter de données personnelles sensibles, jetons, mots de passe ou clés.
 - Ne pas commiter les voix et ambiances régénérables à répétition. Préférer la lecture vocale à la volée et conserver seulement les métadonnées nécessaires à rejouer une scène.
 - Nettoyage après fin de partie selon [STOCKAGE.md](../STOCKAGE.md).
 - Une publication GitHub Pages n'est pas instantanée et ne représente pas une « synchronisation en direct » de ChatGPT.
@@ -118,4 +119,4 @@ Le MJ a choisi **zéro budget**. Le fournisseur vocal par défaut est **Piper lo
 
 Le lecteur GitHub Pages télécharge à la demande des modèles français publics et tente la génération neuronale sur l'appareil. Il utilise deux timbres de base avec des profils vocaux stables par nom de PNJ. Si la génération est indisponible, lente ou bloquée, il bascule automatiquement vers Web Speech. Les voix ne sont pas produites directement par ChatGPT et les résultats peuvent être différents selon le navigateur.
 
-**Règles inchangées** : ne prononcer que les dialogues réellement archivés et validés ; ne pas publier les rôles secrets, choix non confirmés ou pensées des PNJ. Le MJ décide des scènes ; l'application affiche et lit uniquement, elle ne joue jamais à la place du joueur.
+**Règles de diffusion vocale inchangées** : ne prononcer que les dialogues réellement archivés et validés ; ne pas lire les rôles secrets, choix non confirmés ou pensées des PNJ dans les scènes destinées au joueur. Le MJ décide des scènes ; l'application affiche et lit uniquement, elle ne joue jamais à la place du joueur.

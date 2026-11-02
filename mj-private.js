@@ -1,4 +1,4 @@
-/* Carnet secret du MJ : ne lit jamais et n'envoie jamais les rôles vers GitHub.
+/* Carnet secret du MJ : import local manuel. La sauvegarde de secrets_mj.json sur GitHub est gérée par ChatGPT, pas par ce module.
  * Session de navigateur par défaut ; sauvegarde durable locale uniquement sur consentement.
  * Un écran partagé n'est pas un mécanisme d'authentification : masquer avant de le montrer. */
 (() => {
@@ -52,7 +52,7 @@
     toggle.setAttribute("aria-expanded", "false");
     const region = make("div", undefined, "mj-private-region");
     region.hidden = true;
-    const note = make("p", "Privé sur cet appareil uniquement : les rôles ne sont jamais lus ni enregistrés sur le GitHub public. Masquer ce panneau avant de montrer l'écran au joueur.", "fine");
+    const note = make("p", "Affichage local du MJ : l’application ne charge pas automatiquement les rôles de GitHub. Les nouvelles parties peuvent néanmoins archiver ces rôles dans secrets_mj.json sur le dépôt public. Masquer ce panneau avant de montrer l’écran au joueur.", "fine");
     const stats = make("p", "", "mj-private-stats");
     const list = make("div", undefined, "mj-character-grid");
     const status = make("p", "", "mj-private-status");
@@ -212,7 +212,7 @@
       entries = imported;
       importInput.value = "";
       persist(); render();
-      status.textContent = "Rôles importés dans le carnet local du MJ. Rien n'a été publié sur GitHub.";
+      status.textContent = "Rôles importés localement. Cette action ne publie rien ; l’archivage GitHub des rôles validés est géré séparément par ChatGPT.";
     });
 
     remember.addEventListener("change", () => {
@@ -228,7 +228,7 @@
       a.href = url; a.download = id + "-roles-mj-PRIVE.json";
       document.body.append(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      status.textContent = "Fichier privé téléchargé. Ne le publie pas sur GitHub.";
+      status.textContent = "Fichier de rôles exporté localement. Le MJ peut demander à ChatGPT de le conserver dans secrets_mj.json sur GitHub public.";
     });
     clearButton.addEventListener("click", () => {
       entries = names.map(personnage => ({personnage,role:""}));

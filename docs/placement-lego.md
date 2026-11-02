@@ -3,7 +3,7 @@
 ## Sur la table
 
 - Une personne = une figurine LEGO. Le joueur humain a également sa figurine.
-- La carte du rôle est posée **face cachée sous la figurine** et n'est jamais copiée vers un fichier GitHub public.
+- La carte du rôle est posée **face cachée sous la figurine** ; l'attribution peut être archivée dans `secrets_mj.json` sur GitHub public, mais jamais affichée sur le plan de table du joueur.
 - Placer la place n° 1 à **12 heures**, puis les autres **dans le sens horaire**.
 - Les figurines sont les sièges réels de la partie : les pouvoirs de voisinage utilisent **uniquement cet ordre validé**, pas l'ordre des noms d'un fichier.
 

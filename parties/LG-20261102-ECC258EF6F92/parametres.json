@@ -2,7 +2,7 @@
   "schema_version": 2,
   "id": "LG-20261102-ECC258EF6F92",
   "cree_le": "2026-11-02T07:25:52.597Z",
-  "statut": "en_attente_validation_prologue",
+  "statut": "en_cours",
   "source": "Thiercelieux Solo / configurateur GitHub Pages",
   "fonctionnement": {
     "jeu": "ChatGPT dans le projet Loup garou",
@@ -17,7 +17,7 @@
     "age": 10,
     "role": {
       "attribution": "choix_fixe",
-      "id": null,
+      "id": "loup",
       "secret_vis_a_vis_du_public": true
     }
   },
@@ -99,7 +99,7 @@
     "suggestions_relance": true,
     "conseils_separes_des_dialogues": true,
     "jamais_reveler_secrets_sans_validation": true,
-    "instructions_privees": "Conserver dans la conversation ChatGPT, pas dans les fichiers publics GitHub"
+    "instructions_privees": "Les rôles validés et notes MJ sont archivés dans secrets_mj.json sur GitHub public, mais ne doivent pas apparaître dans l'interface joueur ou la synthèse vocale avant leur révélation."
   },
   "media": {
     "illustrations_cartes_authentiques_si_disponibles": true,
@@ -112,10 +112,11 @@
     "git_public": true,
     "chemin": "parties/LG-20261102-ECC258EF6F92",
     "index": "parties/index.json",
-    "secrets_mj": "NE_JAMAIS_PUBLIER_DANS_CE_DEPOT_PUBLIC",
+    "secrets_mj": "secrets_mj.json (fichier accessible publiquement dans GitHub, non chargé par la vue joueur)",
     "fichiers_publics": [
       "parametres.json",
       "partie.json",
+      "secrets_mj.json",
       "narrations.md",
       "journal.md",
       "dialogues.ndjson"

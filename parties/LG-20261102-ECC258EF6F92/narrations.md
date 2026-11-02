@@ -22,4 +22,22 @@ Puis un pigeon se posa sur le chapeau d'Octave.
 
 Le mystère venait de commencer… et le village était encore éveillé.
 
-*[Fin du prologue. Pause obligatoire : attendre l'accord du MJ avant la première scène.]* 
+*[Fin du prologue. Pause obligatoire : attendre l'accord du MJ avant la première scène.]*
+
+## Scène 1 — La fente de la huitième lanterne
+
+*[Ambiance : battements d'ailes, eau de la fontaine, cloche qui résonne au loin. Le village est encore éveillé.]*
+
+Le pigeon d'Octave s'envole d'un battement d'ailes. Sur la place, la huitième lanterne clignote encore une fois. À son pied, une fente très fine laisse entrevoir le bord d'un papier plié. Personne n'y a touché.
+
+**Zoé :** « Alex ! Regarde, là, sous la lanterne bleue ! Il y a quelque chose de coincé. »
+
+**Octave :** « Je tiens à préciser que je surveillais parfaitement la situation… avant cette attaque de pigeon. »
+
+**Iris :** « Huit lanternes et huit habitants. Ce n'est peut-être pas une coïncidence. »
+
+**Mila :** « Moi, j'ai une brioche encore chaude pour celui qui résoudra cette histoire ! »
+
+**Zoé :** « Alors, Alex, qu'est-ce que tu veux faire ? Tu peux regarder la lanterne, interroger quelqu'un… ou tenter une autre idée ! »
+
+*[Pause : Alex choisit librement son action. Aucun personnage n'agit en son nom. Le MJ valide avant la suite.]*

@@ -4,6 +4,7 @@
   const roles = window.ROLES || [];
   const stories = window.STORIES || [];
   const modeCatalog = window.LG_MODES;
+  const voicePool = window.LG_VOICE_POOL?.entries || [];
   const repo = "trexdbg/loup-garou";
   const draftKey = "lg-launcher-draft-v2";
   const $v = id => $(id).value;
@@ -43,7 +44,54 @@
     if (archives) refreshArchives();
   }
 
+  function selectedCast() {
+    if (!voicePool.length) return [];
+    const names = new Set(Array.from(document.querySelectorAll(".voice-pool-check:checked"), x => x.value));
+    return voicePool.filter(x => names.has(x.personnage));
+  }
+  function voicePoolStatus() {
+    const label = $("voicePoolStatus");
+    if (!label) return;
+    const n = selectedCast().length;
+    label.textContent = n + " PNJ sélectionnés sur 15 · une voix Phonon différente par habitant" +
+      (n < 3 ? " (au moins 3 sont nécessaires)" : "");
+  }
+  function renderVoicePool() {
+    const container = $("voicePoolList");
+    if (!container || !voicePool.length) return;
+    const standard = new Set(["Rose","Hugo","Salomé","Marin","Inès","Baptiste","Jade"]);
+    container.replaceChildren();
+    for (const person of voicePool) {
+      const label = make("label", undefined, "voice-pool-person");
+      const check = document.createElement("input");
+      check.type = "checkbox";
+      check.className = "voice-pool-check";
+      check.value = person.personnage;
+      check.checked = standard.has(person.personnage);
+      label.append(check, make("strong", person.personnage));
+      label.append(make("span", "🎙️ " + person.voix + " · " + person.caractere));
+      check.addEventListener("change", () => {
+        $("npcCount").value = selectedCast().length;
+        voicePoolStatus();
+        clearGenerated();
+      });
+      container.append(label);
+    }
+    $("npcCount").max = String(voicePool.length);
+    $("npcCount").addEventListener("change", () => {
+      const wanted = Math.min(voicePool.length, Math.max(3, Number($v("npcCount")) || 7));
+      const all = Array.from(container.querySelectorAll(".voice-pool-check"));
+      const chosen = all.filter(x => x.checked);
+      const rest = all.filter(x => !x.checked);
+      const keep = new Set([...chosen, ...rest].slice(0, wanted));
+      all.forEach(x => x.checked = keep.has(x));
+      $("npcCount").value = wanted;
+      voicePoolStatus();
+    });
+    voicePoolStatus();
+  }
   function populate() {
+    renderVoicePool();
     const story = $("scenario");
     // Partie classique uniquement : les habitants connaissent déjà la présence des Loups-Garous.
     story.replaceChildren(new Option("🐺 Loups-Garous traditionnel — trouver les Loups", "originale"));
@@ -118,6 +166,10 @@
     if (requestedRole !== "random" && !pool.includes(requestedRole)) {
       throw new Error("Le rôle choisi doit figurer parmi les rôles autorisés.");
     }
+    const casting = selectedCast();
+    if (voicePool.length && (casting.length < 3 || casting.length > 15)) {
+      throw new Error("Choisis entre 3 et 15 personnages dans le casting vocal.");
+    }
     const story = stories.find(s => s.id === $v("scenario"));
     const name = clean($v("heroName"), 40) || "Alex";
     const now = new Date().toISOString();
@@ -153,7 +205,13 @@
         scenario_reference: story ? story.title : null,
         titre_libre: clean($v("customTitle"), 100) || null,
         duree_minutes: num("duration", 20, 120),
-        pnj_nombre: num("npcCount", 3, 25),
+        pnj_nombre: voicePool.length ? casting.length : num("npcCount", 3, 15),
+        casting_pnj: casting.map(x => ({
+          prenom: x.personnage, caractere: x.caractere,
+          voix_phonon: x.voix, voix_id_phonon: x.voice_id
+        })),
+        catalogue_voix: "voices/phonon-fr.json",
+        regle_camp_voix: "Les personnages et leurs voix restent stables; les rôles sont tirés par partie.",
         monde: $v("environment"),
         ambiance: $v("storyStyle"),
         theme_personnalise: clean($v("themeFree"), 600) || null,
@@ -237,6 +295,7 @@
       "1. Vérifie si parties/" + value.id + "/ existe déjà. S'il existe, demande au MJ s'il faut le reprendre, sans écraser ses données.",
       "2. Commence par proposer les personnages, leur distribution de rôles et le placement des LEGO ; attends l’accord explicite du MJ sur le rôle du joueur, les PNJ et l’ordre circulaire avant de rédiger le prologue. Une fois validé, crée parties/" + value.id + "/parametres.json (paramètres complets, y compris rôle fixé), partie.json (état visible par le joueur, incluant placement_table validé), secrets_mj.json (rôles validés et notes du MJ), narrations.md (UNIQUEMENT le prologue), journal.md et dialogues.ndjson (entrée initiale facultative). Ne dévoile aucun rôle secret dans les scènes destinées au joueur.",
       "3. Mets à jour parties/index.json pour référencer ce même ID, titre, date, statut, phase et dossier; n'écrase pas les autres parties.",
+      "3 bis. Utilise EXACTEMENT aventure.casting_pnj comme liste des PNJ. Archive dans partie.json personnages_pnj avec prenom, caractere, voix_phonon et voix_id_phonon. Chaque PNJ conserve cette voix Phonon française d'une partie à l'autre, quel que soit son rôle secret. Alex est joué par l'enfant, sans voix synthétique.",
       "4. Après validation du MJ, conserve les identités, les rôles et les secrets dans parties/" + value.id + "/secrets_mj.json sur GitHub (y compris le rôle du joueur). Ne masque pas le rôle fixé dans parametres.json. Le dépôt GitHub est PUBLIC : les fichiers et leur historique sont lisibles par tous, même si l’application ne les affiche pas au joueur. N’inscris aucun spoiler non révélé dans partie.json, narrations.md ou dialogues.ndjson.",
       "4 bis. Applique le niveau roles.mode (classique, avance ou expert) et les rôles autorisés ; si roles.liste_personnalisee est vraie, la sélection manuelle du MJ prime sur le préréglage. Compose une distribution cohérente pour le nombre de personnages, le total de Loups, les pouvoirs et les camps ; le MJ valide la répartition avant le prologue.",
       "4 bis bis. Propose au MJ un placement CIRCULAIRE des personnages avec exactement une figurine LEGO par personne (joueur inclus). Place 1 à 12 h, parcours horaire, noms et numéros de place. Attends la validation du MJ AVANT d'affirmer que les places sont fixées ; archive seulement l'ordre public validé dans partie.json au champ placement_table. Les cartes physiques restent cachées sous les figurines ; leurs attributions sont archivées uniquement dans secrets_mj.json, et jamais dans placement_table. Toutes les interactions de voisinage, dont le flair du Renard, doivent utiliser cet ordre réel.",

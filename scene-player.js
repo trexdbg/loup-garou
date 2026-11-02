@@ -81,7 +81,7 @@
   const settings=add(box,"div",null,"scene-controls");
   const modeLabel=add(settings,"label","Synthèse vocale");
   const mode=add(modeLabel,"select");
-  mode.append(new Option("✨ Gemini · voix des personnages","gemini"));
+  mode.append(new Option("▶ MP3 publiés · Gemini ou voix gratuites","gemini"));
   mode.append(new Option("Voix françaises de l'appareil","native"));
   mode.append(new Option("Voix Piper gratuites (2 timbres)","piper"));
   const voiceNote=add(settings,"p","", "fine");
@@ -111,9 +111,15 @@
         /^audio\/[a-f0-9]{20}\.mp3$/.test(clip.file);
     }).length;
     const missing=eligible.length-ready;
+    const offline=eligible.filter(line=>{
+      const clip=state.audio[String(line.seq)];
+      return clip&&clip.locuteur===line.locuteur&&clip.texte===line.texte&&
+        /^audio\/[a-f0-9]{20}\.mp3$/.test(clip.file)&&clip.provider==="offline";
+    }).length;
+    const gemini=ready-offline;
     voiceNote.textContent=eligible.length
-      ? ready+"/"+eligible.length+" répliques Gemini disponibles pour cette scène"+
-        (missing?" · "+missing+" manquante"+(missing>1?"s":"")+" (voix locales en secours).":" · scène entièrement générée.")
+      ? ready+"/"+eligible.length+" répliques en MP3 disponibles ("+gemini+" Gemini, "+offline+" gratuites hors ligne)."+
+        (missing?" "+missing+" sans MP3 : voix du téléphone en secours.":" Scène prête à écouter.")
       : "Aucune réplique vocale pour cette scène.";
     if(missing && state.audioStats?.quota_exhausted)
       voiceNote.textContent+=" Quota Gemini atteint lors de la dernière génération.";
@@ -175,7 +181,7 @@
     u.pitch=profile[0];u.rate=profile[1];u.volume=1;
     u.onend=()=>advance(token,rows);
     u.onerror=()=>{if(token!==state.generation)return;shutdown();announce("Lecture interrompue : essaie une autre voix.");};
-    announce((geminiUnavailable?"⚠ Voix locale (Gemini indisponible) · ":"🔊 Voix locale · ")+line.locuteur+" · "+(state.index+1)+"/"+rows.length);
+    announce((geminiUnavailable?"⚠ MP3 indisponible, voix du téléphone · ":"🔊 Voix du téléphone · ")+line.locuteur+" · "+(state.index+1)+"/"+rows.length);
     try{synth.speak(u);}catch(_){u.onerror();}
    };
    if(mode.value==="gemini"){
@@ -187,7 +193,7 @@
      audio.onended=()=>{if(token===state.generation){state.handle=null;advance(token,rows);}};
      audio.onerror=()=>{if(token===state.generation){state.handle=null;browserSpeech(true);}};
      state.handle={stop:()=>{audio.onended=null;audio.onerror=null;audio.pause();audio.removeAttribute("src");audio.load();}};
-     announce("✨ Voix Gemini · "+line.locuteur+" · "+(state.index+1)+"/"+rows.length);
+     announce((clip.provider==="offline"?"🔊 MP3 gratuit · ":"✨ Voix Gemini · ")+line.locuteur+" · "+(state.index+1)+"/"+rows.length);
      audio.play().catch(()=>{if(token===state.generation){state.handle=null;browserSpeech(true);}});
      return;
     }

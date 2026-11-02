@@ -201,3 +201,8 @@ footer { padding:28px 15px; }
  .scene-transcript {max-height:490px}
  .game-details {padding:0 11px}
 }
+
+.game-private-section {border:1px solid #73664b;background:#222333;border-radius:13px;padding:12px 17px}
+.game-private-section h4 {color:#e9cfaa;margin:4px 0;font-size:1rem}
+.game-private-section .mj-private-slot {margin:12px 0 0}
+@media(max-width:740px){.game-private-section {padding:12px}}

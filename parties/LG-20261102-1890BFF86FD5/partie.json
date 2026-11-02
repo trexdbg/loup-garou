@@ -4,11 +4,11 @@
   "titre": "Le village des huit suspects",
   "cree_le": "2026-11-02T18:58:30.815Z",
   "statut": "en_cours",
-  "phase": "prologue",
+  "phase": "tour_de_table",
   "progression": {
     "jour": 0,
     "nuit": 0,
-    "scene": "prologue"
+    "scene": "tour_de_table_01"
   },
   "joueur": {
     "prenom": "André",
@@ -63,19 +63,22 @@
     "statut": "valide",
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Les huit habitants de Thiercelieux savent que deux Loups-Garous se cachent parmi eux, mais ignorent leur identité.",
-  "aide_mj_publique": "Lire uniquement le prologue puis attendre l'accord explicite du MJ avant toute nouvelle scène, action, nuit ou vote.",
-  "dernier_evenement_public": "Prologue préparé et distribution des figurines validée par le MJ.",
-  "scene_courante_id": "prologue",
+  "resume_public": "Les habitants débattent sur la place du village et commencent à se soupçonner. André peut intervenir librement.",
+  "aide_mj_publique": "Faire écouter le tour de table 01 à la demande, puis laisser André parler ou interroger un PNJ. Attendre l'accord du MJ pour tout vote, fin du débat ou nuit.",
+  "dernier_evenement_public": "Après les premiers soupçons, Rose invite André à réagir. Aucun vote n'est ouvert.",
+  "scene_courante_id": "tour_de_table_01",
   "tour_de_table": {
-    "statut": "non_commence",
-    "dialogues_enregistres": 0,
-    "attendre_validation_mj": true
+    "statut": "en_cours",
+    "dernier_echange": "tour_de_table_01",
+    "dialogues_enregistres": 13,
+    "attendre_reponse_andre": true,
+    "attendre_validation_mj": true,
+    "passage_vote_apres_validation_mj": true
   },
   "jour_en_cours": {
     "numero": 0,
-    "etape": "prologue",
-    "statut": "attente_mj",
+    "etape": "tour_de_table",
+    "statut": "attente_andre",
     "vote_ouvert": false,
     "attendre_validation_mj": true
   }

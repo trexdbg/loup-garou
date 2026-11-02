@@ -14,3 +14,12 @@
 {"seq":14,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Nils","texte":"Alex, tu as remarqué quelque chose, ou c'est une intuition ?","public":true}
 {"seq":15,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Iris","texte":"Je n'ai rien vu de suspect chez Mila, mais je peux me tromper.","public":true}
 {"seq":16,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Mila","texte":"Alors, Alex, explique-moi. Qu'est-ce qui te fait penser que je suis un Loup-Garou ?","public":true}
+{"seq":17,"scene_id":"tour_de_table_02","scene_label":"Alex lance le débat","type":"dialogue_joueur","locuteur":"Alex","texte":"C'est juste pour lancer le débat et voir qui se dévoile. On ne peut torturer personne, donc voilà...","public":true}
+{"seq":18,"scene_id":"tour_de_table_02","scene_label":"Alex lance le débat","type":"dialogue_pnj","locuteur":"Mila","texte":"Ah ! Tu voulais simplement voir ma réaction ? J'ai cru que tu étais sûr de toi !","public":true}
+{"seq":19,"scene_id":"tour_de_table_02","scene_label":"Alex lance le débat","type":"dialogue_pnj","locuteur":"Clémence","texte":"C'est une idée. Mais on peut aussi accuser au hasard pour détourner les soupçons.","public":true}
+{"seq":20,"scene_id":"tour_de_table_02","scene_label":"Alex lance le débat","type":"dialogue_pnj","locuteur":"Octave","texte":"Attendez ! Vous essayez de nous piéger ? Moi, je n'ai rien à cacher !","public":true}
+{"seq":21,"scene_id":"tour_de_table_02","scene_label":"Alex lance le débat","type":"dialogue_pnj","locuteur":"Basile","texte":"Alors pourquoi te défends-tu déjà, Octave ? Personne ne t'a accusé !","public":true}
+{"seq":22,"scene_id":"tour_de_table_02","scene_label":"Alex lance le débat","type":"dialogue_pnj","locuteur":"Iris","texte":"Justement, Basile, tu as encouragé l'accusation contre Mila tout de suite. Pourquoi ?","public":true}
+{"seq":23,"scene_id":"tour_de_table_02","scene_label":"Alex lance le débat","type":"dialogue_pnj","locuteur":"Rose","texte":"On peut se contenter de poser des questions. Écoutons chacun.","public":true}
+{"seq":24,"scene_id":"tour_de_table_02","scene_label":"Alex lance le débat","type":"dialogue_pnj","locuteur":"Nils","texte":"Basile, à ton tour : qui soupçonnes-tu ?","public":true}
+{"seq":25,"scene_id":"tour_de_table_02","scene_label":"Alex lance le débat","type":"dialogue_pnj","locuteur":"Basile","texte":"Moi ? Peut-être Octave. Il s'agite beaucoup depuis le début !","public":true}

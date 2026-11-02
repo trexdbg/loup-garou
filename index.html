@@ -4,22 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#151b27">
-  <meta name="description" content="Prépare une aventure solo de Loup-Garou, transmets sa configuration à ChatGPT et consulte les archives GitHub.">
-  <title>Thiercelieux Solo — Assistant du maître du jeu</title>
+  <meta name="description" content="Régie privée du maître du jeu : phases, voix, personnages, cartes secrètes, LEGO et consignes pour ChatGPT.">
+  <title>Thiercelieux — Régie du maître du jeu</title>
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./launcher.css?v=20261102b">
+  <link rel="stylesheet" href="./mj-console.css?v=20261102mj">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="moon">☾</span><div><strong>Thiercelieux Solo</strong><small>ChatGPT raconte · Le MJ décide · GitHub conserve</small></div></div>
+    <div class="brand"><span class="moon">☾</span><div><strong>Thiercelieux · Régie MJ</strong><small>Un écran pour le maître du jeu · les joueurs jouent à table</small></div></div>
     <nav class="launcher-tabs" aria-label="Navigation">
-      <button type="button" id="tabPrepare" aria-selected="true">⚙️ Préparer</button>
-      <button type="button" id="tabArchives" aria-selected="false">📚 Mes parties</button>
+      <button type="button" id="tabArchives" aria-selected="true">🎛️ Régie des parties</button>
+      <button type="button" id="tabPrepare" aria-selected="false">＋ Nouvelle partie</button>
     </nav>
   </header>
   <main class="shell">
     <noscript>Cette page nécessite JavaScript pour créer une configuration ou consulter les archives.</noscript>
-    <section id="prepareSection" aria-label="Créer une configuration de partie">
+    <section id="prepareSection" hidden aria-label="Créer une configuration de partie">
       <div class="hero-heading">
         <div class="eyebrow">UNE AVENTURE CRÉÉE AVEC CHATGPT</div>
         <h1>Préparez votre partie. L'histoire se jouera dans ChatGPT.</h1>
@@ -148,33 +149,33 @@
         </div>
       </section>
     </section>
-    <section id="archiveSection" hidden aria-label="Archives de parties GitHub">
+    <section id="archiveSection" aria-label="Régie privée des parties pour le maître du jeu">
       <div class="hero-heading">
-        <div class="eyebrow">ARCHIVES GITHUB EN LECTURE SEULE</div>
-        <h1>Vos parties de Loup-Garou</h1>
-        <p class="lead">Écoute les dialogues de la dernière scène, laisse Alex décider de sa réplique, puis demande à ChatGPT de préparer la suite. Le MJ reste aux commandes.</p>
+        <div class="eyebrow">TABLEAU DE BORD · RÉSERVÉ AU MAÎTRE DU JEU</div>
+        <h1>Votre régie de Loup-Garou</h1>
+        <p class="lead">D’un regard, retrouvez la phase, la prochaine action, les dialogues, les cartes et les LEGO. Les joueurs ne consultent pas cette application : ils jouent autour de la table.</p>
       </div>
       <section class="panel">
-        <div class="section-header archive-heading"><div><h2>Parties enregistrées</h2><p id="archiveStatus" role="status">Actualisation depuis GitHub…</p></div><button type="button" id="archiveRefresh" class="secondary">↻ Actualiser</button></div>
+        <div class="section-header archive-heading"><div><h2>Choisir une partie à animer</h2><p id="archiveStatus" role="status">Actualisation depuis GitHub…</p></div><button type="button" id="archiveRefresh" class="secondary">↻ Actualiser les parties</button></div>
         <div id="archiveList" class="archive-list"></div>
       </section>
       <section class="panel" id="sessionDetail" hidden>
-        <button id="backToArchives" type="button" class="ghost small">← Retour aux archives</button>
+        <button id="backToArchives" type="button" class="ghost small">← Changer de partie</button>
         <div id="sessionContent"></div>
       </section>
-      <section class="panel mj-reminder">
-        <h2>📋 Déroulement d’un tour de table</h2>
+      <details class="panel mj-reminder">
+        <summary>📋 Aide-mémoire du MJ : déroulement d’un débat</summary>
         <div class="reminder-grid">
           <div><strong>1. Écouter</strong><p>Actualiser les dialogues et écouter la nouvelle scène. Le texte reste visible pour accompagner la lecture.</p></div>
           <div><strong>2. Jouer</strong><p>Alex peut parler à n’importe quel personnage. Les PNJ débattent aussi entre eux ; personne ne décide pour Alex.</p></div>
           <div><strong>3. Continuer</strong><p>Revenir dans ChatGPT avec la réponse d’Alex. Après validation du MJ, un nouvel échange est archivé et devient disponible à l’écoute.</p></div>
           <div><strong>4. Terminer le tour</strong><p>Le MJ décide quand les débats se terminent. Le vote et la nuit ne démarrent jamais automatiquement.</p></div>
         </div>
-      </section>
-      <div class="advice"><h3>🛡️ Espace du maître du jeu</h3><p>Une page GitHub publique n'est pas un coffre-fort : les rôles archivés dans secrets_mj.json y restent consultables. Le carnet de l'application est masqué par défaut : ferme-le avant de montrer l'écran au joueur. Aucune action de jeu n'est commandée ici.</p></div>
+      </details>
+      <div class="advice"><h3>🛡️ Accès privé au MJ, données publiques sur GitHub</h3><p>L’interface est conçue pour le maître du jeu uniquement. Les archives et rôles stockés dans ce dépôt public restent accessibles sur GitHub : la régie n’est pas un contrôle d’accès. Elle prépare des consignes pour ChatGPT, sans jamais jouer de décision automatiquement.</p></div>
     </section>
   </main>
-  <footer>Thiercelieux Solo · Projet indépendant et non officiel · Application d'affichage, GitHub pour les archives, ChatGPT pour jouer</footer>
+  <footer>Thiercelieux · Régie privée du MJ · Projet indépendant et non officiel · GitHub archive, ChatGPT anime</footer>
   <script src="./roles.js"></script>
   <script src="./modes.js"></script>
   <script src="./role-art.js"></script>
@@ -184,6 +185,7 @@
   <script src="./seating-model.js"></script>
   <script src="./table-seating.js"></script>
   <script src="./mj-private.js"></script>
-  <script src="./launcher.js?v=20261102b"></script>
+  <script src="./mj-console.js?v=20261102mj"></script>
+  <script src="./launcher.js?v=20261102mj"></script>
 </body>
 </html>

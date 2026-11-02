@@ -22,7 +22,6 @@
     Malo: 1.05, Rosalie: 0.93
   });
   let sdkPromise = null;
-  const sessionAudio = new Map();
 
   function modelFor(speaker) {
     return VOICE_MODELS[speaker] || VOICE_MODELS.Narrateur;
@@ -56,27 +55,38 @@
   function playbackRate(speaker) {
     return RATES[speaker] || 1;
   }
-  function play(blob, speaker, onEnded, onFailure) {
-    // Un seul objet URL actif par lecture. Ne pas garder les WAV volumineux dans Git.
-    const audio = new Audio();
-    const url = URL.createObjectURL(blob);
-    let disposed = false;
-    function cleanup() {
-      if (disposed) return;
-      disposed = true;
-      audio.pause();
-      audio.removeAttribute("src");
-      audio.load();
-      URL.revokeObjectURL(url);
+  async function play(blob, speaker, audioCtx, onEnded, onFailure) {
+    // Contexte audio déverrouillé par le clic initial du MJ ; lecture asynchrone
+    // compatible avec les limites d'autoplay de nombreux navigateurs mobiles.
+    let source = null;
+    let stopped = false;
+    const handle = {
+      stop() {
+        stopped = true;
+        if (source) {
+          source.onended = null;
+          try { source.stop(); } catch (_) {}
+          source.disconnect();
+          source = null;
+        }
+      }
+    };
+    try {
+      if (!audioCtx || audioCtx.state === "closed") throw new Error("AudioContext indisponible");
+      const data = await blob.arrayBuffer();
+      if (stopped) return handle;
+      const buffer = await audioCtx.decodeAudioData(data);
+      if (stopped) return handle;
+      source = audioCtx.createBufferSource();
+      source.buffer = buffer;
+      source.playbackRate.value = playbackRate(speaker);
+      source.connect(audioCtx.destination);
+      source.onended = () => { handle.stop(); if (onEnded) onEnded(); };
+      source.start();
+    } catch (error) {
+      handle.stop();
+      if (onFailure) onFailure(error);
     }
-    audio.preload = "auto";
-    audio.src = url;
-    audio.preservesPitch = true;
-    audio.playbackRate = playbackRate(speaker);
-    const handle = { stop: cleanup };
-    audio.onended = () => { cleanup(); if (onEnded) onEnded(); };
-    audio.onerror = () => { cleanup(); if (onFailure) onFailure(); };
-    audio.play().catch(() => { cleanup(); if (onFailure) onFailure(); });
     return handle;
   }
   window.LG_PIPER = {

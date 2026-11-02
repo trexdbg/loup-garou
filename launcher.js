@@ -215,6 +215,7 @@
         acces_application: "lecture_seule"
       },
       premiere_execution: {
+        attendre_validation_roles_et_placement_lego_avant_creation_du_prologue: true,
         cree_uniquement: ["dossier_de_partie", "parametres.json", "partie.json_public", "prologue_seulement", "journal_initial", "index_json"],
         ne_pas_generer_les_scenes_suivantes: true,
         attendre_validation_mj_apres_prologue: true,
@@ -229,13 +230,13 @@
       "Voici la configuration produite par l'application. Lis son ID exact et utilise le dépôt GitHub " + repo + ".",
       "Tu es l'assistant du maître du jeu humain : tu incarnes les PNJ et proposes les scènes, mais le MJ valide les actions et décisions importantes.",
       "1. Vérifie si parties/" + value.id + "/ existe déjà. S'il existe, demande au MJ s'il faut le reprendre, sans écraser ses données.",
-      "2. Crée parties/" + value.id + "/parametres.json (COPIE EXPURGÉE de tous les rôles et secrets), partie.json (état PUBLIC de départ), narrations.md (UNIQUEMENT le prologue), journal.md et dialogues.ndjson (entrée initiale facultative). Garde le JSON complet dans notre conversation privée.",
+      "2. Commence par proposer les personnages, leur distribution de rôles et le placement des LEGO ; attends l’accord explicite du MJ sur le rôle du joueur, les PNJ et l’ordre circulaire avant de rédiger le prologue. Une fois validé, crée parties/" + value.id + "/parametres.json (COPIE EXPURGÉE des secrets), partie.json (état PUBLIC incluant placement_table validé), narrations.md (UNIQUEMENT le prologue), journal.md et dialogues.ndjson (entrée initiale facultative). Garde les rôles secrets dans notre conversation privée.",
       "3. Mets à jour parties/index.json pour référencer ce même ID, titre, date, statut, phase et dossier; n'écrase pas les autres parties.",
       "4. Prépare les identités et secrets uniquement dans notre conversation privée, sans les commiter au dépôt public. Ne publie pas le rôle secret du joueur ni ceux des PNJ. Si le rôle est fixé dans le JSON, remplace son ID par null dans la copie GitHub.",
       "4 bis. Applique le niveau roles.mode (classique, avance ou expert) et les rôles autorisés ; si roles.liste_personnalisee est vraie, la sélection manuelle du MJ prime sur le préréglage. Compose une distribution cohérente pour le nombre de personnages, le total de Loups, les pouvoirs et les camps ; le MJ valide la répartition avant le prologue.",
       "4 bis bis. Propose au MJ un placement CIRCULAIRE des personnages avec exactement une figurine LEGO par personne (joueur inclus). Place 1 à 12 h, parcours horaire, noms et numéros de place. Attends la validation du MJ AVANT d'affirmer que les places sont fixées ; archive seulement l'ordre public validé dans partie.json au champ placement_table. Les cartes de rôle sont cachées sous les figurines et ne doivent jamais être archivées dans le dépôt public. Toutes les interactions de voisinage, dont le flair du Renard, doivent utiliser cet ordre réel.",
       "4 ter. Après validation des rôles, fournis au MJ dans la conversation PRIVÉE un JSON valide comme {\"id\":\"ID_PARTIE\",\"roles\":[{\"personnage\":\"Alex\",\"role\":\"renard\"}]} avec chaque personnage et son ID exact de rôle issu de roles.js. Ce JSON est à coller uniquement dans le carnet secret MJ de l'application, jamais dans les fichiers GitHub publics.",
-      "5. Après écriture sur GitHub, raconte le prologue et attends l'accord du MJ. Ne génère ni nuit complète, ni vote, ni dénouement par anticipation.",
+      "5. Après validation de la disposition réelle des LEGO et écriture sur GitHub, raconte le prologue et attends l'accord du MJ. Ne génère ni nuit complète, ni vote, ni dénouement par anticipation.",
       "6. Ensuite, au fil de nos échanges, écris seulement les nouveaux événements validés dans le dossier de cette partie et mets à jour l'index.",
       "7. Reste adapté à un joueur de 10 ans si c'est l'âge indiqué. Respecte les vraies cartes et demande au MJ en cas de règles ambiguës.",
       "Si tu ne peux pas écrire sur GitHub dans cette conversation, dis-le explicitement et fournis les fichiers à déposer : n'affirme jamais que la synchronisation est faite sans confirmation.",

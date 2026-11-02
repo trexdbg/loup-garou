@@ -18,6 +18,15 @@
   const validType = new Set(["dialogue_pnj", "dialogue", "replique", "narration", "narration_publique"]);
   const speechAvailable = !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
   let active = null;
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  let endpoint = "";
+  fetch("./tts-config.json?v=" + Date.now(), { cache: "no-store" })
+    .then(res => res.ok ? res.json() : null)
+    .then(config => {
+      if (config && config.enabled === true && /^https:\/\/[a-z0-9.-]+$/i.test(config.worker_url || "")) {
+        endpoint = config.worker_url.replace(/\/$/, "");
+      }
+    }).catch(() => {});
 
   function parseLines(raw) {
     const lines = [];
@@ -71,7 +80,8 @@
     const state = {
       id, closed: false, enabled: false, busy: false, loading: false,
       loaded: false, rows: [], queue: [], lastSeq: savedSeq,
-      maxQueued: savedSeq, interval: null
+      maxQueued: savedSeq, interval: null,
+      audioCtx: null, source: null, abort: null, generation: 0
     };
     const box = add(mount, "section", null, "live-voice");
     add(box, "h4", "🎭 Voix automatiques des habitants");
@@ -92,7 +102,7 @@
       try { sessionStorage.setItem(key, String(state.lastSeq)); } catch (_) {}
     }
     function next() {
-      if (!state.enabled || state.closed || state.busy || !speechAvailable) return;
+      if (!state.enabled || state.closed || state.busy) return;
       const item = state.queue.shift();
       if (!item) {
         current.textContent = "";
@@ -101,36 +111,78 @@
       }
       const speaker = item.locuteur || "Narrateur";
       const profile = profiles[speaker] || { pitch: 0.85 + (speaker.length % 6) * 0.07, rate: 0.89 + (speaker.length % 5) * 0.035 };
-      const utterance = new SpeechSynthesisUtterance(item.texte);
-      utterance.lang = "fr-FR";
-      utterance.voice = voiceFor(speaker);
-      utterance.pitch = profile.pitch;
-      utterance.rate = profile.rate;
-      utterance.volume = 1;
+      const generation = ++state.generation;
       state.busy = true;
       current.textContent = speaker + " : " + item.texte;
-      setStatus("🔊 " + speaker + " parle");
-      utterance.onend = () => {
-        if (state.closed || !state.enabled) return;
+      function finish() {
+        if (state.closed || !state.enabled || generation !== state.generation) return;
         state.busy = false;
+        state.source = null;
+        state.abort = null;
         state.lastSeq = Math.max(state.lastSeq, item.seq);
         saveSeq();
         next();
-      };
-      utterance.onerror = () => {
-        if (state.closed || !state.enabled) return;
-        state.busy = false;
-        state.enabled = false;
-        clearInterval(state.interval);
-        state.interval = null;
-        state.queue = [];
-        state.maxQueued = state.lastSeq;
-        setStatus("Lecture bloquée par le navigateur. Appuyer de nouveau sur « Activer les voix ».");
-        start.disabled = false;
-        pause.disabled = true;
-      };
-      try { synth.speak(utterance); }
-      catch (_) { utterance.onerror(); }
+      }
+      function speakLocal() {
+        if (!state.enabled || state.closed || generation !== state.generation) return;
+        if (!speechAvailable) {
+          setStatus("Voix indisponibles : dialogue affiché en texte.");
+          finish();
+          return;
+        }
+        const utterance = new SpeechSynthesisUtterance(item.texte);
+        utterance.lang = "fr-FR";
+        utterance.voice = voiceFor(speaker);
+        utterance.pitch = profile.pitch;
+        utterance.rate = profile.rate;
+        utterance.volume = 1;
+        setStatus("🔊 " + speaker + " · voix de secours du navigateur");
+        utterance.onend = finish;
+        utterance.onerror = () => {
+          if (state.closed || !state.enabled || generation !== state.generation) return;
+          state.busy = false;
+          state.enabled = false;
+          if (state.interval !== null) clearInterval(state.interval);
+          state.interval = null;
+          state.queue = [];
+          state.maxQueued = state.lastSeq;
+          setStatus("Lecture bloquée par le navigateur. Appuyer sur « Activer les voix ».");
+          start.disabled = false;
+          pause.disabled = true;
+        };
+        try { synth.speak(utterance); }
+        catch (_) { utterance.onerror(); }
+      }
+      if (!endpoint || !state.audioCtx) {
+        speakLocal();
+        return;
+      }
+      setStatus("✨ " + speaker + " · génération de voix naturelle");
+      state.abort = new AbortController();
+      const url = endpoint + "/speak?id=" + encodeURIComponent(id) + "&seq=" + item.seq;
+      fetch(url, { signal: state.abort.signal, cache: "no-store" })
+        .then(async response => {
+          if (!response.ok || !(response.headers.get("Content-Type") || "").includes("audio/")) {
+            throw new Error("service vocal indisponible");
+          }
+          const bytes = await response.arrayBuffer();
+          if (!bytes.byteLength || bytes.byteLength > 6000000) throw new Error("audio invalide");
+          return state.audioCtx.decodeAudioData(bytes);
+        })
+        .then(buffer => {
+          if (!state.enabled || state.closed || generation !== state.generation) return;
+          const source = state.audioCtx.createBufferSource();
+          state.source = source;
+          source.buffer = buffer;
+          source.connect(state.audioCtx.destination);
+          source.onended = finish;
+          setStatus("✨ " + speaker + " · voix naturelle");
+          source.start();
+        })
+        .catch(() => {
+          if (!state.enabled || state.closed || generation !== state.generation) return;
+          speakLocal();
+        });
     }
     function enqueue() {
       if (!state.enabled || state.closed) return;
@@ -171,25 +223,36 @@
       state.interval = null;
       state.queue = [];
       state.maxQueued = state.lastSeq;
+      state.generation++;
+      if (state.abort) state.abort.abort();
+      state.abort = null;
+      if (state.source) { try { state.source.onended = null; state.source.stop(); } catch (_) {} }
+      state.source = null;
       if (speechAvailable) synth.cancel();
-      start.disabled = !speechAvailable;
+      start.disabled = !speechAvailable && !AudioCtx;
       pause.disabled = true;
       current.textContent = "";
       setStatus("Lecture en pause. L'histoire reste dans ChatGPT.");
     }
     function startVoices() {
-      if (!speechAvailable || state.closed) return;
+      if ((!speechAvailable && !AudioCtx) || state.closed) return;
+      if (AudioCtx && !state.audioCtx) {
+        try { state.audioCtx = new AudioCtx(); } catch (_) {}
+      }
+      if (state.audioCtx && state.audioCtx.state === "suspended") state.audioCtx.resume().catch(() => {});
       state.enabled = true;
       start.disabled = true;
       pause.disabled = false;
       enqueue(); // Synchrone avec le clic : nécessaire pour les règles audio mobiles.
       if (!state.busy) {
         // Le message confirme le son immédiatement, dans le geste utilisateur initial.
-        const unlock = new SpeechSynthesisUtterance("Les voix du village sont prêtes.");
-        unlock.lang = "fr-FR";
-        unlock.voice = voiceFor("Narrateur");
-        unlock.rate = 0.94;
-        synth.speak(unlock);
+        if (speechAvailable) {
+          const unlock = new SpeechSynthesisUtterance("Les voix du village sont prêtes.");
+          unlock.lang = "fr-FR";
+          unlock.voice = voiceFor("Narrateur");
+          unlock.rate = 0.94;
+          synth.speak(unlock);
+        }
         setStatus("Voix actives · attente de nouvelles répliques.");
       }
       if (state.interval === null) state.interval = setInterval(refresh, 6000);
@@ -198,7 +261,7 @@
     start.addEventListener("click", startVoices);
     pause.addEventListener("click", stop);
     replay.addEventListener("click", () => {
-      if (!speechAvailable || !state.rows.length) return;
+      if ((!speechAvailable && !AudioCtx) || !state.rows.length) return;
       const tail = state.rows.slice(-3);
       if (!tail.length) return;
       if (speechAvailable) synth.cancel();
@@ -214,15 +277,16 @@
     state.close = () => {
       if (state.closed) return;
       stop();
+      if (state.audioCtx) { state.audioCtx.close().catch(() => {}); state.audioCtx = null; }
       state.closed = true;
       document.removeEventListener("visibilitychange", onVisible);
     };
     active = state;
-    if (!speechAvailable) {
+    if (!speechAvailable && !AudioCtx) {
       start.disabled = true;
       pause.disabled = true;
       replay.disabled = true;
-      setStatus("Synthèse vocale indisponible dans ce navigateur. Les dialogues restent lisibles.");
+      setStatus("Audio indisponible dans ce navigateur. Les dialogues restent lisibles.");
     } else pause.disabled = true;
     refresh(); // Prélire pour lancer immédiatement après le clic du MJ.
     return state;

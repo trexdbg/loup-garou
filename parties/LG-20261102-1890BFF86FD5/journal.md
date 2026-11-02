@@ -36,3 +36,12 @@ Nouvelle partie initialisée. En attente de la validation du MJ après le prolog
 - Le MJ autorise le réveil. Tous les huit habitants sont présents.
 - Aucun vote ouvert et aucun rôle révélé au public.
 - Jour 1, scène reveil_jour_1. André décide librement de ses interventions.
+
+## Jour 1 — Intervention d'André et préparation du vote
+
+- André trouve Hugo bizarre, juge que Rose défend beaucoup de monde et remarque que les villageois parlent énormément. Il hésite encore à désigner quelqu'un.
+- Les PNJ discutent de ses soupçons ; la scène `debats_jour_1_01` est enregistrée publiquement.
+- Le MJ autorise la préparation d'un vote, sans ouvrir le scrutin.
+- Hugo et Éloi sont évoqués comme suspects ; les huit habitants restent susceptibles de recevoir des voix.
+- Scène `preparation_vote_jour_1` archivée. Aucun bulletin attribué à André, aucun suffrage exprimé, aucune élimination.
+- En attente de l'autorisation explicite du MJ pour ouvrir le scrutin.

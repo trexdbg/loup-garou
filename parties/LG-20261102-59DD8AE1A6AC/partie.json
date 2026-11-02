@@ -61,7 +61,7 @@
     "retire": [],
     "valide_par_mj": true
   },
-  "resume_public": "Les habitants savent que des Loups-Garous se cachent dans le village. Ils commencent à se soupçonner.",
-  "aide_mj_publique": "Lire le prologue, puis laisser Alex choisir librement ce qu'il veut dire ou faire. Ne pas lancer la nuit sans accord du MJ.",
-  "dernier_evenement_public": "Début du tour de table ; Alex peut prendre la parole."
+  "resume_public": "Le tour de table continue. Alex soupçonne Rose, Hugo s'emporte et Jade et Baptiste contestent ses accusations. Rose attend la réponse d'Alex.",
+  "aide_mj_publique": "Alex peut expliquer ses soupçons ou parler à un autre habitant. Les PNJ peuvent se répondre. Ne pas déclencher de vote ou de nuit.",
+  "dernier_evenement_public": "Alex a demandé directement à Rose si elle est Loup-Garou. Rose lui demande ce qui a éveillé ses soupçons."
 }

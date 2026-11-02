@@ -107,7 +107,7 @@
   add(following,"strong",party.phase==="nuit"?"Après l’écoute : le MJ garde la main.":party.phase==="jour"?"Après l’écoute : animer les débats du jour.":"Après l’écoute : donner la parole à Alex.");
   add(following,"p","ChatGPT archive les scènes après validation du maître du jeu. Les décisions du joueur ne sont jamais prises automatiquement.");
   const copyButton=add(following,"button",party.phase==="nuit"?"📋 Copier l’étape nocturne":"📋 Continuer dans ChatGPT","secondary");copyButton.type="button";
-  const endRoundButton=add(following,"button",party.phase==="jour"?"✓ Préparer la fin des débats":"✓ Proposer la fin du tour","ghost");endRoundButton.type="button";
+  const endRoundButton=add(following,"button","✓ Clore les débats et ouvrir le vote","ghost");endRoundButton.type="button";
   endRoundButton.hidden = !["tour_de_table","jour"].includes(party.phase);
   const copied=add(following,"p","", "fine");
   function announce(text){if(!state.closed)status.textContent=text;}
@@ -286,7 +286,7 @@
     await copyText(text);
   });
   endRoundButton.addEventListener("click",async()=>{
-    const text="Partie "+id+". Le MJ souhaite conclure le débat de cette phase. Relis les échanges sur GitHub et propose une courte conclusion. Ne lance aucun vote ni nuit sans mon accord et archive uniquement la scène validée.";
+    const text="Partie "+id+". Je valide explicitement la clôture des débats ET l’ouverture du vote. Conclus la discussion en 1 à 3 phrases, ouvre immédiatement le scrutin, archive cet ensemble en un seul commit GitHub, puis attends les voix. N’élimine personne sans ma validation du dépouillement.";
     await copyText(text);
   });
   const onVoices=()=>{if(!state.closed)details();};

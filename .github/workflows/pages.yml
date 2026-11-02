@@ -3,6 +3,22 @@ name: Publier Thiercelieux Solo sur GitHub Pages
 on:
   push:
     branches: [main]
+    # Ne pas reconstruire Pages ni relancer la TTS pour les seuls secrets MJ,
+    # paramètres privés, corrections de documentation ou métadonnées inutiles.
+    paths:
+      - '.github/workflows/pages.yml'
+      - 'index.html'
+      - '*.js'
+      - '*.css'
+      - 'tts-config.json'
+      - 'voices/**'
+      - 'assets/**'
+      - 'parties/index.json'
+      - 'parties/*/partie.json'
+      - 'parties/*/dialogues.ndjson'
+      - 'parties/*/journal.md'
+      - 'parties/*/narrations.md'
+      - 'scripts/**'
   workflow_dispatch:
 
 permissions:

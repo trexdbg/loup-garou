@@ -16,7 +16,7 @@ Les champs déterminent l'âge du joueur, son prénom, le rôle (fixé ou tiré 
 
 1. Vérifier que `parties/<ID>/` n'existe pas. S'il existe, le considérer comme une reprise potentielle. Ne rien écraser sans validation du MJ.
 2. Lire les options du JSON, valider leurs contradictions éventuelles avec les règles officielles et demander arbitrage du MJ quand nécessaire.
-3. Dans la **conversation avec le MJ**, préparer les rôles des PNJ, leurs motivations, la solution possible et les événements futurs non dévoilés. Respecter le niveau `roles.mode`, le tableau `roles.autorises`, le nombre de personnages, les camps et le nombre cible de Loups. **Soumettre la répartition au MJ pour validation avant de continuer**. Conserver les identités stables au fil de la partie.
+3. Dans la **conversation avec le MJ**, préparer les rôles, les personnalités et le placement circulaire des LEGO en **une seule proposition**, en respectant les options, les rôles autorisés et le nombre de Loups. **Une seule validation du MJ couvre cette proposition d'ensemble** (rôles + voisinage), sauf demande de modification. Conserver les identités stables au fil de la partie.
 3 bis. **Après validation**, envoyer dans la conversation privée un JSON MJ contenant `id` (ID exact de partie) et `roles` (tableau de `{\"personnage\":\"Prénom\",\"role\":\"id_role\"}`). Chaque ID de rôle doit exister dans `roles.js`. Le MJ peut coller ce JSON dans son carnet de rôles local de l'application ; ChatGPT doit aussi l'archiver sur GitHub dans `secrets_mj.json` après validation.
 4. Écrire dans GitHub :
    - `parties/<ID>/parametres.json` : paramètres complets, y compris le rôle joueur imposé si présent (dépôt public).
@@ -74,14 +74,22 @@ Une carte secrète est placée physiquement **sous chaque LEGO** ; ne pas inclur
 
 Pour le Renard, le flair s'applique au **personnage ciblé et à ses deux voisins directs encore présents** dans l'ordre circulaire. Le carnet secret vérifie oui/non/incertain à partir des cartes attribuées localement, mais n'applique pas le pouvoir ni ses conséquences. Les pouvoirs de voisinage comme le Montreur d'Ours doivent employer le même plan. Détails : [placement LEGO](placement-lego.md).
 
-## 3. Cycle de jeu : une étape validée à la fois
+## 3. Cycle de jeu : mode rapide et économique (par défaut)
 
-- **MJ :** accepte le prologue et laisse le joueur agir.
-- **ChatGPT :** répond comme le PNJ concerné et décrit brièvement ce qui est visible/audible. Réserve au MJ les instructions confidentielles.
-- **MJ :** valide l'action ou l'arbitre. ChatGPT met ensuite à jour le journal public si l'action est jouée et non une simple hypothèse.
-- **Nuit :** annoncer « Le village s'endort », appeler uniquement les rôles pertinents dans un ordre cohérent, attendre les décisions du MJ, résoudre les pouvoirs et annoncer le réveil.
-- **Jour :** paroles libres, questions, indices, déplacements, débat ; jamais forcer un vote ou éliminer un personnage sans conséquence logique et arbitrage.
-- **Fin :** archiver le résultat, changer le statut en `terminee` et proposer un debrief accessible à l'âge du joueur.
+**Objectif : moins de tours de conversation, moins de commits, moins de générations audio**, sans retirer l'autorité du MJ. La partie progresse en **unités jouables complètes** et non en micro-étapes administratives.
+
+- **Initialisation :** présenter distribution secrète des rôles + placement circulaire dans la même proposition ; un seul « je valide » du MJ suffit à archiver la configuration et le prologue.
+- **Chaque tour :** quand le MJ rapporte des paroles, valide une action ou dit « on continue », faire d'un seul tenant les réactions des PNJ, les effets mécaniques déjà déterminés, le bref texte à jouer et la préparation de la prochaine décision. Ne pas demander de deuxième confirmation pour la même action.
+- **PNJ autonomes :** les personnages joués par ChatGPT raisonnent, bluffent, votent ou choisissent leur pouvoir selon leurs informations et leurs personnalités. Le MJ n'a pas à choisir chaque réaction PNJ. Ne jamais inventer le choix d'Alex.
+- **Nuit :** regrouper les appels et effets de rôles PNJ qui ne réclament pas d'arbitrage. Respecter l'ordre réel des pouvoirs ; s'arrêter **au premier choix humain nécessaire** (Alex ou MJ). Ne pas révéler/résoudre une mort non encore approuvée.
+- **Jour et vote :** faire des échanges courts entre PNJ pertinents, puis laisser Alex parler. Une demande explicite « on lance le vote » autorise directement l'ouverture du scrutin, sans nouvelle validation préalable. Le dépouillement et les éliminations restent sous validation du MJ.
+- **Écriture GitHub :** un seul **commit atomique par scène ou décision validée**, contenant les seuls fichiers effectivement modifiés (état, secrets le cas échéant, dialogue public et journal). Mettre à jour `parties/index.json` uniquement si une donnée de l'index change (phase, statut, titre), pas à chaque réplique. Ne pas multiplier les commits par fichier. En cas d'échec, ne pas prétendre que GitHub est à jour.
+- **Audio :** regrouper les répliques en une scène cohérente, viser **2 à 5 répliques PNJ courtes** lors d'un échange ordinaire et réutiliser les clips existants. Ne pas synthétiser la parole du joueur, les informations secrètes ou les scènes sans intérêt vocal. Ne publier que les répliques réellement jouées/validées.
+- **Réponse au MJ :** afficher directement les paroles à lire, l'effet résolu et **la prochaine décision attendue** ; supprimer les récapitulatifs, demandes de permission et annonces techniques répétitives. Mentionner la synchronisation uniquement si elle échoue ou si le MJ la demande.
+- **Contrôles obligatoires :** validation initiale des rôles/LEGO ; choix et pouvoirs du joueur ; début de nuit ou de vote ; verdict et éliminations ; choix douteux ou irréversible. Une instruction explicite du MJ vaut validation de l'action nommée. Ne pas en déduire une autorisation pour les autres éliminations ou les transitions non demandées.
+- **Fin :** après verdict validé, contrôler immédiatement la victoire, archiver en un commit, puis annoncer la fin si les conditions sont remplies. Aucun aller-retour « dois-je vérifier la victoire ? ».
+
+Le MJ peut demander une progression détaillée ; le mode rapide reste la valeur par défaut. Le MJ peut interrompre, corriger, ralentir ou modifier une règle. Ses choix priment toujours.
 
 Le MJ peut interrompre, revenir sur une scène, changer un personnage, demander un indice, ralentir ou accélérer, et accorder une exception de règle. Ces décisions priment sur les propositions de l'assistant.
 
@@ -109,9 +117,9 @@ Les 37 rôles du catalogue `roles.js` peuvent être sélectionnés. Les règles 
 
 ## 7. Scènes audio à la demande et tour de table
 
-Après validation d'une intervention d'Alex par le MJ, ChatGPT publie **uniquement les nouveaux événements validés** dans `parties/<ID>/dialogues.ndjson`. Les entrées se suivent sans modifier les anciennes : `seq` est un entier strictement croissant, `public` vaut `true`, et l'entrée comprend `type`, `locuteur`, `texte`, `scene_id` et `scene_label`.
+Après validation par le MJ d'un **lot cohérent d'échanges déjà joués**, ChatGPT publie **uniquement les nouveaux événements validés** dans `parties/<ID>/dialogues.ndjson`. Les entrées se suivent sans modifier les anciennes : `seq` est un entier strictement croissant, `public` vaut `true`, et l'entrée comprend `type`, `locuteur`, `texte`, `scene_id` et `scene_label`.
 
-Chaque nouvelle intervention du joueur entraîne un **nouveau groupe de répliques** sous un `scene_id` stable pour tout le lot, par exemple `tour_de_table_03` puis `tour_de_table_04`. Le lecteur manuel affiche et joue une scène à la fois ; l'ordre des répliques est donné par `seq`. Les types autorisés sont `dialogue_pnj`, `narration` ou `dialogue_joueur` (ce dernier est visible, mais non synthétisé : l'enfant a déjà prononcé ses propres paroles).
+Une même scène peut contenir **plusieurs interventions du joueur et les réactions correspondantes** sous un `scene_id` stable pour tout le lot, par exemple `tour_de_table_03` puis `tour_de_table_04`. Le lecteur manuel affiche et joue une scène à la fois ; l'ordre des répliques est donné par `seq`. Les types autorisés sont `dialogue_pnj`, `narration` ou `dialogue_joueur` (ce dernier est visible, mais non synthétisé : l'enfant a déjà prononcé ses propres paroles).
 
 Exemple public de deux lignes dans une même scène :
 
@@ -122,7 +130,7 @@ Exemple public de deux lignes dans une même scène :
 
 **Ces lignes sont illustratives et ne doivent pas être ajoutées à une partie réelle.** ChatGPT garde une séparation absolue entre le texte joué publiquement et `secrets_mj.json` ; ne pas y inscrire d'identité cachée non révélée.
 
-Dans `partie.json`, maintenir `phase: "tour_de_table"`, `scene_courante_id` et l'état `tour_de_table` durant les échanges. Mettre à jour `parties/index.json` avec la phase et sans supprimer les autres parties. Le déroulement attendu est **écouter → intervention d'Alex → réaction des habitants → archivage → actualiser → réécouter**. Les PNJ peuvent débattre entre eux, se contredire et bluffer, en respectant les secrets et les rôles. Ne jamais pré-écrire le choix d'Alex.
+Dans `partie.json`, maintenir `phase: "tour_de_table"`, `scene_courante_id` et l'état `tour_de_table` durant les échanges. Mettre à jour `parties/index.json` **seulement lorsque sa phase ou son statut change**, sans supprimer les autres parties. Le déroulement rapide est **écouter → interventions d'Alex et réactions → un archivage groupé → actualiser → écouter**. Les PNJ peuvent débattre entre eux, se contredire et bluffer, en respectant les secrets et les rôles. Ne jamais pré-écrire le choix d'Alex.
 
 Le MJ seul valide la fin du tour, le lancement d'un vote et l'endormissement du village. Les boutons de l'application pour poursuivre ou terminer le tour **copient des consignes destinées à ChatGPT**, ils ne changent pas l'état de jeu automatiquement.
 

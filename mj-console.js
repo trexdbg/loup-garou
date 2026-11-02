@@ -22,9 +22,9 @@
     if (phase === "nuit") {
       const stage = night.etape || "endormissement";
       const scripts = {
-        endormissement: ["Appeler la Voyante", "Annonce le réveil de la Voyante. Attends le choix de sa carte et l'accord du MJ, sans appeler les Loups automatiquement."],
-        appel_voyante: ["Terminer l'action de la Voyante", "Fais choisir une carte à la Voyante PNJ selon son caractère. Archive son observation uniquement dans secrets_mj.json, fais-la se rendormir puis appelle les Loups. Attends la décision du joueur Alex."],
-        appel_sorciere: ["Faire agir la Sorcière", "Incarne Rose, PNJ Sorcière. Après la victime désignée, fais-la décider elle-même de ses potions selon son caractère. Consigne les effets dans secrets_mj.json ; ne réveille pas le village."],
+        endormissement: ["Poursuivre la nuit", "Le MJ a lancé la nuit : enchaîne les pouvoirs PNJ sans choix humain, dans le bon ordre ; arrête-toi au prochain choix d’Alex ou arbitrage MJ. Ne résous pas de victime par anticipation."],
+        appel_voyante: ["Voyante puis Loups", "Si la Voyante est PNJ, fais-la choisir elle-même sa carte, conserve l’observation dans secrets_mj.json, puis appelle les Loups dans le même échange. Stoppe au choix d’Alex si Alex doit agir."],
+        appel_sorciere: ["Faire agir la Sorcière", "Fais agir la Sorcière selon le rôle réellement attribué et sa personnalité. Si elle est PNJ, décide de ses potions sans interroger le MJ pour chaque détail ; archive les effets secrets sans réveiller le village ni résoudre de nouvelle élimination non validée."],
         sorciere_rendormie: ["Réveiller le village", "Le MJ autorise le réveil. Calcule les survivants avec les décisions de la nuit, crée la scène du matin et passe au jour suivant sans ouvrir de vote."]
       };
       const data = scripts[stage] || ["Continuer la nuit", "Propose uniquement la prochaine action nocturne légale, sans inventer de choix de joueur ni déclencher de réveil."];
@@ -45,19 +45,19 @@
   function promptFor(id, state, action="next", note="") {
     const guide = guideFor(state);
     const start = "MODE MAÎTRE DU JEU — Partie Loup-Garou " + id + ".\n" +
-      "Relis sur GitHub trexdbg/loup-garou : partie.json, dialogues.ndjson, journal.md, secrets_mj.json.\n" +
+      "Lis l’état utile de la partie sur GitHub trexdbg/loup-garou (partie.json, secrets_mj.json et fin du journal/dialogues) ; évite les relectures intégrales inutiles.\n" +
       "Tu incarnes les PNJ et décides leurs actions ; Alex reste seul maître de ses actes. " +
       "L'application est exclusivement une régie MJ. Ne publie jamais de secret dans les scènes publiques.\n";
     let task = guide.instructions;
     if (action === "resume") task = "Vérifie précisément l'état déjà enregistré, rappelle au MJ la dernière scène et propose uniquement la prochaine action adaptée. Ne modifie rien sans une nouvelle décision validée.";
     if (action === "sync") task = "Vérifie si les dernières scènes et décisions validées dans cette conversation sont bien sur la branche main de GitHub. Synchronise uniquement les événements validés, vérifie les fichiers et le déploiement. Si l'écriture échoue, indique-le sans prétendre avoir poussé.";
-    if (action === "dialogue") task = "Laisse Alex intervenir librement. Voici ses mots ou intentions : " + (note || "(le MJ ajoutera les paroles d'Alex)") + ". Fais réagir les PNJ et archive cette nouvelle scène sans passer à une autre phase.";
+    if (action === "dialogue") task = "Alex intervient librement : " + (note || "(le MJ ajoutera ses paroles)") + ". Fais réagir 2 à 4 PNJ pertinents avec des répliques courtes, sans inventer sa réponse ; regroupe les dialogues joués en une seule scène et un seul commit, sans changer de phase.";
     return start + "\nÉtat annoncé : phase=" + (state.phase || "prologue") +
       ", scène=" + (state.scene_courante_id || state.progression?.scene || "?") +
       ", nuit=" + (state.progression?.nuit ?? 0) + ", jour=" + (state.progression?.jour ?? 0) + ".\n" +
       "\nACTION DEMANDÉE : " + task +
-      "\n\nRègles de régie : aucun vote, élimination, changement de phase, pouvoir du joueur ou annonce du matin sans validation explicite du MJ. " +
-      "Conserve les rôles et décisions secrets dans secrets_mj.json. Après écriture, confirme le commit exact.";
+      "\n\nMODE RAPIDE : applique directement l’action explicitement validée par le MJ, résous ses conséquences déterministes, fais agir les PNJ autonomes, puis archive le lot en UN SEUL commit GitHub. Ne demande pas une nouvelle validation pour la même action. " +
+      "Stoppe avant tout vote, élimination, pouvoir d’Alex ou changement de phase non autorisé. Journal bref ; index modifié seulement si phase/statut change. Audio : 2 à 5 répliques PNJ utiles par scène, jamais les secrets. Signale clairement un échec de synchronisation.";
   }
   function attach(id,state,mount) {
     mount.replaceChildren();
@@ -88,12 +88,12 @@
     action.append(make("p",guide.subtitle,"mj-action-subtitle"),make("h3",guide.title),make("p",guide.instructions,"mj-next-help"));
     const actions=make("div",null,"mj-action-buttons");
     const next=make("button","📋 Copier la prochaine consigne","primary");
-    const sync=make("button","↻ Synchroniser GitHub","secondary");
+    const sync=make("button","↻ Vérifier GitHub (si besoin)","secondary");
     const resume=make("button","📖 Reprendre l'état","ghost");
     const audio=make("button","▶ Régie audio","ghost");
     for(const button of [next,sync,resume,audio])button.type="button";
     actions.append(next,sync,resume,audio);action.append(actions);
-    const status=make("p","Ces boutons préparent une consigne pour ChatGPT ; ils ne modifient pas GitHub.","mj-copy-status");
+    const status=make("p","Mode rapide : chaque scène validée se synchronise en une fois ; vérification manuelle seulement si nécessaire.","mj-copy-status");
     status.setAttribute("role","status");action.append(status);
     const fallback=make("textarea",null,"mj-copy-fallback");fallback.hidden=true;fallback.readOnly=true;fallback.setAttribute("aria-label","Consigne à copier dans ChatGPT");action.append(fallback);
     const copy=async(value)=>{
@@ -137,7 +137,7 @@
     nLabel.append(textarea);noteButtons.append(copyNotes,clear);
     notes.append(nTitle,nLabel,noteButtons,make("p","Stockage de session dans ce navigateur, non synchronisé sur GitHub. Les notes ne sont envoyées à ChatGPT que lorsque vous copiez la consigne.","fine"));
     main.append(notes);
-    const final=make("p","⚑ Point de contrôle : seule une validation du MJ dans ChatGPT peut changer la phase ou archiver une nouvelle décision.","mj-stop-rule");
+    const final=make("p","⚑ Un accord explicite du MJ suffit pour l’action annoncée. Les autres éliminations, votes et transitions restent bloqués.","mj-stop-rule");
     main.append(final);mount.append(main);
   }
   window.LG_MJ_CONSOLE={attach,guideFor,promptFor};

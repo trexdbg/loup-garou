@@ -59,7 +59,12 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_TTS_MODEL: ${{ vars.GEMINI_TTS_MODEL || 'gemini-3.1-flash-tts-preview' }}
         run: |
-          # Sans secret, aucune requête à Google et le lecteur utilise les voix locales.
+          # Vérification sans jamais afficher la valeur du token dans les logs.
+          if [ -n "$GEMINI_API_KEY" ]; then
+            echo "Configuration Gemini : secret GEMINI_API_KEY présent."
+          else
+            echo "::warning::Secret GEMINI_API_KEY absent : lecture vocale locale uniquement."
+          fi
           python3 scripts/generate_gemini_tts.py --site site --max-scenes 3 --max-lines 24
       - name: Configurer GitHub Pages
         uses: actions/configure-pages@v5

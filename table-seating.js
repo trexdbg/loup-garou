@@ -26,7 +26,7 @@ function attach(id,state,mount){
  function update(){
   ring.replaceChildren();rows.replaceChildren();
   const active=s.ordre.filter(x=>!s.retire.includes(x));
-  if(!active.includes(s.centre))s.centre=active[0]||null;
+  if(s.centre && !active.includes(s.centre))s.centre=null;
   const selected=M.trio(s.ordre,s.centre,s.retire);
   const radius=Math.max(140,s.ordre.length*16),size=2*radius+126;
   ring.style.width=size+"px";ring.style.height=size+"px";
@@ -49,7 +49,7 @@ function attach(id,state,mount){
     out.addEventListener("click",()=>{s.retire=retired?s.retire.filter(x=>x!==person):s.retire.concat(person);s.valide=false;persist();update();});
     controls.append(out);item.append(label,controls);rows.append(item);
   });
-  fox.textContent=selected.length?"Flair sur 3 voisins : "+selected.join(" · "):"Il faut 3 figurines présentes pour utiliser le flair.";
+  fox.textContent=selected.length?"Flair sur 3 voisins : "+selected.join(" · "):active.length<3?"Il faut au moins 3 figurines présentes pour utiliser le flair.":"Clique sur une figurine centrale pour sélectionner le trio du Renard.";
   validate.disabled=names.length<3;
   status.textContent=names.length<3?"Il manque des personnages : prépare-les avec ChatGPT.":matchesRemote()?"Plan validé et archivé sur GitHub.":s.valide?"Plan validé ici. Copie-le vers ChatGPT pour l'archiver.":"Ordre provisoire : ajuste les LEGO et valide le placement réel.";
  }

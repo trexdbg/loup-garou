@@ -114,7 +114,7 @@ def generate(root: Path, site: Path, cache: Path,
     generated = 0
     stopped = False
     # Prefer the most recently created games if the free quota is tight.
-    entries = sorted(entries, key=lambda x: str(x.get("cree_le", "")), reverse=True)
+    entries = sorted(reversed(entries), key=lambda x: str(x.get("cree_le", "")), reverse=True)
     for entry in entries:
         if str(entry.get("statut", "")).lower() in {"terminee", "terminée", "completed", "finished"}:
             continue
@@ -151,12 +151,15 @@ def generate(root: Path, site: Path, cache: Path,
                     pcm, mime = synthesize(text, voice, style, api_key)
                     make_mp3(pcm, mime, cached)
                     generated += 1
-                    time.sleep(4)  # Space requests within the free-tier RPM limits.
+                    time.sleep(16)  # Pace successful requests conservatively within free-tier limits.
                     print("Gemini generated: " + party_id + " seq " + str(row["seq"]))
                 except urllib.error.HTTPError as exc:
                     print("Gemini HTTP " + str(exc.code) + " on seq " + str(row["seq"]), file=sys.stderr)
                     if exc.code in (400, 401, 403, 404, 429):
                         stopped = True
+                except FileNotFoundError:
+                    print("Gemini audio conversion unavailable: ffmpeg executable missing.", file=sys.stderr)
+                    stopped = True
                 except (urllib.error.URLError, ValueError, OSError, subprocess.TimeoutExpired) as exc:
                     print("Gemini/audio failed on seq " + str(row["seq"]) + ": " + type(exc).__name__, file=sys.stderr)
             if cached.is_file():

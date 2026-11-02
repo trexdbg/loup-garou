@@ -31,6 +31,36 @@ class GeminiTTSTests(unittest.TestCase):
         self.assertEqual(voice_for("Narrateur", cast)[0], "Charon")
         self.assertEqual(voice_for("Rose", cast), voice_for("Rose", cast))
 
+    def test_latest_game_is_processed_first_even_for_same_day(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            older = root / "parties" / "LG-20261102-AAAAAAAAAAAA"
+            newer = root / "parties" / "LG-20261102-BBBBBBBBBBBB"
+            for directory in (older, newer):
+                directory.mkdir(parents=True)
+                (directory / "partie.json").write_text('{"personnages_pnj":[]}', encoding="utf-8")
+                (directory / "dialogues.ndjson").write_text(
+                    json.dumps({"seq": 1, "scene_id": "prologue", "public": True,
+                                "type": "narration", "locuteur": "Narrateur",
+                                "texte": directory.name}), encoding="utf-8")
+            (root / "parties" / "index.json").write_text(
+                json.dumps({"parties": [
+                    {"id": older.name, "cree_le": "2026-11-02"},
+                    {"id": newer.name, "cree_le": "2026-11-02"}
+                ]}), encoding="utf-8")
+            seen = []
+            def fake_synthesize(text, voice, style, api_key):
+                seen.append(text)
+                return b"mock", "audio/pcm"
+            def fake_mp3(data, mime, path):
+                path.write_bytes(b"mock mp3")
+            with patch("scripts.generate_gemini_tts.synthesize", fake_synthesize), \
+                 patch("scripts.generate_gemini_tts.make_mp3", fake_mp3), \
+                 patch("scripts.generate_gemini_tts.time.sleep", lambda seconds: None):
+                self.assertEqual(generate(root, root / "site", root / "cache", 1, 3, "test-key"), 1)
+            self.assertEqual(seen, [newer.name])
+
     def test_no_secret_creates_only_public_manifest(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

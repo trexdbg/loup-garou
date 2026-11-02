@@ -18,8 +18,9 @@ Si la page est absente, ouvrir Settings → Pages → Source → GitHub Actions 
 4. ChatGPT retrouve l'ID, vérifie qu'il n'existe pas, crée le répertoire `parties/<ID>/` via la connexion GitHub **si celle-ci est disponible**, met à jour `parties/index.json`, prépare uniquement **le prologue**, puis attend le MJ.
 5. La conversation ChatGPT devient le **jeu**. L'enfant parle librement ; ChatGPT joue les PNJ, propose les scènes et rappelle les règles au MJ. Chaque action ou transition significative doit être validée par le MJ avant archivage.
 6. Dans l'onglet **Mes parties**, retrouver l'ID et lire narrations, journal et dialogues publiés dans GitHub. Un bouton **Actualiser** recharge les dernières données.
+7. Pour les **voix automatiques**, ouvrir la partie puis cliquer une seule fois sur « Activer les voix » (déblocage audio mobile). Chaque nouvelle réplique publique ajoutée par ChatGPT est ensuite détectée et prononcée avec la voix du personnage.
 
-**Il n'existe pas de synchronisation directe automatique depuis une conversation ChatGPT vers un navigateur.** Les écritures ont lieu lors des interventions explicites de ChatGPT disposant du connecteur GitHub. GitHub Pages se republie après chaque commit sur `main` ; un léger délai de publication est normal. Pour consulter un fichier qui vient d'être créé mais n'est pas encore disponible dans Pages, le lecteur tente aussi la version GitHub publique.
+**Le lecteur vocal vérifie les dialogues publics sur GitHub environ toutes les 6 secondes après activation : un message dans ChatGPT n'est pas audible avant son archivage effectif. Il n'existe pas de synchronisation directe automatique depuis une conversation ChatGPT vers un navigateur.** Les écritures ont lieu lors des interventions explicites de ChatGPT disposant du connecteur GitHub. GitHub Pages se republie après chaque commit sur `main` ; un léger délai de publication est normal. Pour consulter un fichier qui vient d'être créé mais n'est pas encore disponible dans Pages, le lecteur tente aussi la version GitHub publique.
 
 ## Répartition des responsabilités
 
@@ -68,3 +69,12 @@ L'interface Pages publie uniquement `partie.json`, `journal.md`, `narrations.md`
 Les enregistrements audio propres aux parties sont facultatifs et éphémères : ne pas commiter de longs MP3 générés dans GitHub. Un workflow de nettoyage existe pour les parties terminées.
 
 L'univers, les règles et les cartes appartiennent à leurs ayants droit. Pour vérifier un pouvoir complexe, se référer aux cartes physiques et aux livrets officiels.
+
+## Voix automatiques progressives
+
+- `voice-live.js` associe une voix française et un profil de hauteur/débit à Agathe, Basile, Clémence, Gaston, Iris, Malo, Rosalie et au Narrateur. Les voix disponibles varient selon le navigateur et l'appareil du MJ.
+- **Activation initiale une seule fois** : les navigateurs peuvent bloquer le son tant que l'utilisateur n'a pas touché le site. Ensuite, les nouvelles lignes publiques du `dialogues.ndjson` de la partie sont prononcées dans l'ordre avec la voix du personnage, sans clic par dialogue. Il faut laisser la page ouverte.
+- La progression de lecture est mémorisée dans la session du navigateur. Le bouton pause interrompt la lecture ; « Réécouter les 3 dernières » permet de répéter une scène courte.
+- Les voix sont **synthétisées à la volée (Web Speech)** : aucun MP3 n'est produit ni conservé dans GitHub. La qualité et la diversité des voix dépendent de l'appareil.
+- ChatGPT continue de gérer les réactions et les décisions dans la conversation, sous validation du MJ, et doit écrire chaque nouveau dialogue dans GitHub. L'application reste en **lecture seule**.
+- Les textes privés et les secrets du MJ ne sont jamais transmis au lecteur public.

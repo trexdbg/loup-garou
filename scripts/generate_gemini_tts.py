@@ -190,7 +190,7 @@ def generate(root: Path, site: Path, cache: Path,
                     and previous_clip.get("texte") == text
                     and isinstance(previous_clip.get("file"), str)
                     and re.fullmatch(r"audio/[a-f0-9]{20}\.mp3", previous_clip["file"])
-                    and (directory / previous_clip["file"]).is_file()):
+                    and (target.parent / previous_clip["file"]).is_file()):
                 manifest["lines"][str(row["seq"])] = previous_clip
                 stats["available"] += 1
                 continue

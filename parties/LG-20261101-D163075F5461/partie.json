@@ -63,5 +63,22 @@
     "journal": "journal.md",
     "narrations": "narrations.md"
   },
-  "prochain_geste": "Attendre la réponse d'Alex à Agathe, puis proposer la suite sous contrôle du MJ."
+  "prochain_geste": "Attendre la réponse d'Alex à Agathe, puis proposer la suite sous contrôle du MJ.",
+  "placement_table": {
+    "type": "circulaire",
+    "sens": "horaire",
+    "depart": "12h",
+    "ordre": [
+      "Alex",
+      "Agathe",
+      "Basile",
+      "Clémence",
+      "Gaston",
+      "Iris",
+      "Rosalie",
+      "Malo"
+    ],
+    "retire": [],
+    "valide_par_mj": true
+  }
 }

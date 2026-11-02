@@ -78,3 +78,14 @@ L'univers, les règles et les cartes appartiennent à leurs ayants droit. Pour v
 - Les voix sont **synthétisées à la volée (Web Speech)** : aucun MP3 n'est produit ni conservé dans GitHub. La qualité et la diversité des voix dépendent de l'appareil.
 - ChatGPT continue de gérer les réactions et les décisions dans la conversation, sous validation du MJ, et doit écrire chaque nouveau dialogue dans GitHub. L'application reste en **lecture seule**.
 - Les textes privés et les secrets du MJ ne sont jamais transmis au lecteur public.
+
+### Voix neuronales haute qualité (option payante)
+
+Le mode local Web Speech est gratuit, mais peut sonner robotique. Pour des voix françaises plus expressives avec un timbre distinct par PNJ, le projet contient désormais un **pont ElevenLabs sécurisé côté Cloudflare Worker**, qui génère l'audio uniquement après la publication d'une nouvelle réplique jouée. Le son est lu dans l'application et n'est pas commité dans GitHub.
+
+**Ce mode n'est pas actif par défaut :** aucun compte ElevenLabs, aucune clé ni aucun Worker n'a été configuré par ChatGPT. Le fichier `tts-config.json` reste désactivé. La mise en service nécessite un compte/API ElevenLabs, un Worker Cloudflare et un choix de voix françaises ; les secrets ne doivent jamais être ajoutés à ce dépôt public.
+
+- Instructions d'installation : [tts-worker/README.md](tts-worker/README.md).
+- Le coût dépend du fournisseur et de l'utilisation : définir un plafond de dépense et garder le limiteur de requêtes activé.
+- Une panne du fournisseur fait automatiquement revenir l'application à la voix locale ; la partie et les dialogues publics restent utilisables.
+- Une courte annonce dans l'application signale que les voix générées par l'IA ne sont pas des acteurs humains.

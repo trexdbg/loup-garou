@@ -4,11 +4,11 @@
   "titre": "Le village des huit suspects",
   "cree_le": "2026-11-02T18:58:30.815Z",
   "statut": "en_cours",
-  "phase": "tour_de_table",
+  "phase": "nuit",
   "progression": {
     "jour": 0,
-    "nuit": 0,
-    "scene": "tour_de_table_01"
+    "nuit": 1,
+    "scene": "appel_voyante_01"
   },
   "joueur": {
     "prenom": "André",
@@ -63,23 +63,33 @@
     "statut": "valide",
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Les habitants débattent sur la place du village et commencent à se soupçonner. André peut intervenir librement.",
-  "aide_mj_publique": "Faire écouter le tour de table 01 à la demande, puis laisser André parler ou interroger un PNJ. Attendre l'accord du MJ pour tout vote, fin du débat ou nuit.",
-  "dernier_evenement_public": "Après les premiers soupçons, Rose invite André à réagir. Aucun vote n'est ouvert.",
-  "scene_courante_id": "tour_de_table_01",
+  "resume_public": "La première nuit a commencé. La Voyante a consulté une carte et s'est rendormie. Aucun autre rôle n'a été appelé.",
+  "aide_mj_publique": "La Voyante s'est rendormie. Attendre l'accord explicite du MJ avant d'appeler les Loups-Garous. Ne désigner aucune victime, ne réveiller personne.",
+  "dernier_evenement_public": "Nuit 1 : la Voyante s'est rendormie après avoir observé une carte. Aucun secret n'est révélé.",
+  "scene_courante_id": "appel_voyante_01",
   "tour_de_table": {
-    "statut": "en_cours",
-    "dernier_echange": "tour_de_table_01",
-    "dialogues_enregistres": 13,
-    "attendre_reponse_andre": true,
+    "statut": "termine",
+    "dernier_echange": "tour_de_table_02",
+    "dialogues_enregistres": 30,
+    "attendre_reponse_andre": false,
     "attendre_validation_mj": true,
     "passage_vote_apres_validation_mj": true
   },
   "jour_en_cours": {
     "numero": 0,
-    "etape": "tour_de_table",
-    "statut": "attente_andre",
+    "etape": "cloture_debats",
+    "statut": "termine",
     "vote_ouvert": false,
     "attendre_validation_mj": true
+  },
+  "nuit_en_cours": {
+    "numero": 1,
+    "etape": "voyante_rendormie",
+    "actions_resolues": [
+      "voyante_observation"
+    ],
+    "attendre_validation_mj": true,
+    "prochain_appel": "loups",
+    "loups_appeles": false
   }
 }

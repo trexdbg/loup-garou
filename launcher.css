@@ -149,3 +149,55 @@ footer { padding:28px 15px; }
 .mj-fox-check h4,.mj-fox-answer{color:#f2d6a5}
 .mj-fox-answer{font-weight:700}
 @media(max-width:740px){.seating-panel{padding:11px}.seating-rows{grid-template-columns:1fr}}
+
+/* Interface d'écoute : chaque scène est une étape, le carnet secret reste replié. */
+.game-header {padding:17px 19px 8px;border-radius:14px;background:linear-gradient(135deg,#252c39,#171f2c);border:1px solid #526078;margin:14px 0}
+.game-header h3 {margin:6px 0 12px!important}
+.game-phase {margin:0;color:#eac891;font-size:.76rem;letter-spacing:.12em;font-weight:800}
+.game-synopsis {margin:15px 0 8px;color:#d8dbdf;line-height:1.6}
+.game-stage {display:grid;grid-template-columns:1fr;gap:18px;margin:19px 0}
+.scene-player {border:1px solid #ad8654;background:linear-gradient(145deg,#302d35,#1c2734 70%);border-radius:16px;padding:22px;box-shadow:0 12px 30px #0002}
+.scene-player h3 {font-size:1.45rem!important;margin:4px 0 10px!important;color:#f3d6a3}
+.scene-kicker {font-size:.74rem;letter-spacing:.16em;font-weight:900;color:#e8bc7c;margin:0}
+.scene-help {color:#d2d4db;line-height:1.55;max-width:760px;margin:0 0 16px}
+.scene-controls {display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin:13px 0}
+.scene-controls label {flex:1 1 240px;font-size:.87rem;font-weight:700;color:#e6d8c5}
+.scene-controls select {display:block;width:100%;margin-top:7px;border-radius:10px;min-height:44px}
+.scene-controls button {width:auto;min-height:44px;flex:0 1 175px}
+.scene-controls .fine {flex:1 1 100%;margin:0;color:#c9cbd0}
+.scene-buttons {display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.scene-buttons button {width:auto;flex:1 1 145px;min-height:46px}
+.scene-buttons .primary {font-weight:800;font-size:1.02rem}
+.scene-buttons button:disabled {opacity:.5;cursor:not-allowed}
+.scene-status {border:1px solid #7c7065;border-radius:10px;padding:12px;background:#1b2633;color:#f2d8a9;font-weight:700;font-size:.93rem;min-height:43px}
+.scene-transcript {list-style:none;padding:0;margin:16px 0 0;display:grid;gap:9px;max-height:540px;overflow-y:auto}
+.scene-line {border:1px solid #434e60;background:#171f2c;border-radius:12px;padding:12px 15px;display:grid;grid-template-columns:minmax(74px,105px) minmax(0,1fr);gap:12px;line-height:1.55;transition:background .15s,border-color .15s}
+.scene-line strong {color:#eed0a0}
+.scene-line span {color:#e3e5ea;overflow-wrap:anywhere}
+.scene-player-line {border-style:dashed;background:#213044}
+.scene-narrator-line {border-color:#414958;background:#20242e}
+.scene-narrator-line strong {color:#b5c5dc}
+.scene-speaking {border-color:#f4bf75;background:#3a3235;box-shadow:inset 3px 0 #f4bf75}
+.scene-followup {border-top:1px solid #6d6370;padding-top:17px;margin-top:20px}
+.scene-followup strong {color:#f3d6a3}
+.scene-followup p {color:#cfd3dc;line-height:1.5;margin:8px 0 12px}
+.scene-followup button {width:auto;min-height:43px}
+.game-details {border:1px solid #525f70;border-radius:13px;padding:0 17px;background:#1b2431}
+.game-details>summary {cursor:pointer;list-style:none;color:#e9cfaa;font-weight:800;font-size:1rem;padding:17px 3px}
+.game-details>summary::-webkit-details-marker {display:none}
+.game-details>summary:after {content:"＋";float:right;color:#d2b482}
+.game-details[open]>summary:after {content:"−"}
+.game-details[open]>summary {border-bottom:1px solid #414e60}
+.game-details .seating-panel {margin:16px 0}
+.game-details .mj-private-slot {margin:16px 0}
+.game-private {background:#222333;border-color:#73664b}
+.game-history {margin:18px 0}
+.game-history .archive-document {margin-bottom:18px}
+@media(max-width:740px){
+ .game-header {padding:14px}
+ .scene-player {padding:14px}
+ .scene-controls button,.scene-buttons button,.scene-followup button {flex:1 1 100%;width:100%}
+ .scene-line {grid-template-columns:1fr;gap:3px}
+ .scene-transcript {max-height:490px}
+ .game-details {padding:0 11px}
+}

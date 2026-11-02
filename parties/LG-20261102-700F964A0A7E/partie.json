@@ -4,11 +4,11 @@
   "titre": "Le village des soupçons",
   "cree_le": "2026-11-02T12:39:56.344Z",
   "statut": "en_cours",
-  "phase": "nuit",
+  "phase": "jour",
   "progression": {
-    "jour": 0,
+    "jour": 1,
     "nuit": 1,
-    "scene": "nuit_1_sorciere_rendormie"
+    "scene": "reveil_jour_1"
   },
   "joueur": {
     "prenom": "Alex",
@@ -61,10 +61,10 @@
     "retire": [],
     "valide_par_mj": true
   },
-  "resume_public": "La Sorcière a décidé en silence puis s'est rendormie. Le village dort toujours ; le réveil doit être autorisé par le MJ.",
-  "aide_mj_publique": "La Sorcière a terminé son tour. Attendre le signal explicite du MJ avant le réveil du village, les annonces du matin et les révélations.",
-  "dernier_evenement_public": "La Sorcière se rendort. La première nuit se poursuit en attendant le signal du MJ.",
-  "scene_courante_id": "nuit_1_sorciere_rendormie",
+  "resume_public": "Le village se réveille après la première nuit : tous les huit habitants sont vivants. La journée 1 commence sans vote.",
+  "aide_mj_publique": "Faire écouter la scène du réveil, puis laisser Alex réagir et discuter. Le MJ doit valider explicitement toute ouverture de vote ou nouvelle nuit.",
+  "dernier_evenement_public": "Le jour se lève sur Thiercelieux. Personne n'a disparu cette nuit.",
+  "scene_courante_id": "reveil_jour_1",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_conclusion",
@@ -75,16 +75,23 @@
   },
   "nuit_en_cours": {
     "numero": 1,
-    "etape": "sorciere_rendormie",
-    "statut": "attente_reveil_mj",
+    "etape": "terminee",
+    "statut": "terminee",
     "actions_resolues": [
       "voyante_observation",
       "loups_choix_victime",
       "sorciere_decision"
     ],
-    "attendre_validation_mj": true,
+    "attendre_validation_mj": false,
     "potions_utilisees": [
       "vie"
     ]
+  },
+  "jour_en_cours": {
+    "numero": 1,
+    "etape": "discussion",
+    "statut": "attente_alex",
+    "vote_ouvert": false,
+    "attendre_validation_mj": true
   }
 }

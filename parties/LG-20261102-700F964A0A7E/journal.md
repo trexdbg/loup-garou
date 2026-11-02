@@ -16,4 +16,5 @@
 - **Nuit 1 — Loups-Garous** : leur cible a été choisie par Alex et consignée uniquement dans le carnet secret du MJ. L'attaque n'est pas résolue.
 - **Nuit 1 — la Sorcière est appelée** : le MJ lui présente en privé la personne visée. Les potions restent disponibles et aucune décision de la Sorcière n'a été prise.
 - **Nuit 1 — décision de la Sorcière** : Rose a choisi seule et s'est rendormie. Les détails sont consignés uniquement dans le carnet du MJ.
-- **En attente** : feu vert du MJ pour réveiller le village. Aucun jour nouveau ni vote n'a commencé.
+- **Jour 1 — réveil validé par le MJ** : les huit habitants reviennent sur la place après la première nuit. Personne n'a disparu. Le résultat des actions nocturnes reste confidentiel, sans révéler la raison de cette absence de victime.
+- **En attente** : réactions et paroles d'Alex pour les débats du jour 1. Aucun vote n'est ouvert.

@@ -89,3 +89,21 @@ Le village s'endort. Tout le monde ferme les yeux. La première nuit commence.
 **Narrateur :** « Sorcière, réveille-toi. Le maître du jeu va te montrer discrètement la personne visée cette nuit. Tu peux décider d'utiliser une potion ou de n'en utiliser aucune. »
 
 *La décision de la Sorcière n'a pas encore été prise ; la nuit se poursuit.*
+
+## Jour 1 — le village se réveille
+
+**Narrateur :** « Village, réveille-toi ! Le soleil se lève sur Thiercelieux. »
+
+*Les huit habitants se retrouvent sur la place. Personne ne manque à l'appel.*
+
+**Octave :** « Tout le monde est là ! Je n'ai presque pas dormi, moi ! »
+
+**Iris :** « C'est une bonne nouvelle. Mais les Loups-Garous sont toujours parmi nous. »
+
+**Basile :** « Pas de victime ? Tant mieux ! Mais je n'ai pas oublié les soupçons d'hier. »
+
+**Mila :** « Je crois qu'il faut écouter attentivement ce que chacun va dire aujourd'hui. »
+
+**Rose :** « Restons prudents. Pour le moment, nous sommes tous en vie. »
+
+*Les regards se tournent vers Alex. La journée commence, sans vote.*

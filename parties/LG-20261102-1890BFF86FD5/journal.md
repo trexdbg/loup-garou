@@ -10,3 +10,22 @@ Nouvelle partie initialisée. En attente de la validation du MJ après le prolog
 - Rose s'adresse à André et l'invite à réagir librement.
 - État : phase `tour_de_table`, scène `tour_de_table_01`, jour 0, nuit 0 ; aucun vote, aucun pouvoir, aucune élimination.
 - En attente des paroles ou actions d'André, sous arbitrage du MJ.
+
+## Tour de table 02 — André garde le silence
+
+- André ne répond pas à Rose. Les PNJ poursuivent les échanges et les soupçons, sans décider à sa place.
+- Scène publique `tour_de_table_02` archivée ; aucun vote, aucune élimination.
+
+## Nuit 1 — Le village s'endort
+
+- Le MJ a autorisé la fin des débats et l'endormissement. Les huit habitants ferment les yeux.
+- Scène `village_s_endort_01` archivée. Nuit 1 ouverte, jour 0 conservé.
+
+## Nuit 1 — observation de la Voyante
+
+- Appel de la Voyante autorisé par le MJ.
+- Une carte a été consultée, puis la Voyante s'est rendormie.
+- Identité, cible et résultat consignés uniquement dans `secrets_mj.json`.
+- Scène `appel_voyante_01` archivée. Dialogues publics : 30 lignes cumulées.
+- État : `phase=nuit`, `etape=voyante_rendormie`. Loups non appelés, aucune victime, aucun réveil.
+- Attente de l'accord explicite du MJ pour la suite.

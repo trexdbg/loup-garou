@@ -1,0 +1,82 @@
+{
+  "id": "LG-20261102-1890BFF86FD5",
+  "schema_version": 2,
+  "titre": "Le village des huit suspects",
+  "cree_le": "2026-11-02T18:58:30.815Z",
+  "statut": "en_cours",
+  "phase": "prologue",
+  "progression": {
+    "jour": 0,
+    "nuit": 0,
+    "scene": "prologue"
+  },
+  "joueur": {
+    "prenom": "André",
+    "age": 25
+  },
+  "personnages_pnj": [
+    {
+      "prenom": "Éloi",
+      "caractere": "Rusé, excellent bluffeur"
+    },
+    {
+      "prenom": "Célia",
+      "caractere": "Perspicace, logique"
+    },
+    {
+      "prenom": "Rose",
+      "caractere": "Prudente, observatrice"
+    },
+    {
+      "prenom": "Martin",
+      "caractere": "Direct, impulsif"
+    },
+    {
+      "prenom": "Alice",
+      "caractere": "Curieuse, attentive"
+    },
+    {
+      "prenom": "Hugo",
+      "caractere": "Moqueur, méfiant"
+    },
+    {
+      "prenom": "Odette",
+      "caractere": "Persuasive, déterminée"
+    }
+  ],
+  "placement_table": {
+    "type": "circulaire",
+    "sens": "horaire",
+    "depart": "12h",
+    "ordre": [
+      "Célia",
+      "Hugo",
+      "Éloi",
+      "Rose",
+      "André",
+      "Martin",
+      "Odette",
+      "Alice"
+    ],
+    "retire": [],
+    "valide_par_mj": true,
+    "statut": "valide",
+    "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
+  },
+  "resume_public": "Les huit habitants de Thiercelieux savent que deux Loups-Garous se cachent parmi eux, mais ignorent leur identité.",
+  "aide_mj_publique": "Lire uniquement le prologue puis attendre l'accord explicite du MJ avant toute nouvelle scène, action, nuit ou vote.",
+  "dernier_evenement_public": "Prologue préparé et distribution des figurines validée par le MJ.",
+  "scene_courante_id": "prologue",
+  "tour_de_table": {
+    "statut": "non_commence",
+    "dialogues_enregistres": 0,
+    "attendre_validation_mj": true
+  },
+  "jour_en_cours": {
+    "numero": 0,
+    "etape": "prologue",
+    "statut": "attente_mj",
+    "vote_ouvert": false,
+    "attendre_validation_mj": true
+  }
+}

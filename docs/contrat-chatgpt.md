@@ -107,18 +107,27 @@ Les 37 rôles du catalogue `roles.js` peuvent être sélectionnés. Les règles 
 - Nettoyage après fin de partie selon [STOCKAGE.md](../STOCKAGE.md).
 - Une publication GitHub Pages n'est pas instantanée et ne représente pas une « synchronisation en direct » de ChatGPT.
 
-## 7. Voix automatiques à chaque nouvelle action
+## 7. Scènes audio à la demande et tour de table
 
-Après validation d'une action du joueur par le MJ, ChatGPT ne publie que les répliques effectivement jouées dans `parties/<ID>/dialogues.ndjson`. Chaque ligne publique parlée doit comporter `seq` (entier strictement croissant), `type: "dialogue_pnj"` (ou `"narration"`), `locuteur`, `texte` et `public: true`. Le fichier ne doit contenir ni cartes secrètes, ni pensées privées des PNJ, ni instructions réservées au MJ. Ne pas générer les scènes futures par anticipation.
+Après validation d'une intervention d'Alex par le MJ, ChatGPT publie **uniquement les nouveaux événements validés** dans `parties/<ID>/dialogues.ndjson`. Les entrées se suivent sans modifier les anciennes : `seq` est un entier strictement croissant, `public` vaut `true`, et l'entrée comprend `type`, `locuteur`, `texte`, `scene_id` et `scene_label`.
 
-L'application conserve une correspondance déterministe entre personnages et profils vocaux, consulte uniquement ce fichier public toutes les six secondes après activation audio initiale du MJ, et prononce les nouvelles répliques dans leur ordre. La progression est conservée pendant la session dans le navigateur ; elle ne constitue pas une action de jeu. Le bouton de relecture concerne uniquement les derniers dialogues déjà publiés.
+Chaque nouvelle intervention du joueur entraîne un **nouveau groupe de répliques** sous un `scene_id` stable pour tout le lot, par exemple `tour_de_table_03` puis `tour_de_table_04`. Le lecteur manuel affiche et joue une scène à la fois ; l'ordre des répliques est donné par `seq`. Les types autorisés sont `dialogue_pnj`, `narration` ou `dialogue_joueur` (ce dernier est visible, mais non synthétisé : l'enfant a déjà prononcé ses propres paroles).
 
-La lecture utilise la synthèse vocale du navigateur (Web Speech), sans produire de MP3 ni stocker de cache dans Git. La diversité des voix dépend de l'appareil ; Chrome et d'autres navigateurs peuvent exiger un clic initial autorisant le son. Aucun message ChatGPT n'est transmis directement à GitHub Pages : il doit d'abord être explicitement ajouté à GitHub avec le connecteur.
+Exemple public de deux lignes dans une même scène :
 
-## 8. Politique de voix gratuites — décision du MJ
+```ndjson
+{"seq":23,"scene_id":"tour_de_table_03","scene_label":"Alex répond à Rose","type":"dialogue_joueur","locuteur":"Alex","texte":"Pourquoi tu sembles si calme ?","public":true}
+{"seq":24,"scene_id":"tour_de_table_03","scene_label":"Alex répond à Rose","type":"dialogue_pnj","locuteur":"Rose","texte":"Parce que nous devons nous écouter avant de voter !","public":true}
+```
 
-Le MJ a choisi **zéro budget**. Le fournisseur vocal par défaut est **Piper local** (`provider: piper_local`), sans abonnement, sans clé ni utilisation d'API payante. L'ancienne préparation ElevenLabs reste désactivée : ne jamais la mettre en production ni encourager un abonnement sans demande explicite.
+**Ces lignes sont illustratives et ne doivent pas être ajoutées à une partie réelle.** ChatGPT garde une séparation absolue entre le texte joué publiquement et `secrets_mj.json` ; ne pas y inscrire d'identité cachée non révélée.
 
-Le lecteur GitHub Pages télécharge à la demande des modèles français publics et tente la génération neuronale sur l'appareil. Il utilise deux timbres de base avec des profils vocaux stables par nom de PNJ. Si la génération est indisponible, lente ou bloquée, il bascule automatiquement vers Web Speech. Les voix ne sont pas produites directement par ChatGPT et les résultats peuvent être différents selon le navigateur.
+Dans `partie.json`, maintenir `phase: "tour_de_table"`, `scene_courante_id` et l'état `tour_de_table` durant les échanges. Mettre à jour `parties/index.json` avec la phase et sans supprimer les autres parties. Le déroulement attendu est **écouter → intervention d'Alex → réaction des habitants → archivage → actualiser → réécouter**. Les PNJ peuvent débattre entre eux, se contredire et bluffer, en respectant les secrets et les rôles. Ne jamais pré-écrire le choix d'Alex.
 
-**Règles de diffusion vocale inchangées** : ne prononcer que les dialogues réellement archivés et validés ; ne pas lire les rôles secrets, choix non confirmés ou pensées des PNJ dans les scènes destinées au joueur. Le MJ décide des scènes ; l'application affiche et lit uniquement, elle ne joue jamais à la place du joueur.
+Le MJ seul valide la fin du tour, le lancement d'un vote et l'endormissement du village. Les boutons de l'application pour poursuivre ou terminer le tour **copient des consignes destinées à ChatGPT**, ils ne changent pas l'état de jeu automatiquement.
+
+## 8. Synthèse vocale gratuite et commande manuelle
+
+Le lecteur actif `scene-player.js` propose **Web Speech par défaut** : une voix française distincte par PNJ si le navigateur en dispose d'au moins sept. Sinon, les timbres disponibles sont réutilisés avec des hauteurs et vitesses différentes. **Piper reste une alternative locale gratuite** (`fr_FR-siwis-medium` et `fr_FR-tom-medium`) : deux timbres réels seulement, avec téléchargement initial volumineux. La qualité varie suivant le téléphone et le navigateur.
+
+Le MJ clique explicitement sur **▶ Écouter** ; aucune lecture ne démarre au chargement et aucun sondage vocal toutes les six secondes n'est nécessaire. Seules les paroles archivées et déjà validées sont lues. `secrets_mj.json` n'est jamais transmis au lecteur audio. L'application reste en lecture seule, sans abonnement, API payante ou génération de MP3 dans le dépôt.

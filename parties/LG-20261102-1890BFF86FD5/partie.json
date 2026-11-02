@@ -8,7 +8,7 @@
   "progression": {
     "jour": 0,
     "nuit": 1,
-    "scene": "appel_loups_01"
+    "scene": "appel_sorciere_01"
   },
   "joueur": {
     "prenom": "André",
@@ -63,14 +63,14 @@
     "statut": "valide",
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "La première nuit a commencé. La Voyante a consulté une carte et s'est rendormie. Aucun autre rôle n'a été appelé.",
-  "aide_mj_publique": "Attendre la décision d'André ; ne pas choisir pour lui ni poursuivre la nuit.",
-  "dernier_evenement_public": "Les Loups-Garous sont appelés. Le MJ attend le choix du joueur.",
-  "scene_courante_id": "appel_loups_01",
+  "resume_public": "Les habitants sont endormis. Les rôles nocturnes ont agi, sans annonce de leurs décisions au village.",
+  "aide_mj_publique": "Les choix nocturnes sont consignés dans secrets_mj.json. Attendre l'accord explicite du MJ pour annoncer le matin. Ne révéler aucune victime ni effet de potion avant la résolution validée.",
+  "dernier_evenement_public": "Nuit 1 : les Loups-Garous et la Sorcière se sont rendormis. Les décisions restent secrètes ; réveil en attente du MJ.",
+  "scene_courante_id": "appel_sorciere_01",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_02",
-    "dialogues_enregistres": 30,
+    "dialogues_enregistres": 39,
     "attendre_reponse_andre": false,
     "attendre_validation_mj": true,
     "passage_vote_apres_validation_mj": true
@@ -84,13 +84,17 @@
   },
   "nuit_en_cours": {
     "numero": 1,
-    "etape": "appel_loups",
+    "etape": "sorciere_rendormie",
     "actions_resolues": [
-      "voyante_observation"
+      "voyante_observation",
+      "loups_choix_victime",
+      "sorciere_decision"
     ],
     "attendre_validation_mj": true,
-    "prochain_appel": "loups",
+    "prochain_appel": null,
     "loups_appeles": true,
-    "attendre_choix_joueur": true
+    "attendre_choix_joueur": false,
+    "attendre_reveil_mj": true,
+    "attaque_resolue": false
   }
 }

@@ -36,6 +36,7 @@
     } catch (_) { return null; }
   }
 
+  let activeHide = () => {};
   function attach(id, state, mount) {
     mount.replaceChildren();
     const names = publicNames(state);
@@ -128,6 +129,7 @@
       stats.textContent = entries.filter(x => x.role).length + " rôle(s) attribué(s) sur " + entries.length + " personnage(s).";
     }
 
+    activeHide = () => { if (open) toggle.click(); };
     toggle.addEventListener("click", () => {
       open = !open;
       region.hidden = !open;
@@ -206,5 +208,6 @@
       status.textContent = "Rôles effacés du carnet de cet appareil.";
     });
   }
-  window.LG_MJ_PRIVATE = {attach};
+  if (document.addEventListener) document.addEventListener("visibilitychange", () => { if (document.hidden) activeHide(); });
+  window.LG_MJ_PRIVATE = {attach, hide:() => activeHide()};
 })();

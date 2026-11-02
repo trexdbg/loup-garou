@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import time
 import subprocess
 import sys
 import urllib.error
@@ -34,6 +35,8 @@ def public_lines(path: Path, max_scenes: int) -> list[dict]:
         try:
             row = json.loads(raw)
         except (ValueError, TypeError):
+            continue
+        if not isinstance(row, dict):
             continue
         if (row.get("public") is not True or row.get("type") not in TYPES
                 or type(row.get("seq")) is not int or row["seq"] < 1
@@ -110,7 +113,11 @@ def generate(root: Path, site: Path, cache: Path,
     entries = json.loads(index_file.read_text(encoding="utf-8")).get("parties", [])
     generated = 0
     stopped = False
+    # Prefer the most recently created games if the free quota is tight.
+    entries = sorted(entries, key=lambda x: str(x.get("cree_le", "")), reverse=True)
     for entry in entries:
+        if str(entry.get("statut", "")).lower() in {"terminee", "terminée", "completed", "finished"}:
+            continue
         party_id = entry.get("id", "")
         if (not isinstance(party_id, str) or not party_id.startswith("LG-")
                 or not party_id.replace("-", "").isalnum()):
@@ -144,6 +151,7 @@ def generate(root: Path, site: Path, cache: Path,
                     pcm, mime = synthesize(text, voice, style, api_key)
                     make_mp3(pcm, mime, cached)
                     generated += 1
+                    time.sleep(4)  # Space requests within the free-tier RPM limits.
                     print("Gemini generated: " + party_id + " seq " + str(row["seq"]))
                 except urllib.error.HTTPError as exc:
                     print("Gemini HTTP " + str(exc.code) + " on seq " + str(row["seq"]), file=sys.stderr)

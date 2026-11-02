@@ -1,4 +1,4 @@
-/* Carnet secret du MJ : import local manuel. La sauvegarde de secrets_mj.json sur GitHub est gérée par ChatGPT, pas par ce module.
+/* Carnet secret du MJ : les rôles sont lus depuis secrets_mj.json seulement à l'ouverture du panneau secret. L'écriture sur GitHub reste gérée par ChatGPT, pas par ce module.
  * Session de navigateur par défaut ; sauvegarde durable locale uniquement sur consentement.
  * Un écran partagé n'est pas un mécanisme d'authentification : masquer avant de le montrer. */
 (() => {

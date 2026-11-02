@@ -4,3 +4,13 @@
 {"seq":4,"scene_id":"prologue","scene_label":"Le prologue","type":"dialogue_pnj","locuteur":"Clémence","texte":"Accuser sans preuve, c'est justement ce qu'un Loup voudrait.","public":true}
 {"seq":5,"scene_id":"prologue","scene_label":"Le prologue","type":"narration","locuteur":"Narrateur","texte":"Rose croise les bras, tandis que Basile sourit en silence. Mila finit par demander :","public":true}
 {"seq":6,"scene_id":"prologue","scene_label":"Le prologue","type":"dialogue_pnj","locuteur":"Mila","texte":"Qui veut commencer à parler ?","public":true}
+{"seq":7,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_joueur","locuteur":"Alex","texte":"Je pense que Mila, t'es une Loup-Garou.","public":true}
+{"seq":8,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"narration","locuteur":"Narrateur","texte":"Un silence tombe autour de la table. Mila ouvre de grands yeux.","public":true}
+{"seq":9,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Mila","texte":"Moi ? Non, Alex ! Mais pourquoi tu crois ça ?","public":true}
+{"seq":10,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Octave","texte":"Elle s'est défendue bien vite ! Peut-être qu'Alex a vu juste !","public":true}
+{"seq":11,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Clémence","texte":"Octave, tu te méfies de tout le monde ! Se défendre, ça ne prouve rien.","public":true}
+{"seq":12,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Basile","texte":"Alex a du cran de le dire tout haut. Mila, pourquoi tu sembles si nerveuse ?","public":true}
+{"seq":13,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Rose","texte":"Basile, ça suffit. Écoutons Alex avant de décider quoi que ce soit.","public":true}
+{"seq":14,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Nils","texte":"Alex, tu as remarqué quelque chose, ou c'est une intuition ?","public":true}
+{"seq":15,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Iris","texte":"Je n'ai rien vu de suspect chez Mila, mais je peux me tromper.","public":true}
+{"seq":16,"scene_id":"tour_de_table_01","scene_label":"Alex soupçonne Mila","type":"dialogue_pnj","locuteur":"Mila","texte":"Alors, Alex, explique-moi. Qu'est-ce qui te fait penser que je suis un Loup-Garou ?","public":true}

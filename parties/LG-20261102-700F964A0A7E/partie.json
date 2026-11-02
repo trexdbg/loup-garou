@@ -4,11 +4,11 @@
   "titre": "Le village des soupçons",
   "cree_le": "2026-11-02T12:39:56.344Z",
   "statut": "en_cours",
-  "phase": "prologue",
+  "phase": "tour_de_table",
   "progression": {
     "jour": 0,
     "nuit": 0,
-    "scene": "prologue"
+    "scene": "tour_de_table_01"
   },
   "joueur": {
     "prenom": "Alex",
@@ -61,15 +61,15 @@
     "retire": [],
     "valide_par_mj": true
   },
-  "resume_public": "Les huit habitants de Thiercelieux savent que deux Loups-Garous se cachent parmi eux et commencent à s'observer. Personne n'a encore pris de décision.",
-  "aide_mj_publique": "Lire le prologue. Attendre l'accord explicite du MJ avant d'ouvrir la première scène de discussion ou de lancer la nuit.",
-  "dernier_evenement_public": "Les huit habitants se réunissent et commencent à se soupçonner.",
-  "scene_courante_id": "prologue",
+  "resume_public": "Alex soupçonne Mila d'être un Loup-Garou. Elle nie. Les autres habitants débattent, puis la parole revient à Alex.",
+  "aide_mj_publique": "Attendre la réponse d'Alex. Aucun vote ni passage à la nuit sans validation expresse du MJ.",
+  "dernier_evenement_public": "Alex accuse Mila. Mila se défend et demande pourquoi Alex la soupçonne.",
+  "scene_courante_id": "tour_de_table_01",
   "tour_de_table": {
-    "statut": "non_commence",
-    "dernier_echange": null,
-    "dialogues_enregistres": 0,
-    "attendre_reponse_alex": false,
+    "statut": "en_cours",
+    "dernier_echange": "tour_de_table_01",
+    "dialogues_enregistres": 16,
+    "attendre_reponse_alex": true,
     "passage_vote_apres_validation_mj": true
   }
 }

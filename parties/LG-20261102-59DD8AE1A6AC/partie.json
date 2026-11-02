@@ -4,11 +4,11 @@
   "titre": "Le premier soupçon",
   "cree_le": "2026-11-02T08:52:25.597Z",
   "statut": "en_cours",
-  "phase": "prologue",
+  "phase": "tour_de_table",
   "progression": {
     "jour": 0,
     "nuit": 0,
-    "scene": "prologue"
+    "scene": "tour_de_table"
   },
   "joueur": {
     "prenom": "Alex",
@@ -63,5 +63,5 @@
   },
   "resume_public": "Les habitants savent que des Loups-Garous se cachent dans le village. Ils commencent à se soupçonner.",
   "aide_mj_publique": "Lire le prologue, puis laisser Alex choisir librement ce qu'il veut dire ou faire. Ne pas lancer la nuit sans accord du MJ.",
-  "dernier_evenement_public": "Prologue préparé ; attente de l'action du joueur et de l'accord du MJ."
+  "dernier_evenement_public": "Début du tour de table ; Alex peut prendre la parole."
 }

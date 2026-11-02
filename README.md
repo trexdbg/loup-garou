@@ -18,9 +18,9 @@ Si la page est absente, ouvrir Settings → Pages → Source → GitHub Actions 
 4. ChatGPT retrouve l'ID, vérifie qu'il n'existe pas, crée le répertoire `parties/<ID>/` via la connexion GitHub **si celle-ci est disponible**, met à jour `parties/index.json`, prépare uniquement **le prologue**, puis attend le MJ.
 5. La conversation ChatGPT devient le **jeu**. L'enfant parle librement ; ChatGPT joue les PNJ, propose les scènes et rappelle les règles au MJ. Chaque action ou transition significative doit être validée par le MJ avant archivage.
 6. Dans l'onglet **Mes parties**, retrouver l'ID et lire narrations, journal et dialogues publiés dans GitHub. Le bouton **🗝️ Afficher le carnet secret du MJ** charge automatiquement les rôles de la partie depuis `secrets_mj.json` et permet aussi de les modifier ou importer localement. Un bouton **Actualiser** recharge les données publiques.
-7. Pour les **voix automatiques**, ouvrir la partie puis cliquer une seule fois sur « Activer les voix » (déblocage audio mobile). Chaque nouvelle réplique publique ajoutée par ChatGPT est ensuite détectée et prononcée avec la voix du personnage.
+7. Dans **Mes parties**, ouvrir la partie, actualiser les dialogues puis cliquer sur **▶ Écouter**. L’application lit uniquement la scène sélectionnée, dans l’ordre, sans lecture automatique. Alex parle ensuite librement : ChatGPT archive un nouveau lot de dialogues après validation du MJ.
 
-**Le lecteur vocal vérifie les dialogues publics sur GitHub environ toutes les 6 secondes après activation : un message dans ChatGPT n'est pas audible avant son archivage effectif. Il n'existe pas de synchronisation directe automatique depuis une conversation ChatGPT vers un navigateur.** Les écritures ont lieu lors des interventions explicites de ChatGPT disposant du connecteur GitHub. GitHub Pages se republie après chaque commit sur `main` ; un léger délai de publication est normal. Pour consulter un fichier qui vient d'être créé mais n'est pas encore disponible dans Pages, le lecteur tente aussi la version GitHub publique.
+**Le lecteur audio est manuel** : il lit `dialogues.ndjson` quand le MJ ouvre ou actualise la partie. Aucun polling toutes les six secondes et aucune synchronisation directe de ChatGPT vers le navigateur. Il faut que les dialogues soient d’abord archivés dans GitHub ; l’application ne modifie pas la partie.
 
 ## Répartition des responsabilités
 
@@ -111,24 +111,17 @@ Les enregistrements audio propres aux parties sont facultatifs et éphémères :
 
 L'univers, les règles et les cartes appartiennent à leurs ayants droit. Pour vérifier un pouvoir complexe, se référer aux cartes physiques et aux livrets officiels.
 
-## Voix automatiques progressives
+## Scènes audio manuelles — depuis le 2 novembre 2026
 
-- `voice-live.js` associe une voix française et un profil de hauteur/débit à Agathe, Basile, Clémence, Gaston, Iris, Malo, Rosalie et au Narrateur. Les voix disponibles varient selon le navigateur et l'appareil du MJ.
-- **Activation initiale une seule fois** : les navigateurs peuvent bloquer le son tant que l'utilisateur n'a pas touché le site. Ensuite, les nouvelles lignes publiques du `dialogues.ndjson` de la partie sont prononcées dans l'ordre avec la voix du personnage, sans clic par dialogue. Il faut laisser la page ouverte.
-- La progression de lecture est mémorisée dans la session du navigateur. Le bouton pause interrompt la lecture ; « Réécouter les 3 dernières » permet de répéter une scène courte.
-- Les voix sont **synthétisées à la volée (Web Speech)** : aucun MP3 n'est produit ni conservé dans GitHub. La qualité et la diversité des voix dépendent de l'appareil.
-- ChatGPT continue de gérer les réactions et les décisions dans la conversation, sous validation du MJ, et doit écrire chaque nouveau dialogue dans GitHub. L'application reste en **lecture seule**.
-- Les secrets archivés dans `secrets_mj.json` ne sont pas envoyés au lecteur vocal ; seul le dialogue joué est prononcé.
+Le lecteur actif est `scene-player.js` (l'ancien `voice-live.js` reste conservé comme référence, mais n'est plus chargé). Chaque nouvelle réplique publique doit avoir un numéro `seq`, un identifiant `scene_id` et idéalement un `scene_label`. Les répliques de la même scène sont jouées dans l'ordre numérique ; les paroles déjà prononcées par le joueur (`dialogue_joueur`) sont affichées mais pas synthétisées.
 
-### Voix neuronales gratuites : Piper (mode principal)
+**Parcours :** ouvrir la partie → **↻ Actualiser** → sélectionner la dernière scène → **▶ Écouter** → Alex interagit en vrai → le MJ transmet son intervention à ChatGPT → ChatGPT archive le prochain échange avec un nouvel identifiant → rafraîchir et réécouter. Les scènes déjà écoutées sont indiquées dans la session du navigateur. Le MJ peut copier une consigne pour continuer ou proposer la fin du tour de table, sans déclencher automatiquement de vote ni de nuit.
 
-**Aucun abonnement, aucune API, aucune clé, aucun paiement.** L'application utilise désormais Piper TTS (voix de synthèse neuronales françaises exécutées directement par le téléphone ou le navigateur) lorsque le MJ clique sur « Démarrer les voix gratuites ».
+### Sept personnages, voix gratuites
 
-- Deux voix françaises de base, `fr_FR-siwis-medium` et `fr_FR-tom-medium`, sont associées de manière fixe aux PNJ, avec de petites variations de débit pour distinguer leurs personnalités. Cela ne crée pas huit comédiens différents ; la qualité est à écouter et à ajuster sur l'appareil.
-- Téléchargement **à la demande au premier usage** : environ 127 Mo de modèles pour les deux voix, plus le moteur de synthèse et ses ressources. Les modèles sont normalement mis en cache par le navigateur ; ils ne sont jamais commités sur GitHub.
-- Chaque nouvelle réplique validée est lue dans l'ordre. La génération s'effectue sur l'appareil, sans coût par caractère. Certains téléphones peuvent prendre du temps ou échouer à charger les modèles : dans ce cas, retour automatique au moteur vocal classique.
-- Le texte des dialogues reste public dans les archives comme auparavant ; les secrets MJ peuvent désormais être archivés séparément dans `secrets_mj.json` sur GitHub.
-- Librairie de synthèse : `@diffusionstudio/vits-web@1.0.3` (MIT) chargée dynamiquement depuis esm.sh ; modèles Piper disponibles sur Hugging Face. Connexion nécessaire au premier téléchargement, performances variables selon la mémoire et le navigateur.
-- Configuration : `tts-config.json` définit `provider: piper_local` et `enabled: true`. L'ancienne intégration ElevenLabs sous `tts-worker/` est un prototype **désactivé, non nécessaire et non déployé** ; l'utilisation normale reste gratuite.
+- **Mode par défaut : voix françaises du navigateur (Web Speech).** Si l'appareil possède au moins sept voix françaises, le lecteur attribue sept timbres distincts aux sept PNJ de la partie actuelle, avec des réglages de hauteur et de vitesse stables. Si le système en possède moins, certains timbres sont réutilisés ; le lecteur l'indique au MJ.
+- **Alternative : Piper local, sans paiement.** Deux modèles français distincts (`fr_FR-siwis-medium` et `fr_FR-tom-medium`) avec des profils de vitesse par personnage. Ils ne représentent pas sept vraies voix. Leur première utilisation peut nécessiter environ 127 Mo de téléchargement, puis une synthèse lourde sur mobile.
+- La synthèse n'est lancée que par un clic explicite sur **Écouter** ; elle ne requiert aucun MP3 archivé. Seules les narrations et répliques publiques sont lues, jamais `secrets_mj.json`. Les visuels vérifiés des cartes restent dans le carnet du MJ, masqué par défaut.
+- La qualité des voix est propre au navigateur, aux voix installées et aux performances de l'appareil. Si Piper échoue, le lecteur réessaie avec les voix système. Aucun abonnement ou service vocal payant requis.
 
-Ce changement concerne uniquement la lecture vocale des archives publiques et ne remplace ni ChatGPT (dialogues et progression) ni le MJ (décisions). Aucun événement supplémentaire de la partie en cours n'est généré.
+La publication GitHub Pages peut prendre un court délai après les commits. L'application est en lecture seule ; toutes les décisions et écritures du jeu restent dans ChatGPT avec l’accord du MJ.

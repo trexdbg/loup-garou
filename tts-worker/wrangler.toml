@@ -1,0 +1,17 @@
+name = "thiercelieux-neural-voices"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# Cle ElevenLabs via : npx wrangler secret put ELEVENLABS_API_KEY
+# VOICE_MAP_JSON via Cloudflare Dashboard > Worker > Variables
+# ou via wrangler secret put VOICE_MAP_JSON (recommande)
+#
+# Exemple de valeur VOICE_MAP_JSON :
+# {"Narrateur":"ID_NARRATEUR","Agathe":"ID_AGATHE","Basile":"ID_BASILE","Clémence":"ID_CLEMENCE","Gaston":"ID_GASTON","Iris":"ID_IRIS","Malo":"ID_MALO","Rosalie":"ID_ROSALIE"}
+
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "1001"
+  [ratelimits.simple]
+  limit = 20
+  period = 60

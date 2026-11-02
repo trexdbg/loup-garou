@@ -6,8 +6,16 @@
   "use strict";
   // Liens indépendants du dépôt public. Pas de clé ni de service facturé.
   const LIBRARY_URL = "https://esm.sh/@diffusionstudio/vits-web@1.0.3?bundle";
+  // Deux modèles français réellement distincts, sept profils stables de vitesse.
   const VOICE_MODELS = Object.freeze({
     Narrateur: "fr_FR-siwis-medium",
+    Rose: "fr_FR-siwis-medium",
+    Hugo: "fr_FR-tom-medium",
+    "Salomé": "fr_FR-siwis-medium",
+    Marin: "fr_FR-tom-medium",
+    "Inès": "fr_FR-siwis-medium",
+    Baptiste: "fr_FR-tom-medium",
+    Jade: "fr_FR-siwis-medium",
     Agathe: "fr_FR-siwis-medium",
     Basile: "fr_FR-tom-medium",
     "Clémence": "fr_FR-siwis-medium",
@@ -17,9 +25,11 @@
     Rosalie: "fr_FR-siwis-medium"
   });
   const RATES = Object.freeze({
-    Narrateur: 0.96, Agathe: 1.05, Basile: 1.10,
-    "Clémence": 1.00, Gaston: 0.94, Iris: 0.96,
-    Malo: 1.05, Rosalie: 0.93
+    Narrateur: 0.96, Rose: 0.93, Hugo: 1.08,
+    "Salomé": 1.01, Marin: 0.89, "Inès": 1.08,
+    Baptiste: 1.13, Jade: 0.98,
+    Agathe: 1.05, Basile: 1.10, "Clémence": 1.00,
+    Gaston: 0.94, Iris: 0.96, Malo: 1.05, Rosalie: 0.93
   });
   let sdkPromise = null;
 

@@ -7,7 +7,8 @@
       "titre": "Le premier soupçon",
       "statut": "en_cours",
       "phase": "tour_de_table",
-      "dossier": "parties/LG-20261102-59DD8AE1A6AC"
+      "dossier": "parties/LG-20261102-59DD8AE1A6AC",
+      "dernier_evenement": "Alex interroge Rose sur son identité."
     }
   ]
 }

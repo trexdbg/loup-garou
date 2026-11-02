@@ -28,3 +28,12 @@
 {"seq":28,"scene_id":"appel_voyante_01","scene_label":"Nuit 1 — Appel de la Voyante","type":"narration","locuteur":"Narrateur","texte":"Voyante, réveille-toi et regarde discrètement la carte d'un habitant.","public":true}
 {"seq":29,"scene_id":"appel_voyante_01","scene_label":"Nuit 1 — Appel de la Voyante","type":"narration","locuteur":"Narrateur","texte":"La Voyante a consulté une carte. Son observation reste secrète.","public":true}
 {"seq":30,"scene_id":"appel_voyante_01","scene_label":"Nuit 1 — Appel de la Voyante","type":"narration","locuteur":"Narrateur","texte":"Voyante, rendors-toi et referme les yeux.","public":true}
+{"seq":31,"scene_id":"appel_loups_01","scene_label":"Nuit 1 — Appel des Loups-Garous","type":"narration","locuteur":"Narrateur","texte":"La Voyante s'est rendormie. Le village demeure silencieux.","public":true}
+{"seq":32,"scene_id":"appel_loups_01","scene_label":"Nuit 1 — Appel des Loups-Garous","type":"narration","locuteur":"Narrateur","texte":"Loups-Garous, réveillez-vous et reconnaissez-vous.","public":true}
+{"seq":33,"scene_id":"appel_loups_01","scene_label":"Nuit 1 — Appel des Loups-Garous","type":"narration","locuteur":"Narrateur","texte":"Les Loups-Garous désignent ensemble une personne, sans rien annoncer à voix haute.","public":true}
+{"seq":34,"scene_id":"appel_loups_01","scene_label":"Nuit 1 — Appel des Loups-Garous","type":"narration","locuteur":"Narrateur","texte":"Loups-Garous, rendormez-vous et refermez les yeux.","public":true}
+{"seq":35,"scene_id":"appel_sorciere_01","scene_label":"Nuit 1 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"Sorcière, réveille-toi.","public":true}
+{"seq":36,"scene_id":"appel_sorciere_01","scene_label":"Nuit 1 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"Le maître du jeu te montre discrètement qui a été visé par les Loups-Garous cette nuit.","public":true}
+{"seq":37,"scene_id":"appel_sorciere_01","scene_label":"Nuit 1 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"Tu peux utiliser une potion ou n'en utiliser aucune. Ton choix reste secret.","public":true}
+{"seq":38,"scene_id":"appel_sorciere_01","scene_label":"Nuit 1 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"La Sorcière prend sa décision.","public":true}
+{"seq":39,"scene_id":"appel_sorciere_01","scene_label":"Nuit 1 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"Sorcière, rendors-toi et ferme les yeux. Le village reste endormi.","public":true}

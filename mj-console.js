@@ -19,27 +19,10 @@
   function guideFor(state) {
     const phase = state.phase || "prologue";
     const night = state.nuit_en_cours || {};
-    if (phase === "nuit") {
-      const stage = night.etape || "endormissement";
-      const scripts = {
-        endormissement: ["Poursuivre la nuit", "Le MJ a lancé la nuit : enchaîne les pouvoirs PNJ sans choix humain, dans le bon ordre ; arrête-toi au prochain choix d’Alex ou arbitrage MJ. Ne résous pas de victime par anticipation."],
-        appel_voyante: ["Voyante puis Loups", "Si la Voyante est PNJ, fais-la choisir elle-même sa carte, conserve l’observation dans secrets_mj.json, puis appelle les Loups dans le même échange. Stoppe au choix d’Alex si Alex doit agir."],
-        appel_sorciere: ["Faire agir la Sorcière", "Fais agir la Sorcière selon le rôle réellement attribué et sa personnalité. Si elle est PNJ, décide de ses potions sans interroger le MJ pour chaque détail ; archive les effets secrets sans réveiller le village ni résoudre de nouvelle élimination non validée."],
-        sorciere_rendormie: ["Réveiller le village", "Le MJ autorise le réveil. Calcule les survivants avec les décisions de la nuit, crée la scène du matin et passe au jour suivant sans ouvrir de vote."]
-      };
-      const data = scripts[stage] || ["Continuer la nuit", "Propose uniquement la prochaine action nocturne légale, sans inventer de choix de joueur ni déclencher de réveil."];
-      return {title:data[0],instructions:data[1],subtitle:"Nuit " + (state.progression?.nuit || night.numero || 1) + " · " + stage.replaceAll("_"," "),key:stage};
-    }
-    if (phase === "tour_de_table") {
-      if (state.tour_de_table?.statut === "termine")
-        return {title:"Choisir la transition",subtitle:"Débats terminés",key:"fin_debat",instructions:"Le tour de table est terminé. Propose la transition choisie par le MJ (vote ou endormissement). Ne crée aucune scène ni nouvelle phase sans mon accord explicite."};
-      return {title:"Animer les débats",subtitle:"Tour de table en cours",key:"debats",instructions:"Fais réagir les PNJ entre eux et au joueur Alex selon leur caractère. Alex conserve toutes ses répliques et décisions. Ne termine pas le débat et n'ouvre aucun vote sans mon accord."};
-    }
-    if (phase === "jour" || phase === "village_se_reveille") {
-      return {title:"Faire parler le village",subtitle:"Jour " + (state.progression?.jour || 1) + " · discussions",key:"jour",instructions:"Poursuis les échanges du matin. Respecte les survivants, les événements archivés et les rôles secrets. Le MJ décidera quand demander un vote ; ne le lance pas maintenant."};
-    }
-    if (phase === "vote" || phase === "vote_ou_resolution")
-      return {title:"Recueillir les votes",subtitle:"Vote en cours",key:"vote",instructions:"Fais voter en un seul lot tous les PNJ vivants selon leurs soupçons et caractères. Demande uniquement le choix d’Alex s’il doit voter ; présente le dépouillement au MJ. Ne résous aucune élimination avant la validation du verdict."};
+    if (phase === "nuit") return {title:"Résoudre la nuit",subtitle:"Nuit " + (state.progression?.nuit || night.numero || 1) + " · automatique",key:"nuit_auto",instructions:"Enchaîne TOUTE la nuit d'un bloc : chaque rôle PNJ vivant agit dans l'ordre légal selon sa personnalité, ses connaissances et les débats. Arrête-toi seulement si Alex doit choisir via son rôle. Sinon, résous les effets et annonce immédiatement le réveil, sans validation MJ. Ne fais AUCUN dialogue nocturne, appel GitHub, génération audio ou commit avant la scène publique du réveil ; archive alors en un seul lot."};
+    if (phase === "tour_de_table" || phase === "dialogues_et_enquete") return {title:"Une intervention, puis la suite",subtitle:"Débats autonomes",key:"debats_auto",instructions:"Fais 2 à 4 réponses courtes des PNJ après UNE intervention d'Alex. Au jour 1, passe tout de suite à la nuit sans vote. À partir du jour 2, fais voter les PNJ et attends uniquement le vote d'Alex ; ne demande plus la validation MJ pour les transitions."};
+    if (phase === "jour" || phase === "village_se_reveille") return {title:"Réveil et débats",subtitle:"Jour " + (state.progression?.jour || 1) + " · automatique",key:"jour_auto",instructions:"Annonce les conséquences et révélations légales de la nuit. Fais débattre brièvement les PNJ, puis attends UNE intervention d'Alex avant de lancer directement les votes PNJ. Si c'est le jour 1, débats de présentation suivis de la nuit 1, sans scrutin."};
+    if (phase === "vote" || phase === "vote_ou_resolution") return {title:"Vote et verdict",subtitle:"Vote automatique",key:"vote_auto",instructions:"Fais voter ensemble les PNJ vivants de façon cohérente avec leurs informations et les débats. Demande seulement le vote d'Alex s'il est habilité. Dès son choix, dépouille, élimine selon les règles, déclenche les pouvoirs éventuels, vérifie la victoire et démarre la nuit suivante sans validation MJ. Pause seulement pour un choix d'Alex ou un arbitrage réellement indispensable."};
     return {title:"Lancer le prologue",subtitle:"Partie en préparation",key:"preparation",instructions:"Vérifie les personnages, la répartition secrète et le placement des LEGO ; propose uniquement le prologue. Attends l'accord du MJ avant le tour de table."};
   }
   function promptFor(id, state, action="next", note="") {
@@ -51,13 +34,13 @@
     let task = guide.instructions;
     if (action === "resume") task = "Vérifie précisément l'état déjà enregistré, rappelle au MJ la dernière scène et propose uniquement la prochaine action adaptée. Ne modifie rien sans une nouvelle décision validée.";
     if (action === "sync") task = "Vérifie si les dernières scènes et décisions validées dans cette conversation sont bien sur la branche main de GitHub. Synchronise uniquement les événements validés, vérifie les fichiers et le déploiement. Si l'écriture échoue, indique-le sans prétendre avoir poussé.";
-    if (action === "dialogue") task = "Alex intervient librement : " + (note || "(le MJ ajoutera ses paroles)") + ". Fais réagir 2 à 4 PNJ pertinents avec des répliques courtes, sans inventer sa réponse ; regroupe les dialogues joués en une seule scène et un seul commit, sans changer de phase.";
+    if (action === "dialogue") task = "Alex intervient librement : " + (note || "(le MJ ajoutera ses paroles)") + ". Fais répondre 2 à 4 PNJ pertinents, puis avance automatiquement : au jour 1 vers la nuit 1, aux jours suivants vers les votes PNJ et le vote d'Alex. Ne bloque pas pour une validation MJ de transition.";
     return start + "\nÉtat annoncé : phase=" + (state.phase || "prologue") +
       ", scène=" + (state.scene_courante_id || state.progression?.scene || "?") +
       ", nuit=" + (state.progression?.nuit ?? 0) + ", jour=" + (state.progression?.jour ?? 0) + ".\n" +
       "\nACTION DEMANDÉE : " + task +
-      "\n\nMODE RAPIDE : applique directement l’action explicitement validée par le MJ, résous ses conséquences déterministes, fais agir les PNJ autonomes, puis archive le lot en UN SEUL commit GitHub. Ne demande pas une nouvelle validation pour la même action. " +
-      "Stoppe avant tout vote, élimination, pouvoir d’Alex ou changement de phase non autorisé. Après une élimination validée, vérifie immédiatement la victoire. Journal bref ; index modifié seulement si phase/statut change. Audio : 2 à 5 répliques PNJ utiles par scène, jamais les secrets. Signale clairement un échec de synchronisation.";
+      "\n\nMODE AUTONOME : tous les PNJ agissent, votent, utilisent leurs pouvoirs et assument les conséquences selon les règles et leurs informations propres. Arrête-toi SEULEMENT pour les choix d'Alex, un arbitrage impossible ou la fin. Une intervention d'Alex fait avancer un bloc de jeu entier. " +
+      "NUIT : zéro dialogue, zéro audio, zéro appel GitHub ni commit ; stocke les décisions en contexte et archive EN UN SEUL COMMIT à la prochaine scène publique du réveil. JOUR : quelques répliques courtes, puis vote automatique. Ne génère jamais la voix d'Alex ni les secrets.";
   }
   function attach(id,state,mount) {
     mount.replaceChildren();

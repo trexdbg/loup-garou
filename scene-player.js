@@ -286,7 +286,7 @@
     await copyText(text);
   });
   endRoundButton.addEventListener("click",async()=>{
-    const text="Partie "+id+". Je valide explicitement la clôture des débats ET l’ouverture du vote. Conclus la discussion en 1 à 3 phrases, ouvre immédiatement le scrutin, archive cet ensemble en un seul commit GitHub, puis attends les voix. N’élimine personne sans ma validation du dépouillement.";
+    const text="Partie "+id+". Termine le débat en 1 à 3 phrases ; fais voter tous les PNJ vivants selon leurs soupçons et attends uniquement le vote d'Alex. Dès son vote, dépouille, applique les effets et vérifie la victoire. Sinon lance automatiquement la nuit suivante, sans validation MJ, aucun dialogue nocturne ni synchronisation avant le prochain réveil.";
     await copyText(text);
   });
   const onVoices=()=>{if(!state.closed)details();};

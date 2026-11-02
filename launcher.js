@@ -247,7 +247,7 @@
         phases: ["prologue", "village_s_endort", "appels_nocturnes", "village_se_reveille", "dialogues_et_enquete", "vote_ou_resolution", "suite_validee_par_mj"],
         appel_roles_nocturnes: $v("nightOrder"),
         duree_nuit_cible_minutes: num("nightDuration", 1, 15),
-        pause_entre_les_scenes: checked("askValidation"),
+        pause_entre_les_scenes: false, // mode autonome prioritaire ; le MJ conserve le bouton stop
         improvisation_libre: checked("allowImprovisation")
       },
       assistant_mj: {
@@ -279,7 +279,7 @@
         attendre_validation_roles_et_placement_lego_avant_creation_du_prologue: true,
         cree_uniquement: ["dossier_de_partie", "parametres.json", "partie.json_public", "secrets_mj.json_apres_validation", "prologue_seulement", "journal_initial", "index_json"],
         ne_pas_generer_les_scenes_suivantes: true,
-        attendre_validation_mj_apres_prologue: true,
+        attendre_validation_mj_apres_prologue: false,
         ne_pas_simuler_les_decisions_du_joueur: true
       }
     };
@@ -290,7 +290,7 @@
       "PROJET LOUP GAROU — INITIALISATION D'UNE NOUVELLE PARTIE",
       "Voici la configuration produite par l'application. Lis son ID exact et utilise le dépôt GitHub " + repo + ".",
       "Tu es l’assistant du maître du jeu humain : tu incarnes les PNJ, fais avancer rapidement les scènes et laisses au MJ les décisions et validations importantes.",
-      "MODE RAPIDE PAR DÉFAUT : une seule proposition rôles + placement LEGO, une seule validation MJ ; ensuite une réaction PNJ et un lot de dialogues courts par scène, synchronisés dans UN SEUL commit GitHub. Ne redemande pas l’accord déjà donné ; aucun choix d’Alex, élimination ou nouvelle phase sans son autorisation explicite.",
+      "MODE AUTONOME PAR DÉFAUT : le MJ valide rôles + LEGO une seule fois. Jour 1 : présentation puis UNE intervention d’Alex ; passe à la nuit 1 sans vote. Nuit : tous les PNJ agissent dans l’ordre des règles et décident librement à partir de leurs informations ; STOP seulement pour le choix d’Alex si son rôle l’exige. Jour 2 et suivants : réveil, dialogue bref, UNE intervention d’Alex, votes de tous les PNJ, demande seulement le vote d’Alex, résous le verdict, puis nuit suivante sans autorisation. Le MJ peut interrompre à tout moment.",
       "RÈGLE FONDAMENTALE : dès le début tous les habitants savent que des Loups-Garous se cachent dans le village. Le seul grand mystère est LEUR IDENTITÉ. Le jeu est le Loup-Garou traditionnel, pas une quête ou une enquête fantastique.",
       "NARRATION : commence par des discussions, soupçons, bluff, pouvoirs nocturnes, réveil, débats et vote. N’invente aucune lanterne magique, prophétie, cloche étrange, lettre codée, objet à récupérer ou énigme annexe. Les choix de décor et d’ambiance ne changent pas cette règle.",
       "1. Vérifie si parties/" + value.id + "/ existe déjà. S'il existe, demande au MJ s'il faut le reprendre, sans écraser ses données.",
@@ -301,11 +301,11 @@
       "4 bis. Applique le niveau roles.mode (classique, avance ou expert) et les rôles autorisés ; si roles.liste_personnalisee est vraie, la sélection manuelle du MJ prime sur le préréglage. Compose une distribution cohérente pour le nombre de personnages, le total de Loups, les pouvoirs et les camps ; le MJ valide la répartition avant le prologue.",
       "4 bis bis. Propose au MJ un placement CIRCULAIRE des personnages avec exactement une figurine LEGO par personne (joueur inclus). Place 1 à 12 h, parcours horaire, noms et numéros de place. Attends la validation du MJ AVANT d'affirmer que les places sont fixées ; archive seulement l'ordre public validé dans partie.json au champ placement_table. Les cartes physiques restent cachées sous les figurines ; leurs attributions sont archivées uniquement dans secrets_mj.json, et jamais dans placement_table. Toutes les interactions de voisinage, dont le flair du Renard, doivent utiliser cet ordre réel.",
       "4 ter. Après validation des rôles, fournis au MJ dans la conversation PRIVÉE un JSON valide comme {\"id\":\"ID_PARTIE\",\"roles\":[{\"personnage\":\"Alex\",\"role\":\"renard\"}]} avec chaque personnage et son ID exact de rôle issu de roles.js. Archive aussi ce JSON dans secrets_mj.json sur GitHub, sans le faire apparaître dans l’interface joueur ; le MJ peut également le coller dans le carnet secret de l’application.",
-      "5. Après validation des LEGO et écriture sur GitHub, raconte un prologue TRÈS COURT (3 à 6 phrases) : les villageois savent déjà que des Loups se cachent parmi eux, ils se réunissent et se soupçonnent. Pas d’énigme annexe. Attends l’accord du MJ avant la première action puis la nuit ; ne simule ni nuit complète, ni vote, ni dénouement.",
-      "6. Ensuite, archive en un seul commit par scène ou choix déjà validé les seules données modifiées ; ne touche à parties/index.json que si la phase ou le statut change. Regroupe les réactions des PNJ et les conséquences logiques. Évite les mini-étapes, les confirmations en double et les rapports techniques inutiles.",
+      "5. Après validation des LEGO et écriture sur GitHub, raconte un prologue TRÈS COURT (3 à 6 phrases) et 2 à 4 présentations PNJ. Attends UNE intervention d’Alex, puis enchaîne automatiquement toute la nuit 1, sans vote au jour 1.",
+      "6. PENDANT LA NUIT : zéro dialogue, zéro Phonon, zéro GitHub et zéro GitHub Action. Garde les décisions des PNJ en mémoire et publie UN SEUL commit groupé au prochain réveil, avec partie.json, secrets_mj.json si nécessaire, journal et dialogues publics. En dehors de la nuit, 2 à 4 répliques courtes ; marque audio:false les lignes mécaniques. Aucun déploiement pour une simple actualisation d’état ou de secrets.",
       "7. Reste adapté à un joueur de 10 ans si c'est l'âge indiqué. Respecte les vraies cartes et demande au MJ en cas de règles ambiguës.",
       "8. Pour tout dialogue effectivement joué après le prologue, crée un lot de lignes dans dialogues.ndjson avec des seq croissants, scene_id commun à ce lot et scene_label lisible (ex. tour_de_table_01 puis tour_de_table_02). L'application relit une scène à la demande du MJ ; ne déclenche aucune lecture automatique et ne révèle aucun secret.",
-      "9. En phase tour_de_table, laisse Alex intervenir à nouveau après chaque scène audio. Les PNJ peuvent débattre entre eux ; n'impose aucune parole ni action au joueur. Le MJ valide explicitement la fin du tour, le vote ou la nuit. Mets à jour phase et scene_courante_id dans partie.json et l'index sans toucher aux autres parties.",
+      "9. Ne redemande aucune permission MJ pour la fin du débat, le vote, une élimination normale, le réveil ou la nuit. Les PNJ votent et agissent de façon cohérente sans connaître les secrets des autres camps. Seuls les choix d’Alex ou les règles vraiment ambiguës interrompent le cycle ; une fois son vote donné, exécute le verdict et enchaîne la nuit suivante.",
       "Si tu ne peux pas écrire sur GitHub dans cette conversation, dis-le explicitement et fournis les fichiers à déposer : n'affirme jamais que la synchronisation est faite sans confirmation.",
       "",
       "JSON DE PARAMÈTRES :",

@@ -76,6 +76,22 @@ Pour le Renard, le flair s'applique au **personnage ciblé et à ses deux voisin
 
 ## 3. Cycle de jeu : mode rapide et économique (par défaut)
 
+### Mode autonome prioritaire : JOUR → NUIT → JOUR → VOTE
+
+Ce mode remplace les validations étape-par-étape décrites ailleurs dans ce document ; il s'applique aux nouvelles parties et aux reprises, sauf demande contraire du MJ.
+
+1. **Jour 1** : courte présentation (2 à 4 répliques PNJ), puis une seule intervention libre d'Alex. Les PNJ répondent et le village s'endort immédiatement : **aucun vote au premier jour**.
+2. **Nuit N** : enchaîner automatiquement dans l'ordre légal les pouvoirs actifs et les décisions de tous les PNJ (Voyante, Loups-Garous, Sorcière, etc.). Les PNJ raisonnent à partir de leur mémoire, des dialogues précédents, de leurs objectifs et de leurs propres informations : un rôle secret non connu ne doit pas être pris en compte par les autres. Ne pas faire choisir leurs cibles au MJ. **Pause seulement pour un choix personnel d'Alex si son rôle l'exige**, ou pour une véritable ambiguïté de règles. Reprendre aussitôt après son choix. Les rôles passifs ne demandent rien.
+3. **Jour N+1** : résoudre les effets de nuit et de mort (notamment les pouvoirs des PNJ éliminés), annoncer le réveil et révéler seulement les cartes légalement dévoilées. Vérifier immédiatement la victoire. Débat très bref entre PNJ, puis **une seule intervention d'Alex**.
+4. **Vote** : les PNJ vivants votent d'un bloc selon leurs soupçons, leur personnalité et leur stratégie de camp ; demander seulement le vote d'Alex s'il est habilité. Dès qu'il vote, dépouiller, appliquer les conséquences et les pouvoirs spéciaux, vérifier la victoire et passer **automatiquement à la nuit suivante**, sans nouvelle validation MJ. Respecter les règles particulières des égalités et des personnages.
+5. **Continuité** : enchaîner jusqu'à la prochaine intervention d'Alex ou la victoire. Le MJ peut à tout moment arrêter, rectifier ou ralentir la partie, mais n'a plus à valider les transitions normales ni les éliminations déterminées par les règles.
+
+**Nuit = zéro dialogue public, zéro audio, zéro appel GitHub, zéro GitHub Action.** Les actions PNJ et les secrets provisoires restent dans la conversation pendant la nuit. Un **unique commit atomique au réveil / à la nouvelle scène de jour** archive l'état et les effets résolus avec le journal et les nouveaux dialogues publics. Même si Alex doit intervenir pendant la nuit, conserver ses décisions en contexte jusqu'au prochain réveil ; ne pas commiter d'étapes intermédiaires. L'application lit `partie.json` et `parties/index.json` directement sur la branche principale : modifier ces fichiers ou les secrets MJ ne doit pas déclencher de reconstruction Pages.
+
+**Synthèse vocale** : ne produire que 2 à 4 courtes répliques PNJ par scène publique utile. Marquer `"audio":false` toute ligne non destinée à la TTS ; aucune ligne nocturne. Réutiliser les clips existants. Les tables de vote et les mécaniques ne sont pas des scripts audio. Une publication audio n'est justifiée que lorsque `dialogues.ndjson` comporte une véritable nouvelle scène publique.
+
+**Priorités d'efficacité** : relire seulement les événements et dialogues récents, les secrets utiles, les ressources restantes et les soupçons par personnage ; ne jamais relire tout le dossier sans nécessité. Retourner directement le récit et la prochaine question destinée à Alex, pas des validations administratives.
+
 **Objectif : moins de tours de conversation, moins de commits, moins de générations audio**, sans retirer l'autorité du MJ. La partie progresse en **unités jouables complètes** et non en micro-étapes administratives.
 
 - **Initialisation :** présenter distribution secrète des rôles + placement circulaire dans la même proposition ; un seul « je valide » du MJ suffit à archiver la configuration et le prologue.

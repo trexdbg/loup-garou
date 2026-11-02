@@ -1,21 +1,25 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "mode": "lecture_scenes_manuelle",
-  "provider": "piper_local",
+  "provider": "gemini_api_via_github_actions",
   "enabled": true,
   "worker_url": null,
-  "model_policy": "telechargement_piper_uniquement_sur_clic_ecouter_et_choix_piper",
+  "model_policy": "Generation lors des deploiements sur 3 scenes recentes maximum; mp3 uniquement dans l'artefact Pages",
   "default_models": [
     "fr_FR-siwis-medium",
     "fr_FR-tom-medium"
   ],
   "prix_eur": 0,
-  "protection": "aucune_cle_api_ni_fichier_audio_dans_le_depot",
-  "note": "Le lecteur de scènes est manuel : clic Écouter, pas de polling vocal. Voix françaises distinctes selon disponibilité du navigateur. Piper propose deux timbres gratuits téléchargeables à la demande, sans garantie de 7 timbres.",
-  "default_playback_mode": "navigateur",
+  "protection": "Cle uniquement dans GitHub Actions; ni Javascript, ni medias, ni cle dans le git",
+  "note": "Sans cle, avec quota atteint ou modele retire : lecture des repliques par voix locales. L'offre gratuite est soumise a quotas et ne sera pas remplacee automatiquement par un modele payant.",
+  "default_playback_mode": "gemini",
   "available_modes": [
+    "gemini",
     "navigateur",
     "piper_local"
   ],
-  "voice_policy": "jusqua_7_voix_francaises_natives_si_disponibles_sinon_profils_alternatifs"
+  "voice_policy": "7 voix Gemini distinctes par ordre des PNJ + 1 narrateur; repli voix navigateur",
+  "model": "gemini-2.5-flash-preview-tts",
+  "model_shutdown_announced": "2026-11-17",
+  "secret_name": "GEMINI_API_KEY"
 }

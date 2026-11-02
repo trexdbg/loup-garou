@@ -47,7 +47,9 @@
 
   function voiceFor(speaker) {
     const all = frenchVoices();
-    const index = Math.max(0, speakers.indexOf(speaker));
+    const known = speakers.indexOf(speaker);
+    const hash = [...speaker].reduce((acc, char) => (acc * 31 + char.charCodeAt(0)) >>> 0, 7);
+    const index = known >= 0 ? known : hash;
     return all.length ? all[index % all.length] : null;
   }
 
@@ -98,7 +100,7 @@
         return;
       }
       const speaker = item.locuteur || "Narrateur";
-      const profile = profiles[speaker] || profiles.Narrateur;
+      const profile = profiles[speaker] || { pitch: 0.85 + (speaker.length % 6) * 0.07, rate: 0.89 + (speaker.length % 5) * 0.035 };
       const utterance = new SpeechSynthesisUtterance(item.texte);
       utterance.lang = "fr-FR";
       utterance.voice = voiceFor(speaker);
@@ -182,14 +184,12 @@
       pause.disabled = false;
       enqueue(); // Synchrone avec le clic : nécessaire pour les règles audio mobiles.
       if (!state.busy) {
-        // Déverrouillage vocal uniquement si les dialogues ne sont pas encore chargés.
-        if (!state.loaded) {
-          const unlock = new SpeechSynthesisUtterance("Les voix du village sont prêtes.");
-          unlock.lang = "fr-FR";
-          unlock.voice = voiceFor("Narrateur");
-          unlock.rate = 0.94;
-          synth.speak(unlock);
-        }
+        // Le message confirme le son immédiatement, dans le geste utilisateur initial.
+        const unlock = new SpeechSynthesisUtterance("Les voix du village sont prêtes.");
+        unlock.lang = "fr-FR";
+        unlock.voice = voiceFor("Narrateur");
+        unlock.rate = 0.94;
+        synth.speak(unlock);
         setStatus("Voix actives · attente de nouvelles répliques.");
       }
       if (state.interval === null) state.interval = setInterval(refresh, 6000);

@@ -280,7 +280,7 @@
       status.textContent = "Rôles effacés du carnet de cet appareil.";
     });
     // Espace exclusivement MJ : cartes affichées dès l’ouverture, mais masquables en un clic.
-    toggle.click();
+    if (typeof toggle.click === "function") toggle.click();
   }
   if (document.addEventListener) document.addEventListener("visibilitychange", () => { if (document.hidden) activeHide(); });
   window.LG_MJ_PRIVATE = {attach, hide:() => activeHide()};

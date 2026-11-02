@@ -53,7 +53,7 @@
     toggle.setAttribute("aria-expanded", "false");
     const region = make("div", undefined, "mj-private-region");
     region.hidden = true;
-    const note = make("p", "Carnet réservé au MJ : les rôles sont chargés depuis l’archive GitHub publique quand ce panneau est ouvert. Masquer ce panneau avant de montrer l’écran au joueur.", "fine");
+    const note = make("p", "Régie réservée au maître du jeu : les cartes sont chargées depuis les archives GitHub. Les joueurs n’utilisent pas cet écran. Cliquez sur Masquer si vous devez dissimuler les informations.", "fine");
     const stats = make("p", "", "mj-private-stats");
     const list = make("div", undefined, "mj-character-grid");
     const status = make("p", "", "mj-private-status");
@@ -279,6 +279,8 @@
       render();
       status.textContent = "Rôles effacés du carnet de cet appareil.";
     });
+    // Espace exclusivement MJ : cartes affichées dès l’ouverture, mais masquables en un clic.
+    toggle.click();
   }
   if (document.addEventListener) document.addEventListener("visibilitychange", () => { if (document.hidden) activeHide(); });
   window.LG_MJ_PRIVATE = {attach, hide:() => activeHide()};

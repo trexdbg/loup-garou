@@ -81,10 +81,20 @@
   const settings=add(box,"div",null,"scene-controls");
   const modeLabel=add(settings,"label","Synthèse vocale");
   const mode=add(modeLabel,"select");
-  mode.append(new Option("▶ MP3 publiés · Gemini ou voix gratuites","gemini"));
+  mode.append(new Option("🎙️ Phonon français · MP3 publiés","published"));
   mode.append(new Option("Voix françaises de l'appareil","native"));
   mode.append(new Option("Voix Piper gratuites (2 timbres)","piper"));
   const voiceNote=add(settings,"p","", "fine");
+  const voicesPanel=add(box,"details",null,"game-details scene-voice-roster");
+  add(voicesPanel,"summary","🎭 Voix des personnages de la partie");
+  const voiceList=add(voicesPanel,"div",null,"scene-voice-names");
+  const pool=window.LG_VOICE_POOL?.byName||{};
+  for(const person of (party.personnages_pnj||[])){
+    const name=typeof person==="string"?person:person.prenom;
+    if(!name)continue;
+    const voice=(typeof person==="object"&&person.voix_phonon)||pool[name]?.voix;
+    add(voiceList,"p",(name+" — "+(voice||"voix non attribuée")),"fine");
+  }
   const buttons=add(box,"div",null,"scene-buttons");
   const playButton=add(buttons,"button","▶ Écouter","primary");
   const stopButton=add(buttons,"button","■ Arrêter","secondary");
@@ -102,7 +112,7 @@
   const copied=add(following,"p","", "fine");
   function announce(text){if(!state.closed)status.textContent=text;}
   function details(){
-   if(mode.value==="gemini"){
+   if(mode.value==="published"){
     const selected=state.scenes.find(s=>s.id===state.selected);
     const eligible=(selected?.rows||[]).filter(s=>s.type!=="dialogue_joueur");
     const ready=eligible.filter(line=>{
@@ -116,9 +126,14 @@
       return clip&&clip.locuteur===line.locuteur&&clip.texte===line.texte&&
         /^audio\/[a-f0-9]{20}\.mp3$/.test(clip.file)&&clip.provider==="offline";
     }).length;
-    const gemini=ready-offline;
+    const phonon=eligible.filter(line=>{
+      const clip=state.audio[String(line.seq)];
+      return clip&&clip.locuteur===line.locuteur&&clip.texte===line.texte&&
+        /^audio\/[a-f0-9]{20}\.mp3$/.test(clip.file)&&clip.provider==="phonon";
+    }).length;
+    const gemini=ready-offline-phonon;
     voiceNote.textContent=eligible.length
-      ? ready+"/"+eligible.length+" répliques en MP3 disponibles ("+gemini+" Gemini, "+offline+" gratuites hors ligne)."+
+      ? ready+"/"+eligible.length+" répliques en MP3 disponibles ("+phonon+" Phonon, "+gemini+" Gemini, "+offline+" secours local)."+
         (missing?" "+missing+" sans MP3 : voix du téléphone en secours.":" Scène prête à écouter.")
       : "Aucune réplique vocale pour cette scène.";
     if(missing && state.audioStats?.quota_exhausted)
@@ -184,7 +199,7 @@
     announce((geminiUnavailable?"⚠ MP3 indisponible, voix du téléphone · ":"🔊 Voix du téléphone · ")+line.locuteur+" · "+(state.index+1)+"/"+rows.length);
     try{synth.speak(u);}catch(_){u.onerror();}
    };
-   if(mode.value==="gemini"){
+   if(mode.value==="published"){
     const clip=state.audio[String(line.seq)];
     if(clip && clip.locuteur===line.locuteur && clip.texte===line.texte &&
        /^audio\/[a-f0-9]{20}\.mp3$/.test(clip.file)){
@@ -193,7 +208,7 @@
      audio.onended=()=>{if(token===state.generation){state.handle=null;advance(token,rows);}};
      audio.onerror=()=>{if(token===state.generation){state.handle=null;browserSpeech(true);}};
      state.handle={stop:()=>{audio.onended=null;audio.onerror=null;audio.pause();audio.removeAttribute("src");audio.load();}};
-     announce((clip.provider==="offline"?"🔊 MP3 gratuit · ":"✨ Voix Gemini · ")+line.locuteur+" · "+(state.index+1)+"/"+rows.length);
+     announce((clip.provider==="phonon"?"🎙️ Phonon · ":clip.provider==="offline"?"🔊 Secours local · ":"✨ Gemini · ")+line.locuteur+" · "+(state.index+1)+"/"+rows.length);
      audio.play().catch(()=>{if(token===state.generation){state.handle=null;browserSpeech(true);}});
      return;
     }
@@ -234,7 +249,7 @@
     const response=await fetch(url,{cache:"no-store"});
     if(response.ok){
      const manifest=await response.json();
-     if(manifest.version===1&&manifest.provider==="gemini"&&manifest.lines &&
+     if(manifest.version===1&&["gemini","mixed","phonon"].includes(manifest.provider)&&manifest.lines &&
         typeof manifest.lines==="object"&&!Array.isArray(manifest.lines)){
          audio=manifest.lines;
          if(manifest.stats&&typeof manifest.stats==="object")audioStats=manifest.stats;

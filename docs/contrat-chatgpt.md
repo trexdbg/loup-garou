@@ -63,6 +63,14 @@ Index conseillé `parties/index.json` :
 
 Les exemples sont des modèles, **pas des parties réelles à insérer**.
 
+## Placement circulaire obligatoire des personnages
+
+Avant de commencer les séquences de jeu dépendant du voisinage, **proposer au MJ l'ordre complet des figurines LEGO, joueur compris**, sous forme de table circulaire. Départ à 12 h, numérotation dans le sens horaire. Attendre l'accord du MJ : **une liste de personnages ne constitue pas en elle-même un placement validé**. Après confirmation, écrire le champ public `placement_table` de `parties/<ID>/partie.json` avec `type: "circulaire"`, `sens: "horaire"`, `depart: "12h"`, `ordre` (tableau des prénoms dans l'ordre), `retire` (liste des figurines retirées) et `valide_par_mj: true`.
+
+Une carte secrète est placée physiquement **sous chaque LEGO** ; ne publier ni identité secrète, ni emplacement d'une carte de rôle dans les archives GitHub. Les déplacements des LEGO invalident l'ancien plan jusqu'à nouvel accord du MJ. L'application propose les changements localement, puis le MJ copie le plan vers la conversation pour archivage explicite.
+
+Pour le Renard, le flair s'applique au **personnage ciblé et à ses deux voisins directs encore présents** dans l'ordre circulaire. Le carnet secret vérifie oui/non/incertain à partir des cartes attribuées localement, mais n'applique pas le pouvoir ni ses conséquences. Les pouvoirs de voisinage comme le Montreur d'Ours doivent employer le même plan. Détails : [placement LEGO](placement-lego.md).
+
 ## 3. Cycle de jeu : une étape validée à la fois
 
 - **MJ :** accepte le prologue et laisse le joueur agir.

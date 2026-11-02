@@ -78,3 +78,13 @@ Nouvelle partie initialisée. En attente de la validation du MJ après le prolog
 - Scènes publiques : `appel_loups_02` et `appel_sorciere_02`, séquences 92 à 98. Aucun secret dévoilé publiquement.
 - Le Chasseur devra être traité si son élimination est confirmée au réveil.
 - Nuit 2 non résolue publiquement : aucun personnage retiré, aucune annonce du matin ni transition vers le jour 2 sans validation du MJ.
+
+## Jour 2 — Mort de Martin et Chasseur révélé
+
+- Le MJ autorise le réveil du village après la nuit 2.
+- Martin est confirmé comme victime des Loups-Garous. Sa figurine LEGO est retirée : il reste **six habitants**.
+- Le MJ montre publiquement sa carte : **Chasseur**. Cette identité n'est plus secrète.
+- Le pouvoir du Chasseur est disponible au moment de la mort : Martin évoque **Éloi** comme cible possible, en raison des contradictions remarquées lors des débats.
+- **Aucun tir effectué** et aucune victime supplémentaire. Le MJ doit valider explicitement la décision avant toute nouvelle élimination.
+- Scène publique `reveil_jour_2_chasseur` archivée (séquences 99 à 108). Jour 2 ouvert mais débats et vote suspendus jusqu'à résolution du Chasseur.
+- Les observations de la Voyante et les pouvoirs des autres personnages restent secrets.

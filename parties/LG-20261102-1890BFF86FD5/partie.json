@@ -8,7 +8,7 @@
   "progression": {
     "jour": 1,
     "nuit": 1,
-    "scene": "preparation_vote_jour_1"
+    "scene": "elimination_jour_1"
   },
   "joueur": {
     "prenom": "André",
@@ -58,15 +58,17 @@
       "Odette",
       "Alice"
     ],
-    "retire": [],
+    "retire": [
+      "Hugo"
+    ],
     "valide_par_mj": true,
     "statut": "valide",
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Le village s'est réveillé au matin du jour 1, sans disparition.",
-  "aide_mj_publique": "Le scrutin n'est pas ouvert. Faire valider son ouverture par le MJ, recueillir ensuite le choix libre d'André. Aucun résultat ou élimination automatique.",
-  "dernier_evenement_public": "Le village prépare le vote du jour 1. Hugo et Éloi sont cités ; aucun vote n'a encore été exprimé.",
-  "scene_courante_id": "preparation_vote_jour_1",
+  "resume_public": "Le village a éliminé Hugo à la fin du jour 1. La prochaine nuit n'a pas encore commencé.",
+  "aide_mj_publique": "Hugo ne participe plus à la partie. Retirer son LEGO, conserver l'ordre des survivants. Le MJ décide quand commencer la nuit 2.",
+  "dernier_evenement_public": "Hugo éliminé au jour 1 après un vote de 5 contre 3. Sept habitants restent.",
+  "scene_courante_id": "elimination_jour_1",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_02",
@@ -77,15 +79,55 @@
   },
   "jour_en_cours": {
     "numero": 1,
-    "etape": "preparation_vote",
-    "statut": "attente_ouverture_mj",
+    "etape": "apres_vote",
+    "statut": "vote_termine",
     "vote_ouvert": false,
     "attendre_validation_mj": true,
     "candidats_evoques": [
       "Hugo",
       "Éloi"
     ],
-    "votes_enregistres": []
+    "votes_enregistres": [
+      {
+        "votant": "Hugo",
+        "cible": "Éloi"
+      },
+      {
+        "votant": "Éloi",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Célia",
+        "cible": "Éloi"
+      },
+      {
+        "votant": "Rose",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Martin",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Alice",
+        "cible": "Éloi"
+      },
+      {
+        "votant": "Odette",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "André",
+        "cible": "Hugo"
+      }
+    ],
+    "resultat": {
+      "Hugo": 5,
+      "Éloi": 3
+    },
+    "elimine": "Hugo",
+    "resultat_valide": true,
+    "elimination_validee": true
   },
   "nuit_en_cours": {
     "numero": 1,

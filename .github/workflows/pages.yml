@@ -35,7 +35,7 @@ jobs:
       - name: Assembler uniquement les fichiers publics
         run: |
           mkdir -p site/parties
-          cp index.html styles.css launcher.css mj-console.css mj-console.js roles.js modes.js role-art.js stories.js launcher.js piper-free.js scene-player.js voice-live.js seating-model.js table-seating.js mj-private.js tts-config.json site/
+          cp index.html styles.css launcher.css mj-console.css mj-console.js roles.js modes.js role-art.js stories.js launcher.js voice-pool.js piper-free.js scene-player.js voice-live.js seating-model.js table-seating.js mj-private.js tts-config.json site/
           # Les seules données copiées dans Pages sont les archives publiques.
           if [ -f parties/index.json ]; then cp parties/index.json site/parties/index.json; fi
           for folder in parties/*/; do
@@ -46,6 +46,8 @@ jobs:
               if [ -f "${folder}${filename}" ]; then cp "${folder}${filename}" "$dest"; fi
             done
           done
+          mkdir -p site/voices
+          cp voices/phonon-fr.json site/voices/
           touch site/.nojekyll
       - name: Restaurer les clips Gemini déjà générés
         uses: actions/cache@v4
@@ -61,6 +63,27 @@ jobs:
             sudo apt-get install -y -qq ffmpeg
           fi
           ffmpeg -version | head -n 1
+      - name: Retrouver le cache des voix Phonon
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/phonon-tts
+            .cache/huggingface
+          key: phonon-fr-v1-${{ github.sha }}
+          restore-keys: |
+            phonon-fr-v1-
+      - name: Générer les MP3 avec Phonon français (prioritaire)
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HOME: ${{ github.workspace }}/.cache/huggingface
+        run: |
+          if [ -n "$HF_TOKEN" ]; then
+            echo "HF_TOKEN disponible : Phonon FR utilise les 15 voix, si la licence a été acceptée."
+            python3 -m pip install --quiet ptts
+          else
+            echo "::warning::HF_TOKEN absent : accepter les conditions gradium/phonon-40m-fr et ajouter le secret pour activer Phonon."
+          fi
+          python3 scripts/generate_phonon_tts.py --site site --max-scenes 3 --max-lines 20
       - name: Préparer les voix Gemini des scènes récentes
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

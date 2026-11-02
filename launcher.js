@@ -3,6 +3,7 @@
   const $ = id => document.getElementById(id);
   const roles = window.ROLES || [];
   const stories = window.STORIES || [];
+  const modeCatalog = window.LG_MODES;
   const repo = "trexdbg/loup-garou";
   const draftKey = "lg-launcher-draft-v2";
   const $v = id => $(id).value;
@@ -58,22 +59,40 @@
         const input = document.createElement("input");
         input.type = "checkbox"; input.checked = true;
         input.value = r.id; input.className = "role-allowed";
-        input.addEventListener("change", () => { updateRoleCount(); clearGenerated(); });
+        input.addEventListener("change", () => { updateRoleCount(); updateAvailableRoleChoices(); clearGenerated(); });
         label.append(input, document.createTextNode(" " + r.icon + " " + r.name));
         fieldset.append(label);
       }
       $("roleChecklist").append(fieldset);
     }
+    $("gameMode").addEventListener("change", () => { applyMode(); clearGenerated(); });
     $("roleChoice").addEventListener("change", () => { updateRolePreview(); clearGenerated(); });
-    updateRolePreview();
-    updateRoleCount();
+    applyMode();
   }
 
+  function applyMode() {
+    const mode = modeCatalog.modes[$v("gameMode")] || modeCatalog.modes.classique;
+    const pool = new Set(modeCatalog.allowed(mode.id, roles));
+    for (const input of document.querySelectorAll(".role-allowed")) input.checked = pool.has(input.value);
+    for (const [id, value] of Object.entries(mode.regles)) $(id).checked = value;
+    updateRoleCount();
+    updateAvailableRoleChoices();
+  }
+  function updateAvailableRoleChoices() {
+    const role = $("roleChoice"), wanted = role.value;
+    const pool = new Set(allowedRoles());
+    role.replaceChildren(new Option("🎲 Tiré au sort par ChatGPT", "random"));
+    for (const r of roles.filter(item => pool.has(item.id))) role.append(new Option(r.icon + " " + r.name, r.id));
+    role.value = pool.has(wanted) ? wanted : "random";
+    updateRolePreview();
+  }
   function allowedRoles() {
     return Array.from(document.querySelectorAll(".role-allowed:checked")).map(x => x.value);
   }
   function updateRoleCount() {
     $("rolePoolCount").textContent = allowedRoles().length + " rôle(s) autorisé(s) sur " + roles.length;
+    const mode = modeCatalog.modes[$v("gameMode")] || modeCatalog.modes.classique;
+    $("modeSummary").textContent = mode.description + " (" + allowedRoles().length + " rôles sélectionnés sur " + roles.length + " ; sélection personnalisable.)";
   }
   function updateRolePreview() {
     const id = $v("roleChoice");
@@ -142,6 +161,8 @@
         narration_adaptee_a_l_age: true
       },
       roles: {
+        mode: $v("gameMode"),
+        niveau: modeCatalog.modes[$v("gameMode")].niveau,
         autorises: pool,
         loup_garou_nombre_cible: num("wolfCount", 1, 5),
         respecter_les_cartes_et_leurs_pouvoirs: true,
@@ -201,6 +222,8 @@
       "2. Crée parties/" + value.id + "/parametres.json (COPIE EXPURGÉE de tous les rôles et secrets), partie.json (état PUBLIC de départ), narrations.md (UNIQUEMENT le prologue), journal.md et dialogues.ndjson (entrée initiale facultative). Garde le JSON complet dans notre conversation privée.",
       "3. Mets à jour parties/index.json pour référencer ce même ID, titre, date, statut, phase et dossier; n'écrase pas les autres parties.",
       "4. Prépare les identités et secrets uniquement dans notre conversation privée, sans les commiter au dépôt public. Ne publie pas le rôle secret du joueur ni ceux des PNJ. Si le rôle est fixé dans le JSON, remplace son ID par null dans la copie GitHub.",
+      "4 bis. Applique le niveau roles.mode (classique, avance ou expert) et les rôles autorisés. Compose une distribution cohérente pour le nombre de personnages, le total de Loups, les pouvoirs et les camps ; le MJ valide la répartition avant le prologue.",
+      "4 ter. Après validation des rôles, fournis au MJ dans la conversation PRIVÉE un JSON {\\\"id\\\":\\\"ID_PARTIE\\\",\\\"roles\\\":[{\\\"personnage\\\":\\\"Alex\\\",\\\"role\\\":\\\"renard\\\"}, ...]} contenant chaque personnage et son ID de rôle issu de roles.js. Ce JSON est à coller uniquement dans le carnet secret MJ de l'application, jamais dans les fichiers GitHub publics.",
       "5. Après écriture sur GitHub, raconte le prologue et attends l'accord du MJ. Ne génère ni nuit complète, ni vote, ni dénouement par anticipation.",
       "6. Ensuite, au fil de nos échanges, écris seulement les nouveaux événements validés dans le dossier de cette partie et mets à jour l'index.",
       "7. Reste adapté à un joueur de 10 ans si c'est l'âge indiqué. Respecte les vraies cartes et demande au MJ en cas de règles ambiguës.",
@@ -325,6 +348,11 @@
         make("span", "Phase : " + (state.phase || state.progression?.scene || "prologue"))
       );
       content.append(make("h3", title), meta);
+      if (window.LG_MJ_PRIVATE) {
+        const privateMount = make("section", undefined, "mj-private-slot");
+        content.append(privateMount);
+        window.LG_MJ_PRIVATE.attach(id, state, privateMount);
+      }
       if (window.LG_VOICES) {
         const voiceMount = make("div");
         content.append(voiceMount);

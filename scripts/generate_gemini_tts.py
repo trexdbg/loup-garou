@@ -6,6 +6,7 @@ import base64
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import time
@@ -188,7 +189,7 @@ def generate(root: Path, site: Path, cache: Path,
                     and previous_clip.get("locuteur") == speaker
                     and previous_clip.get("texte") == text
                     and isinstance(previous_clip.get("file"), str)
-                    and __import__("re").fullmatch(r"audio/[a-f0-9]{20}\.mp3", previous_clip["file"])
+                    and re.fullmatch(r"audio/[a-f0-9]{20}\.mp3", previous_clip["file"])
                     and (target / previous_clip["file"]).is_file()):
                 manifest["lines"][str(row["seq"])] = previous_clip
                 stats["available"] += 1

@@ -1,0 +1,84 @@
+{
+  "schema_version": 2,
+  "id": "LG-20261102-ECC258EF6F92",
+  "titre": "La Huitième Lanterne",
+  "cree_le": "2026-11-02T07:25:52.597Z",
+  "statut": "en_attente_validation_prologue",
+  "phase": "prologue",
+  "mode": "1 joueur humain, 1 MJ humain, PNJ interprétés par ChatGPT",
+  "participants": {
+    "joueur": {
+      "prenom": "Alex",
+      "age": 10
+    },
+    "joueurs_humains": 1,
+    "pnj_nombre": 7,
+    "maitre_du_jeu": "humain"
+  },
+  "personnages_pnj": [
+    {
+      "prenom": "Mila",
+      "description": "Boulangère bavarde et malicieuse"
+    },
+    {
+      "prenom": "Octave",
+      "description": "Garde forestier courageux mais maladroit"
+    },
+    {
+      "prenom": "Clémence",
+      "description": "Couturière calme et mystérieuse"
+    },
+    {
+      "prenom": "Nils",
+      "description": "Charpentier sympathique, amateur de plaisanteries"
+    },
+    {
+      "prenom": "Iris",
+      "description": "Bibliothécaire observatrice et curieuse"
+    },
+    {
+      "prenom": "Léon",
+      "description": "Facteur romantique et très distrait"
+    },
+    {
+      "prenom": "Zoé",
+      "description": "Jeune apprentie toujours à l'affût des secrets"
+    }
+  ],
+  "placement_table": {
+    "type": "circulaire",
+    "sens": "horaire",
+    "depart": "12h",
+    "ordre": [
+      "Alex",
+      "Mila",
+      "Octave",
+      "Clémence",
+      "Nils",
+      "Iris",
+      "Léon",
+      "Zoé"
+    ],
+    "retire": [],
+    "valide_par_mj": true
+  },
+  "progression": {
+    "scene": "prologue",
+    "jour": 0,
+    "nuit": 0,
+    "journal_seq": 1,
+    "indices_decouverts": [],
+    "votes": []
+  },
+  "resume_public": "Les huit habitants sont réunis sur la place de Thiercelieux. Une lanterne s'allume sans flamme et un étrange message apparaît dans l'eau de la fontaine.",
+  "aide_mj_publique": "Le prologue est prêt, mais la première scène n'est pas encore lancée. Attendre l'accord explicite du MJ. Ne révéler aucun rôle secret.",
+  "dernier_evenement_public": "Le MJ a validé les huit personnages et leur placement physique circulaire ; le prologue a été préparé.",
+  "archivage": {
+    "repo": "trexdbg/loup-garou",
+    "dossier": "parties/LG-20261102-ECC258EF6F92",
+    "dialogues": "dialogues.ndjson",
+    "journal": "journal.md",
+    "narrations": "narrations.md"
+  },
+  "prochain_geste": "Attendre la validation du prologue par le MJ avant toute première action, dialogue interactif, nuit ou vote."
+}

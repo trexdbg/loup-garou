@@ -14,7 +14,7 @@ Le secret GitHub n'est consommé que par le runner GitHub Actions sur le workflo
 
 ## Fonctionnement et coûts
 
-- Modèle par défaut : **`gemini-2.5-flash-preview-tts`**, avec offre gratuite limitée par le quota propre au compte Google. La date de retrait annoncée est **le 17 novembre 2026** ; Google peut restreindre son accès avant. Les modèles successeurs ne sont pas présumés gratuits.
+- Modèle par défaut : **`gemini-3.1-flash-tts-preview`**, avec offre gratuite limitée par les quotas propres au compte Google. C'est une version Preview, susceptible de changer ; le modèle 2.5 précédent est annoncé pour retrait le 17 novembre 2026. Ne pas utiliser de modèle payant sans contrôler la tarification.
 - **7 profils Gemini** pour les sept PNJ (association stable dans l'ordre du casting de `partie.json`) et **1 voix de narrateur**. Chaque réplique est générée séparément pour préserver la cohérence du personnage et respecter l'ordre de la scène.
 - Maximum **24 nouvelles répliques par déploiement**, sur les **3 dernières scènes** de chaque partie. Le cache GitHub Actions réutilise les clips identiques entre déploiements ; les fichiers sont convertis en MP3 à faible débit.
 - Les MP3 et les manifests ne sont placés que dans l'artefact **GitHub Pages**. **Aucun MP3 n'est commité au dépôt**, y compris après nettoyage. Les anciennes scènes sans MP3 conservent la lecture locale.

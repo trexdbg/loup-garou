@@ -63,3 +63,10 @@ Nouvelle partie initialisée. En attente de la validation du MJ après le prolog
 - Répliques et annonce archivées dans `dialogues.ndjson`, scène `revelation_hugo_jour_1` (séquences 81 à 86).
 - Sept survivants ; vote clos ; jour 1 conservé ; aucune nuit 2 déclenchée.
 - Les rôles des sept autres habitants restent cachés dans les scènes publiques.
+
+## Nuit 2 — Le village s'endort
+
+- Le MJ autorise la nuit 2 après la révélation publique de la carte Simple Villageois de Hugo.
+- Sept habitants encore en jeu, Hugo retiré du plan de table.
+- La nuit 2 commence par l'endormissement uniquement. Aucun rôle n'est appelé et aucun pouvoir activé.
+- Prochaine étape soumise à l'accord explicite du MJ : appeler la Voyante.

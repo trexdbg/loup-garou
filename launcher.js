@@ -296,8 +296,8 @@
 
   async function readPublic(path) {
     // GitHub Pages est mis à jour par Actions; raw.githubusercontent sert de secours.
-    const urls = ["./" + path + "?t=" + Date.now(),
-      "https://raw.githubusercontent.com/" + repo + "/main/" + path + "?t=" + Date.now()];
+    const urls = ["https://raw.githubusercontent.com/" + repo + "/main/" + path + "?t=" + Date.now(),
+      "./" + path + "?t=" + Date.now()];
     for (const url of urls) {
       try {
         const response = await fetch(url, {cache:"no-store"});
@@ -342,7 +342,10 @@
         ? rows.length + " partie(s) répertoriée(s). Mise à jour par ChatGPT via GitHub."
         : "Aucune partie archivée. Le JSON créé localement n'est pas encore enregistré sur GitHub.";
       const query = new URLSearchParams(location.search).get("partie");
-      if (query && validId(query) && $("sessionDetail").hidden) await openArchive(query);
+      let remembered = "";
+      try { remembered = localStorage.getItem("lg-mj-last-party") || ""; } catch (_) {}
+      const preferred = validId(query) ? query : (rows.some(x => x.id === remembered) ? remembered : rows[0]?.id);
+      if (preferred && rows.some(x => x.id === preferred) && $("sessionDetail").hidden) await openArchive(preferred);
     } catch (error) {
       $("archiveStatus").textContent = error.message;
     } finally {
@@ -368,6 +371,7 @@
         make("span", "Phase : " + (state.phase || state.progression?.scene || "prologue"))
       );
       const phaseNames = {
+        nuit: "Nuit · pouvoirs", jour: "Jour · débats", vote: "Vote",
         prologue: "Prologue", tour_de_table: "Débat · tour de table",
         village_s_endort: "Le village s'endort", appels_nocturnes: "Pouvoirs nocturnes",
         village_se_reveille: "Réveil du village", dialogues_et_enquete: "Débats",
@@ -378,17 +382,32 @@
       header.append(make("h3", title));
       header.append(meta);
       content.append(header);
+      const command = make("div", undefined, "mj-command-strip");
+      const refreshSession = make("button", "↻ Actualiser cette partie", "secondary mj-quick-reload");
+      refreshSession.type = "button";
+      refreshSession.addEventListener("click", () => openArchive(id));
+      const changeSession = make("button", "← Choisir une autre partie", "ghost");
+      changeSession.type = "button";
+      changeSession.addEventListener("click", () => $("backToArchives").click());
+      command.append(refreshSession, changeSession);
+      content.append(command);
+      try { localStorage.setItem("lg-mj-last-party", id); } catch (_) {}
       if (state.resume_public) content.append(make("p", state.resume_public, "game-synopsis"));
       const stage = make("div", undefined, "game-stage");
       content.append(stage);
+      if (window.LG_MJ_CONSOLE) {
+        const dashboard = make("div", undefined, "mj-console-host");
+        stage.append(dashboard);
+        window.LG_MJ_CONSOLE.attach(id, state, dashboard);
+      }
       if (window.LG_SCENES) {
         const voiceMount = make("div", undefined, "game-audio");
         stage.append(voiceMount);
         window.LG_SCENES.attach(id, voiceMount, state);
       }
       const tableDetails = make("details", undefined, "game-details");
-      tableDetails.open = true;
-      const tableSummary = make("summary", "02 / 🧱 Voir les huit LEGO et leur placement");
+      tableDetails.open = false;
+      const tableSummary = make("summary", "🧱 Plan de table — LEGO, voisinage et flair");
       tableDetails.append(tableSummary);
       if (window.LG_TABLE) {
         const tableMount = make("div", undefined, "game-table");
@@ -397,7 +416,7 @@
       }
       stage.append(tableDetails);
       const privateSection = make("section", undefined, "game-private-section");
-      privateSection.append(make("h4", "03 / 🗝️ Espace du maître du jeu"));
+      privateSection.append(make("h4", "🗝️ Les cartes et pouvoirs secrets du MJ"));
       if (window.LG_MJ_PRIVATE) {
         const privateMount = make("div", undefined, "mj-private-slot");
         privateSection.append(privateMount);
@@ -424,7 +443,7 @@
       });
       content.append(resumeButton);
       const historyPanel = make("details", undefined, "game-details game-history");
-      historyPanel.append(make("summary", "04 / 📜 Journal et archives écrites"));
+      historyPanel.append(make("summary", "📜 Historique, narrations et journal GitHub"));
       content.append(historyPanel);
       const textFiles = [["narrations.md", "Narration"],["journal.md", "Journal"]];
       for (const [file, heading] of textFiles) {
@@ -450,7 +469,11 @@
     $("copyJson").addEventListener("click", () => generated && copy(JSON.stringify(generated, null, 2), "JSON copié. Colle-le dans la conversation du projet Loup garou."));
     $("copyPrompt").addEventListener("click", () => generated && copy(promptFor(generated), "Consigne et JSON copiés. Colle-les dans la conversation ChatGPT du projet."));
     $("downloadJson").addEventListener("click", downloadJson);
-    $("archiveRefresh").addEventListener("click", refreshArchives);
+    $("archiveRefresh").addEventListener("click", async () => {
+      await refreshArchives();
+      const id = new URLSearchParams(location.search).get("partie");
+      if (id && validId(id) && !$("sessionDetail").hidden) await openArchive(id);
+    });
     $("backToArchives").addEventListener("click", () => { if (window.LG_MJ_PRIVATE) window.LG_MJ_PRIVATE.hide(); if (window.LG_SCENES) window.LG_SCENES.stop(); $("sessionDetail").hidden = true; if (history.replaceState) history.replaceState(null, "", location.pathname); });
     $("configForm").addEventListener("change", clearGenerated);
     $("configForm").addEventListener("input", clearGenerated);
@@ -465,7 +488,7 @@
         $("exportStatus").textContent = "Dernière configuration locale retrouvée. Vérifie-la avant de la transmettre.";
       }
     } catch (_) {}
-    if (new URLSearchParams(location.search).has("partie")) setTab("archives");
+    setTab("archives");
   }
   window.LG_LAUNCHER = {sessionId, config, promptFor, validId};
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

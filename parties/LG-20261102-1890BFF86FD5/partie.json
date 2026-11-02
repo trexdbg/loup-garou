@@ -4,11 +4,11 @@
   "titre": "Le village des huit suspects",
   "cree_le": "2026-11-02T18:58:30.815Z",
   "statut": "en_cours",
-  "phase": "nuit",
+  "phase": "jour",
   "progression": {
-    "jour": 1,
+    "jour": 2,
     "nuit": 2,
-    "scene": "appel_sorciere_02"
+    "scene": "reveil_jour_2_chasseur"
   },
   "joueur": {
     "prenom": "André",
@@ -59,16 +59,17 @@
       "Alice"
     ],
     "retire": [
-      "Hugo"
+      "Hugo",
+      "Martin"
     ],
     "valide_par_mj": true,
     "statut": "valide",
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Sept habitants sont encore en vie. Après la révélation du rôle de Hugo, le village s'endort pour la deuxième nuit.",
-  "aide_mj_publique": "Le village dort. Attendre l'accord du MJ pour appeler la Voyante. Ne lancer aucun autre pouvoir ni annoncer de victime.",
-  "dernier_evenement_public": "Nuit 2 : les sept habitants s'endorment. Aucun rôle nocturne n'a encore agi.",
-  "scene_courante_id": "appel_sorciere_02",
+  "resume_public": "Au matin du jour 2, Martin est retrouvé mort. Sa carte de Chasseur est révélée. Six habitants sont encore en jeu ; le tir du Chasseur n'a pas eu lieu.",
+  "aide_mj_publique": "Faire écouter le réveil, puis demander au MJ d'autoriser le tir du Chasseur. Martin propose de viser Éloi mais aucun tir ni élimination supplémentaire ne sont validés. Les débats du jour 2 attendent la résolution du Chasseur.",
+  "dernier_evenement_public": "Jour 2 : Martin mort, rôle de Chasseur révélé. Dernier tir non effectué, en attente du MJ.",
+  "scene_courante_id": "reveil_jour_2_chasseur",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_02",
@@ -78,73 +79,35 @@
     "passage_vote_apres_validation_mj": true
   },
   "jour_en_cours": {
-    "numero": 1,
-    "etape": "apres_vote",
-    "statut": "termine",
+    "numero": 2,
+    "etape": "attente_tir_chasseur",
+    "statut": "suspendu_attente_mj",
     "vote_ouvert": false,
     "attendre_validation_mj": true,
-    "candidats_evoques": [
-      "Hugo",
-      "Éloi"
-    ],
-    "votes_enregistres": [
-      {
-        "votant": "Hugo",
-        "cible": "Éloi"
-      },
-      {
-        "votant": "Éloi",
-        "cible": "Hugo"
-      },
-      {
-        "votant": "Célia",
-        "cible": "Éloi"
-      },
-      {
-        "votant": "Rose",
-        "cible": "Hugo"
-      },
-      {
-        "votant": "Martin",
-        "cible": "Hugo"
-      },
-      {
-        "votant": "Alice",
-        "cible": "Éloi"
-      },
-      {
-        "votant": "Odette",
-        "cible": "Hugo"
-      },
-      {
-        "votant": "André",
-        "cible": "Hugo"
-      }
-    ],
-    "resultat": {
-      "Hugo": 5,
-      "Éloi": 3
+    "chasseur": {
+      "personnage": "Martin",
+      "statut": "attente_accord_mj",
+      "tir_effectue": false,
+      "cible_tir": null
     },
-    "elimine": "Hugo",
-    "resultat_valide": true,
-    "elimination_validee": true,
-    "role_hugo_revele": true,
-    "role_hugo_public": "villageois"
+    "debats_ouverts": false
   },
   "nuit_en_cours": {
     "numero": 2,
-    "etape": "sorciere_rendormie",
+    "etape": "terminee_attente_chasseur",
     "actions_resolues": [
       "voyante_observation",
       "loups_choix_victime",
       "sorciere_decision"
     ],
     "attendre_validation_mj": true,
-    "prochain_appel": "voyante",
+    "prochain_appel": null,
     "loups_appeles": true,
     "attendre_choix_joueur": false,
-    "attendre_reveil_mj": true,
-    "attaque_resolue": false
+    "attendre_reveil_mj": false,
+    "attaque_resolue": true,
+    "reveil_valide_par_mj": true,
+    "chasseur_en_attente": true
   },
   "roles_reveles_publics": [
     {
@@ -152,6 +115,12 @@
       "role": "villageois",
       "jour": 1,
       "cause": "vote"
+    },
+    {
+      "personnage": "Martin",
+      "role": "chasseur",
+      "jour": 2,
+      "cause": "attaque_loups"
     }
   ]
 }

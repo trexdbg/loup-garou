@@ -33,7 +33,7 @@ jobs:
       - name: Assembler uniquement les fichiers publics
         run: |
           mkdir -p site/parties
-          cp index.html styles.css launcher.css roles.js modes.js role-art.js stories.js launcher.js piper-free.js voice-live.js seating-model.js table-seating.js mj-private.js tts-config.json site/
+          cp index.html styles.css launcher.css roles.js modes.js role-art.js stories.js launcher.js piper-free.js scene-player.js voice-live.js seating-model.js table-seating.js mj-private.js tts-config.json site/
           # Les seules données copiées dans Pages sont les archives publiques.
           if [ -f parties/index.json ]; then cp parties/index.json site/parties/index.json; fi
           for folder in parties/*/; do
@@ -45,6 +45,19 @@ jobs:
             done
           done
           touch site/.nojekyll
+      - name: Restaurer les clips Gemini déjà générés
+        uses: actions/cache@v4
+        with:
+          path: .cache/gemini-tts
+          key: gemini-tts-v1-${{ github.sha }}
+          restore-keys: |
+            gemini-tts-v1-
+      - name: Préparer les voix Gemini des scènes récentes
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          # Sans secret, aucune requête à Google et le lecteur utilise les voix locales.
+          python3 scripts/generate_gemini_tts.py --site site --max-scenes 3 --max-lines 24
       - name: Configurer GitHub Pages
         uses: actions/configure-pages@v5
       - name: Envoyer le site

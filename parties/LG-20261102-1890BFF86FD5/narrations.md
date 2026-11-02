@@ -69,3 +69,19 @@ Hugo est éliminé. Sa figurine quitte la table.
 **Rose :** « Sept habitants restent. Ne prenons pas cette décision à la légère. »
 
 Le village demeure au jour 1. Le MJ décidera du début de la nuit suivante.
+
+## Jour 1 — Révélation de la carte de Hugo
+
+Le maître du jeu retourne la carte de Hugo devant les sept survivants : **Simple Villageois**. Tous découvrent qu'ils viennent d'éliminer un innocent.
+
+**Alice :** « Nous avons éliminé un innocent ! »
+
+**Martin :** « J'ai eu tort de voter contre lui. »
+
+**Rose :** « La prochaine fois, écoutons mieux les arguments. »
+
+**Célia :** « La parole ne suffit pas à prouver une culpabilité. »
+
+**Éloi :** « Il reste sept habitants. Soyons vigilants. »
+
+La nuit 2 ne commencera qu'après l'accord du maître du jeu.

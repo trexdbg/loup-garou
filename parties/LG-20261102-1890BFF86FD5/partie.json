@@ -4,11 +4,11 @@
   "titre": "Le village des huit suspects",
   "cree_le": "2026-11-02T18:58:30.815Z",
   "statut": "en_cours",
-  "phase": "nuit",
+  "phase": "jour",
   "progression": {
-    "jour": 0,
+    "jour": 1,
     "nuit": 1,
-    "scene": "appel_sorciere_01"
+    "scene": "reveil_jour_1"
   },
   "joueur": {
     "prenom": "André",
@@ -63,10 +63,10 @@
     "statut": "valide",
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Les habitants sont endormis. Les rôles nocturnes ont agi, sans annonce de leurs décisions au village.",
-  "aide_mj_publique": "Les choix nocturnes sont consignés dans secrets_mj.json. Attendre l'accord explicite du MJ pour annoncer le matin. Ne révéler aucune victime ni effet de potion avant la résolution validée.",
-  "dernier_evenement_public": "Nuit 1 : les Loups-Garous et la Sorcière se sont rendormis. Les décisions restent secrètes ; réveil en attente du MJ.",
-  "scene_courante_id": "appel_sorciere_01",
+  "resume_public": "Le village s'est réveillé au matin du jour 1, sans disparition.",
+  "aide_mj_publique": "Faire débattre les PNJ du jour 1. Le joueur André peut parler librement. Aucun vote ni nuit automatiquement.",
+  "dernier_evenement_public": "Jour 1 : tous les habitants sont vivants et réunis sur la place du village.",
+  "scene_courante_id": "reveil_jour_1",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_02",
@@ -76,15 +76,15 @@
     "passage_vote_apres_validation_mj": true
   },
   "jour_en_cours": {
-    "numero": 0,
-    "etape": "cloture_debats",
-    "statut": "termine",
+    "numero": 1,
+    "etape": "debats",
+    "statut": "attente_andre",
     "vote_ouvert": false,
     "attendre_validation_mj": true
   },
   "nuit_en_cours": {
     "numero": 1,
-    "etape": "sorciere_rendormie",
+    "etape": "terminee",
     "actions_resolues": [
       "voyante_observation",
       "loups_choix_victime",
@@ -94,7 +94,8 @@
     "prochain_appel": null,
     "loups_appeles": true,
     "attendre_choix_joueur": false,
-    "attendre_reveil_mj": true,
-    "attaque_resolue": false
+    "attendre_reveil_mj": false,
+    "attaque_resolue": true,
+    "reveil_valide_par_mj": true
   }
 }

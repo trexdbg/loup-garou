@@ -23,3 +23,23 @@ Le soleil disparaît derrière Thiercelieux et les habitants regagnent leurs mai
 **Narrateur :** « Voyante, rendors-toi et referme les yeux. »
 
 *La nuit se poursuit. Aucun autre rôle n'est appelé sans l'accord du MJ.*
+
+## Jour 1 — Le village se réveille
+
+Village, réveille-toi ! Le soleil se lève sur Thiercelieux.
+
+Les huit habitants sont présents. Personne n'a disparu cette nuit.
+
+**Hugo :** « Personne n'a disparu ? C'est surprenant ! »
+
+**Alice :** « Une bonne nouvelle ! Mais nous devons rester prudents. »
+
+**Martin :** « Les Loups-Garous sont toujours parmi nous. »
+
+**Célia :** « J'aimerais revenir sur les discussions d'hier. »
+
+**Éloi :** « Tu as quelqu'un en tête, Célia ? »
+
+**Rose :** « Écoutons-nous sans accuser trop vite. »
+
+André peut librement prendre la parole.

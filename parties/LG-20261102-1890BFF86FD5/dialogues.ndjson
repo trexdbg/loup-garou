@@ -37,3 +37,12 @@
 {"seq":37,"scene_id":"appel_sorciere_01","scene_label":"Nuit 1 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"Tu peux utiliser une potion ou n'en utiliser aucune. Ton choix reste secret.","public":true}
 {"seq":38,"scene_id":"appel_sorciere_01","scene_label":"Nuit 1 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"La Sorcière prend sa décision.","public":true}
 {"seq":39,"scene_id":"appel_sorciere_01","scene_label":"Nuit 1 — Appel de la Sorcière","type":"narration","locuteur":"Narrateur","texte":"Sorcière, rendors-toi et ferme les yeux. Le village reste endormi.","public":true}
+{"seq":40,"scene_id":"reveil_jour_1","scene_label":"Jour 1 — Le village se réveille","type":"narration","locuteur":"Narrateur","texte":"Village, réveille-toi ! Le soleil se lève sur Thiercelieux.","public":true}
+{"seq":41,"scene_id":"reveil_jour_1","scene_label":"Jour 1 — Le village se réveille","type":"narration","locuteur":"Narrateur","texte":"Les huit habitants sont présents. Personne n'a disparu cette nuit.","public":true}
+{"seq":42,"scene_id":"reveil_jour_1","scene_label":"Jour 1 — Le village se réveille","type":"dialogue_pnj","locuteur":"Hugo","texte":"Personne n'a disparu ? C'est surprenant !","public":true}
+{"seq":43,"scene_id":"reveil_jour_1","scene_label":"Jour 1 — Le village se réveille","type":"dialogue_pnj","locuteur":"Alice","texte":"Une bonne nouvelle ! Mais nous devons rester prudents.","public":true}
+{"seq":44,"scene_id":"reveil_jour_1","scene_label":"Jour 1 — Le village se réveille","type":"dialogue_pnj","locuteur":"Martin","texte":"Les Loups-Garous sont toujours parmi nous.","public":true}
+{"seq":45,"scene_id":"reveil_jour_1","scene_label":"Jour 1 — Le village se réveille","type":"dialogue_pnj","locuteur":"Célia","texte":"J'aimerais revenir sur les discussions d'hier.","public":true}
+{"seq":46,"scene_id":"reveil_jour_1","scene_label":"Jour 1 — Le village se réveille","type":"dialogue_pnj","locuteur":"Éloi","texte":"Tu as quelqu'un en tête, Célia ?","public":true}
+{"seq":47,"scene_id":"reveil_jour_1","scene_label":"Jour 1 — Le village se réveille","type":"dialogue_pnj","locuteur":"Rose","texte":"Écoutons-nous sans accuser trop vite.","public":true}
+{"seq":48,"scene_id":"reveil_jour_1","scene_label":"Jour 1 — Le village se réveille","type":"narration","locuteur":"Narrateur","texte":"André peut librement prendre la parole.","public":true}

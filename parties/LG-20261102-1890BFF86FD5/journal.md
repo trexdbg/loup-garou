@@ -29,3 +29,10 @@ Nouvelle partie initialisée. En attente de la validation du MJ après le prolog
 - Scène `appel_voyante_01` archivée. Dialogues publics : 30 lignes cumulées.
 - État : `phase=nuit`, `etape=voyante_rendormie`. Loups non appelés, aucune victime, aucun réveil.
 - Attente de l'accord explicite du MJ pour la suite.
+
+## Nuit 1 — fin et réveil du village
+
+- Les décisions des rôles nocturnes sont archivées exclusivement dans secrets_mj.json.
+- Le MJ autorise le réveil. Tous les huit habitants sont présents.
+- Aucun vote ouvert et aucun rôle révélé au public.
+- Jour 1, scène reveil_jour_1. André décide librement de ses interventions.

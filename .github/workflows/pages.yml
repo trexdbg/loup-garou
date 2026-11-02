@@ -79,7 +79,9 @@ jobs:
         run: |
           if [ -n "$HF_TOKEN" ]; then
             echo "HF_TOKEN disponible : Phonon FR utilise les 15 voix, si la licence a été acceptée."
-            python3 -m pip install --quiet ptts
+            if ! python3 -m pip install --quiet ptts; then
+              echo "::warning::Installation Phonon impossible; Gemini ou voix locales seront utilisées."
+            fi
           else
             echo "::warning::HF_TOKEN absent : accepter les conditions gradium/phonon-40m-fr et ajouter le secret pour activer Phonon."
           fi

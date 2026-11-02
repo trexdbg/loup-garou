@@ -2,3 +2,13 @@
 {"seq":2,"type":"dialogue_pnj","locuteur":"Hugo","texte":"Je suis sûr que quelqu'un essaie déjà de nous tromper !","public":true}
 {"seq":3,"type":"dialogue_pnj","locuteur":"Rose","texte":"Alors écoutons-nous avant d'accuser n'importe qui.","public":true}
 {"seq":4,"type":"narration","locuteur":"Narrateur","texte":"Tous les regards se tournent vers Alex, qui peut maintenant prendre la parole.","public":true}
+{"seq":5,"type":"narration","locuteur":"Narrateur","texte":"Rose propose de faire un tour de table. Les habitants se tournent les uns vers les autres : personne n'a envie d'être accusé en premier.","public":true}
+{"seq":6,"type":"dialogue_pnj","locuteur":"Rose","texte":"On va faire simple : chacun donne son avis, mais personne ne vote pour le moment.","public":true}
+{"seq":7,"type":"dialogue_pnj","locuteur":"Hugo","texte":"Moi, je trouve Baptiste bizarre. Il rigole dès qu'on parle des Loups !","public":true}
+{"seq":8,"type":"dialogue_pnj","locuteur":"Baptiste","texte":"Je rigole quand je suis nerveux ! Et toi, Hugo, tu accuses les gens sans preuve !","public":true}
+{"seq":9,"type":"dialogue_pnj","locuteur":"Jade","texte":"Un Loup pourrait justement accuser très fort quelqu'un d'autre pour qu'on le laisse tranquille...","public":true}
+{"seq":10,"type":"dialogue_pnj","locuteur":"Hugo","texte":"Attends, Jade, tu parles de moi ?","public":true}
+{"seq":11,"type":"dialogue_pnj","locuteur":"Salomé","texte":"On se calme ! Il faut écouter ceux qui parlent, mais aussi ceux qui restent silencieux.","public":true}
+{"seq":12,"type":"dialogue_pnj","locuteur":"Marin","texte":"Jade a soulevé une bonne question. Moi, je préfère poser des questions plutôt que condamner quelqu'un au hasard.","public":true}
+{"seq":13,"type":"dialogue_pnj","locuteur":"Inès","texte":"D'accord. Chacun doit pouvoir répondre. Rose, et toi, qui te semble suspect ?","public":true}
+{"seq":14,"type":"dialogue_pnj","locuteur":"Rose","texte":"Pour l'instant, je n'ai aucune certitude. Alex, tu peux nous demander ce que tu veux. À qui veux-tu parler d'abord ?","public":true}

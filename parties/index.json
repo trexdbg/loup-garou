@@ -2,6 +2,15 @@
   "schema_version": 1,
   "parties": [
     {
+      "id": "LG-20261102-BA166F2D5DD8",
+      "cree_le": "2026-11-02",
+      "titre": "La première nuit approche",
+      "statut": "en_cours",
+      "phase": "tour_de_table",
+      "dossier": "parties/LG-20261102-BA166F2D5DD8",
+      "dernier_evenement": "Jour 1 : présentations des villageois ; en attente de la première intervention d’André."
+    },
+    {
       "id": "LG-20261102-59DD8AE1A6AC",
       "cree_le": "2026-11-02",
       "titre": "Le premier soupçon",

@@ -1,0 +1,116 @@
+{
+  "id": "LG-20261102-BA166F2D5DD8",
+  "schema_version": 2,
+  "titre": "La première nuit approche",
+  "cree_le": "2026-11-02T20:50:27.211Z",
+  "statut": "en_cours",
+  "phase": "tour_de_table",
+  "progression": {
+    "jour": 1,
+    "nuit": 0,
+    "scene": "tour_de_table_01"
+  },
+  "joueur": {
+    "prenom": "André",
+    "age": 19
+  },
+  "personnages_pnj": [
+    {
+      "prenom": "Rose",
+      "caractere": "Calme et observatrice",
+      "voix_phonon": "Noémie",
+      "voix_id_phonon": "FXxJ9mANRq6BCTX5"
+    },
+    {
+      "prenom": "Salomé",
+      "caractere": "Courageuse et directe",
+      "voix_phonon": "Coralie",
+      "voix_id_phonon": "ZeSg853xFACESHHI"
+    },
+    {
+      "prenom": "Inès",
+      "caractere": "Prudente et diplomate",
+      "voix_phonon": "Tiphaine",
+      "voix_id_phonon": "0fvH6XAKvA748v2v"
+    },
+    {
+      "prenom": "Jade",
+      "caractere": "Malicieuse et réfléchie",
+      "voix_phonon": "Maëlys",
+      "voix_id_phonon": "s048cR1l2Jmu4k3B"
+    },
+    {
+      "prenom": "Hugo",
+      "caractere": "Impulsif et accusateur",
+      "voix_phonon": "Augustin",
+      "voix_id_phonon": "Tek4tJXiX6_yvXq7"
+    },
+    {
+      "prenom": "Marin",
+      "caractere": "Souriant et persuasif",
+      "voix_phonon": "Arnaud",
+      "voix_id_phonon": "aXMVwiUhITMrwPzd"
+    },
+    {
+      "prenom": "Baptiste",
+      "caractere": "Bavard et maladroit",
+      "voix_phonon": "Jules",
+      "voix_id_phonon": "YKeBw3OV1RgpdhLh"
+    }
+  ],
+  "placement_table": {
+    "type": "circulaire",
+    "sens": "horaire",
+    "depart": "12h",
+    "ordre": [
+      "Jade",
+      "Baptiste",
+      "André",
+      "Rose",
+      "Hugo",
+      "Salomé",
+      "Marin",
+      "Inès"
+    ],
+    "statut": "valide",
+    "valide_par_mj": true,
+    "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
+  },
+  "resume_public": "Jour 1 : les huit habitants sont présents. Premières présentations ; aucune élimination ni vote.",
+  "aide_mj_publique": "Lire le prologue et les quatre présentations, puis attendre UNE intervention d’André. Ensuite, passer à la nuit 1 sans vote.",
+  "dernier_evenement_public": "Jour 1 : présentations ouvertes, André est invité à parler.",
+  "scene_courante_id": "tour_de_table_01",
+  "tour_de_table": {
+    "statut": "attend_intervention_joueur",
+    "dernier_echange": "tour_de_table_01",
+    "dialogues_enregistres": 4,
+    "attendre_reponse_andre": true,
+    "attendre_validation_mj": false,
+    "passage_vote_apres_validation_mj": false
+  },
+  "jour_en_cours": {
+    "numero": 1,
+    "etape": "presentations",
+    "statut": "en_cours",
+    "vote_ouvert": false,
+    "debats_ouverts": true,
+    "attendre_validation_mj": false,
+    "votes_enregistres": []
+  },
+  "nuit_en_cours": null,
+  "roles_reveles_publics": [],
+  "vivants": [
+    "Jade",
+    "Baptiste",
+    "André",
+    "Rose",
+    "Hugo",
+    "Salomé",
+    "Marin",
+    "Inès"
+  ],
+  "retire": [],
+  "audio": {
+    "lecture_automatique": false
+  }
+}

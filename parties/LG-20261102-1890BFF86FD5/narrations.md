@@ -97,3 +97,19 @@ Le soir tombe sur Thiercelieux. Les sept habitants se séparent après la révé
 **Narrateur :** « Le village s'endort... Tout le monde ferme les yeux. La deuxième nuit commence. »
 
 Aucun rôle nocturne n'est appelé avant une nouvelle instruction du MJ.
+
+## Nuit 2 — Appel des Loups et de la Sorcière
+
+**Narrateur :** « Loups-Garous, réveillez-vous et désignez discrètement une victime. »
+
+*Les Loups-Garous se concertent en silence. Leur choix n'est pas révélé au village.*
+
+**Narrateur :** « Loups-Garous, rendormez-vous. »
+
+**Narrateur :** « Sorcière, réveille-toi. Le maître du jeu te montre discrètement la personne visée. »
+
+*La Sorcière prend sa décision en secret.*
+
+**Narrateur :** « Sorcière, rendors-toi et ferme les yeux. »
+
+La nuit se poursuit. Aucun réveil ni résultat n'est annoncé sans l'accord du MJ.

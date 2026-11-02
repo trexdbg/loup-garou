@@ -8,7 +8,7 @@
   "progression": {
     "jour": 0,
     "nuit": 1,
-    "scene": "endormissement_nuit_1"
+    "scene": "appel_voyante_nuit_1"
   },
   "joueur": {
     "prenom": "Alex",
@@ -61,10 +61,10 @@
     "retire": [],
     "valide_par_mj": true
   },
-  "resume_public": "Le village s'endort. La première nuit commence après le tour de table.",
-  "aide_mj_publique": "Le village dort. Le MJ guidera les actions nocturnes et décidera du moment où avancer.",
-  "dernier_evenement_public": "Le village s'endort pour la première nuit.",
-  "scene_courante_id": "endormissement_nuit_1",
+  "resume_public": "La première nuit est ouverte. La Voyante a été appelée ; elle doit encore choisir un habitant à observer. Aucun pouvoir n'a été résolu.",
+  "aide_mj_publique": "La Voyante est appelée. Attendre le choix de sa cible validé par le MJ avant de révéler un rôle à la Voyante ou de passer aux Loups-Garous. Aucun autre pouvoir nocturne n'est joué.",
+  "dernier_evenement_public": "Le narrateur appelle la Voyante ; le village garde les yeux fermés.",
+  "scene_courante_id": "appel_voyante_nuit_1",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_conclusion",
@@ -75,9 +75,10 @@
   },
   "nuit_en_cours": {
     "numero": 1,
-    "etape": "endormissement",
-    "statut": "attente_mj",
+    "etape": "appel_voyante",
+    "statut": "attente_choix_voyante",
     "actions_resolues": [],
-    "attendre_validation_mj": true
+    "attendre_validation_mj": true,
+    "cible_voyante": null
   }
 }

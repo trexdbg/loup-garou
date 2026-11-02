@@ -126,8 +126,12 @@ Dans `partie.json`, maintenir `phase: "tour_de_table"`, `scene_courante_id` et l
 
 Le MJ seul valide la fin du tour, le lancement d'un vote et l'endormissement du village. Les boutons de l'application pour poursuivre ou terminer le tour **copient des consignes destinées à ChatGPT**, ils ne changent pas l'état de jeu automatiquement.
 
-## 8. Synthèse vocale gratuite et commande manuelle
+## 8. Voix Gemini et lecture manuelle
 
-Le lecteur actif `scene-player.js` propose **Web Speech par défaut** : une voix française distincte par PNJ si le navigateur en dispose d'au moins sept. Sinon, les timbres disponibles sont réutilisés avec des hauteurs et vitesses différentes. **Piper reste une alternative locale gratuite** (`fr_FR-siwis-medium` et `fr_FR-tom-medium`) : deux timbres réels seulement, avec téléchargement initial volumineux. La qualité varie suivant le téléphone et le navigateur.
+Le lecteur actif `scene-player.js` privilégie **Gemini TTS** (sept voix différentes pour sept PNJ, plus une voix de narrateur). La clé API est un **secret GitHub Actions `GEMINI_API_KEY`** saisi uniquement dans les paramètres du dépôt. La clé ne figure pas dans les sources JavaScript, les fichiers JSON de parties ou l'artefact Pages.
 
-Le MJ clique explicitement sur **▶ Écouter** ; aucune lecture ne démarre au chargement et aucun sondage vocal toutes les six secondes n'est nécessaire. Seules les paroles archivées et déjà validées sont lues. `secrets_mj.json` n'est jamais transmis au lecteur audio. L'application reste en lecture seule, sans abonnement, API payante ou génération de MP3 dans le dépôt.
+Quand ChatGPT archive des dialogues validés dans `dialogues.ndjson`, GitHub Actions utilise `scripts/generate_gemini_tts.py` pour préparer seulement les lignes `public: true` des scènes récentes, à l'exception des lignes `dialogue_joueur`. Le script ne consulte pas `secrets_mj.json`. Les MP3 sont ajoutés uniquement aux fichiers statiques du déploiement Pages et sont cachés temporairement par GitHub Actions : aucun MP3 n'est commité dans l'historique Git.
+
+Le modèle gratuit par défaut `gemini-2.5-flash-preview-tts` est soumis à quota et doit être retiré au **17 novembre 2026**. Il ne faut pas migrer automatiquement vers une offre payante. Les voix du navigateur et Piper sont disponibles en cas de quota épuisé, de clé absente, de lecture impossible ou de modèle retiré. Détails de configuration : [audio-gemini.md](audio-gemini.md).
+
+Le MJ clique explicitement sur **▶ Écouter** pour lancer une scène ; aucune lecture automatique. Les répliques d'Alex sont affichées mais jamais lues par l'application. Le dépôt et l'application restent de simples outils d'archivage et d'affichage : les décisions de jeu appartiennent au MJ et à ChatGPT.

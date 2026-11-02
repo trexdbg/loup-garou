@@ -104,7 +104,7 @@
    if(mode.value==="gemini"){
     voiceNote.textContent=state.audioCount
       ? state.audioCount+" répliques Gemini disponibles. Les autres utilisent les voix françaises locales."
-      : "Les voix Gemini seront disponibles après ajout du secret GEMINI_API_KEY et publication GitHub Pages. En attendant, la voix de l'appareil prend le relais.";
+      : "Aucun fichier Gemini disponible pour cette partie. Lecture avec les voix de l’appareil. Vérifier les Actions GitHub et le manifest audio.";
     return;
    }
    const n=frenchVoices().length;
@@ -156,14 +156,14 @@
    for(const li of transcript.children)li.classList.toggle("scene-speaking",li.dataset.seq===String(line.seq));
    // Le joueur joue sa propre voix autour de la table.
    if(line.type==="dialogue_joueur"){advance(token,rows);return;}
-   const browserSpeech=()=>{
+   const browserSpeech=(geminiUnavailable=false)=>{
     if(!hasSpeech){shutdown();announce("Synthèse vocale indisponible sur cet appareil.");return;}
     const u=new Speech(line.texte), profile=PROFILES[line.locuteur]||[1,1];
     u.lang="fr-FR";u.voice=voiceFor(line.locuteur,cast.length?cast:CAST);
     u.pitch=profile[0];u.rate=profile[1];u.volume=1;
     u.onend=()=>advance(token,rows);
     u.onerror=()=>{if(token!==state.generation)return;shutdown();announce("Lecture interrompue : essaie une autre voix.");};
-    announce("🔊 "+line.locuteur+" · "+(state.index+1)+"/"+rows.length);
+    announce((geminiUnavailable?"⚠ Voix locale (Gemini indisponible) · ":"🔊 Voix locale · ")+line.locuteur+" · "+(state.index+1)+"/"+rows.length);
     try{synth.speak(u);}catch(_){u.onerror();}
    };
    if(mode.value==="gemini"){
@@ -173,13 +173,13 @@
      const audio=new Audio("./parties/"+encodeURIComponent(id)+"/"+clip.file);
      audio.preload="auto";
      audio.onended=()=>{if(token===state.generation){state.handle=null;advance(token,rows);}};
-     audio.onerror=()=>{if(token===state.generation){state.handle=null;browserSpeech();}};
+     audio.onerror=()=>{if(token===state.generation){state.handle=null;browserSpeech(true);}};
      state.handle={stop:()=>{audio.onended=null;audio.onerror=null;audio.pause();audio.removeAttribute("src");audio.load();}};
      announce("✨ Voix Gemini · "+line.locuteur+" · "+(state.index+1)+"/"+rows.length);
-     audio.play().catch(()=>{if(token===state.generation){state.handle=null;browserSpeech();}});
+     audio.play().catch(()=>{if(token===state.generation){state.handle=null;browserSpeech(true);}});
      return;
     }
-    browserSpeech();return;
+    browserSpeech(true);return;
    }
    if(mode.value==="piper"&&state.context&&window.LG_PIPER?.supported()){
     announce("✨ "+line.locuteur+" · préparation de la voix Piper...");

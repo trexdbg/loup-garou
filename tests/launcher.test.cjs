@@ -73,17 +73,19 @@ test("la consigne GPT impose le jeu classique sans énigme annexe", () => {
   assert.match(prompt,/n'affirme jamais que la synchronisation est faite/);
 });
 
-test("l'interface est statique et l'index des anciennes parties est vide", () => {
+test("l'interface reste statique et les parties archivées sont uniques", () => {
   const html = read("index.html");
   const workflow = read(".github/workflows/pages.yml");
   const index = JSON.parse(read("parties/index.json"));
   assert.match(html,/id="buildButton"/);
   assert.match(html,/id="generatedId"/);
   assert.match(html,/id="archiveList"/);
-  assert.match(html,/src="\.\/launcher\.js"/);
+  assert.match(html,/src="\.\/launcher\.js(?:\?[^"]*)?"/);
   assert.doesNotMatch(html,/src="\.\/app\.js"/);
   assert.match(workflow,/launcher\.css/);
   assert.match(workflow,/for filename in partie\.json narrations\.md journal\.md dialogues\.ndjson/);
-  assert.deepEqual(index.parties,[]);
+  assert.ok(Array.isArray(index.parties));
+  assert.equal(new Set(index.parties.map(x => x.id)).size,index.parties.length);
+  assert.ok(index.parties.every(x => /^LG-\d{8}-[0-9A-F]{12}$/.test(x.id)));
   assert.match(html,/value="classique_loup_garou" selected/);
 });

@@ -7,7 +7,7 @@
   <meta name="description" content="Prépare une aventure solo de Loup-Garou, transmets sa configuration à ChatGPT et consulte les archives GitHub.">
   <title>Thiercelieux Solo — Assistant du maître du jeu</title>
   <link rel="stylesheet" href="./styles.css">
-  <link rel="stylesheet" href="./launcher.css">
+  <link rel="stylesheet" href="./launcher.css?v=20261102b">
 </head>
 <body>
   <header class="topbar">
@@ -151,8 +151,8 @@
     <section id="archiveSection" hidden aria-label="Archives de parties GitHub">
       <div class="hero-heading">
         <div class="eyebrow">ARCHIVES GITHUB EN LECTURE SEULE</div>
-        <h1>Vos aventures de Thiercelieux</h1>
-        <p class="lead">ChatGPT écrit les scènes et le journal dans GitHub après validation du MJ. Ce tableau de bord affiche les données publiques. Les nouveaux dialogues peuvent être prononcés automatiquement après activation du son.</p>
+        <h1>Vos parties de Loup-Garou</h1>
+        <p class="lead">Écoute les dialogues de la dernière scène, laisse Alex décider de sa réplique, puis demande à ChatGPT de préparer la suite. Le MJ reste aux commandes.</p>
       </div>
       <section class="panel">
         <div class="section-header archive-heading"><div><h2>Parties enregistrées</h2><p id="archiveStatus" role="status">Actualisation depuis GitHub…</p></div><button type="button" id="archiveRefresh" class="secondary">↻ Actualiser</button></div>
@@ -163,12 +163,12 @@
         <div id="sessionContent"></div>
       </section>
       <section class="panel mj-reminder">
-        <h2>📋 Pense-bête du maître du jeu</h2>
+        <h2>📋 Déroulement d’un tour de table</h2>
         <div class="reminder-grid">
-          <div><strong>Avant la scène</strong><p>Relire la phase, les faits connus et les pouvoirs encore disponibles. Les rôles validés sont archivés dans secrets_mj.json sur GitHub, mais ne doivent pas être révélés à l'enfant.</p></div>
-          <div><strong>Quand l'enfant agit</strong><p>Laisser l'enfant parler librement, puis demander à ChatGPT la réaction des PNJ. Valider l'action avant l'archivage.</p></div>
-          <div><strong>Au coucher du village</strong><p>Annoncer « Le village s'endort ». Suivre l'ordre des rôles présents, leurs pouvoirs et leurs limites, avec l'aide de ChatGPT.</p></div>
-          <div><strong>À la fin d'une scène</strong><p>Faire résumer l'événement par ChatGPT et confirmer l'écriture dans GitHub. Actualiser ensuite cette page.</p></div>
+          <div><strong>1. Écouter</strong><p>Actualiser les dialogues et écouter la nouvelle scène. Le texte reste visible pour accompagner la lecture.</p></div>
+          <div><strong>2. Jouer</strong><p>Alex peut parler à n’importe quel personnage. Les PNJ débattent aussi entre eux ; personne ne décide pour Alex.</p></div>
+          <div><strong>3. Continuer</strong><p>Revenir dans ChatGPT avec la réponse d’Alex. Après validation du MJ, un nouvel échange est archivé et devient disponible à l’écoute.</p></div>
+          <div><strong>4. Terminer le tour</strong><p>Le MJ décide quand les débats se terminent. Le vote et la nuit ne démarrent jamais automatiquement.</p></div>
         </div>
       </section>
       <div class="advice"><h3>🛡️ Espace du maître du jeu</h3><p>Une page GitHub publique n'est pas un coffre-fort : les rôles archivés dans secrets_mj.json y restent consultables. Le carnet de l'application est masqué par défaut : ferme-le avant de montrer l'écran au joueur. Aucune action de jeu n'est commandée ici.</p></div>
@@ -179,11 +179,11 @@
   <script src="./modes.js"></script>
   <script src="./role-art.js"></script>
   <script src="./stories.js"></script>
-  <script src="./piper-free.js"></script>
-  <script src="./voice-live.js"></script>
+  <script src="./piper-free.js?v=20261102b"></script>
+  <script src="./scene-player.js?v=20261102b"></script>
   <script src="./seating-model.js"></script>
   <script src="./table-seating.js"></script>
   <script src="./mj-private.js"></script>
-  <script src="./launcher.js"></script>
+  <script src="./launcher.js?v=20261102b"></script>
 </body>
 </html>

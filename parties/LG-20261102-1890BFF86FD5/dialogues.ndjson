@@ -86,3 +86,6 @@
 {"seq":86,"scene_id":"revelation_hugo_jour_1","scene_label":"Jour 1 — Carte de Hugo révélée","type":"dialogue_pnj","locuteur":"Éloi","texte":"Il reste sept habitants. Soyons vigilants.","public":true}
 {"seq":87,"scene_id":"village_s_endort_02","scene_label":"Nuit 2 — Endormissement","type":"narration","locuteur":"Narrateur","texte":"Les sept habitants quittent la place du village.","public":true}
 {"seq":88,"scene_id":"village_s_endort_02","scene_label":"Nuit 2 — Endormissement","type":"narration","locuteur":"Narrateur","texte":"Le village s'endort. Tout le monde ferme les yeux. La deuxième nuit commence.","public":true}
+{"seq":89,"scene_id":"appel_voyante_02","scene_label":"Nuit 2 — La Voyante","type":"narration","locuteur":"Narrateur","texte":"Voyante, réveille-toi et regarde la carte d'un habitant.","public":true}
+{"seq":90,"scene_id":"appel_voyante_02","scene_label":"Nuit 2 — La Voyante","type":"narration","locuteur":"Narrateur","texte":"La Voyante a consulté une carte. Sa découverte reste secrète.","public":true}
+{"seq":91,"scene_id":"appel_voyante_02","scene_label":"Nuit 2 — La Voyante","type":"narration","locuteur":"Narrateur","texte":"Voyante, rendors-toi et referme les yeux.","public":true}

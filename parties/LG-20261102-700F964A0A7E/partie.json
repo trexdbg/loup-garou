@@ -4,11 +4,11 @@
   "titre": "Le village des soupçons",
   "cree_le": "2026-11-02T12:39:56.344Z",
   "statut": "en_cours",
-  "phase": "tour_de_table",
+  "phase": "nuit",
   "progression": {
     "jour": 0,
-    "nuit": 0,
-    "scene": "tour_de_table_conclusion"
+    "nuit": 1,
+    "scene": "endormissement_nuit_1"
   },
   "joueur": {
     "prenom": "Alex",
@@ -61,10 +61,10 @@
     "retire": [],
     "valide_par_mj": true
   },
-  "resume_public": "Tour de table terminé avec l'accord du MJ : Alex a lancé le débat, Mila a défendu sa position, Basile et Octave ont été questionnés. Aucun habitant n'a été désigné ; pas de vote ni de nuit.",
-  "aide_mj_publique": "Tour de table terminé, scène finale enregistrée. Lire la clôture et attendre un accord explicite du MJ pour choisir puis ouvrir une nouvelle phase ; ni vote ni nuit automatiques.",
-  "dernier_evenement_public": "Le MJ valide la conclusion du tour de table. Les habitants se dispersent sans vote ni décision.",
-  "scene_courante_id": "tour_de_table_conclusion",
+  "resume_public": "Le village s'endort. La première nuit commence après le tour de table.",
+  "aide_mj_publique": "Le village dort. Le MJ guidera les actions nocturnes et décidera du moment où avancer.",
+  "dernier_evenement_public": "Le village s'endort pour la première nuit.",
+  "scene_courante_id": "endormissement_nuit_1",
   "tour_de_table": {
     "statut": "termine",
     "dernier_echange": "tour_de_table_conclusion",
@@ -72,5 +72,12 @@
     "attendre_reponse_alex": false,
     "passage_vote_apres_validation_mj": true,
     "conclusion_validee_par_mj": true
+  },
+  "nuit_en_cours": {
+    "numero": 1,
+    "etape": "endormissement",
+    "statut": "attente_mj",
+    "actions_resolues": [],
+    "attendre_validation_mj": true
   }
 }

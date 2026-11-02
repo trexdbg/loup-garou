@@ -67,3 +67,11 @@ Mila finit par demander : « Qui veut commencer à parler ? »
 **Clémence :** « Nous avons tous quelque chose à réfléchir. Pour l'instant, personne ne sait vraiment à qui faire confiance. »
 
 *Les habitants échangent de derniers regards méfiants. Le tour de parole touche à sa fin, mais personne n'est encore désigné.*
+
+## Nuit 1 — Le village s'endort
+
+La place du village se vide. Après les accusations et les derniers soupçons, chacun regagne sa maison.
+
+Les portes se ferment, les volets se rabattent. Peu à peu, le silence gagne Thiercelieux.
+
+Le village s'endort. Tout le monde ferme les yeux. La première nuit commence.

@@ -70,3 +70,11 @@ Nouvelle partie initialisée. En attente de la validation du MJ après le prolog
 - Sept habitants encore en jeu, Hugo retiré du plan de table.
 - La nuit 2 commence par l'endormissement uniquement. Aucun rôle n'est appelé et aucun pouvoir activé.
 - Prochaine étape soumise à l'accord explicite du MJ : appeler la Voyante.
+
+## Nuit 2 — Appel des Loups et de la Sorcière
+
+- Le MJ annonce que les Loups-Garous ont choisi une victime. L'identité et le détail de la nuit sont consignés dans `secrets_mj.json`.
+- La Sorcière a été appelée et a pris sa décision en tant que PNJ ; elle s'est rendormie.
+- Scènes publiques : `appel_loups_02` et `appel_sorciere_02`, séquences 92 à 98. Aucun secret dévoilé publiquement.
+- Le Chasseur devra être traité si son élimination est confirmée au réveil.
+- Nuit 2 non résolue publiquement : aucun personnage retiré, aucune annonce du matin ni transition vers le jour 2 sans validation du MJ.

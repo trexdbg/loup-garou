@@ -1,25 +1,30 @@
 {
-  "schema_version": 4,
+  "schema_version": 5,
   "mode": "lecture_scenes_manuelle",
-  "provider": "gemini_api_via_github_actions",
+  "provider": "phonon_local_via_github_actions",
   "enabled": true,
   "worker_url": null,
-  "model_policy": "Au plus 8 nouveaux MP3 par déploiement pour la partie active la plus récente et les 3 dernières scènes ; les anciennes parties et les anciens modèles conservent leurs MP3 en cache.",
+  "model_policy": "Phonon prioritaire, Gemini si Phonon indisponible, eSpeak-ng puis voix natives du navigateur",
   "default_models": [
     "fr_FR-siwis-medium",
     "fr_FR-tom-medium"
   ],
   "prix_eur": 0,
-  "protection": "Cle uniquement dans GitHub Actions; ni Javascript, ni medias, ni cle dans le git",
-  "note": "Sans cle, avec quota atteint ou modele retire : lecture des repliques par voix locales. L'offre gratuite est soumise a quotas et ne sera pas remplacee automatiquement par un modele payant.",
-  "default_playback_mode": "gemini",
+  "protection": "HF_TOKEN et GEMINI_API_KEY uniquement dans GitHub Actions, aucune cle dans le site public.",
+  "note": "Le modèle français nécessite d'accepter les conditions sur Hugging Face et d'ajouter le secret HF_TOKEN. Les MP3 sont uniquement dans l'artefact Pages et en cache de runner, jamais commits.",
+  "default_playback_mode": "published",
   "available_modes": [
-    "gemini",
+    "published",
     "navigateur",
     "piper_local"
   ],
-  "voice_policy": "7 voix Gemini distinctes par ordre des PNJ + 1 narrateur; repli voix navigateur",
+  "voice_policy": "15 personnalites de PNJ et 15 vraies voix Phonon françaises ; 9 féminines et 6 masculines. Les identités restent stables entre les parties.",
   "model": "gemini-3.8-flash-lite-tts",
-  "secret_name": "GEMINI_API_KEY",
-  "model_note": "Gemini 3.8 Flash-Lite TTS : génération gratuite sous quotas, nouvelles requêtes Interactions REST; anciennes voix conservées grâce au cache."
+  "secret_name": "HF_TOKEN",
+  "model_note": "Gemini 3.8 Flash-Lite TTS : génération gratuite sous quotas, nouvelles requêtes Interactions REST; anciennes voix conservées grâce au cache.",
+  "phonon_model": "gradium/phonon-40m-fr",
+  "phonon_voices": "gradium/phonon-voices",
+  "phonon_catalogue": "voices/phonon-fr.json",
+  "phonon_license": "CC BY-NC 4.0 : usage non commercial uniquement",
+  "secondary_secret_name": "GEMINI_API_KEY"
 }

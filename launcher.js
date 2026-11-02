@@ -33,6 +33,7 @@
 
   function setTab(tab) {
     const archives = tab === "archives";
+    if (!archives && window.LG_VOICES) window.LG_VOICES.stop();
     $("prepareSection").hidden = archives;
     $("archiveSection").hidden = !archives;
     $("tabPrepare").setAttribute("aria-selected", String(!archives));
@@ -299,7 +300,7 @@
         ? rows.length + " partie(s) répertoriée(s). Mise à jour par ChatGPT via GitHub."
         : "Aucune partie archivée. Le JSON créé localement n'est pas encore enregistré sur GitHub.";
       const query = new URLSearchParams(location.search).get("partie");
-      if (query && validId(query)) await openArchive(query);
+      if (query && validId(query) && $("sessionDetail").hidden) await openArchive(query);
     } catch (error) {
       $("archiveStatus").textContent = error.message;
     } finally {
@@ -309,6 +310,7 @@
 
   async function openArchive(id) {
     if (!validId(id)) return;
+    if (window.LG_VOICES) window.LG_VOICES.stop();
     $("sessionDetail").hidden = false;
     $("sessionContent").replaceChildren(make("p", "Chargement de " + id + "…"));
     try {
@@ -323,6 +325,11 @@
         make("span", "Phase : " + (state.phase || state.progression?.scene || "prologue"))
       );
       content.append(make("h3", title), meta);
+      if (window.LG_VOICES) {
+        const voiceMount = make("div");
+        content.append(voiceMount);
+        window.LG_VOICES.attach(id, voiceMount);
+      }
       if (state.resume_public) content.append(make("p", state.resume_public, "archive-public-summary"));
       if (state.dernier_evenement_public) content.append(make("p", "Dernier événement : " + state.dernier_evenement_public, "archive-public-summary"));
       if (state.aide_mj_publique) {
@@ -367,7 +374,7 @@
     $("copyPrompt").addEventListener("click", () => generated && copy(promptFor(generated), "Consigne et JSON copiés. Colle-les dans la conversation ChatGPT du projet."));
     $("downloadJson").addEventListener("click", downloadJson);
     $("archiveRefresh").addEventListener("click", refreshArchives);
-    $("backToArchives").addEventListener("click", () => { $("sessionDetail").hidden = true; if (history.replaceState) history.replaceState(null, "", location.pathname); });
+    $("backToArchives").addEventListener("click", () => { if (window.LG_VOICES) window.LG_VOICES.stop(); $("sessionDetail").hidden = true; if (history.replaceState) history.replaceState(null, "", location.pathname); });
     $("configForm").addEventListener("change", clearGenerated);
     $("configForm").addEventListener("input", clearGenerated);
     $("newConfig").addEventListener("click", () => { generated = null; $("generatedPanel").hidden = true; $("formStatus").textContent = ""; });

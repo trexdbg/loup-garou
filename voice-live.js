@@ -97,6 +97,7 @@
     const box = add(mount, "section", null, "live-voice");
     state.qualityLabel = add(box, "p", endpoint ? "✨ Voix neuronales disponibles." : "Voix du navigateur actuellement : amélioration sonore limitée. Un serveur de synthèse neuronale peut être activé pour des voix beaucoup plus humaines.", "fine");
     add(box, "h4", "🎭 Voix automatiques des habitants");
+    add(box, "p", "Les voix sont générées par synthèse vocale, et non enregistrées par des comédiens.", "fine");
     add(box, "p", "Un seul démarrage audio, puis les nouvelles répliques publiques sont lues automatiquement au fur et à mesure de leur publication sur GitHub.", "fine");
     const actions = add(box, "div", null, "live-voice-buttons");
     const start = add(actions, "button", "▶ Activer les voix", "primary");

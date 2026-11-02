@@ -31,7 +31,7 @@ jobs:
       - name: Vérifier les archives et le catalogue
         run: |
           npm test
-          python3 -m unittest discover -s tests -p 'test_gemini_tts.py'
+          python3 -m unittest discover -s tests -p 'test_*_tts.py'
       - name: Assembler uniquement les fichiers publics
         run: |
           mkdir -p site/parties

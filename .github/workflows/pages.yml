@@ -73,6 +73,13 @@ jobs:
             echo "::warning::Secret GEMINI_API_KEY absent : lecture vocale locale uniquement."
           fi
           python3 scripts/generate_gemini_tts.py --site site --max-scenes 3 --max-lines 8
+      - name: Préparer les MP3 de secours gratuits
+        run: |
+          if ! command -v espeak-ng >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq espeak-ng
+          fi
+          python3 scripts/generate_offline_tts.py site
       - name: Configurer GitHub Pages
         uses: actions/configure-pages@v5
       - name: Envoyer le site

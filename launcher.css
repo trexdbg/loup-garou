@@ -86,3 +86,14 @@ footer { padding:28px 15px; }
 .reminder-grid p { color:var(--muted);margin:9px 0 0;font-size:.88rem;line-height:1.6; }
 .archive-public-summary { color:#d5d9de; }
 @media (max-width:740px) { .reminder-grid { grid-template-columns:1fr; } }
+
+/* Voix synthétisées au fur et à mesure, sans média stocké. */
+.live-voice { margin:18px 0 24px;padding:16px;border:1px solid #755f43;border-radius:12px;background:#242331; }
+.live-voice h4 { margin:0 0 8px;color:#f0d4a5; }
+.live-voice p { margin:8px 0;line-height:1.5; }
+.live-voice-buttons { display:flex;flex-wrap:wrap;gap:9px;margin:13px 0; }
+.live-voice-buttons button { width:auto;flex:1 1 175px; }
+.live-voice-buttons button:disabled { opacity:.48;cursor:not-allowed; }
+.live-voice-status { font-weight:700;font-size:.9rem;color:#e9c997; }
+.live-voice-current { font-style:italic;color:#e6e4e1; }
+@media(max-width:740px){.live-voice-buttons button{flex-basis:100%;}}

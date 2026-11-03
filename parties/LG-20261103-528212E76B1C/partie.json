@@ -1,0 +1,157 @@
+{
+  "id": "LG-20261103-528212E76B1C",
+  "schema_version": 2,
+  "titre": "Le village des douze",
+  "cree_le": "2026-11-03T17:23:33.219Z",
+  "statut": "en_cours",
+  "phase": "tour_de_table",
+  "progression": {
+    "jour": 1,
+    "nuit": 0,
+    "scene": "tour_de_table_01"
+  },
+  "joueur": {
+    "prenom": "Alex",
+    "age": 25
+  },
+  "personnages_pnj": [
+    {
+      "prenom": "Rose",
+      "caractere": "Calme et observatrice",
+      "voix_phonon": "Noémie",
+      "voix_id_phonon": "FXxJ9mANRq6BCTX5"
+    },
+    {
+      "prenom": "Salomé",
+      "caractere": "Courageuse et directe",
+      "voix_phonon": "Coralie",
+      "voix_id_phonon": "ZeSg853xFACESHHI"
+    },
+    {
+      "prenom": "Inès",
+      "caractere": "Prudente et diplomate",
+      "voix_phonon": "Tiphaine",
+      "voix_id_phonon": "0fvH6XAKvA748v2v"
+    },
+    {
+      "prenom": "Jade",
+      "caractere": "Malicieuse et réfléchie",
+      "voix_phonon": "Maëlys",
+      "voix_id_phonon": "s048cR1l2Jmu4k3B"
+    },
+    {
+      "prenom": "Mila",
+      "caractere": "Spontanée et curieuse",
+      "voix_phonon": "Orianne",
+      "voix_id_phonon": "TUk4X11S6UytB3G6"
+    },
+    {
+      "prenom": "Clémence",
+      "caractere": "Discrète et analytique",
+      "voix_phonon": "Solène",
+      "voix_id_phonon": "YhIHaAfQ0cQPDV9R"
+    },
+    {
+      "prenom": "Iris",
+      "caractere": "Franche et intuitive",
+      "voix_phonon": "Ninon",
+      "voix_id_phonon": "qtPlUYAZ4EJDuWMm"
+    },
+    {
+      "prenom": "Hugo",
+      "caractere": "Impulsif et accusateur",
+      "voix_phonon": "Augustin",
+      "voix_id_phonon": "Tek4tJXiX6_yvXq7"
+    },
+    {
+      "prenom": "Marin",
+      "caractere": "Souriant et persuasif",
+      "voix_phonon": "Arnaud",
+      "voix_id_phonon": "aXMVwiUhITMrwPzd"
+    },
+    {
+      "prenom": "Baptiste",
+      "caractere": "Bavard et maladroit",
+      "voix_phonon": "Jules",
+      "voix_id_phonon": "YKeBw3OV1RgpdhLh"
+    },
+    {
+      "prenom": "Léon",
+      "caractere": "Protecteur et loyal",
+      "voix_phonon": "Lucien",
+      "voix_id_phonon": "LIv4NaG8ay4Mhqtd"
+    }
+  ],
+  "placement_table": {
+    "type": "circulaire",
+    "sens": "horaire",
+    "depart": "12h",
+    "ordre": [
+      "Jade",
+      "Léon",
+      "Baptiste",
+      "Alex",
+      "Inès",
+      "Rose",
+      "Hugo",
+      "Clémence",
+      "Marin",
+      "Mila",
+      "Salomé",
+      "Iris"
+    ],
+    "statut": "valide",
+    "valide_par_mj": true,
+    "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
+  },
+  "resume_public": "Jour 1 : douze habitants sont réunis à Thiercelieux. Des Loups-Garous se cachent parmi eux. Les premières présentations commencent.",
+  "aide_mj_publique": "Attendre une seule intervention d’Alex, puis lancer directement la nuit 1 sans vote.",
+  "dernier_evenement_public": "Prologue et quatre présentations ; aucune élimination ni action nocturne.",
+  "scene_courante_id": "tour_de_table_01",
+  "tour_de_table": {
+    "statut": "en_cours",
+    "jour": 1,
+    "termine_sans_vote": false,
+    "dernier_echange": "tour_de_table_01",
+    "attendre_reponse_alex": true
+  },
+  "jour_en_cours": {
+    "numero": 1,
+    "etape": "presentations",
+    "statut": "en_cours",
+    "vote_ouvert": false,
+    "debats_ouverts": true,
+    "attendre_intervention_joueur": true,
+    "votes_enregistres": []
+  },
+  "nuit_en_cours": {
+    "numero": 0,
+    "statut": "pas_commencee",
+    "actions_resolues": [],
+    "victimes_confirmees": []
+  },
+  "roles_reveles_publics": [],
+  "vivants": [
+    "Jade",
+    "Léon",
+    "Baptiste",
+    "Alex",
+    "Inès",
+    "Rose",
+    "Hugo",
+    "Clémence",
+    "Marin",
+    "Mila",
+    "Salomé",
+    "Iris"
+  ],
+  "retire": [],
+  "capitaine": {
+    "statut": "non_elu",
+    "election_prevue": "apres_premier_reveil"
+  },
+  "audio": {
+    "lecture_automatique": false,
+    "dernier_lot": "tour_de_table_01"
+  }
+}

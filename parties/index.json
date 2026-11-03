@@ -2,6 +2,15 @@
   "schema_version": 1,
   "parties": [
     {
+      "id": "LG-20261103-528212E76B1C",
+      "cree_le": "2026-11-03",
+      "titre": "Le village des douze",
+      "statut": "en_cours",
+      "phase": "tour_de_table",
+      "dossier": "parties/LG-20261103-528212E76B1C",
+      "dernier_evenement": "Jour 1 : prologue et quatre présentations ; Alex doit prendre la parole."
+    },
+    {
       "id": "LG-20261102-BA166F2D5DD8",
       "cree_le": "2026-11-02",
       "titre": "La première nuit approche",

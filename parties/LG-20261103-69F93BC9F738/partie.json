@@ -4,11 +4,11 @@
   "titre": "Les douze à la lisière du bois",
   "cree_le": "2026-11-03T18:33:55.056Z",
   "statut": "en_cours",
-  "phase": "tour_de_table",
+  "phase": "jour",
   "progression": {
-    "jour": 1,
-    "nuit": 0,
-    "scene": "tour_de_table_01"
+    "jour": 2,
+    "nuit": 1,
+    "scene": "reveil_jour_2"
   },
   "joueur": {
     "prenom": "Alex",
@@ -103,23 +103,26 @@
     "statut": "valide",
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous",
     "valide_par_mj": true,
-    "retire": []
+    "retire": [
+      "Marin"
+    ]
   },
-  "resume_public": "Jour 1 : les douze habitants se sont rassemblés à la lisière de la forêt. Quatre personnages se présentent et attendent la première intervention d'Alex. Pas de vote au jour 1.",
-  "aide_mj_publique": "Écouter les présentations si l'audio est disponible. Faire intervenir Alex UNE fois, puis lancer la nuit 1 sans vote. Les PNJ agiront automatiquement ; ne s'arrêter que pour les choix d'Alex.",
-  "dernier_evenement_public": "Jour 1 : le tour de table commence, Alex doit prendre la parole.",
-  "scene_courante_id": "tour_de_table_01",
+  "resume_public": "Réveil du jour 2 : Marin est mort pendant la nuit. Sa carte de Simple Villageois est révélée. Onze habitants restent en vie. Jade, Hugo et Léon réagissent ; Alex doit prendre la parole avant les votes.",
+  "aide_mj_publique": "Retirer le LEGO de Marin. Demander une seule intervention d'Alex, puis faire voter automatiquement les dix PNJ vivants et demander uniquement le vote d'Alex avant verdict.",
+  "dernier_evenement_public": "Jour 2 : Marin éliminé pendant la nuit, rôle Simple Villageois révélé.",
+  "scene_courante_id": "reveil_jour_2",
   "tour_de_table": {
-    "statut": "en_cours",
+    "statut": "termine",
     "jour": 1,
     "dernier_echange": "tour_de_table_01",
     "dialogues_enregistres": 4,
-    "attendre_reponse_alex": true,
-    "termine_sans_vote": false
+    "attendre_reponse_alex": false,
+    "termine_sans_vote": true,
+    "intervention_alex": "je suis daccord avec vous"
   },
   "jour_en_cours": {
-    "numero": 1,
-    "etape": "presentation",
+    "numero": 2,
+    "etape": "debats",
     "statut": "en_cours",
     "vote_ouvert": false,
     "debats_ouverts": true,
@@ -131,7 +134,6 @@
     "Iris",
     "Baptiste",
     "Rose",
-    "Marin",
     "Jade",
     "Léon",
     "Salomé",
@@ -140,10 +142,34 @@
     "Mila",
     "Inès"
   ],
-  "retire": [],
-  "roles_reveles_publics": [],
+  "retire": [
+    "Marin"
+  ],
+  "roles_reveles_publics": [
+    {
+      "personnage": "Marin",
+      "role": "villageois",
+      "cause": "attaque_nocturne",
+      "jour": 2
+    }
+  ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "tour_de_table_01"
+    "dernier_lot": "reveil_jour_2",
+    "generation_effectuee": false
+  },
+  "nuit_en_cours": {
+    "numero": 1,
+    "statut": "resolue",
+    "actions_resolues": [
+      "cupidon_amoureux",
+      "voyante_observation",
+      "meute_attaque",
+      "sorciere_decision",
+      "reveil_village"
+    ],
+    "victimes_confirmees": [
+      "Marin"
+    ]
   }
 }

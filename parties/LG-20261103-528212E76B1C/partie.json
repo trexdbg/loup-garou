@@ -4,11 +4,11 @@
   "titre": "Le village des douze",
   "cree_le": "2026-11-03T17:23:33.219Z",
   "statut": "en_cours",
-  "phase": "jour",
+  "phase": "vote_ou_resolution",
   "progression": {
     "jour": 3,
     "nuit": 2,
-    "scene": "reveil_jour_3"
+    "scene": "votes_jour_3_01"
   },
   "joueur": {
     "prenom": "Alex",
@@ -104,10 +104,10 @@
     "valide_par_mj": true,
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Jour 3 : Inès a été éliminée au jour 2 par 5 voix sur 11, sa carte de Loup-Garou a été révélée. Aucun mort pendant la nuit 2, dix habitants restent en vie.",
-  "aide_mj_publique": "Après une intervention d'Alex au jour 3, faire voter les neuf PNJ et demander uniquement le vote d'Alex. Résoudre le verdict, vérifier la victoire et poursuivre sans confirmation supplémentaire.",
-  "dernier_evenement_public": "Jour 3 : aucun mort cette nuit. Jade soupçonne Marin. En attente d'une intervention d'Alex avant les votes.",
-  "scene_courante_id": "reveil_jour_3",
+  "resume_public": "Jour 3 : après les soupçons d'Alex contre Marin, neuf PNJ ont voté. Résultat provisoire avant le vote d'Alex : Marin 5, Jade 4.",
+  "aide_mj_publique": "Demander uniquement le vote d'Alex ; dépouiller les dix voix. En cas d'égalité (5-5), appliquer la procédure de départage du jeu avant toute élimination.",
+  "dernier_evenement_public": "Jour 3 : neuf votes PNJ enregistrés. Vote d'Alex requis avant le verdict.",
+  "scene_courante_id": "votes_jour_3_01",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -117,12 +117,55 @@
   },
   "jour_en_cours": {
     "numero": 3,
-    "etape": "dialogues_et_enquete",
+    "etape": "vote_ou_resolution",
     "statut": "en_cours",
-    "vote_ouvert": false,
-    "debats_ouverts": true,
-    "attendre_intervention_joueur": true,
-    "votes_enregistres": []
+    "vote_ouvert": true,
+    "debats_ouverts": false,
+    "attendre_intervention_joueur": false,
+    "attendre_vote_joueur": true,
+    "votes_enregistres": [
+      {
+        "votant": "Jade",
+        "cible": "Marin"
+      },
+      {
+        "votant": "Léon",
+        "cible": "Marin"
+      },
+      {
+        "votant": "Baptiste",
+        "cible": "Jade"
+      },
+      {
+        "votant": "Rose",
+        "cible": "Marin"
+      },
+      {
+        "votant": "Clémence",
+        "cible": "Marin"
+      },
+      {
+        "votant": "Marin",
+        "cible": "Jade"
+      },
+      {
+        "votant": "Mila",
+        "cible": "Jade"
+      },
+      {
+        "votant": "Salomé",
+        "cible": "Marin"
+      },
+      {
+        "votant": "Iris",
+        "cible": "Jade"
+      }
+    ],
+    "decompte_provisoire": {
+      "Marin": 5,
+      "Jade": 4
+    },
+    "verdict": "en_attente_vote_alex"
   },
   "nuit_en_cours": {
     "numero": 2,
@@ -173,6 +216,6 @@
   },
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "reveil_jour_3"
+    "dernier_lot": "debats_jour_3_01"
   }
 }

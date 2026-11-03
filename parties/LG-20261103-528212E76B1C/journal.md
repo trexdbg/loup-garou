@@ -44,3 +44,12 @@
 - Les dix habitants sont vivants.
 - Jade soupçonne Marin, Marin se défend et Salomé demande des explications.
 - Alex doit intervenir une seule fois avant les votes des PNJ.
+
+## Jour 3 — Échanges et votes provisoires
+
+- Alex interpelle Marin sur le fait d'avoir défendu Inès.
+- Marin affirme qu'il ne connaissait pas l'identité d'Inès et voulait éviter une élimination injuste.
+- Jade rappelle le vote de Marin contre Baptiste ; Iris s'étonne de la certitude de Jade.
+- Votes PNJ : Jade → Marin; Léon → Marin; Baptiste → Jade; Rose → Marin; Clémence → Marin; Marin → Jade; Mila → Jade; Salomé → Marin; Iris → Jade.
+- Décompte provisoire : Marin 5, Jade 4. Vote d'Alex en attente.
+- Aucun verdict, aucune nouvelle élimination.

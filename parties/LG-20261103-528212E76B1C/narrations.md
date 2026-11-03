@@ -15,3 +15,7 @@ Après les débats, Alex vote pour Inès. Elle reçoit cinq voix contre quatre p
 ## Réveil — Jour 3
 
 Le village se réveille : personne n'a disparu cette nuit. Les dix habitants se retrouvent sur la place. Les soupçons se tournent vers Marin, qui doit répondre aux questions des autres villageois.
+
+## Jour 3 — Marin sous pression
+
+Alex reproche à Marin d'avoir défendu Inès. Marin répond qu'il ne savait pas qu'elle était Loup-Garou. Jade insiste sur son ancien vote contre Baptiste, tandis qu'Iris s'étonne de sa certitude. Les neuf PNJ votent ; il manque encore le vote d'Alex pour connaître le résultat.

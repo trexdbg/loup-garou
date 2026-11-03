@@ -4,11 +4,11 @@
   "titre": "Les douze à la lisière du bois",
   "cree_le": "2026-11-03T18:33:55.056Z",
   "statut": "en_cours",
-  "phase": "vote_ou_resolution",
+  "phase": "nuit",
   "progression": {
     "jour": 5,
-    "nuit": 4,
-    "scene": "departage_jour_5"
+    "nuit": 5,
+    "scene": "nuit_5_choix_cible_alex"
   },
   "joueur": {
     "prenom": "Alex",
@@ -114,10 +114,10 @@
       "Rose"
     ]
   },
-  "resume_public": "Jour 5 : Alex vote Jade. Le scrutin donne 2 voix à Alex et 2 à Jade : égalité sans Capitaine. Un second scrutin entre Alex et Jade a lieu ; les trois PNJ ont revoté selon leurs soupçons. Il faut le second vote d'Alex avant de conclure. Aucun éliminé.",
-  "aide_mj_publique": "Les trois votes PNJ du second scrutin sont fixés et doivent rester inchangés. Faire choisir Alex entre les candidats de départage (Alex ou Jade) ; aucune élimination avant son second vote. Si nouvelle égalité, aucun éliminé, puis continuer selon les règles.",
-  "dernier_evenement_public": "Jour 5 : premier scrutin à égalité Alex 2 / Jade 2 ; second scrutin PNJ achevé, vote d'Alex attendu.",
-  "scene_courante_id": "departage_jour_5",
+  "resume_public": "Jour 5 : le second scrutin reproduit l'égalité Alex 2 voix, Jade 2 voix. Personne n'est éliminé, quatre habitants restent vivants : Alex, Jade, Salomé, Mila. La nuit 5 commence.",
+  "aide_mj_publique": "Conserver les quatre figurines. Nuit 5 : seul Alex est Loup-Garou encore vivant ; il participe au pouvoir nocturne habituel de la meute et choisit personnellement une victime parmi Jade, Salomé ou Mila. Aucun rôle autonome nocturne restant, pas de potion, pas de tir. Son pouvoir solitaire de Loup-Garou Blanc n'est pas disponible cette nuit impaire. Ne pas choisir à la place du joueur ; aucune synchronisation ni audio pendant la nuit.",
+  "dernier_evenement_public": "Jour 5 : deuxième égalité 2–2 Alex/Jade. Aucune élimination. Nuit 5, choix d'Alex attendu.",
+  "scene_courante_id": "verdict_jour_5",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -129,9 +129,9 @@
   },
   "jour_en_cours": {
     "numero": 5,
-    "etape": "vote_departage_alex_en_attente",
-    "statut": "en_cours",
-    "vote_ouvert": true,
+    "etape": "termine",
+    "statut": "termine",
+    "vote_ouvert": false,
     "debats_ouverts": false,
     "attendre_intervention_joueur": false,
     "intervention_joueur": "La décision est tres dur a prendre, je n'ai personne a voter",
@@ -202,15 +202,39 @@
           "cible": "Jade"
         }
       ],
-      "decompte_provisoire": {
+      "attendre_vote_alex": false,
+      "verdict": null,
+      "vote_alex": "Jade",
+      "votes": [
+        {
+          "votant": "Jade",
+          "cible": "Alex"
+        },
+        {
+          "votant": "Salomé",
+          "cible": "Alex"
+        },
+        {
+          "votant": "Mila",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Alex",
+          "cible": "Jade"
+        }
+      ],
+      "decompte_final": {
         "Alex": 2,
-        "Jade": 1
+        "Jade": 2
       },
-      "attendre_vote_alex": true,
-      "verdict": null
+      "statut": "egalite_definitive",
+      "aucune_elimination": true
     },
-    "attendre_vote_alex": true,
-    "verdict": null
+    "attendre_vote_alex": false,
+    "verdict": null,
+    "aucune_elimination": true,
+    "motif_verdict": "egalite_persistante_second_scrutin",
+    "cartes_revelees": []
   },
   "vivants": [
     "Alex",
@@ -280,32 +304,14 @@
   ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "departage_jour_5",
+    "dernier_lot": "verdict_jour_5",
     "generation_effectuee": false
   },
   "nuit_en_cours": {
-    "numero": 4,
-    "statut": "resolue",
-    "actions_resolues": [
-      "choix_meute",
-      "loup_blanc_pouvoir",
-      "sorciere",
-      "tir_chasseur",
-      "amoureux",
-      "victoire",
-      "reveil"
-    ],
-    "attendre_action_joueur": null,
-    "victimes_confirmees": [
-      "Iris",
-      "Clémence",
-      "Baptiste",
-      "Rose"
-    ],
-    "cible_meute": "Iris",
-    "cible_loup_blanc": "Clémence",
-    "cible_poison_sorciere": "Clémence",
-    "cible_tir_chasseur": "Baptiste",
-    "victime_amoureux": "Rose"
+    "numero": 5,
+    "statut": "en_cours",
+    "actions_resolues": [],
+    "attendre_action_joueur": "choix_cible_meute_alex",
+    "victimes_confirmees": []
   }
 }

@@ -114,3 +114,12 @@
 - Au second scrutin, votes PNJ fixés : Jade→Alex ; Salomé→Alex ; Mila→Jade.
 - Décompte provisoire : Alex 2, Jade 1. Second vote d'Alex attendu avant le verdict.
 - Aucune élimination ni nouvelle nuit en attendant.
+
+## Jour 5 — Verdict du second scrutin
+
+- Alex vote Jade une seconde fois.
+- Votes définitifs du départage : Jade → Alex ; Salomé → Alex ; Mila → Jade ; Alex → Jade.
+- Total : Alex 2, Jade 2 ; égalité persistante sans Capitaine.
+- Aucun personnage éliminé, aucune carte retournée, aucun effet de rôle et aucune victoire.
+- Quatre survivants : Alex, Jade, Salomé, Mila.
+- Début de la nuit 5 : l'unique Loup survivant Alex devra désigner une cible. Aucun audio ni synchronisation intermédiaire pendant la nuit.

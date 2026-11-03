@@ -55,3 +55,7 @@ Alex dit : « La décision est tres dur a prendre, je n'ai personne a voter ». 
 ## Jour 5 — Premier scrutin : égalité
 
 Alex vote Jade. Le résultat est partagé : Alex 2 voix, Jade 2 voix. Sans Capitaine, le village organise un deuxième scrutin entre les deux ex æquo. Jade, Salomé et Mila ont déjà voté ; Alex doit choisir son vote de départage. Aucun personnage éliminé, aucune carte dévoilée.
+
+## Jour 5 — Verdict définitif
+
+Alex vote Jade au second scrutin. Jade recueille deux voix et Alex deux : l'égalité persiste. Personne n'est éliminé, aucune carte révélée et aucun pouvoir de mort déclenché. Alex, Jade, Salomé et Mila s'endorment pour la nuit 5.

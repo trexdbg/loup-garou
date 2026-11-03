@@ -27,3 +27,7 @@ Personne n'a disparu durant la nuit. Dix habitants sont toujours vivants. Inès 
 ## Jour 3 — Soupçons et votes
 
 Alex estime que Jade a raison d'interroger Léon mais invite à réunir davantage de preuves. Inès maintient ses soupçons ; Léon conteste sa certitude ; Rose demande à Inès de s'expliquer. Les neuf PNJ votent ; le scrutin attend la voix d'Alex avant tout verdict.
+
+## Jour 3 — Verdict
+
+Alex vote contre Léon. Cinq voix contre lui, trois pour Inès et deux pour Jade : Léon est éliminé. Sa carte est retournée : Loup-Garou. Aucun effet de rôle supplémentaire. Neuf survivants ; la partie continue et les habitants s'endorment pour la nuit 3.

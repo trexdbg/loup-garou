@@ -4,11 +4,11 @@
   "titre": "Les douze à la lisière du bois",
   "cree_le": "2026-11-03T18:33:55.056Z",
   "statut": "en_cours",
-  "phase": "vote_ou_resolution",
+  "phase": "nuit",
   "progression": {
     "jour": 3,
-    "nuit": 2,
-    "scene": "votes_jour_3_01"
+    "nuit": 3,
+    "scene": "nuit_3_choix_meute"
   },
   "joueur": {
     "prenom": "Alex",
@@ -105,13 +105,14 @@
     "valide_par_mj": true,
     "retire": [
       "Marin",
-      "Hugo"
+      "Hugo",
+      "Léon"
     ]
   },
-  "resume_public": "Jour 3 : aucune victime pendant la nuit 2. Alex soutient la question de Jade sur Léon, tout en demandant plus de preuves. Les neuf PNJ ont voté ; seul le vote d'Alex manque avant le verdict.",
-  "aide_mj_publique": "Demander seulement le vote d'Alex parmi les neuf autres survivants. Les neuf votes PNJ sont fixés et archivés, ne pas les modifier. Aucun verdict ni passage à la nuit avant son vote.",
-  "dernier_evenement_public": "Jour 3 : intervention d'Alex et neuf votes PNJ archivés ; vote d'Alex attendu, aucun verdict.",
-  "scene_courante_id": "votes_jour_3_01",
+  "resume_public": "Jour 3 : Alex vote Léon. Cinq voix éliminent Léon (Loup-Garou), contre trois pour Inès et deux pour Jade. Neuf habitants survivent. La partie continue et la nuit 3 commence.",
+  "aide_mj_publique": "Retirer la figurine de Léon et révéler sa carte Loup-Garou. Aucun effet amoureux ni tir du Chasseur. Nuit 3 : la Voyante observe en secret ; l'action personnelle de la meute requiert le choix d'Alex. Aucune synchronisation GitHub ni audio pendant la nuit.",
+  "dernier_evenement_public": "Jour 3 : Léon éliminé (5 voix) et révélé Loup-Garou. Neuf survivants. Nuit 3.",
+  "scene_courante_id": "verdict_jour_3",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -123,9 +124,9 @@
   },
   "jour_en_cours": {
     "numero": 3,
-    "etape": "vote_joueur_en_attente",
-    "statut": "en_cours",
-    "vote_ouvert": true,
+    "etape": "termine",
+    "statut": "termine",
+    "vote_ouvert": false,
     "debats_ouverts": false,
     "attendre_intervention_joueur": false,
     "intervention_joueur": "Jade a raison léon mais il faut faire attention d'avoir plus de preuve",
@@ -165,15 +166,20 @@
       {
         "votant": "Inès",
         "cible": "Léon"
+      },
+      {
+        "votant": "Alex",
+        "cible": "Léon"
       }
     ],
-    "decompte_provisoire": {
-      "Léon": 4,
+    "attendre_vote_alex": false,
+    "verdict": "Léon",
+    "decompte_final": {
+      "Léon": 5,
       "Jade": 2,
       "Inès": 3
     },
-    "attendre_vote_alex": true,
-    "verdict": null
+    "carte_revelee": "loup"
   },
   "vivants": [
     "Alex",
@@ -181,7 +187,6 @@
     "Baptiste",
     "Rose",
     "Jade",
-    "Léon",
     "Salomé",
     "Clémence",
     "Mila",
@@ -189,7 +194,8 @@
   ],
   "retire": [
     "Marin",
-    "Hugo"
+    "Hugo",
+    "Léon"
   ],
   "roles_reveles_publics": [
     {
@@ -203,29 +209,24 @@
       "role": "villageois",
       "cause": "vote_jour_2",
       "jour": 2
+    },
+    {
+      "personnage": "Léon",
+      "role": "loup",
+      "cause": "vote_jour_3",
+      "jour": 3
     }
   ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "debats_jour_3_01",
+    "dernier_lot": "verdict_jour_3",
     "generation_effectuee": false
   },
   "nuit_en_cours": {
-    "numero": 2,
-    "statut": "resolue",
-    "actions_resolues": [
-      "voyante_observation",
-      "meute_attaque",
-      "loup_blanc_action",
-      "sorciere_sauvetage",
-      "sorciere_poison",
-      "effets_amoureux",
-      "condition_victoire",
-      "reveil_village"
-    ],
-    "victimes_confirmees": [],
-    "cibles_annulees": [
-      "Jade"
-    ]
+    "numero": 3,
+    "statut": "en_cours",
+    "actions_resolues": [],
+    "attendre_action_joueur": "choix_cible_meute",
+    "victimes_confirmees": []
   }
 }

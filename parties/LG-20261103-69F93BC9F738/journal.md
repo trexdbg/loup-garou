@@ -48,3 +48,11 @@
 - Votes PNJ : Iris → Léon; Baptiste → Jade; Rose → Inès; Jade → Léon; Léon → Inès; Salomé → Léon; Clémence → Inès; Mila → Jade; Inès → Léon.
 - Décompte provisoire (sans Alex) : Léon 4, Jade 2, Inès 3.
 - Neuf votes sur dix enregistrés ; vote d'Alex en attente, aucun verdict ni élimination.
+
+## Jour 3 — Verdict
+
+- Alex vote Léon. Les neuf votes PNJ précédents restent inchangés.
+- Décompte définitif : Léon 5, Inès 3, Jade 2 (10 votants).
+- Léon éliminé, révélé Loup-Garou ; ni amoureux ni Chasseur.
+- Neuf personnes survivent, pas de condition de victoire remplie.
+- Début de nuit 3, arrêt pour la décision de la meute par Alex ; aucune action nocturne encore publiée.

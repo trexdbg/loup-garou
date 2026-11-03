@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "modele": "gradium/phonon-40m-fr",
   "licence_modele": "CC-BY-NC-4.0",
-  "notice": "Voix phonon officielles: gradium/phonon-voices. Les rôles sont attribués séparément et changent selon les parties. Alex ne reçoit pas de voix automatique.",
+  "notice": "14 PNJ fixes et une voix de narrateur réservée, tous issus de gradium/phonon-voices. Anciens personnages archivés conservés en lecture. Le joueur humain ne reçoit pas de voix automatique.",
   "personnages": [
     {
       "personnage": "Rose",
@@ -101,13 +101,13 @@
       "voice_id": "LIv4NaG8ay4Mhqtd",
       "genre": "m",
       "caractere": "Protecteur et loyal"
-    },
-    {
-      "personnage": "Octave",
-      "voix": "Marius",
-      "voice_id": "biuhvu17TxVKOcyy",
-      "genre": "m",
-      "caractere": "Sévère et déterminé"
     }
-  ]
+  ],
+  "narrateur": {
+    "personnage": "Narrateur",
+    "voix": "Marius",
+    "voice_id": "biuhvu17TxVKOcyy",
+    "genre": "m",
+    "caractere": "Voix du récit"
+  }
 }

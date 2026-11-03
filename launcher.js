@@ -53,7 +53,7 @@
     const label = $("voicePoolStatus");
     if (!label) return;
     const n = selectedCast().length;
-    label.textContent = n + " PNJ sélectionnés sur 15 · une voix Phonon différente par habitant" +
+    label.textContent = n + " PNJ sélectionnés sur " + voicePool.length + " · narrateur Marius réservé · une voix Phonon par habitant" +
       (n < 3 ? " (au moins 3 sont nécessaires)" : "");
   }
   function renderVoicePool() {
@@ -167,8 +167,8 @@
       throw new Error("Le rôle choisi doit figurer parmi les rôles autorisés.");
     }
     const casting = selectedCast();
-    if (voicePool.length && (casting.length < 3 || casting.length > 15)) {
-      throw new Error("Choisis entre 3 et 15 personnages dans le casting vocal.");
+    if (voicePool.length && (casting.length < 3 || casting.length > voicePool.length)) {
+      throw new Error("Choisis entre 3 et " + voicePool.length + " personnages dans le casting vocal.");
     }
     const story = stories.find(s => s.id === $v("scenario"));
     const name = clean($v("heroName"), 40) || "Alex";
@@ -205,11 +205,12 @@
         scenario_reference: story ? story.title : null,
         titre_libre: clean($v("customTitle"), 100) || null,
         duree_minutes: num("duration", 20, 120),
-        pnj_nombre: voicePool.length ? casting.length : num("npcCount", 3, 15),
+        pnj_nombre: voicePool.length ? casting.length : num("npcCount", 3, 14),
         casting_pnj: casting.map(x => ({
           prenom: x.personnage, caractere: x.caractere,
           voix_phonon: x.voix, voix_id_phonon: x.voice_id
         })),
+        narrateur: {prenom:"Narrateur", voix_phonon:"Marius", voix_id_phonon:"biuhvu17TxVKOcyy"},
         catalogue_voix: "voices/phonon-fr.json",
         regle_camp_voix: "Les personnages et leurs voix restent stables; les rôles sont tirés par partie.",
         monde: $v("environment"),
@@ -296,7 +297,7 @@
       "1. Vérifie si parties/" + value.id + "/ existe déjà. S'il existe, demande au MJ s'il faut le reprendre, sans écraser ses données.",
       "2. Propose ENSEMBLE rôles des personnages et placement circulaire des LEGO ; une seule validation explicite du MJ couvre les deux. Après cet accord, crée en un unique commit parties/" + value.id + "/parametres.json, partie.json (avec placement_table validé), secrets_mj.json, narrations.md (prologue uniquement), journal.md et dialogues.ndjson (facultatif). Ne dévoile aucun rôle secret dans les scènes destinées au joueur.",
       "3. Mets à jour parties/index.json pour référencer ce même ID, titre, date, statut, phase et dossier; n'écrase pas les autres parties.",
-      "3 bis. Utilise EXACTEMENT aventure.casting_pnj comme liste des PNJ. Archive dans partie.json personnages_pnj avec prenom, caractere, voix_phonon et voix_id_phonon. Chaque PNJ conserve cette voix Phonon française d'une partie à l'autre, quel que soit son rôle secret. Alex est joué par l'enfant, sans voix synthétique.",
+      "3 bis. Utilise EXACTEMENT aventure.casting_pnj comme liste des 3 à 14 PNJ. Archive dans partie.json personnages_pnj avec prenom, caractere, voix_phonon et voix_id_phonon. Chaque PNJ conserve sa voix Phonon. Le Narrateur est distinct des PNJ et utilise exclusivement Marius. Alex est joué par l'enfant, sans voix synthétique.",
       "4. Après validation du MJ, conserve les identités, les rôles et les secrets dans parties/" + value.id + "/secrets_mj.json sur GitHub (y compris le rôle du joueur). Ne masque pas le rôle fixé dans parametres.json. Le dépôt GitHub est PUBLIC : les fichiers et leur historique sont lisibles par tous, même si l’application ne les affiche pas au joueur. N’inscris aucun spoiler non révélé dans partie.json, narrations.md ou dialogues.ndjson.",
       "4 bis. Applique le niveau roles.mode (classique, avance ou expert) et les rôles autorisés ; si roles.liste_personnalisee est vraie, la sélection manuelle du MJ prime sur le préréglage. Compose une distribution cohérente pour le nombre de personnages, le total de Loups, les pouvoirs et les camps ; le MJ valide la répartition avant le prologue.",
       "4 bis bis. Propose au MJ un placement CIRCULAIRE des personnages avec exactement une figurine LEGO par personne (joueur inclus). Place 1 à 12 h, parcours horaire, noms et numéros de place. Attends la validation du MJ AVANT d'affirmer que les places sont fixées ; archive seulement l'ordre public validé dans partie.json au champ placement_table. Les cartes physiques restent cachées sous les figurines ; leurs attributions sont archivées uniquement dans secrets_mj.json, et jamais dans placement_table. Toutes les interactions de voisinage, dont le flair du Renard, doivent utiliser cet ordre réel.",

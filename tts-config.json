@@ -1,5 +1,5 @@
 {
-  "schema_version": 5,
+  "schema_version": 6,
   "mode": "lecture_scenes_manuelle",
   "provider": "phonon_local_via_github_actions",
   "enabled": true,
@@ -18,7 +18,7 @@
     "navigateur",
     "piper_local"
   ],
-  "voice_policy": "15 personnalites de PNJ et 15 vraies voix Phonon françaises ; 9 féminines et 6 masculines. Les identités restent stables entre les parties.",
+  "voice_policy": "14 PNJ permanents avec 14 voix Phonon distinctes (9 féminines, 5 masculines) + narrateur réservé Marius (masculin) = 15 voix au total. Octave conserve Marius uniquement dans les anciennes parties.",
   "model": "gemini-3.8-flash-lite-tts",
   "secret_name": "HF_TOKEN",
   "model_note": "Gemini 3.8 Flash-Lite TTS : génération gratuite sous quotas, nouvelles requêtes Interactions REST; anciennes voix conservées grâce au cache.",
@@ -26,5 +26,12 @@
   "phonon_voices": "gradium/phonon-voices",
   "phonon_catalogue": "voices/phonon-fr.json",
   "phonon_license": "CC BY-NC 4.0 : usage non commercial uniquement",
-  "secondary_secret_name": "GEMINI_API_KEY"
+  "secondary_secret_name": "GEMINI_API_KEY",
+  "narrateur": {
+    "personnage": "Narrateur",
+    "voix": "Marius",
+    "voice_id": "biuhvu17TxVKOcyy"
+  },
+  "pnj_disponibles": 14,
+  "voix_phonon_distinctes": 15
 }

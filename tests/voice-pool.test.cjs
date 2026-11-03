@@ -8,20 +8,26 @@ const vm = require("node:vm");
 const root = path.join(__dirname, "..");
 const read = name => fs.readFileSync(path.join(root, name), "utf8");
 
-test("Le casting possède 15 voix Phonon françaises uniques et stables", () => {
+test("Le casting possède 14 PNJ et un narrateur aux 15 voix distinctes", () => {
   const window = {};
   vm.runInNewContext(read("voice-pool.js"), {window});
   const list = window.LG_VOICE_POOL.entries;
-  const reference = JSON.parse(read("voices/phonon-fr.json")).personnages;
-  assert.equal(list.length, 15);
-  assert.equal(new Set(list.map(x => x.personnage)).size, 15);
-  assert.equal(new Set(list.map(x => x.voix)).size, 15);
-  assert.equal(new Set(list.map(x => x.voice_id)).size, 15);
+  const catalogue = JSON.parse(read("voices/phonon-fr.json"));
+  const reference = catalogue.personnages;
+  const narrator = window.LG_VOICE_POOL.narrateur;
+  assert.equal(list.length, 14);
+  assert.equal(new Set(list.map(x => x.personnage)).size, 14);
+  assert.equal(new Set(list.map(x => x.voix)).size, 14);
+  assert.equal(new Set([...list.map(x => x.voix), narrator.voix]).size, 15);
+  assert.equal(new Set([...list.map(x => x.voice_id), narrator.voice_id]).size, 15);
   assert.equal(list.filter(x => x.genre === "f").length, 9);
-  assert.equal(list.filter(x => x.genre === "m").length, 6);
+  assert.equal(list.filter(x => x.genre === "m").length, 5);
   assert.deepEqual(Array.from(list, x => ({...x})), reference);
   assert.equal(window.LG_VOICE_POOL.byName.Rose.voix, "Noémie");
-  assert.equal(window.LG_VOICE_POOL.byName.Octave.voix, "Marius");
+  assert.equal(window.LG_VOICE_POOL.byName.Octave, undefined);
+  assert.equal(window.LG_VOICE_POOL.legacy.Octave.voix, "Marius");
+  assert.equal(narrator.voix, "Marius");
+  assert.equal(narrator.voice_id, catalogue.narrateur.voice_id);
 });
 
 test("Le configurateur embarque la sélection de personnages à voix fixes", () => {
@@ -30,7 +36,7 @@ test("Le configurateur embarque la sélection de personnages à voix fixes", () 
   const workflow = read(".github/workflows/pages.yml");
   assert.match(html, /id="voicePoolList"/);
   assert.match(html, /voice-pool\.js/);
-  assert.match(html, /id="npcCount"[^>]*max="15"/);
+  assert.match(html, /id="npcCount"[^>]*max="14"/);
   assert.match(script, /casting_pnj: casting\.map/);
   assert.match(script, /voix_id_phonon: x\.voice_id/);
   assert.match(workflow, /scripts\/generate_phonon_tts\.py/);

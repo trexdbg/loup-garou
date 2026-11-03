@@ -118,7 +118,7 @@ La page de consultation et le lecteur audio ne chargent pas automatiquement `sec
 
 - [roles.js](roles.js) + [modes.js](modes.js) : catalogue des **37 rôles**, presets Classique / Avancé / Expert et leurs résumés.
 - [mj-private.js](mj-private.js) : carnet de rôles privé, assignation locale par personnage, import/export du JSON MJ.
-- [voice-pool.js](voice-pool.js) + [voices/phonon-fr.json](voices/phonon-fr.json) : 15 personnages récurrents, 15 voix fixes et catalogue Phonon français.
+- [voice-pool.js](voice-pool.js) + [voices/phonon-fr.json](voices/phonon-fr.json) : 14 PNJ récurrents + 1 narrateur, 15 voix fixes et catalogue Phonon français.
 - [role-art.js](role-art.js) : association vérifiée aux illustrations authentiques et fiches wiki ; pas d'image empruntée à un autre rôle.
 - [stories.js](stories.js) : cinq trames facultatives (ChatGPT peut en créer de nouvelles).
 - [launcher.js](launcher.js) + [launcher.css](launcher.css) + [index.html](index.html) : nouvelle application de configuration / consultation.
@@ -136,15 +136,15 @@ Le lecteur actif est `scene-player.js` (l'ancien `voice-live.js` reste conservé
 
 **Parcours :** ouvrir la partie → **↻ Actualiser** → sélectionner la dernière scène → **▶ Écouter** → Alex interagit en vrai → le MJ transmet son intervention à ChatGPT → ChatGPT archive le prochain échange avec un nouvel identifiant → rafraîchir et réécouter. Les scènes déjà écoutées sont indiquées dans la session du navigateur. Le MJ peut copier une consigne pour continuer ou proposer la fin du tour de table, sans déclencher automatiquement de vote ni de nuit.
 
-### Casting de 15 PNJ, chacun avec une vraie voix française Phonon
+### Casting de 14 PNJ et un narrateur : 15 voix Phonon distinctes
 
-- **15 personnages permanents**, sélectionnables dans l'onglet Préparer (3 à 15 PNJ, 7 par défaut) : Rose, Salomé, Inès, Jade, Mila, Clémence, Iris, Zoé, Agathe, Hugo, Marin, Baptiste, Nils, Léon, Octave.
-- **15 timbres Phonon différents**, issus du catalogue officiel Gradium (9 féminins, 6 masculins), attribués de manière fixe aux habitants, indépendamment de leurs rôles ou de leur camp secret. Le narrateur réutilise une des 15 voix ; Alex parle réellement.
+- **14 PNJ permanents**, sélectionnables dans l'onglet Préparer (3 à 14 PNJ, 7 par défaut) : Rose, Salomé, Inès, Jade, Mila, Clémence, Iris, Zoé, Agathe, Hugo, Marin, Baptiste, Nils et Léon. Octave reste disponible uniquement dans les archives de parties existantes.
+- **15 timbres Phonon différents**, issus du catalogue officiel Gradium : 14 voix pour les PNJ (9 féminines, 5 masculines) et **Marius réservé exclusivement au Narrateur** dans les nouvelles parties. Les archives d'Octave conservent leur voix historique Marius ; le joueur humain parle lui-même.
 - **Phonon 40M FR est prioritaire** : les répliques publiques sont transformées en MP3 lors de GitHub Actions. Les MP3 ne sont publiés que dans GitHub Pages et sont mis en cache dans Actions, **jamais commités**.
 - Pour activer : accepter les conditions du modèle `gradium/phonon-40m-fr` sur Hugging Face, puis créer un secret GitHub **`HF_TOKEN`** en lecture. **Phonon français est sous licence CC BY-NC 4.0 (non commercial)**.
 - **Secours** : Gemini (`GEMINI_API_KEY` déjà pris en charge), puis eSpeak-ng local, puis voix du navigateur. Aucune lecture automatique ; le MJ clique sur **▶ Écouter**.
 - **Limites** : uniquement les scènes déjà validées, cache de 3 scènes récentes et plafond de 20 nouveaux clips Phonon par déploiement. Les requêtes Gemini restent soumises à leurs quotas si la génération Phonon échoue.
 
-**Guide complet : [Configuration Phonon et attribution des 15 voix](docs/audio-phonon.md).**
+**Guide complet : [14 personnages + 1 narrateur Phonon](docs/audio-phonon.md).**
 
 La publication GitHub Pages peut prendre un court délai après les commits. L'application est en lecture seule ; toutes les décisions et écritures du jeu restent dans ChatGPT avec l’accord du MJ.

@@ -1,4 +1,4 @@
-"""Tests hors réseau du catalogue de 15 voix et des scènes Phonon."""
+"""Tests hors réseau des 14 PNJ, du narrateur et des scènes Phonon."""
 import json
 from pathlib import Path
 import tempfile
@@ -12,14 +12,20 @@ class PhononTTSUnitTests(unittest.TestCase):
     def setUp(self):
         self.root = Path(__file__).resolve().parent.parent
 
-    def test_fifteen_different_french_voices(self):
+    def test_fourteen_npcs_and_one_dedicated_narrator(self):
         roster = catalog(self.root)
-        self.assertEqual(len(roster), 15)
-        self.assertEqual(len({p["voix"] for p in roster.values()}), 15)
+        narrator = json.loads((self.root / "voices" / "phonon-fr.json").read_text(encoding="utf-8"))["narrateur"]
+        self.assertEqual(len(roster), 14)
+        self.assertEqual(len({p["voix"] for p in roster.values()}), 14)
+        self.assertEqual(len({p["voix"] for p in roster.values()} | {narrator["voix"]}), 15)
+        self.assertEqual(len({p["voice_id"] for p in roster.values()} | {narrator["voice_id"]}), 15)
         self.assertEqual(len([p for p in roster.values() if p["genre"] == "f"]), 9)
-        self.assertEqual(len([p for p in roster.values() if p["genre"] == "m"]), 6)
+        self.assertEqual(len([p for p in roster.values() if p["genre"] == "m"]), 5)
         self.assertEqual(voice_for("Rose", roster), "Noémie")
         self.assertEqual(voice_for("Hugo", roster), "Augustin")
+        self.assertEqual(voice_for("Narrateur", roster), "Marius")
+        self.assertNotIn("Octave", roster)
+        self.assertEqual(voice_for("Octave", roster), "Marius")  # archives conservées
         self.assertIsNone(voice_for("Alex", roster))
 
     def test_only_public_dialogue_is_read(self):

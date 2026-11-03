@@ -89,12 +89,14 @@
   add(voicesPanel,"summary","🎭 Voix des personnages de la partie");
   const voiceList=add(voicesPanel,"div",null,"scene-voice-names");
   const pool=window.LG_VOICE_POOL?.byName||{};
+  const legacy=window.LG_VOICE_POOL?.legacy||{};
   for(const person of (party.personnages_pnj||[])){
     const name=typeof person==="string"?person:person.prenom;
     if(!name)continue;
-    const voice=(typeof person==="object"&&person.voix_phonon)||pool[name]?.voix;
+    const voice=(typeof person==="object"&&person.voix_phonon)||pool[name]?.voix||legacy[name]?.voix;
     add(voiceList,"p",(name+" — "+(voice||"voix non attribuée")),"fine");
   }
+  add(voiceList,"p","Narrateur — Marius (voix réservée)","fine");
   const buttons=add(box,"div",null,"scene-buttons");
   const playButton=add(buttons,"button","▶ Écouter","primary");
   const stopButton=add(buttons,"button","■ Arrêter","secondary");

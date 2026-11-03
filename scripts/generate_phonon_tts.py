@@ -24,9 +24,14 @@ TYPES = {"dialogue_pnj", "dialogue", "replique", "narration", "narration_publiqu
 def catalog(root: Path) -> dict:
     data = json.loads((root / "voices" / "phonon-fr.json").read_text(encoding="utf-8"))
     people = data["personnages"]
-    assert len(people) == 15
-    assert len({p["voix"] for p in people}) == 15
-    assert len({p["personnage"] for p in people}) == 15
+    narrateur = data["narrateur"]
+    assert len(people) == 14
+    assert len({p["voix"] for p in people}) == 14
+    assert len({p["personnage"] for p in people}) == 14
+    assert narrateur["personnage"] == "Narrateur"
+    assert narrateur["voix"] == "Marius"
+    assert len({p["voix"] for p in people} | {narrateur["voix"]}) == 15
+    assert len({p["voice_id"] for p in people} | {narrateur["voice_id"]}) == 15
     return {p["personnage"]: p for p in people}
 
 
@@ -58,11 +63,14 @@ def read_lines(file: Path, max_scenes: int) -> list[dict]:
     return [x for x in ordered if x["scene_id"] in active]
 
 
+LEGACY_VOICES = {"Octave": "Marius"}  # Anciennes parties, jamais proposées au nouveau casting.
+
+
 def voice_for(name: str, roster: dict) -> str | None:
     if name.lower() == "narrateur":
-        return "Marius"  # 15 different NPC voices; narrator reuses one of them.
+        return "Marius"  # Réservée au narrateur des nouvelles parties.
     profile = roster.get(name)
-    return profile["voix"] if profile else None
+    return profile["voix"] if profile else LEGACY_VOICES.get(name)
 
 
 def filename_for(voice: str, words: str) -> str:

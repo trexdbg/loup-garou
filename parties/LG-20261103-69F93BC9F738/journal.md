@@ -91,3 +91,18 @@
 - Nouvelle égalité sans Capitaine : aucune élimination ni révélation de carte ; aucun effet amoureux ou de Chasseur.
 - Toujours 8 vivants et aucune condition de victoire remplie.
 - Nuit 4 ouverte, en attente du choix d'Alex pour la meute ; pas de décision nocturne ni audio, ni commit intermédiaire.
+
+## Nuit 4 — Bilan public
+
+- Iris (Chasseur) et Clémence (Loup-Garou) meurent pendant la nuit.
+- Le tir d'Iris élimine Baptiste (Simple Villageois).
+- Rose (Sorcière), liée à Baptiste par Cupidon, meurt d'amour.
+- Quatre rôles révélés, quatre figurines retirées. Alex, Jade, Salomé et Mila sont les quatre survivants. Aucune victoire.
+- Pas de publication ni d'audio pendant la nuit.
+
+## Jour 5 — Intervention et votes
+
+- Alex : « La décision est tres dur a prendre, je n'ai personne a voter ».
+- Jade, Salomé et Mila discutent de la justesse des accusations contre Clémence et de la prudence d'Alex.
+- Votes PNJ fixés : Jade → Alex ; Salomé → Alex ; Mila → Jade.
+- Décompte provisoire : Alex 2, Jade 1. Le vote d'Alex est attendu ; aucune élimination.

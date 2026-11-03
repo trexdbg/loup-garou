@@ -4,11 +4,11 @@
   "titre": "Les douze à la lisière du bois",
   "cree_le": "2026-11-03T18:33:55.056Z",
   "statut": "en_cours",
-  "phase": "nuit",
+  "phase": "vote_ou_resolution",
   "progression": {
-    "jour": 4,
+    "jour": 5,
     "nuit": 4,
-    "scene": "nuit_4_choix_meute"
+    "scene": "votes_jour_5_01"
   },
   "joueur": {
     "prenom": "Alex",
@@ -107,13 +107,17 @@
       "Marin",
       "Hugo",
       "Léon",
-      "Inès"
+      "Inès",
+      "Iris",
+      "Clémence",
+      "Baptiste",
+      "Rose"
     ]
   },
-  "resume_public": "Jour 4 : égalité à 3 voix entre Clémence et Jade au premier scrutin, Rose obtient 2 voix. Au second scrutin, Alex vote Clémence : nouvelle égalité à 4 contre 4. Sans Capitaine, personne n'est éliminé. Les huit habitants restent en vie et le village s'endort pour la nuit 4.",
-  "aide_mj_publique": "Jour 4 terminé : aucune figurine retirée. Nuit 4 en cours : Alex doit choisir la victime de la meute parmi les six autres habitants. Après ce choix, l'appeler séparément pour son pouvoir de Loup-Garou Blanc, disponible cette nuit. Aucun audio ni synchronisation intermédiaire pendant la nuit.",
-  "dernier_evenement_public": "Jour 4 : deuxième égalité Clémence 4, Jade 4 ; aucun éliminé, huit vivants. Nuit 4.",
-  "scene_courante_id": "verdict_jour_4",
+  "resume_public": "Jour 5 : la nuit 4 a coûté la vie à Iris (Chasseur), Clémence (Loup-Garou), Baptiste (Villageois) et Rose (Sorcière), à la suite du tir du Chasseur et du lien des amoureux. Restent Alex, Jade, Salomé et Mila. Alex déclare qu'il n'arrive pas à choisir un suspect. Les trois PNJ ont voté, le vote d'Alex est attendu avant tout verdict.",
+  "aide_mj_publique": "Retirer et révéler Iris, Clémence, Baptiste et Rose ; quatre survivants. Trois votes PNJ fixés et archivés ; demander uniquement le vote d'Alex parmi Jade, Salomé ou Mila. Aucun verdict ni nouveau tour nocturne avant cette décision.",
+  "dernier_evenement_public": "Jour 5 : quatre morts à la nuit 4, trois votes PNJ fixés ; vote d'Alex attendu.",
+  "scene_courante_id": "votes_jour_5_01",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -124,193 +128,49 @@
     "intervention_alex": "je suis daccord avec vous"
   },
   "jour_en_cours": {
-    "numero": 4,
-    "etape": "termine",
-    "statut": "termine",
-    "vote_ouvert": false,
+    "numero": 5,
+    "etape": "vote_joueur_en_attente",
+    "statut": "en_cours",
+    "vote_ouvert": true,
     "debats_ouverts": false,
     "attendre_intervention_joueur": false,
-    "intervention_joueur": "ah bah bravo les loup garou, vous avez vu ce que vou savez fait! c'est l'un des personnage les plus important du village",
+    "intervention_joueur": "La décision est tres dur a prendre, je n'ai personne a voter",
     "votes_enregistres": [
       {
-        "votant": "Iris",
-        "cible": "Clémence"
-      },
-      {
-        "votant": "Baptiste",
-        "cible": "Jade"
-      },
-      {
-        "votant": "Rose",
-        "cible": "Clémence"
-      },
-      {
         "votant": "Jade",
-        "cible": "Clémence"
+        "cible": "Alex"
       },
       {
         "votant": "Salomé",
-        "cible": "Rose"
-      },
-      {
-        "votant": "Clémence",
-        "cible": "Rose"
+        "cible": "Alex"
       },
       {
         "votant": "Mila",
         "cible": "Jade"
-      },
-      {
-        "votant": "Alex",
-        "cible": "Jade"
       }
     ],
-    "premier_scrutin": {
-      "votes": [
-        {
-          "votant": "Iris",
-          "cible": "Clémence"
-        },
-        {
-          "votant": "Baptiste",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Rose",
-          "cible": "Clémence"
-        },
-        {
-          "votant": "Jade",
-          "cible": "Clémence"
-        },
-        {
-          "votant": "Salomé",
-          "cible": "Rose"
-        },
-        {
-          "votant": "Clémence",
-          "cible": "Rose"
-        },
-        {
-          "votant": "Mila",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Alex",
-          "cible": "Jade"
-        }
-      ],
-      "decompte": {
-        "Clémence": 3,
-        "Jade": 3,
-        "Rose": 2
-      },
-      "statut": "egalite",
-      "ex_aequo": [
-        "Clémence",
-        "Jade"
-      ]
+    "decompte_provisoire": {
+      "Alex": 2,
+      "Jade": 1
     },
-    "second_scrutin": {
-      "candidats": [
-        "Clémence",
-        "Jade"
-      ],
-      "votes_pnj": [
-        {
-          "votant": "Iris",
-          "cible": "Clémence"
-        },
-        {
-          "votant": "Baptiste",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Rose",
-          "cible": "Clémence"
-        },
-        {
-          "votant": "Jade",
-          "cible": "Clémence"
-        },
-        {
-          "votant": "Salomé",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Clémence",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Mila",
-          "cible": "Jade"
-        }
-      ],
-      "attendre_vote_alex": false,
-      "verdict": null,
-      "vote_alex": "Clémence",
-      "votes": [
-        {
-          "votant": "Iris",
-          "cible": "Clémence"
-        },
-        {
-          "votant": "Baptiste",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Rose",
-          "cible": "Clémence"
-        },
-        {
-          "votant": "Jade",
-          "cible": "Clémence"
-        },
-        {
-          "votant": "Salomé",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Clémence",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Mila",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Alex",
-          "cible": "Clémence"
-        }
-      ],
-      "decompte_final": {
-        "Clémence": 4,
-        "Jade": 4
-      },
-      "statut": "egalite_definitive",
-      "aucune_elimination": true
-    },
-    "attendre_vote_alex": false,
-    "verdict": null,
-    "aucune_elimination": true,
-    "motif_verdict": "egalite_persistante_au_second_scrutin",
-    "cartes_revelees": []
+    "attendre_vote_alex": true,
+    "verdict": null
   },
   "vivants": [
     "Alex",
-    "Iris",
-    "Baptiste",
-    "Rose",
     "Jade",
     "Salomé",
-    "Clémence",
     "Mila"
   ],
   "retire": [
     "Marin",
     "Hugo",
     "Léon",
-    "Inès"
+    "Inès",
+    "Iris",
+    "Clémence",
+    "Baptiste",
+    "Rose"
   ],
   "roles_reveles_publics": [
     {
@@ -336,18 +196,60 @@
       "role": "voyante",
       "cause": "attaque_nocturne",
       "jour": 4
+    },
+    {
+      "personnage": "Iris",
+      "role": "chasseur",
+      "cause": "attaque_nocturne",
+      "jour": 5
+    },
+    {
+      "personnage": "Clémence",
+      "role": "loup",
+      "cause": "attaque_nocturne",
+      "jour": 5
+    },
+    {
+      "personnage": "Baptiste",
+      "role": "villageois",
+      "cause": "tir_chasseur",
+      "jour": 5
+    },
+    {
+      "personnage": "Rose",
+      "role": "sorciere",
+      "cause": "mort_amoureuse",
+      "jour": 5
     }
   ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "verdict_jour_4",
+    "dernier_lot": "debats_jour_5_01",
     "generation_effectuee": false
   },
   "nuit_en_cours": {
     "numero": 4,
-    "statut": "en_cours",
-    "actions_resolues": [],
-    "attendre_action_joueur": "choix_cible_meute",
-    "victimes_confirmees": []
+    "statut": "resolue",
+    "actions_resolues": [
+      "choix_meute",
+      "loup_blanc_pouvoir",
+      "sorciere",
+      "tir_chasseur",
+      "amoureux",
+      "victoire",
+      "reveil"
+    ],
+    "attendre_action_joueur": null,
+    "victimes_confirmees": [
+      "Iris",
+      "Clémence",
+      "Baptiste",
+      "Rose"
+    ],
+    "cible_meute": "Iris",
+    "cible_loup_blanc": "Clémence",
+    "cible_poison_sorciere": "Clémence",
+    "cible_tir_chasseur": "Baptiste",
+    "victime_amoureux": "Rose"
   }
 }

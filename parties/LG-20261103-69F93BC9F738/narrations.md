@@ -43,3 +43,11 @@ Alex s'indigne de la mort d'Inès. Les habitants confrontent les votes précéde
 ## Jour 4 — Égalité définitive
 
 Alex vote Clémence au second scrutin. Clémence et Jade recueillent quatre voix chacune. Le second vote ne départage personne : aucune élimination, aucune carte retournée. Les huit habitants s'endorment pour la nuit 4.
+
+## Réveil — Jour 5
+
+Au matin, Iris (Chasseur) et Clémence (Loup-Garou) ont disparu. Iris a tiré sur Baptiste (Simple Villageois) avant de mourir. Rose (Sorcière), amoureuse de Baptiste, est morte à son tour. Les cartes sont révélées. Il reste Alex, Jade, Salomé et Mila ; la partie continue.
+
+## Jour 5 — Débats et votes
+
+Alex dit : « La décision est tres dur a prendre, je n'ai personne a voter ». Jade lui reproche son premier vote de la veille contre elle. Salomé reconnaît que Jade avait raison sur Clémence. Mila doute des stratégies d'accusation. Les trois PNJ votent, puis le village attend la seule voix d'Alex avant le verdict.

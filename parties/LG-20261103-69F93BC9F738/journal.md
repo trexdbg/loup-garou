@@ -25,3 +25,13 @@
 - Onze survivants. Le placement circulaire d'origine est conservé.
 - Jade, Hugo et Léon réagissent.
 - Alex doit intervenir une fois avant les votes des dix PNJ, puis son vote sera demandé.
+
+## Jour 2 — Silence, votes et verdict
+
+- Alex reste silencieux pendant les débats.
+- Hugo s'inquiète de ce silence ; Rose refuse d'en faire une preuve. Jade interroge Léon, qui se défend.
+- Votes PNJ : Iris → Léon; Baptiste → Hugo; Rose → Hugo; Jade → Léon; Léon → Jade; Salomé → Léon; Clémence → Hugo; Hugo → Alex; Mila → Hugo; Inès → Léon.
+- Alex vote Hugo.
+- Résultat : Hugo 5, Léon 4, Jade 1, Alex 1 (11 voix au total).
+- Hugo éliminé, sa carte révèle Simple Villageois. Pas de pouvoir ni de disparition en chaîne.
+- Dix vivants. Pas de victoire. Passage à la nuit 2, sans action ni synchronisation pendant la nuit.

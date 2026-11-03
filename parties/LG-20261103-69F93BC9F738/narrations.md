@@ -11,3 +11,11 @@ Alex répond : « je suis daccord avec vous ». Le village s'endort sans vote.
 ## Réveil — Jour 2
 
 Au matin, Marin manque à l'appel. Sa carte est révélée : Simple Villageois. Onze habitants sont encore en vie. Les premières réactions se font entendre, puis Alex devra prendre la parole.
+
+## Jour 2 — Les accusations
+
+Alex reste silencieux. Hugo lui reproche son absence de réponse, mais Rose rappelle que ce n'est pas une preuve. Jade interroge Léon, qui demande d'éviter les condamnations hâtives.
+
+## Jour 2 — Verdict
+
+Alex vote Hugo. Hugo recueille cinq voix contre quatre pour Léon, une pour Jade et une pour Alex. Il est éliminé : sa carte révèle Simple Villageois. Dix habitants restent en vie. Le village s'endort pour la nuit 2.

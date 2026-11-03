@@ -4,11 +4,11 @@
   "titre": "Les douze à la lisière du bois",
   "cree_le": "2026-11-03T18:33:55.056Z",
   "statut": "en_cours",
-  "phase": "jour",
+  "phase": "nuit",
   "progression": {
     "jour": 2,
-    "nuit": 1,
-    "scene": "reveil_jour_2"
+    "nuit": 2,
+    "scene": "nuit_2_choix_meute"
   },
   "joueur": {
     "prenom": "Alex",
@@ -104,13 +104,14 @@
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous",
     "valide_par_mj": true,
     "retire": [
-      "Marin"
+      "Marin",
+      "Hugo"
     ]
   },
-  "resume_public": "Réveil du jour 2 : Marin est mort pendant la nuit. Sa carte de Simple Villageois est révélée. Onze habitants restent en vie. Jade, Hugo et Léon réagissent ; Alex doit prendre la parole avant les votes.",
-  "aide_mj_publique": "Retirer le LEGO de Marin. Demander une seule intervention d'Alex, puis faire voter automatiquement les dix PNJ vivants et demander uniquement le vote d'Alex avant verdict.",
-  "dernier_evenement_public": "Jour 2 : Marin éliminé pendant la nuit, rôle Simple Villageois révélé.",
-  "scene_courante_id": "reveil_jour_2",
+  "resume_public": "Jour 2 : Alex est resté silencieux, puis a voté Hugo. Hugo est éliminé avec 5 voix contre 4 pour Léon, 1 pour Jade et 1 pour Alex. Sa carte révèle Simple Villageois. Dix habitants vivent encore. Le village s'endort.",
+  "aide_mj_publique": "Jour 2 terminé : Hugo retiré, sa carte révélée. Nuit 2 en cours sans dialogue, audio ni GitHub. Seul Alex doit décider de la cible de la meute puis, à son tour, de son pouvoir spécial de Loup-Garou Blanc.",
+  "dernier_evenement_public": "Jour 2 : Hugo éliminé par 5 voix et révélé Simple Villageois. Nuit 2 commencée.",
+  "scene_courante_id": "verdict_jour_2",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -122,12 +123,66 @@
   },
   "jour_en_cours": {
     "numero": 2,
-    "etape": "debats",
-    "statut": "en_cours",
+    "etape": "termine",
+    "statut": "termine",
     "vote_ouvert": false,
-    "debats_ouverts": true,
-    "attendre_intervention_joueur": true,
-    "votes_enregistres": []
+    "debats_ouverts": false,
+    "attendre_intervention_joueur": false,
+    "intervention_joueur": "alex ne dit rien",
+    "votes_enregistres": [
+      {
+        "votant": "Iris",
+        "cible": "Léon"
+      },
+      {
+        "votant": "Baptiste",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Rose",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Jade",
+        "cible": "Léon"
+      },
+      {
+        "votant": "Léon",
+        "cible": "Jade"
+      },
+      {
+        "votant": "Salomé",
+        "cible": "Léon"
+      },
+      {
+        "votant": "Clémence",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Hugo",
+        "cible": "Alex"
+      },
+      {
+        "votant": "Mila",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Inès",
+        "cible": "Léon"
+      },
+      {
+        "votant": "Alex",
+        "cible": "Hugo"
+      }
+    ],
+    "decompte_final": {
+      "Léon": 4,
+      "Hugo": 5,
+      "Jade": 1,
+      "Alex": 1
+    },
+    "verdict": "Hugo",
+    "carte_revelee": "villageois"
   },
   "vivants": [
     "Alex",
@@ -138,12 +193,12 @@
     "Léon",
     "Salomé",
     "Clémence",
-    "Hugo",
     "Mila",
     "Inès"
   ],
   "retire": [
-    "Marin"
+    "Marin",
+    "Hugo"
   ],
   "roles_reveles_publics": [
     {
@@ -151,25 +206,24 @@
       "role": "villageois",
       "cause": "attaque_nocturne",
       "jour": 2
+    },
+    {
+      "personnage": "Hugo",
+      "role": "villageois",
+      "cause": "vote_jour_2",
+      "jour": 2
     }
   ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "reveil_jour_2",
+    "dernier_lot": "verdict_jour_2",
     "generation_effectuee": false
   },
   "nuit_en_cours": {
-    "numero": 1,
-    "statut": "resolue",
-    "actions_resolues": [
-      "cupidon_amoureux",
-      "voyante_observation",
-      "meute_attaque",
-      "sorciere_decision",
-      "reveil_village"
-    ],
-    "victimes_confirmees": [
-      "Marin"
-    ]
+    "numero": 2,
+    "statut": "en_cours",
+    "actions_resolues": [],
+    "attendre_action_joueur": "choix_cible_meute",
+    "victimes_confirmees": []
   }
 }

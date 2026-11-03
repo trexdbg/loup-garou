@@ -51,3 +51,7 @@ Au matin, Iris (Chasseur) et Clémence (Loup-Garou) ont disparu. Iris a tiré su
 ## Jour 5 — Débats et votes
 
 Alex dit : « La décision est tres dur a prendre, je n'ai personne a voter ». Jade lui reproche son premier vote de la veille contre elle. Salomé reconnaît que Jade avait raison sur Clémence. Mila doute des stratégies d'accusation. Les trois PNJ votent, puis le village attend la seule voix d'Alex avant le verdict.
+
+## Jour 5 — Premier scrutin : égalité
+
+Alex vote Jade. Le résultat est partagé : Alex 2 voix, Jade 2 voix. Sans Capitaine, le village organise un deuxième scrutin entre les deux ex æquo. Jade, Salomé et Mila ont déjà voté ; Alex doit choisir son vote de départage. Aucun personnage éliminé, aucune carte dévoilée.

@@ -106,3 +106,11 @@
 - Jade, Salomé et Mila discutent de la justesse des accusations contre Clémence et de la prudence d'Alex.
 - Votes PNJ fixés : Jade → Alex ; Salomé → Alex ; Mila → Jade.
 - Décompte provisoire : Alex 2, Jade 1. Le vote d'Alex est attendu ; aucune élimination.
+
+## Jour 5 — Départage après égalité
+
+- Alex vote Jade au premier scrutin (votes PNJ inchangés : Jade→Alex, Salomé→Alex, Mila→Jade).
+- Premier résultat : Alex 2, Jade 2. Aucun Capitaine ; second scrutin entre Alex et Jade.
+- Au second scrutin, votes PNJ fixés : Jade→Alex ; Salomé→Alex ; Mila→Jade.
+- Décompte provisoire : Alex 2, Jade 1. Second vote d'Alex attendu avant le verdict.
+- Aucune élimination ni nouvelle nuit en attendant.

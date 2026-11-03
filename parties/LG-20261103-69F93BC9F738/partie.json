@@ -8,7 +8,7 @@
   "progression": {
     "jour": 5,
     "nuit": 4,
-    "scene": "votes_jour_5_01"
+    "scene": "departage_jour_5"
   },
   "joueur": {
     "prenom": "Alex",
@@ -114,10 +114,10 @@
       "Rose"
     ]
   },
-  "resume_public": "Jour 5 : la nuit 4 a coûté la vie à Iris (Chasseur), Clémence (Loup-Garou), Baptiste (Villageois) et Rose (Sorcière), à la suite du tir du Chasseur et du lien des amoureux. Restent Alex, Jade, Salomé et Mila. Alex déclare qu'il n'arrive pas à choisir un suspect. Les trois PNJ ont voté, le vote d'Alex est attendu avant tout verdict.",
-  "aide_mj_publique": "Retirer et révéler Iris, Clémence, Baptiste et Rose ; quatre survivants. Trois votes PNJ fixés et archivés ; demander uniquement le vote d'Alex parmi Jade, Salomé ou Mila. Aucun verdict ni nouveau tour nocturne avant cette décision.",
-  "dernier_evenement_public": "Jour 5 : quatre morts à la nuit 4, trois votes PNJ fixés ; vote d'Alex attendu.",
-  "scene_courante_id": "votes_jour_5_01",
+  "resume_public": "Jour 5 : Alex vote Jade. Le scrutin donne 2 voix à Alex et 2 à Jade : égalité sans Capitaine. Un second scrutin entre Alex et Jade a lieu ; les trois PNJ ont revoté selon leurs soupçons. Il faut le second vote d'Alex avant de conclure. Aucun éliminé.",
+  "aide_mj_publique": "Les trois votes PNJ du second scrutin sont fixés et doivent rester inchangés. Faire choisir Alex entre les candidats de départage (Alex ou Jade) ; aucune élimination avant son second vote. Si nouvelle égalité, aucun éliminé, puis continuer selon les règles.",
+  "dernier_evenement_public": "Jour 5 : premier scrutin à égalité Alex 2 / Jade 2 ; second scrutin PNJ achevé, vote d'Alex attendu.",
+  "scene_courante_id": "departage_jour_5",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -129,7 +129,7 @@
   },
   "jour_en_cours": {
     "numero": 5,
-    "etape": "vote_joueur_en_attente",
+    "etape": "vote_departage_alex_en_attente",
     "statut": "en_cours",
     "vote_ouvert": true,
     "debats_ouverts": false,
@@ -147,11 +147,67 @@
       {
         "votant": "Mila",
         "cible": "Jade"
+      },
+      {
+        "votant": "Alex",
+        "cible": "Jade"
       }
     ],
-    "decompte_provisoire": {
-      "Alex": 2,
-      "Jade": 1
+    "premier_scrutin": {
+      "votes": [
+        {
+          "votant": "Jade",
+          "cible": "Alex"
+        },
+        {
+          "votant": "Salomé",
+          "cible": "Alex"
+        },
+        {
+          "votant": "Mila",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Alex",
+          "cible": "Jade"
+        }
+      ],
+      "decompte": {
+        "Alex": 2,
+        "Jade": 2
+      },
+      "statut": "egalite",
+      "ex_aequo": [
+        "Alex",
+        "Jade"
+      ],
+      "vote_alex": "Jade"
+    },
+    "second_scrutin": {
+      "candidats": [
+        "Alex",
+        "Jade"
+      ],
+      "votes_pnj": [
+        {
+          "votant": "Jade",
+          "cible": "Alex"
+        },
+        {
+          "votant": "Salomé",
+          "cible": "Alex"
+        },
+        {
+          "votant": "Mila",
+          "cible": "Jade"
+        }
+      ],
+      "decompte_provisoire": {
+        "Alex": 2,
+        "Jade": 1
+      },
+      "attendre_vote_alex": true,
+      "verdict": null
     },
     "attendre_vote_alex": true,
     "verdict": null
@@ -224,7 +280,7 @@
   ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "debats_jour_5_01",
+    "dernier_lot": "departage_jour_5",
     "generation_effectuee": false
   },
   "nuit_en_cours": {

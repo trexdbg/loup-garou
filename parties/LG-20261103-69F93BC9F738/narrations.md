@@ -31,3 +31,7 @@ Alex estime que Jade a raison d'interroger Léon mais invite à réunir davantag
 ## Jour 3 — Verdict
 
 Alex vote contre Léon. Cinq voix contre lui, trois pour Inès et deux pour Jade : Léon est éliminé. Sa carte est retournée : Loup-Garou. Aucun effet de rôle supplémentaire. Neuf survivants ; la partie continue et les habitants s'endorment pour la nuit 3.
+
+## Réveil — Jour 4
+
+Le village constate qu'Inès manque à l'appel. Sa carte est révélée : Voyante. Huit habitants restent en vie. Jade se rappelle qu'Inès avait eu raison sur Léon ; Iris mesure la gravité de la perte de la Voyante ; Clémence appelle à la prudence. Alex peut intervenir une fois avant les votes.

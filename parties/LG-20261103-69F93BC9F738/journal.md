@@ -56,3 +56,16 @@
 - Léon éliminé, révélé Loup-Garou ; ni amoureux ni Chasseur.
 - Neuf personnes survivent, pas de condition de victoire remplie.
 - Début de nuit 3, arrêt pour la décision de la meute par Alex ; aucune action nocturne encore publiée.
+
+## Nuit 3 — bilan public
+
+- La nuit a été résolue sans synchronisation intermédiaire, audio ni dialogue nocturne.
+- La meute a tué Inès. Sa carte Voyante est révélée au réveil du jour 4.
+- Aucun décès supplémentaire ni effet des amoureux ou du Chasseur.
+- Huit habitants restent vivants. Pas de victoire.
+
+## Réveil — Jour 4
+
+- Jade rappelle qu'Inès avait vu juste au sujet de Léon. Iris déplore la disparition de la Voyante. Clémence appelle à la prudence.
+- Une intervention d'Alex est attendue avant de faire voter les sept PNJ.
+- Aucun vote du jour 4 encore enregistré.

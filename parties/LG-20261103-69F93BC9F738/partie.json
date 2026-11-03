@@ -4,11 +4,11 @@
   "titre": "Les douze à la lisière du bois",
   "cree_le": "2026-11-03T18:33:55.056Z",
   "statut": "en_cours",
-  "phase": "nuit",
+  "phase": "jour",
   "progression": {
-    "jour": 3,
+    "jour": 4,
     "nuit": 3,
-    "scene": "nuit_3_choix_meute"
+    "scene": "reveil_jour_4"
   },
   "joueur": {
     "prenom": "Alex",
@@ -106,13 +106,14 @@
     "retire": [
       "Marin",
       "Hugo",
-      "Léon"
+      "Léon",
+      "Inès"
     ]
   },
-  "resume_public": "Jour 3 : Alex vote Léon. Cinq voix éliminent Léon (Loup-Garou), contre trois pour Inès et deux pour Jade. Neuf habitants survivent. La partie continue et la nuit 3 commence.",
-  "aide_mj_publique": "Retirer la figurine de Léon et révéler sa carte Loup-Garou. Aucun effet amoureux ni tir du Chasseur. Nuit 3 : la Voyante observe en secret ; l'action personnelle de la meute requiert le choix d'Alex. Aucune synchronisation GitHub ni audio pendant la nuit.",
-  "dernier_evenement_public": "Jour 3 : Léon éliminé (5 voix) et révélé Loup-Garou. Neuf survivants. Nuit 3.",
-  "scene_courante_id": "verdict_jour_3",
+  "resume_public": "Jour 4 : Inès a disparu pendant la nuit 3. Sa carte révèle Voyante. Huit habitants restent vivants. Jade, Iris et Clémence réagissent ; Alex doit prendre la parole avant le scrutin.",
+  "aide_mj_publique": "Retirer la figurine d'Inès et retourner sa carte de Voyante. Présenter trois réactions PNJ, demander une seule intervention d'Alex, faire voter les sept PNJ, puis demander le vote d'Alex avant verdict. Aucun audio généré.",
+  "dernier_evenement_public": "Réveil du jour 4 : Inès éliminée par les Loups-Garous, carte Voyante révélée. Huit survivants.",
+  "scene_courante_id": "reveil_jour_4",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -123,63 +124,13 @@
     "intervention_alex": "je suis daccord avec vous"
   },
   "jour_en_cours": {
-    "numero": 3,
-    "etape": "termine",
-    "statut": "termine",
+    "numero": 4,
+    "etape": "debats",
+    "statut": "en_cours",
     "vote_ouvert": false,
-    "debats_ouverts": false,
-    "attendre_intervention_joueur": false,
-    "intervention_joueur": "Jade a raison léon mais il faut faire attention d'avoir plus de preuve",
-    "votes_enregistres": [
-      {
-        "votant": "Iris",
-        "cible": "Léon"
-      },
-      {
-        "votant": "Baptiste",
-        "cible": "Jade"
-      },
-      {
-        "votant": "Rose",
-        "cible": "Inès"
-      },
-      {
-        "votant": "Jade",
-        "cible": "Léon"
-      },
-      {
-        "votant": "Léon",
-        "cible": "Inès"
-      },
-      {
-        "votant": "Salomé",
-        "cible": "Léon"
-      },
-      {
-        "votant": "Clémence",
-        "cible": "Inès"
-      },
-      {
-        "votant": "Mila",
-        "cible": "Jade"
-      },
-      {
-        "votant": "Inès",
-        "cible": "Léon"
-      },
-      {
-        "votant": "Alex",
-        "cible": "Léon"
-      }
-    ],
-    "attendre_vote_alex": false,
-    "verdict": "Léon",
-    "decompte_final": {
-      "Léon": 5,
-      "Jade": 2,
-      "Inès": 3
-    },
-    "carte_revelee": "loup"
+    "debats_ouverts": true,
+    "attendre_intervention_joueur": true,
+    "votes_enregistres": []
   },
   "vivants": [
     "Alex",
@@ -189,13 +140,13 @@
     "Jade",
     "Salomé",
     "Clémence",
-    "Mila",
-    "Inès"
+    "Mila"
   ],
   "retire": [
     "Marin",
     "Hugo",
-    "Léon"
+    "Léon",
+    "Inès"
   ],
   "roles_reveles_publics": [
     {
@@ -215,18 +166,36 @@
       "role": "loup",
       "cause": "vote_jour_3",
       "jour": 3
+    },
+    {
+      "personnage": "Inès",
+      "role": "voyante",
+      "cause": "attaque_nocturne",
+      "jour": 4
     }
   ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "verdict_jour_3",
+    "dernier_lot": "reveil_jour_4",
     "generation_effectuee": false
   },
   "nuit_en_cours": {
     "numero": 3,
-    "statut": "en_cours",
-    "actions_resolues": [],
-    "attendre_action_joueur": "choix_cible_meute",
-    "victimes_confirmees": []
+    "statut": "resolue",
+    "actions_resolues": [
+      "voyante_observation",
+      "meute_attaque",
+      "loup_blanc_non_actif",
+      "sorciere_decision",
+      "effets_amoureux",
+      "effet_chasseur",
+      "verification_victoire",
+      "reveil_village"
+    ],
+    "attendre_action_joueur": null,
+    "victimes_confirmees": [
+      "Inès"
+    ],
+    "cible_meute": "Inès"
   }
 }

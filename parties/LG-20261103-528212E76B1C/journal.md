@@ -53,3 +53,11 @@
 - Votes PNJ : Jade → Marin; Léon → Marin; Baptiste → Jade; Rose → Marin; Clémence → Marin; Marin → Jade; Mila → Jade; Salomé → Marin; Iris → Jade.
 - Décompte provisoire : Marin 5, Jade 4. Vote d'Alex en attente.
 - Aucun verdict, aucune nouvelle élimination.
+
+## Jour 3 — Verdict et victoire
+
+- Alex vote Marin.
+- Décompte final : Marin 6, Jade 4.
+- Marin est éliminé ; carte Loup-Garou révélée.
+- Inès et Marin, les deux Loups-Garous, sont éliminés.
+- Victoire du Village, 9 survivants. Partie terminée, pas de nuit 3.

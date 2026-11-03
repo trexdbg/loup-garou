@@ -3,12 +3,12 @@
   "schema_version": 2,
   "titre": "Le village des douze",
   "cree_le": "2026-11-03T17:23:33.219Z",
-  "statut": "en_cours",
-  "phase": "vote_ou_resolution",
+  "statut": "terminee",
+  "phase": "terminee",
   "progression": {
     "jour": 3,
     "nuit": 2,
-    "scene": "votes_jour_3_01"
+    "scene": "verdict_jour_3"
   },
   "joueur": {
     "prenom": "Alex",
@@ -104,10 +104,10 @@
     "valide_par_mj": true,
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Jour 3 : après les soupçons d'Alex contre Marin, neuf PNJ ont voté. Résultat provisoire avant le vote d'Alex : Marin 5, Jade 4.",
-  "aide_mj_publique": "Demander uniquement le vote d'Alex ; dépouiller les dix voix. En cas d'égalité (5-5), appliquer la procédure de départage du jeu avant toute élimination.",
-  "dernier_evenement_public": "Jour 3 : neuf votes PNJ enregistrés. Vote d'Alex requis avant le verdict.",
-  "scene_courante_id": "votes_jour_3_01",
+  "resume_public": "Victoire du Village au jour 3 : Marin, dernier Loup-Garou, a été éliminé par 6 voix contre 4 pour Jade. Neuf habitants survivent.",
+  "aide_mj_publique": "Partie terminée. Aucun nouveau vote ou nuit.",
+  "dernier_evenement_public": "Jour 3 : Marin révélé Loup-Garou et éliminé. Victoire définitive du Village.",
+  "scene_courante_id": "verdict_jour_3",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -117,12 +117,11 @@
   },
   "jour_en_cours": {
     "numero": 3,
-    "etape": "vote_ou_resolution",
-    "statut": "en_cours",
-    "vote_ouvert": true,
+    "etape": "termine",
+    "statut": "termine",
+    "vote_ouvert": false,
     "debats_ouverts": false,
     "attendre_intervention_joueur": false,
-    "attendre_vote_joueur": true,
     "votes_enregistres": [
       {
         "votant": "Jade",
@@ -159,13 +158,18 @@
       {
         "votant": "Iris",
         "cible": "Jade"
+      },
+      {
+        "votant": "Alex",
+        "cible": "Marin"
       }
     ],
-    "decompte_provisoire": {
-      "Marin": 5,
+    "decompte_final": {
+      "Marin": 6,
       "Jade": 4
     },
-    "verdict": "en_attente_vote_alex"
+    "verdict": "Marin",
+    "carte_revelee": "loup"
   },
   "nuit_en_cours": {
     "numero": 2,
@@ -192,6 +196,12 @@
       "role": "loup",
       "cause": "vote_jour_2",
       "jour": 2
+    },
+    {
+      "personnage": "Marin",
+      "role": "loup",
+      "cause": "vote_jour_3",
+      "jour": 3
     }
   ],
   "vivants": [
@@ -201,14 +211,14 @@
     "Alex",
     "Rose",
     "Clémence",
-    "Marin",
     "Mila",
     "Salomé",
     "Iris"
   ],
   "retire": [
     "Hugo",
-    "Inès"
+    "Inès",
+    "Marin"
   ],
   "capitaine": {
     "statut": "non_elu",
@@ -216,6 +226,26 @@
   },
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "debats_jour_3_01"
+    "dernier_lot": "verdict_jour_3"
+  },
+  "resultat": {
+    "vainqueur": "village",
+    "terminee": true,
+    "jour": 3,
+    "loups_elimines": [
+      "Inès",
+      "Marin"
+    ],
+    "survivants": [
+      "Jade",
+      "Léon",
+      "Baptiste",
+      "Alex",
+      "Rose",
+      "Clémence",
+      "Mila",
+      "Salomé",
+      "Iris"
+    ]
   }
 }

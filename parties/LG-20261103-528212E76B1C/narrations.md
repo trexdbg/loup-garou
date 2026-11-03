@@ -19,3 +19,7 @@ Le village se réveille : personne n'a disparu cette nuit. Les dix habitants se 
 ## Jour 3 — Marin sous pression
 
 Alex reproche à Marin d'avoir défendu Inès. Marin répond qu'il ne savait pas qu'elle était Loup-Garou. Jade insiste sur son ancien vote contre Baptiste, tandis qu'Iris s'étonne de sa certitude. Les neuf PNJ votent ; il manque encore le vote d'Alex pour connaître le résultat.
+
+## Jour 3 — Victoire du Village
+
+Alex vote Marin. Six voix le désignent contre quatre pour Jade. Marin retourne sa carte : Loup-Garou. C'était le dernier. Les neuf survivants remportent la partie, qui se termine ici.

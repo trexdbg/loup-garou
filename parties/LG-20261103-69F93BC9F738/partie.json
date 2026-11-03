@@ -6,9 +6,9 @@
   "statut": "en_cours",
   "phase": "nuit",
   "progression": {
-    "jour": 5,
-    "nuit": 5,
-    "scene": "nuit_5_choix_cible_alex"
+    "jour": 6,
+    "nuit": 6,
+    "scene": "nuit_6_choix_cible_alex"
   },
   "joueur": {
     "prenom": "Alex",
@@ -111,13 +111,15 @@
       "Iris",
       "Clémence",
       "Baptiste",
-      "Rose"
+      "Rose",
+      "Salomé",
+      "Jade"
     ]
   },
-  "resume_public": "Jour 5 : le second scrutin reproduit l'égalité Alex 2 voix, Jade 2 voix. Personne n'est éliminé, quatre habitants restent vivants : Alex, Jade, Salomé, Mila. La nuit 5 commence.",
-  "aide_mj_publique": "Conserver les quatre figurines. Nuit 5 : seul Alex est Loup-Garou encore vivant ; il participe au pouvoir nocturne habituel de la meute et choisit personnellement une victime parmi Jade, Salomé ou Mila. Aucun rôle autonome nocturne restant, pas de potion, pas de tir. Son pouvoir solitaire de Loup-Garou Blanc n'est pas disponible cette nuit impaire. Ne pas choisir à la place du joueur ; aucune synchronisation ni audio pendant la nuit.",
-  "dernier_evenement_public": "Jour 5 : deuxième égalité 2–2 Alex/Jade. Aucune élimination. Nuit 5, choix d'Alex attendu.",
-  "scene_courante_id": "verdict_jour_5",
+  "resume_public": "Jour 6 : après un débat entre Alex, Jade et Mila, Jade et Alex reçoivent respectivement deux voix et une voix. Jade est éliminée, sa carte Simple Villageois est dévoilée. Aucun effet supplémentaire. Alex et Mila sont les deux survivants. Aucune victoire ; nuit 6, choix nocturne d'Alex requis.",
+  "aide_mj_publique": "Retirer la figurine de Jade et révéler Simple Villageois. Il ne reste qu'Alex et Mila. La partie n'est pas gagnée : le Loup-Garou Blanc doit finir seul. Nuit 6 : demander explicitement le choix personnel d'Alex pour son attaque habituelle. Mila est l'unique cible possible ; ne pas décider à la place d'Alex. Aucun autre Loup ne peut être ciblé par le pouvoir solitaire du Blanc. Zéro audio, zéro commit intermédiaire pendant la nuit.",
+  "dernier_evenement_public": "Jour 6 : Jade éliminée par 2 voix contre 1 pour Alex, révélée Simple Villageois. Nuit 6 ouverte, Alex doit choisir la cible.",
+  "scene_courante_id": "verdict_jour_6",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -128,20 +130,16 @@
     "intervention_alex": "je suis daccord avec vous"
   },
   "jour_en_cours": {
-    "numero": 5,
+    "numero": 6,
     "etape": "termine",
     "statut": "termine",
     "vote_ouvert": false,
     "debats_ouverts": false,
     "attendre_intervention_joueur": false,
-    "intervention_joueur": "La décision est tres dur a prendre, je n'ai personne a voter",
+    "intervention_joueur": "C'est facile de m'accuser maintenant que Salomé n'est plus là pour se défendre. Et toi, Jade, pourquoi tu insistes autant ?",
     "votes_enregistres": [
       {
         "votant": "Jade",
-        "cible": "Alex"
-      },
-      {
-        "votant": "Salomé",
         "cible": "Alex"
       },
       {
@@ -153,93 +151,17 @@
         "cible": "Jade"
       }
     ],
-    "premier_scrutin": {
-      "votes": [
-        {
-          "votant": "Jade",
-          "cible": "Alex"
-        },
-        {
-          "votant": "Salomé",
-          "cible": "Alex"
-        },
-        {
-          "votant": "Mila",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Alex",
-          "cible": "Jade"
-        }
-      ],
-      "decompte": {
-        "Alex": 2,
-        "Jade": 2
-      },
-      "statut": "egalite",
-      "ex_aequo": [
-        "Alex",
-        "Jade"
-      ],
-      "vote_alex": "Jade"
-    },
-    "second_scrutin": {
-      "candidats": [
-        "Alex",
-        "Jade"
-      ],
-      "votes_pnj": [
-        {
-          "votant": "Jade",
-          "cible": "Alex"
-        },
-        {
-          "votant": "Salomé",
-          "cible": "Alex"
-        },
-        {
-          "votant": "Mila",
-          "cible": "Jade"
-        }
-      ],
-      "attendre_vote_alex": false,
-      "verdict": null,
-      "vote_alex": "Jade",
-      "votes": [
-        {
-          "votant": "Jade",
-          "cible": "Alex"
-        },
-        {
-          "votant": "Salomé",
-          "cible": "Alex"
-        },
-        {
-          "votant": "Mila",
-          "cible": "Jade"
-        },
-        {
-          "votant": "Alex",
-          "cible": "Jade"
-        }
-      ],
-      "decompte_final": {
-        "Alex": 2,
-        "Jade": 2
-      },
-      "statut": "egalite_definitive",
-      "aucune_elimination": true
+    "decompte_final": {
+      "Alex": 1,
+      "Jade": 2
     },
     "attendre_vote_alex": false,
-    "verdict": null,
-    "aucune_elimination": true,
-    "motif_verdict": "egalite_persistante_second_scrutin",
-    "cartes_revelees": []
+    "verdict": "Jade",
+    "carte_revelee": "villageois",
+    "aucun_effet_supplementaire": true
   },
   "vivants": [
     "Alex",
-    "Jade",
-    "Salomé",
     "Mila"
   ],
   "retire": [
@@ -250,7 +172,9 @@
     "Iris",
     "Clémence",
     "Baptiste",
-    "Rose"
+    "Rose",
+    "Salomé",
+    "Jade"
   ],
   "roles_reveles_publics": [
     {
@@ -300,18 +224,34 @@
       "role": "sorciere",
       "cause": "mort_amoureuse",
       "jour": 5
+    },
+    {
+      "personnage": "Salomé",
+      "role": "villageois",
+      "cause": "attaque_nocturne",
+      "jour": 6
+    },
+    {
+      "personnage": "Jade",
+      "role": "villageois",
+      "cause": "vote_jour_6",
+      "jour": 6
     }
   ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "verdict_jour_5",
+    "dernier_lot": "verdict_jour_6",
     "generation_effectuee": false
   },
   "nuit_en_cours": {
-    "numero": 5,
+    "numero": 6,
     "statut": "en_cours",
     "actions_resolues": [],
     "attendre_action_joueur": "choix_cible_meute_alex",
-    "victimes_confirmees": []
+    "victimes_confirmees": [],
+    "cibles_possibles": [
+      "Mila"
+    ],
+    "loup_blanc_solitaire_autre_loup_vivant": false
   }
 }

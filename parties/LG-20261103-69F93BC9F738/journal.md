@@ -123,3 +123,25 @@
 - Aucun personnage éliminé, aucune carte retournée, aucun effet de rôle et aucune victoire.
 - Quatre survivants : Alex, Jade, Salomé, Mila.
 - Début de la nuit 5 : l'unique Loup survivant Alex devra désigner une cible. Aucun audio ni synchronisation intermédiaire pendant la nuit.
+
+## Nuit 5 — Bilan public
+
+- Salomé (Simple Villageois) est la seule victime.
+- Aucun autre pouvoir ni décès.
+- Survivants : Alex, Jade, Mila. Aucune victoire.
+- Pas de commit ni audio pendant la nuit.
+
+## Réveil — Jour 6
+
+- Jade et Mila réagissent, en attente d'Alex avant le scrutin.
+
+## Jour 6 — Intervention et verdict
+
+- Alex : « C'est facile de m'accuser maintenant que Salomé n'est plus là pour se défendre. Et toi, Jade, pourquoi tu insistes autant ? ».
+- Jade rappelle que Salomé partageait ses soupçons contre Alex ; Mila se méfie de la certitude de Jade.
+- Votes PNJ : Jade → Alex ; Mila → Jade.
+- Alex vote Jade.
+- Décompte final : Jade 2 voix, Alex 1 voix (3 votants).
+- Jade éliminée ; sa carte révèle Simple Villageois. Aucun effet de rôle supplémentaire.
+- Deux survivants : Alex, Mila. Pas de victoire (le Blanc ne se retrouve pas seul).
+- Début de la nuit 6 : choix personnel de l'attaque d'Alex en attente. Aucune résolution nocturne, aucun audio ni commit intermédiaire.

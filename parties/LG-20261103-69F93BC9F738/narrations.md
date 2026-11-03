@@ -59,3 +59,11 @@ Alex vote Jade. Le résultat est partagé : Alex 2 voix, Jade 2 voix. Sans Capit
 ## Jour 5 — Verdict définitif
 
 Alex vote Jade au second scrutin. Jade recueille deux voix et Alex deux : l'égalité persiste. Personne n'est éliminé, aucune carte révélée et aucun pouvoir de mort déclenché. Alex, Jade, Salomé et Mila s'endorment pour la nuit 5.
+
+## Réveil — Jour 6
+
+Salomé a disparu. Sa carte révèle Simple Villageois. Trois survivants : Alex, Jade et Mila. Jade et Mila réagissent avant l'intervention d'Alex. Aucune victoire.
+
+## Jour 6 — Débats et verdict
+
+Alex déclare : « C'est facile de m'accuser maintenant que Salomé n'est plus là pour se défendre. Et toi, Jade, pourquoi tu insistes autant ? ». Jade le soupçonne depuis les votes contre Clémence et la mort de Salomé ; Mila hésite et doute des certitudes de Jade. Votes : Jade contre Alex, Mila contre Jade, Alex contre Jade. Jade reçoit deux voix, Alex une. Jade est éliminée : sa carte révèle Simple Villageois. Aucun effet de rôle supplémentaire. Alex et Mila restent vivants. Pas de victoire ; ils s'endorment pour la nuit 6, en attente d'une décision nocturne d'Alex.

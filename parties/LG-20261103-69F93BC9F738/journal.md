@@ -145,3 +145,12 @@
 - Jade éliminée ; sa carte révèle Simple Villageois. Aucun effet de rôle supplémentaire.
 - Deux survivants : Alex, Mila. Pas de victoire (le Blanc ne se retrouve pas seul).
 - Début de la nuit 6 : choix personnel de l'attaque d'Alex en attente. Aucune résolution nocturne, aucun audio ni commit intermédiaire.
+
+## Nuit 6 — Fin de partie
+
+- Alex, dernier Loup-Garou Blanc vivant, choisit explicitement Mila comme cible de son attaque nocturne habituelle.
+- Mila meurt. Sa carte révèle Cupidon, pouvoir déjà utilisé ; les amoureux Rose et Baptiste sont morts, aucun effet supplémentaire.
+- Les autres rôles nocturnes actifs sont éliminés. Le pouvoir spécial du Blanc ne peut plus viser de Loup ordinaire.
+- Survivant unique : Alex. Sa carte Loup-Garou Blanc est dévoilée.
+- **Victoire solitaire d'Alex. Partie terminée au réveil suivant la nuit 6.**
+- Aucun audio ni archivage intermédiaire pendant la nuit.

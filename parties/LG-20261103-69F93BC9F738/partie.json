@@ -3,12 +3,12 @@
   "schema_version": 2,
   "titre": "Les douze à la lisière du bois",
   "cree_le": "2026-11-03T18:33:55.056Z",
-  "statut": "en_cours",
-  "phase": "nuit",
+  "statut": "terminee",
+  "phase": "terminee",
   "progression": {
-    "jour": 6,
+    "jour": 7,
     "nuit": 6,
-    "scene": "nuit_6_choix_cible_alex"
+    "scene": "victoire_loup_blanc_nuit_6"
   },
   "joueur": {
     "prenom": "Alex",
@@ -113,13 +113,14 @@
       "Baptiste",
       "Rose",
       "Salomé",
-      "Jade"
+      "Jade",
+      "Mila"
     ]
   },
-  "resume_public": "Jour 6 : après un débat entre Alex, Jade et Mila, Jade et Alex reçoivent respectivement deux voix et une voix. Jade est éliminée, sa carte Simple Villageois est dévoilée. Aucun effet supplémentaire. Alex et Mila sont les deux survivants. Aucune victoire ; nuit 6, choix nocturne d'Alex requis.",
-  "aide_mj_publique": "Retirer la figurine de Jade et révéler Simple Villageois. Il ne reste qu'Alex et Mila. La partie n'est pas gagnée : le Loup-Garou Blanc doit finir seul. Nuit 6 : demander explicitement le choix personnel d'Alex pour son attaque habituelle. Mila est l'unique cible possible ; ne pas décider à la place d'Alex. Aucun autre Loup ne peut être ciblé par le pouvoir solitaire du Blanc. Zéro audio, zéro commit intermédiaire pendant la nuit.",
-  "dernier_evenement_public": "Jour 6 : Jade éliminée par 2 voix contre 1 pour Alex, révélée Simple Villageois. Nuit 6 ouverte, Alex doit choisir la cible.",
-  "scene_courante_id": "verdict_jour_6",
+  "resume_public": "Fin de la partie : après la nuit 6, Mila est éliminée, sa carte Cupidon est révélée. Alex est le seul survivant et révèle sa carte Loup-Garou Blanc. Victoire solitaire d'Alex.",
+  "aide_mj_publique": "Partie terminée. Révéler Mila (Cupidon), puis Alex (Loup-Garou Blanc). Aucun nouveau vote ni tour nocturne.",
+  "dernier_evenement_public": "Victoire du Loup-Garou Blanc Alex, seul survivant après la mort de Mila en nuit 6.",
+  "scene_courante_id": "victoire_loup_blanc_nuit_6",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -161,8 +162,7 @@
     "aucun_effet_supplementaire": true
   },
   "vivants": [
-    "Alex",
-    "Mila"
+    "Alex"
   ],
   "retire": [
     "Marin",
@@ -174,7 +174,8 @@
     "Baptiste",
     "Rose",
     "Salomé",
-    "Jade"
+    "Jade",
+    "Mila"
   ],
   "roles_reveles_publics": [
     {
@@ -236,22 +237,56 @@
       "role": "villageois",
       "cause": "vote_jour_6",
       "jour": 6
+    },
+    {
+      "personnage": "Mila",
+      "role": "cupidon",
+      "cause": "attaque_nocturne",
+      "jour": 7
+    },
+    {
+      "personnage": "Alex",
+      "role": "blanc",
+      "cause": "victoire",
+      "jour": 7
     }
   ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "verdict_jour_6",
+    "dernier_lot": "victoire_loup_blanc_nuit_6",
     "generation_effectuee": false
   },
   "nuit_en_cours": {
     "numero": 6,
-    "statut": "en_cours",
-    "actions_resolues": [],
-    "attendre_action_joueur": "choix_cible_meute_alex",
-    "victimes_confirmees": [],
-    "cibles_possibles": [
+    "statut": "resolue",
+    "actions_resolues": [
+      "attaque_meute",
+      "verif_autres_roles",
+      "pouvoir_blanc_sans_autre_loup",
+      "verif_victoire",
+      "revelation_fin"
+    ],
+    "victimes_confirmees": [
       "Mila"
     ],
-    "loup_blanc_solitaire_autre_loup_vivant": false
+    "cible_meute": "Mila",
+    "attendre_action_joueur": null,
+    "effets_supplementaires": []
+  },
+  "resultat": {
+    "vainqueur": "loup_blanc",
+    "gagnant": "Alex",
+    "terminee": true,
+    "jour": 7,
+    "nuit": 6,
+    "loups_elimines": [
+      "Léon",
+      "Clémence"
+    ],
+    "survivants": [
+      "Alex"
+    ],
+    "derniere_victime": "Mila",
+    "condition_victoire": "Loup-Garou Blanc seul survivant"
   }
 }

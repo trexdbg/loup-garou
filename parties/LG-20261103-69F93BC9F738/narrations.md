@@ -67,3 +67,7 @@ Salomé a disparu. Sa carte révèle Simple Villageois. Trois survivants : Alex,
 ## Jour 6 — Débats et verdict
 
 Alex déclare : « C'est facile de m'accuser maintenant que Salomé n'est plus là pour se défendre. Et toi, Jade, pourquoi tu insistes autant ? ». Jade le soupçonne depuis les votes contre Clémence et la mort de Salomé ; Mila hésite et doute des certitudes de Jade. Votes : Jade contre Alex, Mila contre Jade, Alex contre Jade. Jade reçoit deux voix, Alex une. Jade est éliminée : sa carte révèle Simple Villageois. Aucun effet de rôle supplémentaire. Alex et Mila restent vivants. Pas de victoire ; ils s'endorment pour la nuit 6, en attente d'une décision nocturne d'Alex.
+
+## Réveil final, après la nuit 6 — Victoire du Loup-Garou Blanc
+
+Alex a attaqué Mila pendant la nuit 6. Au matin, sa carte Cupidon est révélée ; son pouvoir avait déjà été joué et les amoureux Rose et Baptiste sont morts. La seule figurine restante est Alex. Sa carte est révélée : Loup-Garou Blanc. **Victoire solitaire d'Alex — fin de partie.**

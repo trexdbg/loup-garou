@@ -1,0 +1,149 @@
+{
+  "id": "LG-20261103-69F93BC9F738",
+  "schema_version": 2,
+  "titre": "Les douze à la lisière du bois",
+  "cree_le": "2026-11-03T18:33:55.056Z",
+  "statut": "en_cours",
+  "phase": "tour_de_table",
+  "progression": {
+    "jour": 1,
+    "nuit": 0,
+    "scene": "tour_de_table_01"
+  },
+  "joueur": {
+    "prenom": "Alex",
+    "age": 10
+  },
+  "personnages_pnj": [
+    {
+      "prenom": "Rose",
+      "caractere": "Calme et observatrice",
+      "voix_phonon": "Noémie",
+      "voix_id_phonon": "FXxJ9mANRq6BCTX5"
+    },
+    {
+      "prenom": "Salomé",
+      "caractere": "Courageuse et directe",
+      "voix_phonon": "Coralie",
+      "voix_id_phonon": "ZeSg853xFACESHHI"
+    },
+    {
+      "prenom": "Inès",
+      "caractere": "Prudente et diplomate",
+      "voix_phonon": "Tiphaine",
+      "voix_id_phonon": "0fvH6XAKvA748v2v"
+    },
+    {
+      "prenom": "Jade",
+      "caractere": "Malicieuse et réfléchie",
+      "voix_phonon": "Maëlys",
+      "voix_id_phonon": "s048cR1l2Jmu4k3B"
+    },
+    {
+      "prenom": "Mila",
+      "caractere": "Spontanée et curieuse",
+      "voix_phonon": "Orianne",
+      "voix_id_phonon": "TUk4X11S6UytB3G6"
+    },
+    {
+      "prenom": "Clémence",
+      "caractere": "Discrète et analytique",
+      "voix_phonon": "Solène",
+      "voix_id_phonon": "YhIHaAfQ0cQPDV9R"
+    },
+    {
+      "prenom": "Iris",
+      "caractere": "Franche et intuitive",
+      "voix_phonon": "Ninon",
+      "voix_id_phonon": "qtPlUYAZ4EJDuWMm"
+    },
+    {
+      "prenom": "Hugo",
+      "caractere": "Impulsif et accusateur",
+      "voix_phonon": "Augustin",
+      "voix_id_phonon": "Tek4tJXiX6_yvXq7"
+    },
+    {
+      "prenom": "Marin",
+      "caractere": "Souriant et persuasif",
+      "voix_phonon": "Arnaud",
+      "voix_id_phonon": "aXMVwiUhITMrwPzd"
+    },
+    {
+      "prenom": "Baptiste",
+      "caractere": "Bavard et maladroit",
+      "voix_phonon": "Jules",
+      "voix_id_phonon": "YKeBw3OV1RgpdhLh"
+    },
+    {
+      "prenom": "Léon",
+      "caractere": "Protecteur et loyal",
+      "voix_phonon": "Lucien",
+      "voix_id_phonon": "LIv4NaG8ay4Mhqtd"
+    }
+  ],
+  "placement_table": {
+    "type": "circulaire",
+    "sens": "horaire",
+    "depart": "12h",
+    "ordre": [
+      "Alex",
+      "Iris",
+      "Baptiste",
+      "Rose",
+      "Marin",
+      "Jade",
+      "Léon",
+      "Salomé",
+      "Clémence",
+      "Hugo",
+      "Mila",
+      "Inès"
+    ],
+    "statut": "valide",
+    "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous",
+    "valide_par_mj": true,
+    "retire": []
+  },
+  "resume_public": "Jour 1 : les douze habitants se sont rassemblés à la lisière de la forêt. Quatre personnages se présentent et attendent la première intervention d'Alex. Pas de vote au jour 1.",
+  "aide_mj_publique": "Écouter les présentations si l'audio est disponible. Faire intervenir Alex UNE fois, puis lancer la nuit 1 sans vote. Les PNJ agiront automatiquement ; ne s'arrêter que pour les choix d'Alex.",
+  "dernier_evenement_public": "Jour 1 : le tour de table commence, Alex doit prendre la parole.",
+  "scene_courante_id": "tour_de_table_01",
+  "tour_de_table": {
+    "statut": "en_cours",
+    "jour": 1,
+    "dernier_echange": "tour_de_table_01",
+    "dialogues_enregistres": 4,
+    "attendre_reponse_alex": true,
+    "termine_sans_vote": false
+  },
+  "jour_en_cours": {
+    "numero": 1,
+    "etape": "presentation",
+    "statut": "en_cours",
+    "vote_ouvert": false,
+    "debats_ouverts": true,
+    "attendre_intervention_joueur": true,
+    "votes_enregistres": []
+  },
+  "vivants": [
+    "Alex",
+    "Iris",
+    "Baptiste",
+    "Rose",
+    "Marin",
+    "Jade",
+    "Léon",
+    "Salomé",
+    "Clémence",
+    "Hugo",
+    "Mila",
+    "Inès"
+  ],
+  "retire": [],
+  "roles_reveles_publics": [],
+  "audio": {
+    "lecture_automatique": false,
+    "dernier_lot": "tour_de_table_01"
+  }
+}

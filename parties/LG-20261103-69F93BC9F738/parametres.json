@@ -1,0 +1,223 @@
+{
+  "schema_version": 2,
+  "id": "LG-20261103-69F93BC9F738",
+  "cree_le": "2026-11-03T18:33:55.056Z",
+  "statut": "en_cours",
+  "source": "Thiercelieux Solo / configurateur GitHub Pages",
+  "fonctionnement": {
+    "jeu": "ChatGPT dans le projet Loup garou",
+    "arbitre": "maitre_du_jeu_humain",
+    "joueurs_humains": 1,
+    "pnjs_joues_par": "ChatGPT",
+    "depot_archive": "trexdbg/loup-garou",
+    "application": "configuration et consultation exclusivement"
+  },
+  "joueur": {
+    "prenom": "Alex",
+    "age": 10,
+    "role": {
+      "attribution": "choix_fixe",
+      "id": "blanc",
+      "secret_vis_a_vis_du_public": true
+    }
+  },
+  "aventure": {
+    "scenario": "originale",
+    "connaissance_loups_initiale": true,
+    "objectif_principal": "identifier_les_loups_par_dialogues_pouvoirs_et_votes",
+    "enigme_annexe_par_defaut": false,
+    "scenario_reference": null,
+    "titre_libre": null,
+    "duree_minutes": 45,
+    "pnj_nombre": 11,
+    "casting_pnj": [
+      {
+        "prenom": "Rose",
+        "caractere": "Calme et observatrice",
+        "voix_phonon": "Noémie",
+        "voix_id_phonon": "FXxJ9mANRq6BCTX5"
+      },
+      {
+        "prenom": "Salomé",
+        "caractere": "Courageuse et directe",
+        "voix_phonon": "Coralie",
+        "voix_id_phonon": "ZeSg853xFACESHHI"
+      },
+      {
+        "prenom": "Inès",
+        "caractere": "Prudente et diplomate",
+        "voix_phonon": "Tiphaine",
+        "voix_id_phonon": "0fvH6XAKvA748v2v"
+      },
+      {
+        "prenom": "Jade",
+        "caractere": "Malicieuse et réfléchie",
+        "voix_phonon": "Maëlys",
+        "voix_id_phonon": "s048cR1l2Jmu4k3B"
+      },
+      {
+        "prenom": "Mila",
+        "caractere": "Spontanée et curieuse",
+        "voix_phonon": "Orianne",
+        "voix_id_phonon": "TUk4X11S6UytB3G6"
+      },
+      {
+        "prenom": "Clémence",
+        "caractere": "Discrète et analytique",
+        "voix_phonon": "Solène",
+        "voix_id_phonon": "YhIHaAfQ0cQPDV9R"
+      },
+      {
+        "prenom": "Iris",
+        "caractere": "Franche et intuitive",
+        "voix_phonon": "Ninon",
+        "voix_id_phonon": "qtPlUYAZ4EJDuWMm"
+      },
+      {
+        "prenom": "Hugo",
+        "caractere": "Impulsif et accusateur",
+        "voix_phonon": "Augustin",
+        "voix_id_phonon": "Tek4tJXiX6_yvXq7"
+      },
+      {
+        "prenom": "Marin",
+        "caractere": "Souriant et persuasif",
+        "voix_phonon": "Arnaud",
+        "voix_id_phonon": "aXMVwiUhITMrwPzd"
+      },
+      {
+        "prenom": "Baptiste",
+        "caractere": "Bavard et maladroit",
+        "voix_phonon": "Jules",
+        "voix_id_phonon": "YKeBw3OV1RgpdhLh"
+      },
+      {
+        "prenom": "Léon",
+        "caractere": "Protecteur et loyal",
+        "voix_phonon": "Lucien",
+        "voix_id_phonon": "LIv4NaG8ay4Mhqtd"
+      }
+    ],
+    "narrateur": {
+      "prenom": "Narrateur",
+      "voix_phonon": "Marius",
+      "voix_id_phonon": "biuhvu17TxVKOcyy"
+    },
+    "catalogue_voix": "voices/phonon-fr.json",
+    "regle_camp_voix": "Les personnages et leurs voix restent stables; les rôles sont tirés par partie.",
+    "monde": "foret",
+    "ambiance": "mixte",
+    "theme_personnalise": null,
+    "mystere": 5,
+    "humour": 5,
+    "difficulte_enquete": 5,
+    "frayeur": 5,
+    "violence_graphique": false,
+    "narration_adaptee_a_l_age": true
+  },
+  "roles": {
+    "mode": "avance",
+    "liste_personnalisee": true,
+    "niveau": 2,
+    "autorises": [
+      "villageois",
+      "loup",
+      "voyante",
+      "sorciere",
+      "chasseur",
+      "cupidon",
+      "blanc"
+    ],
+    "loup_garou_nombre_cible": 2,
+    "respecter_les_cartes_et_leurs_pouvoirs": true,
+    "variantes_et_compatibilite": "Arbitrer les interactions complexes avec le MJ. Ne pas inventer le pouvoir officiel d'une carte.",
+    "capitaine": false,
+    "amoureux_cupidon": true,
+    "evenements_nouvelle_lune": false,
+    "batiments_metiers_le_village": false
+  },
+  "placement_table": {
+    "type": "circulaire",
+    "sens": "horaire",
+    "depart": "12h",
+    "ordre": [
+      "Alex",
+      "Iris",
+      "Baptiste",
+      "Rose",
+      "Marin",
+      "Jade",
+      "Léon",
+      "Salomé",
+      "Clémence",
+      "Hugo",
+      "Mila",
+      "Inès"
+    ],
+    "statut": "valide",
+    "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous",
+    "valide_par_mj": true
+  },
+  "rythme": {
+    "phases": [
+      "prologue",
+      "village_s_endort",
+      "appels_nocturnes",
+      "village_se_reveille",
+      "dialogues_et_enquete",
+      "vote_ou_resolution",
+      "suite_validee_par_mj"
+    ],
+    "appel_roles_nocturnes": "officiel_adapte",
+    "duree_nuit_cible_minutes": 3,
+    "pause_entre_les_scenes": false,
+    "improvisation_libre": true
+  },
+  "assistant_mj": {
+    "mode": "copilote_du_mj",
+    "decision_finale": "MJ_humain",
+    "rappels_regles_et_ordre_pouvoirs": true,
+    "aides_indices": true,
+    "suggestions_relance": true,
+    "conseils_separes_des_dialogues": true,
+    "jamais_reveler_secrets_sans_validation": true,
+    "instructions_privees": "Les secrets validés du MJ peuvent être archivés dans secrets_mj.json sur GitHub public. Ne jamais les révéler dans les scènes destinées au joueur sans validation du MJ."
+  },
+  "media": {
+    "illustrations_cartes_authentiques_si_disponibles": true,
+    "textes_de_narration": true,
+    "indications_audio": true,
+    "synthese_vocale_si_disponible": true,
+    "fichiers_generes_ephemeres": true
+  },
+  "publication": {
+    "git_public": true,
+    "chemin": "parties/LG-20261103-69F93BC9F738",
+    "index": "parties/index.json",
+    "secrets_mj": "secrets_mj.json (fichier public sur GitHub, réservé à l’usage du MJ dans l’interface)",
+    "fichiers_publics": [
+      "parametres.json",
+      "partie.json",
+      "secrets_mj.json",
+      "narrations.md",
+      "journal.md",
+      "dialogues.ndjson"
+    ],
+    "acces_application": "lecture_seule"
+  },
+  "premiere_execution": {
+    "attendre_validation_roles_et_placement_lego_avant_creation_du_prologue": true,
+    "cree_uniquement": [
+      "dossier_de_partie",
+      "parametres.json",
+      "partie.json_public",
+      "secrets_mj.json_apres_validation",
+      "prologue_seulement",
+      "journal_initial",
+      "index_json"
+    ],
+    "ne_pas_generer_les_scenes_suivantes": true,
+    "attendre_validation_mj_apres_prologue": false,
+    "ne_pas_simuler_les_decisions_du_joueur": true
+  }
+}

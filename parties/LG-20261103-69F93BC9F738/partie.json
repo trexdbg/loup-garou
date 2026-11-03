@@ -4,11 +4,11 @@
   "titre": "Les douze à la lisière du bois",
   "cree_le": "2026-11-03T18:33:55.056Z",
   "statut": "en_cours",
-  "phase": "jour",
+  "phase": "nuit",
   "progression": {
     "jour": 4,
-    "nuit": 3,
-    "scene": "reveil_jour_4"
+    "nuit": 4,
+    "scene": "nuit_4_choix_meute"
   },
   "joueur": {
     "prenom": "Alex",
@@ -110,10 +110,10 @@
       "Inès"
     ]
   },
-  "resume_public": "Jour 4 : Inès a disparu pendant la nuit 3. Sa carte révèle Voyante. Huit habitants restent vivants. Jade, Iris et Clémence réagissent ; Alex doit prendre la parole avant le scrutin.",
-  "aide_mj_publique": "Retirer la figurine d'Inès et retourner sa carte de Voyante. Présenter trois réactions PNJ, demander une seule intervention d'Alex, faire voter les sept PNJ, puis demander le vote d'Alex avant verdict. Aucun audio généré.",
-  "dernier_evenement_public": "Réveil du jour 4 : Inès éliminée par les Loups-Garous, carte Voyante révélée. Huit survivants.",
-  "scene_courante_id": "reveil_jour_4",
+  "resume_public": "Jour 4 : égalité à 3 voix entre Clémence et Jade au premier scrutin, Rose obtient 2 voix. Au second scrutin, Alex vote Clémence : nouvelle égalité à 4 contre 4. Sans Capitaine, personne n'est éliminé. Les huit habitants restent en vie et le village s'endort pour la nuit 4.",
+  "aide_mj_publique": "Jour 4 terminé : aucune figurine retirée. Nuit 4 en cours : Alex doit choisir la victime de la meute parmi les six autres habitants. Après ce choix, l'appeler séparément pour son pouvoir de Loup-Garou Blanc, disponible cette nuit. Aucun audio ni synchronisation intermédiaire pendant la nuit.",
+  "dernier_evenement_public": "Jour 4 : deuxième égalité Clémence 4, Jade 4 ; aucun éliminé, huit vivants. Nuit 4.",
+  "scene_courante_id": "verdict_jour_4",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -125,12 +125,176 @@
   },
   "jour_en_cours": {
     "numero": 4,
-    "etape": "debats",
-    "statut": "en_cours",
+    "etape": "termine",
+    "statut": "termine",
     "vote_ouvert": false,
-    "debats_ouverts": true,
-    "attendre_intervention_joueur": true,
-    "votes_enregistres": []
+    "debats_ouverts": false,
+    "attendre_intervention_joueur": false,
+    "intervention_joueur": "ah bah bravo les loup garou, vous avez vu ce que vou savez fait! c'est l'un des personnage les plus important du village",
+    "votes_enregistres": [
+      {
+        "votant": "Iris",
+        "cible": "Clémence"
+      },
+      {
+        "votant": "Baptiste",
+        "cible": "Jade"
+      },
+      {
+        "votant": "Rose",
+        "cible": "Clémence"
+      },
+      {
+        "votant": "Jade",
+        "cible": "Clémence"
+      },
+      {
+        "votant": "Salomé",
+        "cible": "Rose"
+      },
+      {
+        "votant": "Clémence",
+        "cible": "Rose"
+      },
+      {
+        "votant": "Mila",
+        "cible": "Jade"
+      },
+      {
+        "votant": "Alex",
+        "cible": "Jade"
+      }
+    ],
+    "premier_scrutin": {
+      "votes": [
+        {
+          "votant": "Iris",
+          "cible": "Clémence"
+        },
+        {
+          "votant": "Baptiste",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Rose",
+          "cible": "Clémence"
+        },
+        {
+          "votant": "Jade",
+          "cible": "Clémence"
+        },
+        {
+          "votant": "Salomé",
+          "cible": "Rose"
+        },
+        {
+          "votant": "Clémence",
+          "cible": "Rose"
+        },
+        {
+          "votant": "Mila",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Alex",
+          "cible": "Jade"
+        }
+      ],
+      "decompte": {
+        "Clémence": 3,
+        "Jade": 3,
+        "Rose": 2
+      },
+      "statut": "egalite",
+      "ex_aequo": [
+        "Clémence",
+        "Jade"
+      ]
+    },
+    "second_scrutin": {
+      "candidats": [
+        "Clémence",
+        "Jade"
+      ],
+      "votes_pnj": [
+        {
+          "votant": "Iris",
+          "cible": "Clémence"
+        },
+        {
+          "votant": "Baptiste",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Rose",
+          "cible": "Clémence"
+        },
+        {
+          "votant": "Jade",
+          "cible": "Clémence"
+        },
+        {
+          "votant": "Salomé",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Clémence",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Mila",
+          "cible": "Jade"
+        }
+      ],
+      "attendre_vote_alex": false,
+      "verdict": null,
+      "vote_alex": "Clémence",
+      "votes": [
+        {
+          "votant": "Iris",
+          "cible": "Clémence"
+        },
+        {
+          "votant": "Baptiste",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Rose",
+          "cible": "Clémence"
+        },
+        {
+          "votant": "Jade",
+          "cible": "Clémence"
+        },
+        {
+          "votant": "Salomé",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Clémence",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Mila",
+          "cible": "Jade"
+        },
+        {
+          "votant": "Alex",
+          "cible": "Clémence"
+        }
+      ],
+      "decompte_final": {
+        "Clémence": 4,
+        "Jade": 4
+      },
+      "statut": "egalite_definitive",
+      "aucune_elimination": true
+    },
+    "attendre_vote_alex": false,
+    "verdict": null,
+    "aucune_elimination": true,
+    "motif_verdict": "egalite_persistante_au_second_scrutin",
+    "cartes_revelees": []
   },
   "vivants": [
     "Alex",
@@ -176,26 +340,14 @@
   ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "reveil_jour_4",
+    "dernier_lot": "verdict_jour_4",
     "generation_effectuee": false
   },
   "nuit_en_cours": {
-    "numero": 3,
-    "statut": "resolue",
-    "actions_resolues": [
-      "voyante_observation",
-      "meute_attaque",
-      "loup_blanc_non_actif",
-      "sorciere_decision",
-      "effets_amoureux",
-      "effet_chasseur",
-      "verification_victoire",
-      "reveil_village"
-    ],
-    "attendre_action_joueur": null,
-    "victimes_confirmees": [
-      "Inès"
-    ],
-    "cible_meute": "Inès"
+    "numero": 4,
+    "statut": "en_cours",
+    "actions_resolues": [],
+    "attendre_action_joueur": "choix_cible_meute",
+    "victimes_confirmees": []
   }
 }

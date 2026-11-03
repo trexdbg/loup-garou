@@ -35,3 +35,11 @@ Alex vote contre Léon. Cinq voix contre lui, trois pour Inès et deux pour Jade
 ## Réveil — Jour 4
 
 Le village constate qu'Inès manque à l'appel. Sa carte est révélée : Voyante. Huit habitants restent en vie. Jade se rappelle qu'Inès avait eu raison sur Léon ; Iris mesure la gravité de la perte de la Voyante ; Clémence appelle à la prudence. Alex peut intervenir une fois avant les votes.
+
+## Jour 4 — Égalité et second scrutin
+
+Alex s'indigne de la mort d'Inès. Les habitants confrontent les votes précédents de Léon, Rose et Clémence. Alex vote Jade au premier scrutin. Clémence et Jade recueillent trois voix chacune, Rose deux. Comme la partie ne prévoit aucun Capitaine, le village procède à un second vote réservé à Clémence et Jade. Les sept autres votent, puis attendent la nouvelle voix d'Alex. Aucun verdict n'est prononcé.
+
+## Jour 4 — Égalité définitive
+
+Alex vote Clémence au second scrutin. Clémence et Jade recueillent quatre voix chacune. Le second vote ne départage personne : aucune élimination, aucune carte retournée. Les huit habitants s'endorment pour la nuit 4.

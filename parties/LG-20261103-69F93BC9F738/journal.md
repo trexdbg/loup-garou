@@ -69,3 +69,25 @@
 - Jade rappelle qu'Inès avait vu juste au sujet de Léon. Iris déplore la disparition de la Voyante. Clémence appelle à la prudence.
 - Une intervention d'Alex est attendue avant de faire voter les sept PNJ.
 - Aucun vote du jour 4 encore enregistré.
+
+## Jour 4 — Débats et scrutin initial
+
+- Alex déclare : « ah bah bravo les loup garou, vous avez vu ce que vou savez fait! c'est l'un des personnage les plus important du village ».
+- Iris, Rose, Clémence, Jade et Salomé réagissent aux votes du jour 3 contre Inès.
+- Votes PNJ du premier scrutin : Iris → Clémence; Baptiste → Jade; Rose → Clémence; Jade → Clémence; Salomé → Rose; Clémence → Rose; Mila → Jade.
+- Alex vote Jade. Résultat : Clémence 3, Jade 3, Rose 2.
+- Pas de Capitaine, pas de Bouc Émissaire : second scrutin entre Clémence et Jade, sans élimination immédiate.
+
+## Jour 4 — Départage en attente
+
+- Votes PNJ du second scrutin : Iris → Clémence; Baptiste → Jade; Rose → Clémence; Jade → Clémence; Salomé → Jade; Clémence → Jade; Mila → Jade.
+- Décompte provisoire : Jade 4, Clémence 3. Vote de départage d'Alex requis.
+- Aucun personnage éliminé, aucune victoire, pas de nuit 4 lancée.
+
+## Jour 4 — Verdict final du départage
+
+- Alex vote Clémence au second scrutin, après son premier vote contre Jade.
+- Décompte final du second scrutin : Clémence 4, Jade 4 (8 votants).
+- Nouvelle égalité sans Capitaine : aucune élimination ni révélation de carte ; aucun effet amoureux ou de Chasseur.
+- Toujours 8 vivants et aucune condition de victoire remplie.
+- Nuit 4 ouverte, en attente du choix d'Alex pour la meute ; pas de décision nocturne ni audio, ni commit intermédiaire.

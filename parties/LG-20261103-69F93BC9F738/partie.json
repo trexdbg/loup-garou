@@ -4,11 +4,11 @@
   "titre": "Les douze à la lisière du bois",
   "cree_le": "2026-11-03T18:33:55.056Z",
   "statut": "en_cours",
-  "phase": "nuit",
+  "phase": "vote_ou_resolution",
   "progression": {
-    "jour": 2,
+    "jour": 3,
     "nuit": 2,
-    "scene": "nuit_2_choix_meute"
+    "scene": "votes_jour_3_01"
   },
   "joueur": {
     "prenom": "Alex",
@@ -108,10 +108,10 @@
       "Hugo"
     ]
   },
-  "resume_public": "Jour 2 : Alex est resté silencieux, puis a voté Hugo. Hugo est éliminé avec 5 voix contre 4 pour Léon, 1 pour Jade et 1 pour Alex. Sa carte révèle Simple Villageois. Dix habitants vivent encore. Le village s'endort.",
-  "aide_mj_publique": "Jour 2 terminé : Hugo retiré, sa carte révélée. Nuit 2 en cours sans dialogue, audio ni GitHub. Seul Alex doit décider de la cible de la meute puis, à son tour, de son pouvoir spécial de Loup-Garou Blanc.",
-  "dernier_evenement_public": "Jour 2 : Hugo éliminé par 5 voix et révélé Simple Villageois. Nuit 2 commencée.",
-  "scene_courante_id": "verdict_jour_2",
+  "resume_public": "Jour 3 : aucune victime pendant la nuit 2. Alex soutient la question de Jade sur Léon, tout en demandant plus de preuves. Les neuf PNJ ont voté ; seul le vote d'Alex manque avant le verdict.",
+  "aide_mj_publique": "Demander seulement le vote d'Alex parmi les neuf autres survivants. Les neuf votes PNJ sont fixés et archivés, ne pas les modifier. Aucun verdict ni passage à la nuit avant son vote.",
+  "dernier_evenement_public": "Jour 3 : intervention d'Alex et neuf votes PNJ archivés ; vote d'Alex attendu, aucun verdict.",
+  "scene_courante_id": "votes_jour_3_01",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -122,13 +122,13 @@
     "intervention_alex": "je suis daccord avec vous"
   },
   "jour_en_cours": {
-    "numero": 2,
-    "etape": "termine",
-    "statut": "termine",
-    "vote_ouvert": false,
+    "numero": 3,
+    "etape": "vote_joueur_en_attente",
+    "statut": "en_cours",
+    "vote_ouvert": true,
     "debats_ouverts": false,
     "attendre_intervention_joueur": false,
-    "intervention_joueur": "alex ne dit rien",
+    "intervention_joueur": "Jade a raison léon mais il faut faire attention d'avoir plus de preuve",
     "votes_enregistres": [
       {
         "votant": "Iris",
@@ -136,11 +136,11 @@
       },
       {
         "votant": "Baptiste",
-        "cible": "Hugo"
+        "cible": "Jade"
       },
       {
         "votant": "Rose",
-        "cible": "Hugo"
+        "cible": "Inès"
       },
       {
         "votant": "Jade",
@@ -148,7 +148,7 @@
       },
       {
         "votant": "Léon",
-        "cible": "Jade"
+        "cible": "Inès"
       },
       {
         "votant": "Salomé",
@@ -156,33 +156,24 @@
       },
       {
         "votant": "Clémence",
-        "cible": "Hugo"
-      },
-      {
-        "votant": "Hugo",
-        "cible": "Alex"
+        "cible": "Inès"
       },
       {
         "votant": "Mila",
-        "cible": "Hugo"
+        "cible": "Jade"
       },
       {
         "votant": "Inès",
         "cible": "Léon"
-      },
-      {
-        "votant": "Alex",
-        "cible": "Hugo"
       }
     ],
-    "decompte_final": {
+    "decompte_provisoire": {
       "Léon": 4,
-      "Hugo": 5,
-      "Jade": 1,
-      "Alex": 1
+      "Jade": 2,
+      "Inès": 3
     },
-    "verdict": "Hugo",
-    "carte_revelee": "villageois"
+    "attendre_vote_alex": true,
+    "verdict": null
   },
   "vivants": [
     "Alex",
@@ -216,14 +207,25 @@
   ],
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "verdict_jour_2",
+    "dernier_lot": "debats_jour_3_01",
     "generation_effectuee": false
   },
   "nuit_en_cours": {
     "numero": 2,
-    "statut": "en_cours",
-    "actions_resolues": [],
-    "attendre_action_joueur": "choix_cible_meute",
-    "victimes_confirmees": []
+    "statut": "resolue",
+    "actions_resolues": [
+      "voyante_observation",
+      "meute_attaque",
+      "loup_blanc_action",
+      "sorciere_sauvetage",
+      "sorciere_poison",
+      "effets_amoureux",
+      "condition_victoire",
+      "reveil_village"
+    ],
+    "victimes_confirmees": [],
+    "cibles_annulees": [
+      "Jade"
+    ]
   }
 }

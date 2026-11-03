@@ -19,3 +19,11 @@ Alex reste silencieux. Hugo lui reproche son absence de réponse, mais Rose rapp
 ## Jour 2 — Verdict
 
 Alex vote Hugo. Hugo recueille cinq voix contre quatre pour Léon, une pour Jade et une pour Alex. Il est éliminé : sa carte révèle Simple Villageois. Dix habitants restent en vie. Le village s'endort pour la nuit 2.
+
+## Réveil — Jour 3
+
+Personne n'a disparu durant la nuit. Dix habitants sont toujours vivants. Inès questionne Léon sur son vote contre Jade ; Léon se défend. Jade répond.
+
+## Jour 3 — Soupçons et votes
+
+Alex estime que Jade a raison d'interroger Léon mais invite à réunir davantage de preuves. Inès maintient ses soupçons ; Léon conteste sa certitude ; Rose demande à Inès de s'expliquer. Les neuf PNJ votent ; le scrutin attend la voix d'Alex avant tout verdict.

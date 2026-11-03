@@ -35,3 +35,16 @@
 - Résultat : Hugo 5, Léon 4, Jade 1, Alex 1 (11 voix au total).
 - Hugo éliminé, sa carte révèle Simple Villageois. Pas de pouvoir ni de disparition en chaîne.
 - Dix vivants. Pas de victoire. Passage à la nuit 2, sans action ni synchronisation pendant la nuit.
+
+## Nuit 2 — bilan public
+
+- Aucun habitant disparu ; dix personnes encore vivantes.
+- La nuit se termine sans audio ni publication intermédiaire.
+
+## Jour 3 — Débats et votes provisoires
+
+- Alex déclare : « Jade a raison léon mais il faut faire attention d'avoir plus de preuve ».
+- Inès maintient ses soupçons contre Léon, Léon demande des justifications ; Rose s'interroge sur la certitude d'Inès, Mila hésite.
+- Votes PNJ : Iris → Léon; Baptiste → Jade; Rose → Inès; Jade → Léon; Léon → Inès; Salomé → Léon; Clémence → Inès; Mila → Jade; Inès → Léon.
+- Décompte provisoire (sans Alex) : Léon 4, Jade 2, Inès 3.
+- Neuf votes sur dix enregistrés ; vote d'Alex en attente, aucun verdict ni élimination.

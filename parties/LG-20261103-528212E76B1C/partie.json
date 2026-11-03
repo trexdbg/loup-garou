@@ -6,9 +6,9 @@
   "statut": "en_cours",
   "phase": "jour",
   "progression": {
-    "jour": 2,
-    "nuit": 1,
-    "scene": "reveil_jour_2"
+    "jour": 3,
+    "nuit": 2,
+    "scene": "reveil_jour_3"
   },
   "joueur": {
     "prenom": "Alex",
@@ -104,10 +104,10 @@
     "valide_par_mj": true,
     "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous"
   },
-  "resume_public": "Jour 2 : Hugo a été retrouvé mort après la première nuit. Sa carte de Simple Villageois est révélée. Onze personnes restent en vie.",
-  "aide_mj_publique": "Attendre une seule intervention d’Alex au jour 2, puis calculer les votes PNJ et demander uniquement son vote.",
-  "dernier_evenement_public": "Réveil du jour 2 : Hugo est mort, rôle Simple Villageois révélé.",
-  "scene_courante_id": "reveil_jour_2",
+  "resume_public": "Jour 3 : Inès a été éliminée au jour 2 par 5 voix sur 11, sa carte de Loup-Garou a été révélée. Aucun mort pendant la nuit 2, dix habitants restent en vie.",
+  "aide_mj_publique": "Après une intervention d'Alex au jour 3, faire voter les neuf PNJ et demander uniquement le vote d'Alex. Résoudre le verdict, vérifier la victoire et poursuivre sans confirmation supplémentaire.",
+  "dernier_evenement_public": "Jour 3 : aucun mort cette nuit. Jade soupçonne Marin. En attente d'une intervention d'Alex avant les votes.",
+  "scene_courante_id": "reveil_jour_3",
   "tour_de_table": {
     "statut": "termine",
     "jour": 1,
@@ -116,7 +116,7 @@
     "attendre_reponse_alex": false
   },
   "jour_en_cours": {
-    "numero": 2,
+    "numero": 3,
     "etape": "dialogues_et_enquete",
     "statut": "en_cours",
     "vote_ouvert": false,
@@ -125,21 +125,29 @@
     "votes_enregistres": []
   },
   "nuit_en_cours": {
-    "numero": 1,
+    "numero": 2,
     "statut": "resolue",
     "actions_resolues": [
-      "actions_nocturnes",
+      "salvateur_protection",
+      "voyante_observation",
+      "renard_flair",
+      "loup_attaque",
+      "sorciere_sauvetage",
       "reveil_village"
     ],
-    "victimes_confirmees": [
-      "Hugo"
-    ]
+    "victimes_confirmees": []
   },
   "roles_reveles_publics": [
     {
       "personnage": "Hugo",
       "role": "villageois",
       "cause": "attaque_nocturne",
+      "jour": 2
+    },
+    {
+      "personnage": "Inès",
+      "role": "loup",
+      "cause": "vote_jour_2",
       "jour": 2
     }
   ],
@@ -148,7 +156,6 @@
     "Léon",
     "Baptiste",
     "Alex",
-    "Inès",
     "Rose",
     "Clémence",
     "Marin",
@@ -157,7 +164,8 @@
     "Iris"
   ],
   "retire": [
-    "Hugo"
+    "Hugo",
+    "Inès"
   ],
   "capitaine": {
     "statut": "non_elu",
@@ -165,6 +173,6 @@
   },
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "reveil_jour_2"
+    "dernier_lot": "reveil_jour_3"
   }
 }

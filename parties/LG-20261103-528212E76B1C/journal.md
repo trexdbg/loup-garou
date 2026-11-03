@@ -24,3 +24,23 @@
 - Onze personnes restent en vie ; la figurine Hugo est retirée.
 - Inès, Rose et Jade réagissent, puis Alex est invité à intervenir avant les votes.
 - Aucun vote encore ouvert.
+
+## Jour 2 — Question et vote
+
+- Alex demande qui ne faisait pas confiance à Hugo.
+- Rose, Jade, Inès et Marin réagissent.
+- Votes du jour 2 : Jade pour Inès; Léon pour Inès; Baptiste pour Inès; Inès pour Baptiste; Rose pour Marin; Clémence pour Marin; Marin pour Baptiste; Mila pour Baptiste; Salomé pour Inès; Iris pour Baptiste; Alex pour Inès.
+- Résultat : Inès 5 voix, Baptiste 4, Marin 2.
+- Inès est éliminée ; sa carte de Loup-Garou est révélée.
+- La partie continue, dix habitants sont encore en vie.
+
+## Nuit 2 — bilan public
+
+- La nuit se déroule sans dialogue ni audio.
+- Aucun habitant ne meurt.
+
+## Réveil — Jour 3
+
+- Les dix habitants sont vivants.
+- Jade soupçonne Marin, Marin se défend et Salomé demande des explications.
+- Alex doit intervenir une seule fois avant les votes des PNJ.

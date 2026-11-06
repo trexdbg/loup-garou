@@ -19,7 +19,9 @@
   function publicNames(state) {
     const list = [];
     const add = name => { name = cleanName(name); if (name && !list.includes(name)) list.push(name); };
-    add(state.participants?.joueur?.prenom || state.joueur?.prenom || state.joueur?.nom);
+    const humans = state.joueurs_humains || state.participants?.joueurs_humains;
+    if (Array.isArray(humans) && humans.length) humans.forEach(player => add(nameOf(player)));
+    else add(state.participants?.joueur?.prenom || state.joueur?.prenom || state.joueur?.nom);
     const inhabitants = state.personnages_pnj || state.pnjs || state.pnj || state.personnages || state.habitants || [];
     if (Array.isArray(inhabitants)) inhabitants.forEach(item => add(nameOf(item)));
     return list;

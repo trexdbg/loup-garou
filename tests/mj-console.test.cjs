@@ -57,3 +57,14 @@ test("la régie MJ est livrée sur GitHub Pages et ouverte par défaut",()=>{
   assert.match(launcher,/LG_MJ_CONSOLE\.attach/);
   assert.match(launcher,/setTab\("archives"\)/);
 });
+
+test("la régie attend tous les votes et pouvoirs humains en multijoueur",()=>{
+ const api=moduleApi();
+ const state={phase:"vote",joueurs_humains:[{prenom:"Alex"},{prenom:"Éloi"},{prenom:"Zoé"}]};
+ const guide=api.guideFor(state);
+ assert.match(guide.instructions,/votes de TOUS les joueurs humains vivants/);
+ const prompt=api.promptFor("LG-20261106-123456ABCDEF",state);
+ assert.match(prompt,/Alex, Éloi, Zoé/);
+ assert.match(prompt,/attends le vote de chaque humain vivant/);
+ assert.doesNotMatch(prompt,/SEULEMENT pour les choix d'Alex/);
+});

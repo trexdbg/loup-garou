@@ -4,9 +4,11 @@ const norm = x => String(x || "").trim();
 const name = x => typeof x === "string" ? x : (x?.prenom || x?.name || x?.nom || "");
 const uniq = a => [...new Set(a.map(norm).filter(Boolean))];
 function names(state) {
- const p = state?.participants?.joueur?.prenom || state?.joueur?.prenom || "";
+ const humans = state?.joueurs_humains || state?.participants?.joueurs_humains;
+ const fallback = state?.participants?.joueur?.prenom || state?.joueur?.prenom || "";
+ const playerNames = Array.isArray(humans) && humans.length ? humans.map(name) : [fallback];
  const npcs = state?.personnages_pnj || state?.pnjs || state?.personnages || [];
- return uniq([p,...(Array.isArray(npcs)?npcs.map(name):[])]);
+ return uniq([...playerNames,...(Array.isArray(npcs)?npcs.map(name):[])]);
 }
 function remote(state) {
  const p = state?.placement_table || {};

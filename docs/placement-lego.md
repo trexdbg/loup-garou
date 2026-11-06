@@ -39,3 +39,7 @@ Le Renard choisit **trois personnages encore présents et voisins sur le cercle*
 Selon les règles du Renard, un groupe sans aucun Loup fait perdre le flair ; cette conséquence est appliquée par le MJ, pas par le plan de table. Si un rôle est inconnu ou a une appartenance variable (Chien-Loup, Enfant Sauvage...), la vérification reste incertaine sauf si un Loup est déjà confirmé parmi les trois.
 
 Le **Montreur d'Ours** et les autres interactions dépendantes des voisins doivent également utiliser la disposition physique validée, en tenant compte des figurines retirées et des arbitrages des règles officielles.
+
+## Plusieurs joueurs humains
+
+Avec 2 à 4 joueurs humains, chacun possède une figurine LEGO et une carte cachée sous sa figurine, exactement comme un PNJ. Le plan circulaire public comprend **tous les prénoms humains** et tous les PNJ, chacun une seule fois ; les rôles restent dans le carnet secret MJ. Les effets de voisinage s'appliquent à tous sans distinguer humain et PNJ.

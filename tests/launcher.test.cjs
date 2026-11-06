@@ -91,3 +91,46 @@ test("l'interface reste statique et les parties archivées sont uniques", () => 
   assert.ok(index.parties.every(x => /^LG-\d{8}-[0-9A-F]{12}$/.test(x.id)));
   assert.match(html,/value="classique_loup_garou" selected/);
 });
+test("le configurateur accepte 2, 3 ou 4 humains avec des décisions indépendantes", () => {
+  const {api,nodes} = launcher();
+  nodes.humanCount = {value:"2"};
+  nodes.humanName2 = {value:"Éloi"};
+  nodes.humanAge2 = {value:"12"};
+  nodes.humanRole2 = {value:"voyante"};
+  let state = api.config();
+  assert.equal(state.fonctionnement.joueurs_humains,2);
+  assert.equal(state.joueurs_humains.length,2);
+  assert.equal(state.joueur.prenom,"Alex");
+  assert.equal(state.joueurs_humains[1].prenom,"Éloi");
+  assert.equal(state.joueurs_humains[1].role.id,"voyante");
+  assert.equal(state.premiere_execution.ne_pas_simuler_les_decisions_des_joueurs_humains,true);
+  const prompt = api.promptFor(state);
+  assert.match(prompt,/MODE MULTIJOUEUR RAPIDE/);
+  assert.match(prompt,/TOUS les humains vivants habilités/);
+  assert.match(prompt,/CHAQUE joueur humain/);
+
+  nodes.humanCount.value="3";
+  nodes.humanName3={value:"Zoé"};
+  nodes.humanAge3={value:"9"};
+  nodes.humanRole3={value:"random"};
+  assert.equal(api.config().joueurs_humains.length,3);
+  nodes.humanCount.value="4";
+  nodes.humanName4={value:"Nina"};
+  nodes.humanAge4={value:"11"};
+  nodes.humanRole4={value:"random"};
+  assert.equal(api.config().joueurs_humains.length,4);
+  nodes.humanName4.value="alex";
+  assert.throws(()=>api.config(),/prénom distinct/);
+  nodes.humanName4.value="Nina";
+  nodes.humanRole2.value="chasseur";
+  assert.throws(()=>api.config(),/rôle choisi pour/);
+});
+
+test("l'interface fournit la sélection de 1 à 4 joueurs et les rôles individuels",()=>{
+  const html=read("index.html");
+  assert.match(html,/id="humanCount"/);
+  for(const n of [2,3,4]) {
+    assert.match(html,new RegExp('id="humanPlayer'+n+'"'));
+    assert.match(html,new RegExp('id="humanRole'+n+'"'));
+  }
+});

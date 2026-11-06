@@ -44,3 +44,10 @@ test("un plan validé est chargé depuis partie.json et les noms absents sont aj
  assert.deepEqual(Array.from(m.reconcile(r.ordre,m.names(sample))).slice(0,3),["Malo","Alex","Agathe"]);
  assert.deepEqual(Array.from(m.trio(m.reconcile(r.ordre,m.names(sample)),"Malo",r.retire)),["Rosalie","Malo","Alex"]);
 });
+
+test("tous les joueurs humains et PNJ possèdent exactement une place LEGO",()=>{
+ const m=model();
+ const state={joueur:{prenom:"Alex"},joueurs_humains:[{prenom:"Alex"},{prenom:"Éloi"},{prenom:"Zoé"},{prenom:"Nina"}],personnages_pnj:[{prenom:"Rose"},{prenom:"Jade"}]};
+ assert.deepEqual(Array.from(m.names(state)),["Alex","Éloi","Zoé","Nina","Rose","Jade"]);
+ assert.deepEqual(Array.from(m.trio(m.names(state),"Nina")),["Zoé","Nina","Rose"]);
+});

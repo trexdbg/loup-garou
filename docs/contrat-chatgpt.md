@@ -1,12 +1,12 @@
 # Contrat d'échange — Configurateur ↔ ChatGPT ↔ GitHub
 
-Version : 3 (politique de stockage MJ du 2 novembre 2026). Objectif : offrir au MJ humain un copilote narratif et des archives GitHub publiques, avec contenu visible par le joueur séparé des fichiers de secrets, pour **1 joueur**.
+Version : 3 (politique de stockage MJ du 2 novembre 2026). Objectif : offrir au MJ humain un copilote narratif et des archives GitHub publiques, avec contenu visible par le joueur séparé des fichiers de secrets, pour **1 à 4 joueurs humains** et les PNJ LEGO.
 
 ## 1. Entrée provenant de l'application
 
 L'utilisateur copie le bouton **Copier pour ChatGPT** depuis GitHub Pages dans une conversation du projet *Loup garou*. La consigne contient un document JSON dont `schema_version` vaut `2` et dont l'`id` suit le format `LG-AAAAMMJJ-XXXXXXXXXXXX`.
 
-Les champs déterminent l'âge du joueur, son prénom, le rôle (fixé ou tiré au sort sous contrôle du MJ), le **niveau** `roles.mode` (`classique`, `avance` ou `expert`), la réserve de rôles autorisés, le décor, le scénario, la durée, les difficultés, les options de pouvoirs, les sonorités et le degré d'intervention du MJ.
+Les champs déterminent les prénoms, âges et rôles des joueurs humains (champ `joueurs_humains`), le rôle (fixé ou tiré au sort sous contrôle du MJ), le **niveau** `roles.mode` (`classique`, `avance` ou `expert`), la réserve de rôles autorisés, le décor, le scénario, la durée, les difficultés, les options de pouvoirs, les sonorités et le degré d'intervention du MJ.
 
 **La génération de cet identifiant ne crée aucun fichier GitHub.** L'application ne dispose ni de jeton GitHub ni de pouvoir de modification de partie. Le JSON est à transmettre manuellement à ChatGPT.
 
@@ -73,6 +73,17 @@ Avant de commencer les séquences de jeu dépendant du voisinage, **proposer au 
 Une carte secrète est placée physiquement **sous chaque LEGO** ; ne pas inclure les identités secrètes dans `placement_table`. Les attributions peuvent être archivées séparément dans `secrets_mj.json` sur GitHub public. Les déplacements des LEGO invalident l'ancien plan jusqu'à nouvel accord du MJ. L'application propose les changements localement, puis le MJ copie le plan vers la conversation pour archivage explicite.
 
 Pour le Renard, le flair s'applique au **personnage ciblé et à ses deux voisins directs encore présents** dans l'ordre circulaire. Le carnet secret vérifie oui/non/incertain à partir des cartes attribuées localement, mais n'applique pas le pouvoir ni ses conséquences. Les pouvoirs de voisinage comme le Montreur d'Ours doivent employer le même plan. Détails : [placement LEGO](placement-lego.md).
+
+## Mode multijoueur (2, 3 ou 4 humains)
+
+Le configurateur peut produire `fonctionnement.joueurs_humains = 1..4` et `joueurs_humains = [{prenom, age, role:{attribution,id,secret_vis_a_vis_du_public}}, ...]`. `joueur` est l'alias **rétrocompatible du premier humain**. Les archives anciennes sans `joueurs_humains` sont des parties solo.
+
+- Lors de l'initialisation, ajouter **tous** les humains aux PNJ dans la distribution secrète et le `placement_table.ordre` : 1 figurine LEGO et 1 carte physique par personnage ; les noms sont uniques. Inscrire dans `partie.json` la liste publique `joueurs_humains` avec prénom et âge seulement, sans rôle.
+- Les choix de rôles fixes et aléatoires s'appliquent **individuellement** ; un rôle unique ne peut pas être attribué en double si ses règles l'interdisent. Le MJ valide ensemble répartition et placement. La liste complète des rôles est gardée dans `secrets_mj.json` (attention : dépôt GitHub public), pas dans la scène.
+- Au jour 1, permettre **une intervention par humain vivant** avant de passer à la nuit sans vote. Les PNJ réagissent brièvement ; les joueurs humains discutent librement entre eux.
+- Nuit : exécuter les PNJ autonomes, puis **s'arrêter chaque fois qu'un joueur humain actif doit décider** selon l'ordre officiel. Le MJ peut recueillir les choix séparément, en protégeant les secrets ; les Loups-Garous humains participent eux-mêmes à l'attaque collective, sans IA qui choisit pour eux. Aucun appel de TTS, d'audio ou de commit pendant la nuit.
+- À partir du jour 2, recueillir un vote explicite **de chaque humain vivant autorisé** ; les PNJ votent autonomes, mais le dépouillement final attend tous les votes humains nécessaires. Ne jamais inventer une parole, un vote ou un pouvoir humain, et ne pas faire participer un personnage mort hors pouvoir post-mortem légal. Reprendre ensuite la progression rapide normale.
+- Toutes les consignes « intervention d'Alex », « vote d'Alex » ou « choix d'Alex » dans les sections historiques solo se lisent, **pour une partie multijoueur**, comme « interventions / votes de tous les humains concernés ». Cette règle a priorité sur toute formulation solo héritée.
 
 ## 3. Cycle de jeu : mode rapide et économique (par défaut)
 

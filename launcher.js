@@ -90,8 +90,24 @@
     });
     voicePoolStatus();
   }
+  function renderHumanPlayers() {
+    const count = num("humanCount", 1, 4);
+    for (let i = 2; i <= 4; i++) {
+      const block = $("humanPlayer" + i);
+      if (block) block.hidden = i > count;
+    }
+  }
+  function playerRole(choice) {
+    return {
+      attribution: choice === "random" ? "tirage_par_chatgpt_avec_accord_mj" : "choix_fixe",
+      id: choice === "random" ? null : choice,
+      secret_vis_a_vis_du_public: true
+    };
+  }
   function populate() {
     renderVoicePool();
+    renderHumanPlayers();
+    $("humanCount").addEventListener("change", () => { renderHumanPlayers(); clearGenerated(); });
     const story = $("scenario");
     // Partie classique uniquement : les habitants connaissent déjà la présence des Loups-Garous.
     story.replaceChildren(new Option("🐺 Loups-Garous traditionnel — trouver les Loups", "originale"));
@@ -128,11 +144,13 @@
     updateAvailableRoleChoices();
   }
   function updateAvailableRoleChoices() {
-    const role = $("roleChoice"), wanted = role.value;
     const pool = new Set(allowedRoles());
-    role.replaceChildren(new Option("🎲 Tiré au sort par ChatGPT", "random"));
-    for (const r of roles.filter(item => pool.has(item.id))) role.append(new Option(r.icon + " " + r.name, r.id));
-    role.value = pool.has(wanted) ? wanted : "random";
+    for (const id of ["roleChoice", "humanRole2", "humanRole3", "humanRole4"]) {
+      const role = $(id), wanted = role.value;
+      role.replaceChildren(new Option("🎲 Tiré au sort par ChatGPT", "random"));
+      for (const r of roles.filter(item => pool.has(item.id))) role.append(new Option(r.icon + " " + r.name, r.id));
+      role.value = pool.has(wanted) ? wanted : "random";
+    }
     updateRolePreview();
   }
   function allowedRoles() {
@@ -170,8 +188,30 @@
     if (voicePool.length && (casting.length < 3 || casting.length > voicePool.length)) {
       throw new Error("Choisis entre 3 et " + voicePool.length + " personnages dans le casting vocal.");
     }
+    const humanCount = num("humanCount", 1, 4);
     const story = stories.find(s => s.id === $v("scenario"));
     const name = clean($v("heroName"), 40) || "Alex";
+    const humans = [{ prenom:name, age:num("heroAge", 6, 99), role:playerRole(requestedRole) }];
+    for (let i = 2; i <= humanCount; i++) {
+      const prenom = clean($v("humanName" + i), 40);
+      if (!prenom) throw new Error("Indique le prénom du joueur " + i + ".");
+      const chosen = $v("humanRole" + i) || "random";
+      if (chosen !== "random" && !pool.includes(chosen)) {
+        throw new Error("Le rôle choisi pour " + prenom + " doit figurer parmi les rôles autorisés.");
+      }
+      humans.push({ prenom, age:num("humanAge" + i, 6, 99), role:playerRole(chosen) });
+    }
+    const names = new Set();
+    for (const human of humans) {
+      const key = human.prenom.toLocaleLowerCase("fr");
+      if (names.has(key)) throw new Error("Chaque joueur humain doit avoir un prénom distinct.");
+      names.add(key);
+    }
+    for (const npc of casting) {
+      if (names.has(npc.personnage.toLocaleLowerCase("fr"))) {
+        throw new Error("Le prénom " + npc.personnage + " est déjà utilisé par un joueur humain : retire ce PNJ du casting.");
+      }
+    }
     const now = new Date().toISOString();
     const id = sessionId();
     return {
@@ -183,20 +223,13 @@
       fonctionnement: {
         jeu: "ChatGPT dans le projet Loup garou",
         arbitre: "maitre_du_jeu_humain",
-        joueurs_humains: 1,
+        joueurs_humains: humanCount,
         pnjs_joues_par: "ChatGPT",
         depot_archive: repo,
         application: "configuration et consultation exclusivement"
       },
-      joueur: {
-        prenom: name,
-        age: num("heroAge", 6, 99),
-        role: {
-          attribution: requestedRole === "random" ? "tirage_par_chatgpt_avec_accord_mj" : "choix_fixe",
-          id: requestedRole === "random" ? null : requestedRole,
-          secret_vis_a_vis_du_public: true
-        }
-      },
+      joueur: humans[0], // rétrocompatibilité avec les parties à un seul joueur
+      joueurs_humains: humans, // les décisions de chacun restent humaines, jamais simulées
       aventure: {
         scenario: story ? story.id : "originale",
         connaissance_loups_initiale: true,
@@ -281,32 +314,37 @@
         cree_uniquement: ["dossier_de_partie", "parametres.json", "partie.json_public", "secrets_mj.json_apres_validation", "prologue_seulement", "journal_initial", "index_json"],
         ne_pas_generer_les_scenes_suivantes: true,
         attendre_validation_mj_apres_prologue: false,
-        ne_pas_simuler_les_decisions_du_joueur: true
+        ne_pas_simuler_les_decisions_du_joueur: true,
+        ne_pas_simuler_les_decisions_des_joueurs_humains: true
       }
     };
   }
 
   function promptFor(value) {
+    const humans = value.joueurs_humains || [value.joueur];
+    const multiplayer = humans.length > 1;
+    const names = humans.map(p => p.prenom).join(", ");
     return [
       "PROJET LOUP GAROU — INITIALISATION D'UNE NOUVELLE PARTIE",
       "Voici la configuration produite par l'application. Lis son ID exact et utilise le dépôt GitHub " + repo + ".",
       "Tu es l’assistant du maître du jeu humain : tu incarnes les PNJ, fais avancer rapidement les scènes et laisses au MJ les décisions et validations importantes.",
-      "MODE AUTONOME PAR DÉFAUT : le MJ valide rôles + LEGO une seule fois. Jour 1 : présentation puis UNE intervention d’Alex ; passe à la nuit 1 sans vote. Nuit : tous les PNJ agissent dans l’ordre des règles et décident librement à partir de leurs informations ; STOP seulement pour le choix d’Alex si son rôle l’exige. Jour 2 et suivants : réveil, dialogue bref, UNE intervention d’Alex, votes de tous les PNJ, demande seulement le vote d’Alex, résous le verdict, puis nuit suivante sans autorisation. Le MJ peut interrompre à tout moment.",
+      multiplayer ? "MODE MULTIJOUEUR RAPIDE : le MJ valide rôles + LEGO une seule fois. Jour 1 : brève présentation puis une intervention de CHACUN des joueurs humains vivants, sans vote. Nuit : tous les PNJ agissent de manière autonome ; STOP pour chaque décision ou pouvoir d'un joueur humain concerné, dans l'ordre des règles. Jour 2 et suivants : réveil, PNJ brefs, interventions de chaque joueur humain vivant, votes PNJ puis demander séparément le vote de chaque humain vivant ; dépouiller uniquement après tous les votes humains requis. Aucun choix humain n'est simulé. Le MJ peut interrompre à tout moment." : "MODE AUTONOME PAR DÉFAUT : le MJ valide rôles + LEGO une seule fois. Jour 1 : présentation puis UNE intervention d’Alex ; passe à la nuit 1 sans vote. Nuit : tous les PNJ agissent dans l’ordre des règles et décident librement à partir de leurs informations ; STOP seulement pour le choix d’Alex si son rôle l’exige. Jour 2 et suivants : réveil, dialogue bref, UNE intervention d’Alex, votes de tous les PNJ, demande seulement le vote d’Alex, résous le verdict, puis nuit suivante sans autorisation. Le MJ peut interrompre à tout moment.",
       "RÈGLE FONDAMENTALE : dès le début tous les habitants savent que des Loups-Garous se cachent dans le village. Le seul grand mystère est LEUR IDENTITÉ. Le jeu est le Loup-Garou traditionnel, pas une quête ou une enquête fantastique.",
       "NARRATION : commence par des discussions, soupçons, bluff, pouvoirs nocturnes, réveil, débats et vote. N’invente aucune lanterne magique, prophétie, cloche étrange, lettre codée, objet à récupérer ou énigme annexe. Les choix de décor et d’ambiance ne changent pas cette règle.",
       "1. Vérifie si parties/" + value.id + "/ existe déjà. S'il existe, demande au MJ s'il faut le reprendre, sans écraser ses données.",
       "2. Propose ENSEMBLE rôles des personnages et placement circulaire des LEGO ; une seule validation explicite du MJ couvre les deux. Après cet accord, crée en un unique commit parties/" + value.id + "/parametres.json, partie.json (avec placement_table validé), secrets_mj.json, narrations.md (prologue uniquement), journal.md et dialogues.ndjson (facultatif). Ne dévoile aucun rôle secret dans les scènes destinées au joueur.",
       "3. Mets à jour parties/index.json pour référencer ce même ID, titre, date, statut, phase et dossier; n'écrase pas les autres parties.",
-      "3 bis. Utilise EXACTEMENT aventure.casting_pnj comme liste des 3 à 14 PNJ. Archive dans partie.json personnages_pnj avec prenom, caractere, voix_phonon et voix_id_phonon. Chaque PNJ conserve sa voix Phonon. Le Narrateur est distinct des PNJ et utilise exclusivement Marius. Alex est joué par l'enfant, sans voix synthétique.",
+      "3 bis. Utilise EXACTEMENT aventure.casting_pnj comme liste des 3 à 14 PNJ. Archive dans partie.json personnages_pnj avec prenom, caractere, voix_phonon et voix_id_phonon. Chaque PNJ conserve sa voix Phonon. Le Narrateur est distinct des PNJ et utilise exclusivement Marius. Tous les humains (" + names + ") jouent leurs propres paroles, sans voix synthétique.",
       "4. Après validation du MJ, conserve les identités, les rôles et les secrets dans parties/" + value.id + "/secrets_mj.json sur GitHub (y compris le rôle du joueur). Ne masque pas le rôle fixé dans parametres.json. Le dépôt GitHub est PUBLIC : les fichiers et leur historique sont lisibles par tous, même si l’application ne les affiche pas au joueur. N’inscris aucun spoiler non révélé dans partie.json, narrations.md ou dialogues.ndjson.",
       "4 bis. Applique le niveau roles.mode (classique, avance ou expert) et les rôles autorisés ; si roles.liste_personnalisee est vraie, la sélection manuelle du MJ prime sur le préréglage. Compose une distribution cohérente pour le nombre de personnages, le total de Loups, les pouvoirs et les camps ; le MJ valide la répartition avant le prologue.",
-      "4 bis bis. Propose au MJ un placement CIRCULAIRE des personnages avec exactement une figurine LEGO par personne (joueur inclus). Place 1 à 12 h, parcours horaire, noms et numéros de place. Attends la validation du MJ AVANT d'affirmer que les places sont fixées ; archive seulement l'ordre public validé dans partie.json au champ placement_table. Les cartes physiques restent cachées sous les figurines ; leurs attributions sont archivées uniquement dans secrets_mj.json, et jamais dans placement_table. Toutes les interactions de voisinage, dont le flair du Renard, doivent utiliser cet ordre réel.",
-      "4 ter. Après validation des rôles, fournis au MJ dans la conversation PRIVÉE un JSON valide comme {\"id\":\"ID_PARTIE\",\"roles\":[{\"personnage\":\"Alex\",\"role\":\"renard\"}]} avec chaque personnage et son ID exact de rôle issu de roles.js. Archive aussi ce JSON dans secrets_mj.json sur GitHub, sans le faire apparaître dans l’interface joueur ; le MJ peut également le coller dans le carnet secret de l’application.",
-      "5. Après validation des LEGO et écriture sur GitHub, raconte un prologue TRÈS COURT (3 à 6 phrases) et 2 à 4 présentations PNJ. Attends UNE intervention d’Alex, puis enchaîne automatiquement toute la nuit 1, sans vote au jour 1.",
+      "4 bis bis. Propose au MJ un placement CIRCULAIRE des personnages avec exactement une figurine LEGO par personne (tous les joueurs humains inclus). Place 1 à 12 h, parcours horaire, noms et numéros de place. Attends la validation du MJ AVANT d'affirmer que les places sont fixées ; archive seulement l'ordre public validé dans partie.json au champ placement_table. Les cartes physiques restent cachées sous les figurines ; leurs attributions sont archivées uniquement dans secrets_mj.json, et jamais dans placement_table. Toutes les interactions de voisinage, dont le flair du Renard, doivent utiliser cet ordre réel.",
+      "4 ter. Après validation des rôles, fournis au MJ dans la conversation PRIVÉE un JSON valide comme {\"id\":\"ID_PARTIE\",\"roles\":[{\"personnage\":\"" + humans[0].prenom + "\",\"role\":\"renard\"}]} avec chaque personnage et son ID exact de rôle issu de roles.js. Archive aussi ce JSON dans secrets_mj.json sur GitHub, sans le faire apparaître dans l’interface joueur ; le MJ peut également le coller dans le carnet secret de l’application.",
+      multiplayer ? "5. Après validation des LEGO et écriture sur GitHub, raconte un prologue TRÈS COURT (3 à 6 phrases) et 2 à 4 présentations PNJ. Attends une intervention de chaque humain vivant (" + names + "), puis enchaîne la nuit 1, sans vote au jour 1." : "5. Après validation des LEGO et écriture sur GitHub, raconte un prologue TRÈS COURT (3 à 6 phrases) et 2 à 4 présentations PNJ. Attends UNE intervention d’Alex, puis enchaîne automatiquement toute la nuit 1, sans vote au jour 1.",
       "6. PENDANT LA NUIT : zéro dialogue, zéro Phonon, zéro GitHub et zéro GitHub Action. Garde les décisions des PNJ en mémoire et publie UN SEUL commit groupé au prochain réveil, avec partie.json, secrets_mj.json si nécessaire, journal et dialogues publics. En dehors de la nuit, 2 à 4 répliques courtes ; marque audio:false les lignes mécaniques. Aucun déploiement pour une simple actualisation d’état ou de secrets.",
-      "7. Reste adapté à un joueur de 10 ans si c'est l'âge indiqué. Respecte les vraies cartes et demande au MJ en cas de règles ambiguës.",
+      "7. Adapte le récit aux âges réels des joueurs humains (notamment aux enfants de 10 ans). Respecte les vraies cartes et demande au MJ en cas de règles ambiguës.",
       "8. Pour tout dialogue effectivement joué après le prologue, crée un lot de lignes dans dialogues.ndjson avec des seq croissants, scene_id commun à ce lot et scene_label lisible (ex. tour_de_table_01 puis tour_de_table_02). L'application relit une scène à la demande du MJ ; ne déclenche aucune lecture automatique et ne révèle aucun secret.",
-      "9. Ne redemande aucune permission MJ pour la fin du débat, le vote, une élimination normale, le réveil ou la nuit. Les PNJ votent et agissent de façon cohérente sans connaître les secrets des autres camps. Seuls les choix d’Alex ou les règles vraiment ambiguës interrompent le cycle ; une fois son vote donné, exécute le verdict et enchaîne la nuit suivante.",
+      multiplayer ? "9. Ne redemande aucune permission MJ pour les transitions normales. Les PNJ votent et agissent sans connaître les secrets d'autrui. Attends les votes de TOUS les humains vivants habilités, un par un, sans en inventer ; seulement ensuite dépouille et enchaîne. Lors des nuits, attends le choix de chaque humain concerné sans révéler d'autres rôles." : "9. Ne redemande aucune permission MJ pour la fin du débat, le vote, une élimination normale, le réveil ou la nuit. Les PNJ votent et agissent de façon cohérente sans connaître les secrets des autres camps. Seuls les choix d’Alex ou les règles vraiment ambiguës interrompent le cycle ; une fois son vote donné, exécute le verdict et enchaîne la nuit suivante.",
+      "MULTIJOUEUR : fonctionnement.joueurs_humains = " + humans.length + ". La liste joueurs_humains est la référence ; joueur reste un alias du premier pour compatibilité. Dans partie.json, archive joueurs_humains (prénom et âge uniquement), joueur, personnages_pnj et placement_table de tous. Chaque humain a sa propre carte, vote et éventuel pouvoir. Les rôles secrets ne sont visibles qu'en régie MJ et dans secrets_mj.json, jamais dans les dialogues. Les humains n'ont PAS de voix Phonon. Pas de vote ou action au nom d'un humain éliminé, sauf pouvoir post-mortem légal. Les Loups humains décident eux-mêmes de leurs attaques communes, selon arbitrage du MJ.",
       "Si tu ne peux pas écrire sur GitHub dans cette conversation, dis-le explicitement et fournis les fichiers à déposer : n'affirme jamais que la synchronisation est faite sans confirmation.",
       "",
       "JSON DE PARAMÈTRES :",

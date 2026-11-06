@@ -24,21 +24,66 @@
       <div class="hero-heading">
         <div class="eyebrow">UNE AVENTURE CRÉÉE AVEC CHATGPT</div>
         <h1>Préparez votre partie. L'histoire se jouera dans ChatGPT.</h1>
-        <p class="lead">Un MJ adulte, un seul joueur, des habitants joués par ChatGPT. Cette application génère uniquement un identifiant et un JSON de paramètres. Le MJ reste maître de l'histoire.</p>
+        <p class="lead">Un MJ adulte, de 1 à 4 joueurs humains et des habitants PNJ joués par ChatGPT. Cette application génère uniquement un identifiant et un JSON de paramètres. Le MJ reste maître de l'histoire.</p>
       </div>
       <div class="flow-strip" aria-label="Déroulé en quatre étapes">
         <span><b>1</b> Configurer</span><span><b>2</b> Copier le JSON</span><span><b>3</b> Jouer dans ChatGPT</span><span><b>4</b> Retrouver sur GitHub</span>
       </div>
       <form id="configForm" class="setup-form" onsubmit="return false">
         <section class="panel">
-          <div class="section-header"><span class="step">01</span><div><h2>Le joueur et son aventure</h2><p>Le joueur choisit son rôle, ou laisse ChatGPT le proposer au hasard.</p></div></div>
+          <div class="section-header"><span class="step">01</span><div><h2>Les joueurs et leur aventure</h2><p>De 1 à 4 joueurs humains autour de la table. Chaque joueur a sa figurine LEGO et choisit son rôle, ou le laisse tirer au sort.</p></div></div>
           <div class="config-grid">
+            <label>Nombre de joueurs humains
+              <select id="humanCount"><option value="1" selected>1 joueur</option><option value="2">2 joueurs</option><option value="3">3 joueurs</option><option value="4">4 joueurs</option></select>
+            </label>
             <label>Prénom du personnage
               <input id="heroName" value="Alex" maxlength="40" placeholder="Prénom du héros">
             </label>
-            <label>Âge du joueur
+            <label>Âge du joueur 1
               <input id="heroAge" type="number" value="10" min="6" max="99">
             </label>
+            <div id="humanPlayer2" class="wide-label" style="grid-column:1/-1" hidden>
+              <h3>🧍 Joueur humain 2</h3>
+              <div class="config-grid">
+                <label>Prénom du joueur 2
+                  <input id="humanName2" value="Joueur 2" maxlength="40" placeholder="Prénom du joueur 2">
+                </label>
+                <label>Âge du joueur 2
+                  <input id="humanAge2" type="number" value="10" min="6" max="99">
+                </label>
+                <label>Rôle du joueur 2
+                  <select id="humanRole2"></select>
+                </label>
+              </div>
+            </div>
+            <div id="humanPlayer3" class="wide-label" style="grid-column:1/-1" hidden>
+              <h3>🧍 Joueur humain 3</h3>
+              <div class="config-grid">
+                <label>Prénom du joueur 3
+                  <input id="humanName3" value="Joueur 3" maxlength="40" placeholder="Prénom du joueur 3">
+                </label>
+                <label>Âge du joueur 3
+                  <input id="humanAge3" type="number" value="10" min="6" max="99">
+                </label>
+                <label>Rôle du joueur 3
+                  <select id="humanRole3"></select>
+                </label>
+              </div>
+            </div>
+            <div id="humanPlayer4" class="wide-label" style="grid-column:1/-1" hidden>
+              <h3>🧍 Joueur humain 4</h3>
+              <div class="config-grid">
+                <label>Prénom du joueur 4
+                  <input id="humanName4" value="Joueur 4" maxlength="40" placeholder="Prénom du joueur 4">
+                </label>
+                <label>Âge du joueur 4
+                  <input id="humanAge4" type="number" value="10" min="6" max="99">
+                </label>
+                <label>Rôle du joueur 4
+                  <select id="humanRole4"></select>
+                </label>
+              </div>
+            </div>
             <label>Durée de la séance (minutes)
               <select id="duration"><option value="30">30 min — rapide</option><option value="45" selected>45 min — équilibrée</option><option value="60">60 min — développée</option><option value="90">90 min — longue</option></select>
             </label>
@@ -47,7 +92,7 @@
             </label>
             <div class="wide-label voice-pool-config" style="grid-column:1/-1">
               <h3>🎭 Casting : 14 habitants + 1 narrateur Phonon</h3>
-              <p class="fine">Sélectionne jusqu’à 14 PNJ. Chacun possède sa voix propre ; le narrateur est séparé et utilise exclusivement Marius. Les cartes des personnages changent à chaque partie.</p>
+              <p class="fine">Sélectionne jusqu’à 14 PNJ, en complément des joueurs humains. Chaque PNJ possède sa voix propre ; le narrateur est séparé et utilise exclusivement Marius. Les cartes des personnages changent à chaque partie.</p>
               <div id="voicePoolList" class="voice-pool-list" aria-label="Choix des personnages"></div>
               <p id="voicePoolStatus" class="fine" role="status"></p>
             </div>
@@ -81,7 +126,7 @@
               <select id="gameMode"><option value="classique" selected>🌙 Classique</option><option value="avance">🦊 Avancé</option><option value="expert">🐺 Expert</option></select>
             </label>
             <div id="modeSummary" class="mode-summary" aria-live="polite"></div>
-            <label>Rôle du joueur
+            <label>Rôle du joueur 1
               <select id="roleChoice"></select>
             </label>
             <label>Nombre cible de Loups-Garous
@@ -173,7 +218,7 @@
         <summary>📋 Aide-mémoire du MJ : déroulement d’un débat</summary>
         <div class="reminder-grid">
           <div><strong>1. Écouter</strong><p>Actualiser les dialogues et écouter la nouvelle scène. Le texte reste visible pour accompagner la lecture.</p></div>
-          <div><strong>2. Jouer</strong><p>Alex peut parler à n’importe quel personnage. Les PNJ débattent aussi entre eux ; personne ne décide pour Alex.</p></div>
+          <div><strong>2. Jouer</strong><p>Chaque joueur humain peut parler aux PNJ et aux autres humains. Les PNJ débattent aussi entre eux ; personne ne décide pour un humain.</p></div>
           <div><strong>3. Continuer</strong><p>Revenir dans ChatGPT avec la réponse d’Alex. Après validation du MJ, un nouvel échange est archivé et devient disponible à l’écoute.</p></div>
           <div><strong>4. Terminer le tour</strong><p>Le MJ décide quand les débats se terminent. Le vote et la nuit ne démarrent jamais automatiquement.</p></div>
         </div>
@@ -192,7 +237,7 @@
   <script src="./seating-model.js"></script>
   <script src="./table-seating.js"></script>
   <script src="./mj-private.js"></script>
-  <script src="./mj-console.js?v=20261102mj"></script>
-  <script src="./launcher.js?v=20261103a"></script>
+  <script src="./mj-console.js?v=20261106multi"></script>
+  <script src="./launcher.js?v=20261106multi"></script>
 </body>
 </html>

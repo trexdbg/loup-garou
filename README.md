@@ -1,6 +1,6 @@
 # Thiercelieux — Régie privée du maître du jeu 🌙
 
-Une aventure de **Loups-Garous de Thiercelieux** pour **1 joueur (dès 10 ans) et 1 maître du jeu adulte**. Le MJ humain conserve le dernier mot. ChatGPT raconte, incarne tous les PNJ et assure la continuité narrative. GitHub archive les étapes. L'application GitHub Pages est une **régie exclusivement destinée au MJ** : les joueurs ne consultent jamais l'écran. Elle permet de préparer et d'animer les parties, sans prendre de décisions ni écrire elle-même sur GitHub.
+Une aventure de **Loups-Garous de Thiercelieux** pour **1 à 4 joueurs humains (dès 10 ans) et 1 maître du jeu adulte**. Le MJ humain conserve le dernier mot. ChatGPT raconte, incarne tous les PNJ et assure la continuité narrative. GitHub archive les étapes. L'application GitHub Pages est une **régie exclusivement destinée au MJ** : les joueurs ne consultent jamais l'écran. Elle permet de préparer et d'animer les parties, sans prendre de décisions ni écrire elle-même sur GitHub.
 
 Projet indépendant, non officiel. Les illustrations officielles restent liées depuis leurs sources tierces, sans être copiées dans ce dépôt.
 
@@ -148,3 +148,11 @@ Le lecteur actif est `scene-player.js` (l'ancien `voice-live.js` reste conservé
 **Guide complet : [14 personnages + 1 narrateur Phonon](docs/audio-phonon.md).**
 
 La publication GitHub Pages peut prendre un court délai après les commits. L'application est en lecture seule ; toutes les décisions et écritures du jeu restent dans ChatGPT avec l’accord du MJ.
+
+## Partie avec plusieurs joueurs humains (nouveau)
+
+Dans **+ Nouvelle partie**, le réglage **Nombre de joueurs humains** propose 1, 2, 3 ou 4 participants, en plus des 3 à 14 PNJ LEGO pilotés par ChatGPT. Renseigner pour chaque humain son prénom, son âge et son rôle (tirage MJ ou rôle fixé). Les prénoms sont uniques, y compris par rapport aux PNJ. **Tous les joueurs ont une figurine LEGO et une carte physique** au même titre que les PNJ, mais jamais de voix synthétique.
+
+Le JSON comporte `joueurs_humains` (liste ordonnée) et `fonctionnement.joueurs_humains` (nombre) ; `joueur` reste présent comme alias du premier pour lire les anciens formats. Lors de la création GitHub, ChatGPT doit aussi écrire la liste publique minimale `partie.json.joueurs_humains` (prénom et âge sans rôle). Le carnet MJ conserve toutes les cartes secrètes.
+
+Au jour 1, chacun des humains vivants peut intervenir avant la première nuit. Pendant la nuit, les PNJ agissent seuls ; **l'IA s'arrête dès qu'un humain a une décision de rôle** (y compris s'il est Loup-Garou) et demande son choix. À partir du jour 2, tous les humains vivants habilités votent séparément, sans que l'IA n'invente de vote et sans dépouillement anticipé. Les PNJ raisonnent toujours individuellement. La régie affiche les humains et PNJ et conserve un emplacement LEGO pour chacun.

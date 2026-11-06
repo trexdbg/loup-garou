@@ -37,4 +37,13 @@ Au matin, les quinze habitants sont de retour sur la place : aucun mort n'est an
 
 **Rose :** « André, ton avis a-t-il changé depuis hier ? »
 
-**À jouer :** demander à André son intervention du jour 2, sans inventer sa réponse. Le vote n'a pas commencé.
+
+## Jour 2 — Clôture du débat et préparation du vote
+
+**André :** « je suis esitent »
+
+**Rose :** « Ce n'est pas facile de choisir, André. Mais chacun doit voter selon ce qu'il a remarqué. »
+
+**Baptiste :** « Moi non plus je ne suis pas tranquille, mais je ne vais pas laisser les autres décider pour moi. »
+
+Quatorze bulletins sont déposés sans être dépouillés. Il manque uniquement le vote d'André.

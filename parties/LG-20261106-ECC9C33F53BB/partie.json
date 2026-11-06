@@ -8,7 +8,7 @@
   "progression": {
     "jour": 2,
     "nuit": 1,
-    "scene": "reveil_jour_2"
+    "scene": "vote_jour_2_attente_andre"
   },
   "joueur": {
     "prenom": "André",
@@ -152,18 +152,21 @@
   "retire": [],
   "roles_reveles_publics": [],
   "resume_public": "Au matin du jour 2, les quinze habitants sont tous présents. Aucun décès n'est annoncé. Les discussions reprennent autour des hésitations de Baptiste et des soupçons de chacun.",
-  "aide_mj_publique": "Jour 2 : lire le réveil et les quatre répliques PNJ, puis recueillir une intervention libre d'André. Ne pas simuler ses paroles ou son vote ; les votes PNJ et le vote d'André viendront après son intervention.",
-  "dernier_evenement_public": "Au réveil du jour 2, aucun habitant n'est mort. Le village débat ; André doit prendre la parole.",
-  "scene_courante_id": "reveil_jour_2",
+  "aide_mj_publique": "Quatorze votes PNJ ont été archivés confidentiellement, sans dépouillement. Attendre uniquement le vote d'André pour un habitant encore vivant (sauf lui-même), puis dépouiller tous les bulletins. Ne révéler ni les votes PNJ ni les nombres avant ce choix.",
+  "dernier_evenement_public": "Jour 2 : André s'est dit hésitant. Les 14 PNJ ont voté ; le vote d'André est attendu avant le dépouillement.",
+  "scene_courante_id": "vote_jour_2_attente_andre",
   "tour_de_table": {
-    "statut": "en_attente_intervention_humaine",
+    "statut": "termine",
     "jour": 2,
-    "interventions_humaines_attendues": [
-      "André"
+    "interventions_humaines_attendues": [],
+    "interventions_humaines_enregistrees": [
+      {
+        "prenom": "André",
+        "texte": "je suis esitent"
+      }
     ],
-    "interventions_humaines_enregistrees": [],
     "vote_ouvert": false,
-    "attendre_intervention_joueur": true,
+    "attendre_intervention_joueur": false,
     "termine_sans_vote": false,
     "jour_1": {
       "statut": "termine",
@@ -179,19 +182,31 @@
   },
   "jour_en_cours": {
     "numero": 2,
-    "etape": "debats",
-    "statut": "en_cours",
-    "vote_ouvert": false,
-    "debats_ouverts": true,
-    "attendre_intervention_joueur": true,
-    "interventions_humaines_attendues": [
+    "etape": "vote_ou_resolution",
+    "statut": "en_attente_vote_andre",
+    "vote_ouvert": true,
+    "debats_ouverts": false,
+    "attendre_intervention_joueur": false,
+    "interventions_humaines_attendues": [],
+    "votes_enregistres": [],
+    "intervention_joueur": "je suis esitent",
+    "interventions_humaines_enregistrees": [
+      {
+        "prenom": "André",
+        "texte": "je suis esitent"
+      }
+    ],
+    "nombre_votes_pnj_prepares": 14,
+    "votes_humains_attendus": [
       "André"
     ],
-    "votes_enregistres": []
+    "attendre_vote_andre": true,
+    "decompte_final": null,
+    "verdict": null
   },
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "reveil_jour_2",
+    "dernier_lot": "vote_jour_2_attente_andre",
     "generation_effectuee": false
   },
   "nuit_precedente_publique": {

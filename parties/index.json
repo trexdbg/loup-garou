@@ -2,6 +2,15 @@
   "schema_version": 1,
   "parties": [
     {
+      "id": "LG-20261106-ECC9C33F53BB",
+      "cree_le": "2026-11-06",
+      "titre": "Les quinze de Thiercelieux",
+      "statut": "en_cours",
+      "phase": "prologue",
+      "dossier": "parties/LG-20261106-ECC9C33F53BB",
+      "dernier_evenement": "Prologue créé. En attente de la première intervention d'André."
+    },
+    {
       "id": "LG-20261106-21D6C54F356F",
       "cree_le": "2026-11-06",
       "titre": "Les seize de Thiercelieux",

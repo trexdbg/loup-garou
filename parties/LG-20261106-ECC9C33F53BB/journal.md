@@ -2,7 +2,7 @@
 
 - **Partie** : LG-20261106-ECC9C33F53BB
 - **Création** : 2026-11-06
-- **Statut** : en cours — nuit 2 commencée.
+- **Statut** : en cours — réveil et débats du jour 3.
 - **Validation MJ** : 15 rôles et placement circulaire approuvés ; 1 humain (André), 14 PNJ.
 - **Table LEGO** : 1 André, 2 Baptiste, 3 Agathe, 4 Iris, 5 Nils, 6 Jade, 7 Marin, 8 Hugo, 9 Mila, 10 Léon, 11 Clémence, 12 Rose, 13 Zoé, 14 Inès, 15 Salomé ; départ à 12 h, sens horaire.
 - **Jour 1** : André déclare exactement « je suis daccord avec vous, baptiste tu as l'air hésitant? » ; Baptiste et Rose lui répondent. Aucun vote.
@@ -14,3 +14,10 @@
 - **Éliminations** : Hugo (Loup-Garou, vote du jour 2).
 - **Situation après verdict** : 14 vivants, dont 2 Loups-Garous. Aucun camp n'a gagné.
 - **Prochaine phase** : nuit 2, pouvoirs PNJ autonomes, attendre la décision personnelle d'André si son rôle est appelé. Aucune action nocturne archivée à ce stade.
+
+## Nuit 2 et réveil du jour 3
+
+- **Morts de la nuit 2** : Mila (Voyante), Agathe (Loup-Garou) ; cartes révélées au réveil.
+- **Effets en cascade** : aucun, le couple d'amoureux et le Chasseur ne sont pas concernés.
+- **Après la nuit 2** : 12 vivants, dont 1 Loup-Garou. La partie continue, sans victoire de camp.
+- **Prochaine étape** : courte discussion puis intervention d'André ; aucun vote du jour 3 enregistré.

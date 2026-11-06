@@ -59,3 +59,17 @@ Hugo est éliminé. Sa carte est révélée : **Loup-Garou**. Aucun autre habita
 **Rose :** « Nous en avons trouvé un, mais les autres se cachent encore parmi nous. »
 
 Les quatorze habitants encore en vie se retirent chez eux. **La nuit 2 commence.**
+
+## Réveil — Jour 3
+
+Au matin du troisième jour, deux places sont vides sur la place du village. Mila est retrouvée morte : sa carte révèle la Voyante. Agathe a également disparu : elle était Loup-Garou. Aucun autre habitant ne manque à l'appel. Le village sait désormais qu'un seul Loup-Garou reste caché parmi les douze survivants.
+
+**Rose :** « Mila était la Voyante… Nous perdons quelqu'un qui aurait pu nous éclairer. »
+
+**Baptiste :** « Agathe était un Loup-Garou ? André avait voté contre elle hier ! »
+
+**Zoé :** « Deux morts en une seule nuit… Nous devons rester prudents avant d'accuser qui que ce soit. »
+
+**Nils :** « André, qu'est-ce qui t'avait donné des soupçons sur Agathe ? »
+
+**À jouer :** attendre la réponse libre d'André avant de préparer les votes ; aucun vote du jour 3 n'a encore eu lieu.

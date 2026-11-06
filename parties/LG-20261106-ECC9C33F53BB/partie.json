@@ -4,11 +4,11 @@
   "titre": "Les quinze de Thiercelieux",
   "cree_le": "2026-11-06T19:17:18.400Z",
   "statut": "en_cours",
-  "phase": "prologue",
+  "phase": "jour",
   "progression": {
-    "jour": 1,
-    "nuit": 0,
-    "scene": "prologue"
+    "jour": 2,
+    "nuit": 1,
+    "scene": "reveil_jour_2"
   },
   "joueur": {
     "prenom": "André",
@@ -151,24 +151,35 @@
   ],
   "retire": [],
   "roles_reveles_publics": [],
-  "resume_public": "À Thiercelieux, quinze habitants, dont André, se réunissent. Tous savent que trois Loups-Garous se cachent parmi eux, mais personne ne connaît leur identité.",
-  "aide_mj_publique": "Faire entendre le prologue et les quatre répliques PNJ, puis recueillir les paroles d’André. Aucun vote au jour 1 ; ne pas simuler ses décisions et ne pas commencer la nuit avant son intervention.",
-  "dernier_evenement_public": "Prologue initialisé ; aucune intervention humaine, aucun vote, aucun pouvoir ni élimination.",
-  "scene_courante_id": "prologue",
+  "resume_public": "Au matin du jour 2, les quinze habitants sont tous présents. Aucun décès n'est annoncé. Les discussions reprennent autour des hésitations de Baptiste et des soupçons de chacun.",
+  "aide_mj_publique": "Jour 2 : lire le réveil et les quatre répliques PNJ, puis recueillir une intervention libre d'André. Ne pas simuler ses paroles ou son vote ; les votes PNJ et le vote d'André viendront après son intervention.",
+  "dernier_evenement_public": "Au réveil du jour 2, aucun habitant n'est mort. Le village débat ; André doit prendre la parole.",
+  "scene_courante_id": "reveil_jour_2",
   "tour_de_table": {
     "statut": "en_attente_intervention_humaine",
-    "jour": 1,
+    "jour": 2,
     "interventions_humaines_attendues": [
       "André"
     ],
     "interventions_humaines_enregistrees": [],
     "vote_ouvert": false,
     "attendre_intervention_joueur": true,
-    "termine_sans_vote": false
+    "termine_sans_vote": false,
+    "jour_1": {
+      "statut": "termine",
+      "interventions_humaines_enregistrees": [
+        {
+          "prenom": "André",
+          "texte": "je suis daccord avec vous, baptiste tu as l'air hésitant?"
+        }
+      ],
+      "vote_ouvert": false,
+      "termine_sans_vote": true
+    }
   },
   "jour_en_cours": {
-    "numero": 1,
-    "etape": "presentations",
+    "numero": 2,
+    "etape": "debats",
     "statut": "en_cours",
     "vote_ouvert": false,
     "debats_ouverts": true,
@@ -180,7 +191,12 @@
   },
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "prologue",
+    "dernier_lot": "reveil_jour_2",
     "generation_effectuee": false
+  },
+  "nuit_precedente_publique": {
+    "numero": 1,
+    "victimes_revelees": [],
+    "nombre_morts": 0
   }
 }

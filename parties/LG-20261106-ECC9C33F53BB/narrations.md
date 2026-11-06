@@ -14,4 +14,27 @@ Ce matin, les quinze habitants de Thiercelieux se rassemblent sur la place du vi
 
 **Baptiste :** « Euh… moi, je parle beaucoup, justement. Ça ne veut pas dire que je suis un Loup ! »
 
-**À jouer :** demander la parole à André ; aucun dialogue humain, vote ou pouvoir nocturne n'a été anticipé.
+
+## Fin des discussions — Jour 1
+
+**André :** « je suis daccord avec vous, baptiste tu as l'air hésitant? »
+
+**Baptiste :** « Ben oui, j'hésite ! Je connais tout le monde ici… Je n'ai pas envie d'accuser quelqu'un au hasard. Et puis, toi aussi tu pourrais être un Loup, André ! »
+
+**Rose :** « Ça suffit pour aujourd'hui. On verra demain qui aura changé de discours. »
+
+Le village s'endort sans vote. Aucun rôle ni pouvoir n'est révélé.
+
+## Réveil — Jour 2
+
+Au matin, les quinze habitants sont de retour sur la place : aucun mort n'est annoncé. Personne ne sait publiquement pourquoi la nuit s'est achevée sans victime.
+
+**Baptiste :** « Je vous jure, je suis juste un peu nerveux. Je ne sais pas qui croire ! »
+
+**Hugo :** « Tu te justifies encore, Baptiste. Personne ne t'a accusé ce matin ! »
+
+**Nils :** « Moi, je veux surtout comprendre qui essaie déjà de diriger nos soupçons. »
+
+**Rose :** « André, ton avis a-t-il changé depuis hier ? »
+
+**À jouer :** demander à André son intervention du jour 2, sans inventer sa réponse. Le vote n'a pas commencé.

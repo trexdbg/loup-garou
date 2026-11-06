@@ -107,7 +107,7 @@ test("le configurateur accepte 2, 3 ou 4 humains avec des décisions indépendan
   const prompt = api.promptFor(state);
   assert.match(prompt,/MODE MULTIJOUEUR RAPIDE/);
   assert.match(prompt,/TOUS les humains vivants habilités/);
-  assert.match(prompt,/CHAQUE joueur humain/);
+  assert.match(prompt,/CHACUN des joueurs humains/);
 
   nodes.humanCount.value="3";
   nodes.humanName3={value:"Zoé"};

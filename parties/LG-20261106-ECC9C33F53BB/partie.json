@@ -4,11 +4,11 @@
   "titre": "Les quinze de Thiercelieux",
   "cree_le": "2026-11-06T19:17:18.400Z",
   "statut": "en_cours",
-  "phase": "jour",
+  "phase": "nuit",
   "progression": {
     "jour": 2,
-    "nuit": 1,
-    "scene": "vote_jour_2_attente_andre"
+    "nuit": 2,
+    "scene": "debut_nuit_2"
   },
   "joueur": {
     "prenom": "André",
@@ -140,7 +140,6 @@
     "Nils",
     "Jade",
     "Marin",
-    "Hugo",
     "Mila",
     "Léon",
     "Clémence",
@@ -149,12 +148,21 @@
     "Inès",
     "Salomé"
   ],
-  "retire": [],
-  "roles_reveles_publics": [],
-  "resume_public": "Au matin du jour 2, les quinze habitants sont tous présents. Aucun décès n'est annoncé. Les discussions reprennent autour des hésitations de Baptiste et des soupçons de chacun.",
-  "aide_mj_publique": "Quatorze votes PNJ ont été archivés confidentiellement, sans dépouillement. Attendre uniquement le vote d'André pour un habitant encore vivant (sauf lui-même), puis dépouiller tous les bulletins. Ne révéler ni les votes PNJ ni les nombres avant ce choix.",
-  "dernier_evenement_public": "Jour 2 : André s'est dit hésitant. Les 14 PNJ ont voté ; le vote d'André est attendu avant le dépouillement.",
-  "scene_courante_id": "vote_jour_2_attente_andre",
+  "retire": [
+    "Hugo"
+  ],
+  "roles_reveles_publics": [
+    {
+      "personnage": "Hugo",
+      "role": "loup",
+      "cause": "vote_jour_2",
+      "jour": 2
+    }
+  ],
+  "resume_public": "Jour 2 : Hugo est éliminé par 6 voix. Sa carte Loup-Garou est révélée. Quatorze habitants restent vivants, dont deux Loups-Garous. Le village s'endort pour la nuit 2.",
+  "aide_mj_publique": "Le jour 2 est clos : dépouillement terminé, Hugo éliminé. Le village s'endort. Les pouvoirs nocturnes PNJ sont résolus sans nouvelles écritures GitHub ; s'arrêter seulement pour la décision nocturne personnelle d'André (Sorcière, potion de mort restante). Les secrets et décisions non finalisées ne doivent pas être publiés avant le prochain réveil.",
+  "dernier_evenement_public": "Jour 2 : Hugo éliminé (6 voix) et révélé Loup-Garou. Aucun autre décès. Nuit 2 commencée.",
+  "scene_courante_id": "debut_nuit_2",
   "tour_de_table": {
     "statut": "termine",
     "jour": 2,
@@ -182,13 +190,74 @@
   },
   "jour_en_cours": {
     "numero": 2,
-    "etape": "vote_ou_resolution",
-    "statut": "en_attente_vote_andre",
-    "vote_ouvert": true,
+    "etape": "termine",
+    "statut": "termine",
+    "vote_ouvert": false,
     "debats_ouverts": false,
     "attendre_intervention_joueur": false,
     "interventions_humaines_attendues": [],
-    "votes_enregistres": [],
+    "votes_enregistres": [
+      {
+        "votant": "Baptiste",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Agathe",
+        "cible": "Baptiste"
+      },
+      {
+        "votant": "Iris",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Nils",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Jade",
+        "cible": "Baptiste"
+      },
+      {
+        "votant": "Marin",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Hugo",
+        "cible": "Baptiste"
+      },
+      {
+        "votant": "Mila",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Léon",
+        "cible": "Nils"
+      },
+      {
+        "votant": "Clémence",
+        "cible": "Nils"
+      },
+      {
+        "votant": "Rose",
+        "cible": "Hugo"
+      },
+      {
+        "votant": "Zoé",
+        "cible": "Baptiste"
+      },
+      {
+        "votant": "Inès",
+        "cible": "Baptiste"
+      },
+      {
+        "votant": "Salomé",
+        "cible": "Nils"
+      },
+      {
+        "votant": "André",
+        "cible": "Agathe"
+      }
+    ],
     "intervention_joueur": "je suis esitent",
     "interventions_humaines_enregistrees": [
       {
@@ -197,21 +266,34 @@
       }
     ],
     "nombre_votes_pnj_prepares": 14,
-    "votes_humains_attendus": [
-      "André"
-    ],
-    "attendre_vote_andre": true,
-    "decompte_final": null,
-    "verdict": null
+    "votes_humains_attendus": [],
+    "attendre_vote_andre": false,
+    "decompte_final": {
+      "Hugo": 6,
+      "Baptiste": 5,
+      "Nils": 3,
+      "Agathe": 1
+    },
+    "verdict": "Hugo",
+    "carte_revelee": "loup",
+    "aucun_effet_supplementaire": true
   },
   "audio": {
     "lecture_automatique": false,
-    "dernier_lot": "vote_jour_2_attente_andre",
+    "dernier_lot": "verdict_jour_2",
     "generation_effectuee": false
   },
   "nuit_precedente_publique": {
     "numero": 1,
     "victimes_revelees": [],
     "nombre_morts": 0
+  },
+  "nuit_en_cours": {
+    "numero": 2,
+    "statut": "commencee",
+    "actions_resolues": [],
+    "victimes_confirmees": [],
+    "attendre_choix_humain": false,
+    "publication_nocturne": false
   }
 }

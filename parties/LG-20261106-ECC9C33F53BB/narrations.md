@@ -47,3 +47,15 @@ Au matin, les quinze habitants sont de retour sur la place : aucun mort n'est an
 **Baptiste :** « Moi non plus je ne suis pas tranquille, mais je ne vais pas laisser les autres décider pour moi. »
 
 Quatorze bulletins sont déposés sans être dépouillés. Il manque uniquement le vote d'André.
+
+## Jour 2 — Dépouillement et verdict
+
+**André vote Agathe.** Les quinze bulletins sont dépouillés : **Hugo 6 voix, Baptiste 5, Nils 3, Agathe 1.**
+
+Hugo est éliminé. Sa carte est révélée : **Loup-Garou**. Aucun autre habitant n'est éliminé et aucune condition de victoire n'est atteinte.
+
+**Baptiste :** « Hugo était un Loup ?! Alors il essayait de me faire accuser depuis le début ! »
+
+**Rose :** « Nous en avons trouvé un, mais les autres se cachent encore parmi nous. »
+
+Les quatorze habitants encore en vie se retirent chez eux. **La nuit 2 commence.**

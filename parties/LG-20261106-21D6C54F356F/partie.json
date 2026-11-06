@@ -1,0 +1,194 @@
+{
+  "id": "LG-20261106-21D6C54F356F",
+  "schema_version": 2,
+  "titre": "Les seize de Thiercelieux",
+  "cree_le": "2026-11-06T18:58:57.761Z",
+  "statut": "en_cours",
+  "phase": "prologue",
+  "progression": {
+    "jour": 1,
+    "nuit": 0,
+    "scene": "prologue"
+  },
+  "joueur": {
+    "prenom": "André",
+    "age": 10
+  },
+  "joueurs_humains": [
+    {
+      "prenom": "André",
+      "age": 10
+    },
+    {
+      "prenom": "Martin",
+      "age": 20
+    }
+  ],
+  "personnages_pnj": [
+    {
+      "prenom": "Rose",
+      "caractere": "Calme et observatrice",
+      "voix_phonon": "Noémie",
+      "voix_id_phonon": "FXxJ9mANRq6BCTX5"
+    },
+    {
+      "prenom": "Salomé",
+      "caractere": "Courageuse et directe",
+      "voix_phonon": "Coralie",
+      "voix_id_phonon": "ZeSg853xFACESHHI"
+    },
+    {
+      "prenom": "Inès",
+      "caractere": "Prudente et diplomate",
+      "voix_phonon": "Tiphaine",
+      "voix_id_phonon": "0fvH6XAKvA748v2v"
+    },
+    {
+      "prenom": "Jade",
+      "caractere": "Malicieuse et réfléchie",
+      "voix_phonon": "Maëlys",
+      "voix_id_phonon": "s048cR1l2Jmu4k3B"
+    },
+    {
+      "prenom": "Mila",
+      "caractere": "Spontanée et curieuse",
+      "voix_phonon": "Orianne",
+      "voix_id_phonon": "TUk4X11S6UytB3G6"
+    },
+    {
+      "prenom": "Clémence",
+      "caractere": "Discrète et analytique",
+      "voix_phonon": "Solène",
+      "voix_id_phonon": "YhIHaAfQ0cQPDV9R"
+    },
+    {
+      "prenom": "Iris",
+      "caractere": "Franche et intuitive",
+      "voix_phonon": "Ninon",
+      "voix_id_phonon": "qtPlUYAZ4EJDuWMm"
+    },
+    {
+      "prenom": "Zoé",
+      "caractere": "Enjouée et attentive",
+      "voix_phonon": "Lilou",
+      "voix_id_phonon": "4iKxBtHBRzr1YOph"
+    },
+    {
+      "prenom": "Agathe",
+      "caractere": "Réservée mais perspicace",
+      "voix_phonon": "Hélène",
+      "voix_id_phonon": "Vvakv7iWZCUrBooR"
+    },
+    {
+      "prenom": "Hugo",
+      "caractere": "Impulsif et accusateur",
+      "voix_phonon": "Augustin",
+      "voix_id_phonon": "Tek4tJXiX6_yvXq7"
+    },
+    {
+      "prenom": "Marin",
+      "caractere": "Souriant et persuasif",
+      "voix_phonon": "Arnaud",
+      "voix_id_phonon": "aXMVwiUhITMrwPzd"
+    },
+    {
+      "prenom": "Baptiste",
+      "caractere": "Bavard et maladroit",
+      "voix_phonon": "Jules",
+      "voix_id_phonon": "YKeBw3OV1RgpdhLh"
+    },
+    {
+      "prenom": "Nils",
+      "caractere": "Réfléchi et méfiant",
+      "voix_phonon": "Baptiste",
+      "voix_id_phonon": "rqqeErpASHVQXHDd"
+    },
+    {
+      "prenom": "Léon",
+      "caractere": "Protecteur et loyal",
+      "voix_phonon": "Lucien",
+      "voix_id_phonon": "LIv4NaG8ay4Mhqtd"
+    }
+  ],
+  "placement_table": {
+    "type": "circulaire",
+    "sens": "horaire",
+    "depart": "12h",
+    "ordre": [
+      "André",
+      "Rose",
+      "Inès",
+      "Martin",
+      "Agathe",
+      "Léon",
+      "Jade",
+      "Marin",
+      "Hugo",
+      "Clémence",
+      "Nils",
+      "Mila",
+      "Salomé",
+      "Baptiste",
+      "Zoé",
+      "Iris"
+    ],
+    "statut": "valide",
+    "regle": "une_figurine_lego_par_personnage_carte_cachee_dessous",
+    "valide_par_mj": true,
+    "retire": []
+  },
+  "vivants": [
+    "André",
+    "Rose",
+    "Inès",
+    "Martin",
+    "Agathe",
+    "Léon",
+    "Jade",
+    "Marin",
+    "Hugo",
+    "Clémence",
+    "Nils",
+    "Mila",
+    "Salomé",
+    "Baptiste",
+    "Zoé",
+    "Iris"
+  ],
+  "retire": [],
+  "roles_reveles_publics": [],
+  "resume_public": "À Thiercelieux, seize habitants, dont André et Martin, se réunissent. Tous savent que trois Loups-Garous se cachent dans le village, mais personne ne sait qui ils sont.",
+  "aide_mj_publique": "Faire entendre le prologue et les quatre répliques PNJ, puis recueillir séparément les paroles d’André et de Martin. Aucun vote au jour 1 ; ne pas lancer la nuit avant les deux interventions humaines.",
+  "dernier_evenement_public": "Prologue initialisé ; aucun choix humain, vote, pouvoir ou élimination joué.",
+  "scene_courante_id": "prologue",
+  "tour_de_table": {
+    "statut": "en_attente_interventions_humaines",
+    "jour": 1,
+    "interventions_humaines_attendues": [
+      "André",
+      "Martin"
+    ],
+    "interventions_humaines_enregistrees": [],
+    "vote_ouvert": false,
+    "attendre_intervention_joueur": true,
+    "termine_sans_vote": false
+  },
+  "jour_en_cours": {
+    "numero": 1,
+    "etape": "presentations",
+    "statut": "en_cours",
+    "vote_ouvert": false,
+    "debats_ouverts": true,
+    "attendre_intervention_joueur": true,
+    "interventions_humaines_attendues": [
+      "André",
+      "Martin"
+    ],
+    "votes_enregistres": []
+  },
+  "audio": {
+    "lecture_automatique": false,
+    "dernier_lot": "prologue",
+    "generation_effectuee": false
+  }
+}

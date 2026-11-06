@@ -2,6 +2,15 @@
   "schema_version": 1,
   "parties": [
     {
+      "id": "LG-20261106-21D6C54F356F",
+      "cree_le": "2026-11-06",
+      "titre": "Les seize de Thiercelieux",
+      "statut": "en_cours",
+      "phase": "prologue",
+      "dossier": "parties/LG-20261106-21D6C54F356F",
+      "dernier_evenement": "Prologue créé. En attente des interventions des joueurs André et Martin."
+    },
+    {
       "id": "LG-20261103-69F93BC9F738",
       "cree_le": "2026-11-03",
       "titre": "Les douze à la lisière du bois",
